@@ -1,0 +1,231 @@
+import { CalendarEvent, Vehicle } from "./types";
+
+export const mockVehicles: Vehicle[] = [
+  { id: "vehicle-1", name: "Toyota Camry 2023", plateNumber: "ABC-123", status: "available" },
+  { id: "vehicle-2", name: "Mercedes GLE", plateNumber: "DEF-456", status: "booked" },
+  { id: "vehicle-3", name: "BMW 3 Series", plateNumber: "GHI-789", status: "maintenance" },
+  { id: "vehicle-4", name: "Ford Explorer", plateNumber: "JKL-012", status: "available" },
+  { id: "vehicle-5", name: "Range Rover Sport", plateNumber: "MNO-345", status: "unavailable" },
+  { id: "vehicle-6", name: "Toyota Hilux 2023", plateNumber: "PQR-678", status: "available" },
+  { id: "vehicle-7", name: "Mercedes Sprinter", plateNumber: "STU-901", status: "available" },
+];
+
+// Helper function to create UTC date strings
+export const createUTCDate = (year: number, month: number, day: number, hour: number = 0, minute: number = 0): string => {
+  return new Date(Date.UTC(year, month, day, hour, minute)).toISOString();
+};
+
+export const mockEvents: CalendarEvent[] = [
+  // Confirmed Bookings
+  {
+    id: "event-1",
+    title: "Toyota Camry - John Doe",
+    start: createUTCDate(2026, 2, 15, 9, 0),
+    end: createUTCDate(2026, 2, 18, 17, 0),
+    type: "booking",
+    status: "confirmed",
+    vehicleId: "vehicle-1",
+    vehicleName: "Toyota Camry 2023",
+    renterName: "John Doe",
+    location: "Victoria Island, Lagos",
+  },
+  {
+    id: "event-2",
+    title: "Mercedes GLE - Sarah Smith",
+    start: createUTCDate(2026, 2, 12, 14, 0),
+    end: createUTCDate(2026, 2, 14, 10, 0),
+    type: "booking",
+    status: "confirmed",
+    vehicleId: "vehicle-2",
+    vehicleName: "Mercedes GLE",
+    renterName: "Sarah Smith",
+    location: "Ikoyi, Lagos",
+  },
+  
+  // Pending Bookings
+  {
+    id: "event-3",
+    title: "BMW 3 Series - Mike Johnson",
+    start: createUTCDate(2026, 2, 20, 8, 0),
+    end: createUTCDate(2026, 2, 25, 18, 0),
+    type: "booking",
+    status: "pending",
+    vehicleId: "vehicle-3",
+    vehicleName: "BMW 3 Series",
+    renterName: "Mike Johnson",
+    location: "Lekki, Lagos",
+  },
+  {
+    id: "event-9",
+    title: "Ford Explorer - Emma Thompson",
+    start: createUTCDate(2026, 3, 12, 9, 0),
+    end: createUTCDate(2026, 3, 15, 18, 0),
+    type: "booking",
+    status: "pending",
+    vehicleId: "vehicle-4",
+    vehicleName: "Ford Explorer",
+    renterName: "Emma Thompson",
+    location: "Lekki, Lagos",
+  },
+  
+  // Overdue Bookings
+  {
+    id: "event-19",
+    title: "OVERDUE: Ford Explorer - Tom Wilson",
+    start: createUTCDate(2026, 2, 5, 10, 0),
+    end: createUTCDate(2026, 2, 8, 16, 0),
+    type: "booking",
+    status: "overdue",
+    vehicleId: "vehicle-4",
+    vehicleName: "Ford Explorer",
+    renterName: "Tom Wilson",
+    location: "Victoria Island, Lagos",
+  },
+  
+  // Returned Bookings
+  {
+    id: "event-20",
+    title: "Toyota Camry - Alice Johnson",
+    start: createUTCDate(2026, 2, 1, 9, 0),
+    end: createUTCDate(2026, 2, 5, 17, 0),
+    type: "booking",
+    status: "returned",
+    vehicleId: "vehicle-1",
+    vehicleName: "Toyota Camry 2023",
+    renterName: "Alice Johnson",
+    location: "Victoria Island, Lagos",
+  },
+  {
+    id: "event-21",
+    title: "Toyota Hilux - David Williams",
+    start: createUTCDate(2026, 2, 25, 10, 0),
+    end: createUTCDate(2026, 2, 28, 16, 0),
+    type: "booking",
+    status: "returned",
+    vehicleId: "vehicle-6",
+    vehicleName: "Toyota Hilux 2023",
+    renterName: "David Williams",
+    location: "Victoria Island, Lagos",
+  },
+  
+  // Service Events
+  {
+    id: "event-6",
+    title: "Toyota Camry - Oil Change",
+    start: createUTCDate(2026, 2, 28, 10, 0),
+    end: createUTCDate(2026, 2, 28, 12, 0),
+    type: "service",
+    status: "scheduled",
+    vehicleId: "vehicle-1",
+    vehicleName: "Toyota Camry 2023",
+  },
+  {
+    id: "event-13",
+    title: "Mercedes GLE - Tire Rotation",
+    start: createUTCDate(2026, 3, 8, 9, 0),
+    end: createUTCDate(2026, 3, 8, 11, 0),
+    type: "service",
+    status: "scheduled",
+    vehicleId: "vehicle-2",
+    vehicleName: "Mercedes GLE",
+  },
+  {
+    id: "event-22",
+    title: "Range Rover Sport - AC Service",
+    start: createUTCDate(2026, 3, 15, 8, 0),
+    end: createUTCDate(2026, 3, 15, 12, 0),
+    type: "service",
+    status: "in-progress",
+    vehicleId: "vehicle-5",
+    vehicleName: "Range Rover Sport",
+  },
+  
+  // Inspection Events
+  {
+    id: "event-5",
+    title: "Ford Explorer - Brake Inspection",
+    start: createUTCDate(2026, 2, 22, 8, 0),
+    end: createUTCDate(2026, 2, 22, 12, 0),
+    type: "inspection",
+    status: "completed",
+    vehicleId: "vehicle-4",
+    vehicleName: "Ford Explorer",
+  },
+  {
+    id: "event-16",
+    title: "Mercedes Sprinter - Safety Inspection",
+    start: createUTCDate(2026, 4, 12, 14, 0),
+    end: createUTCDate(2026, 4, 12, 16, 0),
+    type: "inspection",
+    status: "scheduled",
+    vehicleId: "vehicle-7",
+    vehicleName: "Mercedes Sprinter",
+  },
+  
+  // Maintenance Events
+  {
+    id: "event-4",
+    title: "BMW 3 Series - Regular Service",
+    start: createUTCDate(2026, 2, 10, 9, 0),
+    end: createUTCDate(2026, 2, 12, 17, 0),
+    type: "maintenance",
+    status: "completed",
+    vehicleId: "vehicle-3",
+    vehicleName: "BMW 3 Series",
+  },
+  {
+    id: "event-14",
+    title: "Toyota Hilux - Engine Service",
+    start: createUTCDate(2026, 3, 25, 10, 0),
+    end: createUTCDate(2026, 3, 26, 16, 0),
+    type: "maintenance",
+    status: "scheduled",
+    vehicleId: "vehicle-6",
+    vehicleName: "Toyota Hilux 2023",
+  },
+  {
+    id: "event-15",
+    title: "Range Rover Sport - AC Repair",
+    start: createUTCDate(2026, 4, 5, 8, 0),
+    end: createUTCDate(2026, 4, 7, 17, 0),
+    type: "maintenance",
+    status: "scheduled",
+    vehicleId: "vehicle-5",
+    vehicleName: "Range Rover Sport",
+  },
+  
+  // Unavailable Events
+  {
+    id: "event-7",
+    title: "Range Rover - Body Repair",
+    start: createUTCDate(2026, 2, 5, 0, 0),
+    end: createUTCDate(2026, 2, 10, 23, 59),
+    type: "unavailable",
+    status: "confirmed",
+    vehicleId: "vehicle-5",
+    vehicleName: "Range Rover Sport",
+    allDay: true,
+  },
+  {
+    id: "event-17",
+    title: "BMW 3 Series - Parts Delay",
+    start: createUTCDate(2026, 3, 1, 0, 0),
+    end: createUTCDate(2026, 3, 3, 23, 59),
+    type: "unavailable",
+    status: "confirmed",
+    vehicleId: "vehicle-3",
+    vehicleName: "BMW 3 Series",
+    allDay: true,
+  },
+  {
+    id: "event-18",
+    title: "Ford Explorer - Insurance Processing",
+    start: createUTCDate(2026, 4, 18, 0, 0),
+    end: createUTCDate(2026, 4, 20, 23, 59),
+    type: "unavailable",
+    status: "pending",
+    vehicleId: "vehicle-4",
+    vehicleName: "Ford Explorer",
+    allDay: true,
+  },
+];

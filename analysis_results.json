@@ -1,0 +1,1367 @@
+[
+  {
+    "path": "@types\\business.ts",
+    "lineCount": 1,
+    "sizeBytes": 0,
+    "exports": [],
+    "status": "Empty (Yet to build)",
+    "snippet": "",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "@types\\index.ts",
+    "lineCount": 185,
+    "sizeBytes": 3831,
+    "exports": [
+      "User",
+      "Business",
+      "Vehicle",
+      "AvailabilityBlock",
+      "Booking",
+      "BookingStatus",
+      "BookingExtra",
+      "Evidence",
+      "Payment",
+      "Review",
+      "Message",
+      "SearchFilters",
+      "Notification"
+    ],
+    "status": "Implemented",
+    "snippet": "// Core type definitions for Rydway\r\n\r\nexport interface User {\r\n  id: string;\r\n  email: string;\r",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "@types\\kyc.ts",
+    "lineCount": 54,
+    "sizeBytes": 1375,
+    "exports": [
+      "FieldOption",
+      "FieldConfig",
+      "StepConfig",
+      "KYCFormConfig",
+      "FormData"
+    ],
+    "status": "Implemented",
+    "snippet": "import { LucideIcon } from \"lucide-react\";\r\n\r\nexport interface FieldOption {\r\n  value: string;\r\n  label: string;\r",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "@types\\vehicle.ts",
+    "lineCount": 94,
+    "sizeBytes": 2154,
+    "exports": [
+      "Vehicle",
+      "VehicleFormData",
+      "VehicleFieldConfig",
+      "VehicleStepConfig"
+    ],
+    "status": "Implemented",
+    "snippet": "// types/car.ts\r\nexport interface Vehicle {\r\n  id: string;\r\n  name: string;\r\n  category: string;\r",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "app\\auth\\layout.tsx",
+    "lineCount": 110,
+    "sizeBytes": 4367,
+    "exports": [
+      "AuthLayout"
+    ],
+    "status": "Implemented",
+    "snippet": "\"use client\";\r\n\r\nimport { useState } from \"react\";\r\nimport Image from \"next/image\";\r\nimport { Check, Car, Shield, CreditCard, Headphones } from \"lucide-react\";\r",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "app\\auth\\page.tsx",
+    "lineCount": 68,
+    "sizeBytes": 1605,
+    "exports": [
+      "AuthPage"
+    ],
+    "status": "Implemented",
+    "snippet": "\"use client\";\r\n\r\nimport { useState } from \"react\";\r\n\r\nimport OtpForm from \"@/components/pages/auth/OtpForm\";\r",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "app\\dashboard\\business\\booking\\page.tsx",
+    "lineCount": 302,
+    "sizeBytes": 9519,
+    "exports": [
+      "BusinessBookingsPage"
+    ],
+    "status": "Implemented",
+    "snippet": "\"use client\";\r\n\r\nimport { useState } from \"react\";\r\nimport { useRouter } from \"next/navigation\";\r\nimport { Card, CardContent } from \"@/components/ui/card\";\r",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "app\\dashboard\\business\\booking\\[id]\\page.tsx",
+    "lineCount": 64,
+    "sizeBytes": 2178,
+    "exports": [
+      "BusinessBookingPage"
+    ],
+    "status": "Implemented",
+    "snippet": "\"use client\";\r\n\r\nimport { BusinessBookingDetails } from \"@/components/pages/booking/business/BusinessBookingDetails\";\r\nimport { getBookingDetailsById } from \"@/data/bookingData\";\r\nimport { useParams, useSearchParams } from \"next/navigation\";\r",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "app\\dashboard\\business\\calendar\\page.tsx",
+    "lineCount": 1264,
+    "sizeBytes": 45278,
+    "exports": [
+      "BusinessCalendarPage"
+    ],
+    "status": "Implemented",
+    "snippet": "// app/dashboard/business/calendar/page.tsx\r\n\"use client\";\r\n\r\nimport { useState, useMemo, useEffect } from \"react\";\r\nimport { Card, CardContent } from \"@/components/ui/card\";\r",
+    "hasTodo": false,
+    "hasMock": true
+  },
+  {
+    "path": "app\\dashboard\\business\\earnings\\page.tsx",
+    "lineCount": 1023,
+    "sizeBytes": 45444,
+    "exports": [
+      "EarningsPage"
+    ],
+    "status": "Implemented",
+    "snippet": "// app/dashboard/business/earnings/page.tsx\r\n\"use client\";\r\n\r\nimport { useState, useMemo } from \"react\";\r\nimport {\r",
+    "hasTodo": false,
+    "hasMock": true
+  },
+  {
+    "path": "app\\dashboard\\business\\messages\\page.tsx",
+    "lineCount": 418,
+    "sizeBytes": 11473,
+    "exports": [
+      "BusinessMessagesPage"
+    ],
+    "status": "Implemented",
+    "snippet": "// app/dashboard/business/messages/page.tsx\r\n\"use client\";\r\n\r\nimport { useState, useEffect } from \"react\";\r\nimport { Card } from \"@/components/ui/card\";\r",
+    "hasTodo": false,
+    "hasMock": true
+  },
+  {
+    "path": "app\\dashboard\\business\\page.tsx",
+    "lineCount": 532,
+    "sizeBytes": 19306,
+    "exports": [
+      "DashboardPage"
+    ],
+    "status": "Implemented",
+    "snippet": "\"use client\";\r\n\r\nimport {\r\n  AreaChart,\r\n  Area,\r",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "app\\dashboard\\business\\profile\\page.tsx",
+    "lineCount": 359,
+    "sizeBytes": 12567,
+    "exports": [
+      "BusinessPage"
+    ],
+    "status": "Implemented",
+    "snippet": "// app/business/[id]/page.tsx\r\n\"use client\";\r\n\r\nimport { useState } from \"react\";\r\nimport { useRouter, useParams } from \"next/navigation\";\r",
+    "hasTodo": false,
+    "hasMock": true
+  },
+  {
+    "path": "app\\dashboard\\business\\settings\\page.tsx",
+    "lineCount": 6,
+    "sizeBytes": 165,
+    "exports": [
+      "BusinessSettings"
+    ],
+    "status": "Implemented",
+    "snippet": "import { BusinessSettingsPage } from \"@/components/pages/settings/Settings\";\r\n\r\n\r\nexport default function BusinessSettings() {\r\n  return <BusinessSettingsPage />;\r",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "app\\dashboard\\business\\vehicles\\page.tsx",
+    "lineCount": 615,
+    "sizeBytes": 18163,
+    "exports": [
+      "BusinessVehiclesPage"
+    ],
+    "status": "Implemented",
+    "snippet": "// app/dashboard/business/vehicles/page.tsx\r\n\"use client\";\r\n\r\nimport { useState } from \"react\";\r\nimport { useRouter } from \"next/navigation\";\r",
+    "hasTodo": false,
+    "hasMock": true
+  },
+  {
+    "path": "app\\dashboard\\business\\vehicles\\[id]\\page.tsx",
+    "lineCount": 104,
+    "sizeBytes": 3343,
+    "exports": [
+      "BusinessVehicleDetailsPage"
+    ],
+    "status": "Implemented",
+    "snippet": "// app/dashboard/business/vehicles/[id]/page.tsx\r\n\"use client\";\r\n\r\nimport { VehicleDetailsComponent } from \"@/components/pages/vehicle/view/VehicleDetails\";\r\nimport { getVehicleById } from \"@/data/carData\";\r",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "app\\dashboard\\layout.tsx",
+    "lineCount": 100,
+    "sizeBytes": 3133,
+    "exports": [
+      "DashboardLayout"
+    ],
+    "status": "Implemented",
+    "snippet": "// app/dashboard/layout.tsx\r\n\"use client\";\r\n\r\nimport { useState } from \"react\";\r\nimport { Menu } from \"lucide-react\";\r",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "app\\dashboard\\renter\\booking\\page.tsx",
+    "lineCount": 274,
+    "sizeBytes": 8635,
+    "exports": [
+      "BookingsPage"
+    ],
+    "status": "Implemented",
+    "snippet": "\"use client\";\r\n\r\nimport { useState } from \"react\";\r\nimport { useRouter } from \"next/navigation\";\r\nimport { Card, CardContent } from \"@/components/ui/card\";\r",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "app\\dashboard\\renter\\booking\\[id]\\page.tsx",
+    "lineCount": 60,
+    "sizeBytes": 1924,
+    "exports": [
+      "RenterBookingPage"
+    ],
+    "status": "Implemented",
+    "snippet": "\"use client\";\r\n\r\nimport { RenterBookingDetails } from \"@/components/pages/booking/renter/RenterBookingDetails\";\r\nimport { getBookingDetailsById } from \"@/data/bookingData\";\r\nimport { useParams } from \"next/navigation\";\r",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "app\\dashboard\\renter\\discover\\page.tsx",
+    "lineCount": 181,
+    "sizeBytes": 6548,
+    "exports": [
+      "SearchWithNavbar"
+    ],
+    "status": "Implemented",
+    "snippet": "\"use client\";\r\nimport { useState } from \"react\";\r\nimport { useRouter } from \"next/navigation\"; // Add this import\r\nimport { Search, Menu, User, Bell, ChevronDown } from \"lucide-react\";\r\nimport { Input } from \"@/components/ui/input\";\r",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "app\\dashboard\\renter\\help\\page.tsx",
+    "lineCount": 1361,
+    "sizeBytes": 51912,
+    "exports": [
+      "HelpPage"
+    ],
+    "status": "Implemented",
+    "snippet": "// app/dashboard/renter/help/page.tsx\r\n\"use client\";\r\n\r\nimport { useState } from \"react\";\r\nimport {\r",
+    "hasTodo": false,
+    "hasMock": true
+  },
+  {
+    "path": "app\\dashboard\\renter\\messages\\page.tsx",
+    "lineCount": 396,
+    "sizeBytes": 11098,
+    "exports": [
+      "RenterMessagesPage"
+    ],
+    "status": "Implemented",
+    "snippet": "// app/dashboard/renter/messages/page.tsx\r\n\"use client\";\r\n\r\nimport { useState, useEffect } from \"react\";\r\nimport { Card } from \"@/components/ui/card\";\r",
+    "hasTodo": false,
+    "hasMock": true
+  },
+  {
+    "path": "app\\dashboard\\renter\\page.tsx",
+    "lineCount": 532,
+    "sizeBytes": 19306,
+    "exports": [
+      "DashboardPage"
+    ],
+    "status": "Implemented",
+    "snippet": "\"use client\";\r\n\r\nimport {\r\n  AreaChart,\r\n  Area,\r",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "app\\dashboard\\renter\\payments\\page.tsx",
+    "lineCount": 1468,
+    "sizeBytes": 55998,
+    "exports": [
+      "RenterPaymentsPage"
+    ],
+    "status": "Implemented",
+    "snippet": "// app/dashboard/renter/payments/page.tsx\r\n\"use client\";\r\n\r\nimport { useState, useMemo } from \"react\";\r\nimport { format, formatDistanceToNow } from \"date-fns\";\r",
+    "hasTodo": false,
+    "hasMock": true
+  },
+  {
+    "path": "app\\dashboard\\renter\\profile\\page.tsx",
+    "lineCount": 909,
+    "sizeBytes": 31285,
+    "exports": [
+      "ProfilePage"
+    ],
+    "status": "Implemented",
+    "snippet": "// app/dashboard/renter/profile/page.tsx\r\n\"use client\";\r\n\r\nimport { useState } from \"react\";\r\nimport { format } from \"date-fns\";\r",
+    "hasTodo": false,
+    "hasMock": true
+  },
+  {
+    "path": "app\\dashboard\\renter\\settings\\page.tsx",
+    "lineCount": 6,
+    "sizeBytes": 157,
+    "exports": [
+      "SettingsPage"
+    ],
+    "status": "Implemented",
+    "snippet": "import { RenterSettingsPage } from \"@/components/pages/settings/Settings\";\r\n\r\n\r\nexport default function SettingsPage() {\r\n  return <RenterSettingsPage />;\r",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "app\\dashboard\\renter\\vehicles\\[id]\\page.tsx",
+    "lineCount": 106,
+    "sizeBytes": 3257,
+    "exports": [
+      "RenterVehicleDetailsPage"
+    ],
+    "status": "Implemented",
+    "snippet": "// app/dashboard/renter/vehicles/[id]/page.tsx\r\n\"use client\";\r\n\r\nimport { VehicleDetailsComponent } from \"@/components/pages/vehicle/view/VehicleDetails\";\r\nimport { getVehicleById } from \"@/data/carData\";\r",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "app\\kyc\\business\\page.tsx",
+    "lineCount": 31,
+    "sizeBytes": 860,
+    "exports": [
+      "BusinessKYCPage"
+    ],
+    "status": "Implemented",
+    "snippet": "\"use client\";\r\n\r\nimport { KYCForm } from \"@/components/pages/kyc/KycForm\";\r\nimport { BusinessKYCConfig } from \"@/lib/config/business-kyc.config\";\r\n\r",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "app\\kyc\\renter\\page.tsx",
+    "lineCount": 28,
+    "sizeBytes": 811,
+    "exports": [
+      "RenterKYCPage"
+    ],
+    "status": "Implemented",
+    "snippet": "\"use client\"; // Add this line\r\n\r\nimport { KYCForm } from \"@/components/pages/kyc/KycForm\";\r\nimport { RenterKYCConfig } from \"@/lib/config/renter-kyc.config\";\r\n\r",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "app\\layout.tsx",
+    "lineCount": 29,
+    "sizeBytes": 551,
+    "exports": [
+      "metadata",
+      "RootLayout"
+    ],
+    "status": "Implemented",
+    "snippet": "import type { Metadata } from \"next\"\nimport { Montserrat, Nunito } from \"next/font/google\"\nimport \"./globals.css\"\n\n",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "app\\page.tsx",
+    "lineCount": 17,
+    "sizeBytes": 332,
+    "exports": [
+      "Home"
+    ],
+    "status": "Implemented",
+    "snippet": "import CarCatalog from \"@/components/layout/Catalog\";\nimport Footer from \"@/components/layout/Footer\";\nimport Hero from \"@/components/layout/Hero\";\nimport Navbar from \"@/components/layout/NavBar\";\n",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "components\\base\\cards\\BookingCard.tsx",
+    "lineCount": 376,
+    "sizeBytes": 12076,
+    "exports": [
+      "BookingCardProps",
+      "BookingCard"
+    ],
+    "status": "Implemented",
+    "snippet": "import Image from \"next/image\";\r\nimport { Calendar, MapPin, User, MoreVertical, Clock } from \"lucide-react\";\r\nimport { Card, CardContent } from \"@/components/ui/card\";\r\nimport { Badge } from \"@/components/ui/badge\";\r\nimport { Button } from \"@/components/ui/button\";\r",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "components\\base\\cards\\StatCard.tsx",
+    "lineCount": 58,
+    "sizeBytes": 1659,
+    "exports": [
+      "StatCard"
+    ],
+    "status": "Implemented",
+    "snippet": "import { Card, CardContent } from \"@/components/ui/card\";\r\nimport { cn } from \"@/lib/utils\";\r\nimport { LucideIcon } from \"lucide-react\";\r\n\r\ninterface StatCardProps {\r",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "components\\base\\cards\\VehicleCard.tsx",
+    "lineCount": 187,
+    "sizeBytes": 6789,
+    "exports": [
+      "VehicleCard"
+    ],
+    "status": "Implemented",
+    "snippet": "// components/CarCard.tsx\r\nimport { useState } from \"react\";\r\nimport { useRouter } from \"next/navigation\"; // Import from next/navigation\r\nimport { Badge } from \"@/components/ui/badge\";\r\nimport { Button } from \"@/components/ui/button\";\r",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "components\\base\\FilterPanel.tsx",
+    "lineCount": 136,
+    "sizeBytes": 4630,
+    "exports": [
+      "FilterPanel"
+    ],
+    "status": "Implemented",
+    "snippet": "\"use client\";\r\n\r\nimport { useState } from \"react\";\r\nimport { Card } from \"@/components/ui/card\";\r\nimport { Label } from \"@/components/ui/label\";\r",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "components\\base\\form\\FormField.tsx",
+    "lineCount": 397,
+    "sizeBytes": 14622,
+    "exports": [
+      "FormField"
+    ],
+    "status": "Implemented",
+    "snippet": "import React from \"react\";\r\nimport { Input } from \"@/components/ui/input\";\r\nimport { Label } from \"@/components/ui/label\";\r\nimport { Checkbox } from \"@/components/ui/checkbox\";\r\nimport {\r",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "components\\base\\form\\FormStep.tsx",
+    "lineCount": 60,
+    "sizeBytes": 1636,
+    "exports": [
+      "FormStep"
+    ],
+    "status": "Implemented",
+    "snippet": "import React from \"react\";\r\nimport { FormField } from \"./FormField\";\r\nimport { StepConfig } from \"@/@types/kyc\";\r\n\r\ninterface FormStepProps {\r",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "components\\base\\Pagination.tsx",
+    "lineCount": 110,
+    "sizeBytes": 3953,
+    "exports": [
+      "CustomPagination"
+    ],
+    "status": "Implemented",
+    "snippet": "import { ChevronLeft, ChevronRight } from \"lucide-react\";\r\nimport { Button } from \"@/components/ui/button\";\r\nimport { cn } from \"@/lib/utils\";\r\n\r\ninterface CustomPaginationProps {\r",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "components\\base\\StatusBadge.tsx",
+    "lineCount": 75,
+    "sizeBytes": 1800,
+    "exports": [
+      "StatusBadge"
+    ],
+    "status": "Implemented",
+    "snippet": "\"use client\";\r\n\r\nimport { cn, getStatusColor, getStatusText } from \"@/lib/utils\";\r\nimport { \r\n  Clock, \r",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "components\\base\\Tabs.tsx",
+    "lineCount": 59,
+    "sizeBytes": 1895,
+    "exports": [
+      "CustomTabs"
+    ],
+    "status": "Implemented",
+    "snippet": "\"use client\";\r\n\r\nimport { cn } from \"@/lib/utils\";\r\n\r\ninterface Tab {\r",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "components\\layout\\Catalog.tsx",
+    "lineCount": 54,
+    "sizeBytes": 1598,
+    "exports": [
+      "VehicleCatalog"
+    ],
+    "status": "Implemented",
+    "snippet": "\r\n\"use client\";\r\n\r\n\r\nimport { popularCars, recommendedCars } from \"@/data/carData\";\r",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "components\\layout\\Footer.tsx",
+    "lineCount": 154,
+    "sizeBytes": 5491,
+    "exports": [
+      "Footer"
+    ],
+    "status": "Implemented",
+    "snippet": "import React from \"react\";\r\nimport { Instagram, Twitter, Mail } from \"lucide-react\";\r\n\r\nexport default function Footer() {\r\n  return (\r",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "components\\layout\\Hero.tsx",
+    "lineCount": 126,
+    "sizeBytes": 5328,
+    "exports": [
+      "Hero"
+    ],
+    "status": "Implemented",
+    "snippet": "\"use client\"\r\nimport { useState, useEffect } from \"react\"\r\nimport Image from \"next/image\"\r\nimport { Button } from \"@/components/ui/button\"\r\nimport {\r",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "components\\layout\\NavBar.tsx",
+    "lineCount": 102,
+    "sizeBytes": 3642,
+    "exports": [
+      "Navbar"
+    ],
+    "status": "Implemented",
+    "snippet": "\"use client\";\r\n\r\nimport Link from \"next/link\";\r\nimport { useState, useEffect } from \"react\";\r\nimport { Menu } from \"lucide-react\";\r",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "components\\layout\\Sidebar.tsx",
+    "lineCount": 261,
+    "sizeBytes": 10654,
+    "exports": [
+      "Sidebar"
+    ],
+    "status": "Implemented",
+    "snippet": "\"use client\";\r\n\r\nimport React from \"react\";\r\nimport Link from \"next/link\";\r\nimport Image from \"next/image\";\r",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "components\\pages\\auth\\AuthForm.tsx",
+    "lineCount": 240,
+    "sizeBytes": 9024,
+    "exports": [
+      "AuthForm"
+    ],
+    "status": "Implemented",
+    "snippet": "\"use client\";\r\n\r\nimport { useState } from \"react\";\r\nimport { Button } from \"@/components/ui/button\";\r\nimport { Input } from \"@/components/ui/input\";\r",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "components\\pages\\auth\\OtpForm.tsx",
+    "lineCount": 155,
+    "sizeBytes": 4881,
+    "exports": [
+      "OtpForm"
+    ],
+    "status": "Implemented",
+    "snippet": "\"use client\";\r\n\r\nimport { useState, useRef, useEffect } from \"react\";\r\nimport { Button } from \"@/components/ui/button\";\r\nimport { ArrowRight } from \"lucide-react\";\r",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "components\\pages\\auth\\SignInForm.tsx",
+    "lineCount": 225,
+    "sizeBytes": 8183,
+    "exports": [
+      "SignInForm"
+    ],
+    "status": "Implemented",
+    "snippet": "\"use client\";\r\n\r\nimport { useState } from \"react\";\r\nimport { Button } from \"@/components/ui/button\";\r\nimport { Input } from \"@/components/ui/input\";\r",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "components\\pages\\auth\\SignUpForm.tsx",
+    "lineCount": 323,
+    "sizeBytes": 11818,
+    "exports": [
+      "SignUpForm"
+    ],
+    "status": "Implemented",
+    "snippet": "\"use client\";\r\n\r\nimport { useState } from \"react\";\r\nimport { Button } from \"@/components/ui/button\";\r\nimport { Input } from \"@/components/ui/input\";\r",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "components\\pages\\booking\\BookingActions.tsx",
+    "lineCount": 69,
+    "sizeBytes": 2540,
+    "exports": [
+      "BookingCard"
+    ],
+    "status": "Implemented",
+    "snippet": "\r\n\"use client\";\r\n\r\nimport { Booking } from \"@/@types\";\r\nimport StatusBadge from \"@/components/base/StatusBadge\";\r",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "components\\pages\\booking\\BookingCard.tsx",
+    "lineCount": 65,
+    "sizeBytes": 2532,
+    "exports": [
+      "BookingCard"
+    ],
+    "status": "Implemented",
+    "snippet": "\"use client\";\r\n\r\nimport { Card, CardContent } from \"@/components/ui/card\";\r\nimport { Button } from \"@/components/ui/button\";\r\n\r",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "components\\pages\\booking\\BookingDetails.tsx",
+    "lineCount": 456,
+    "sizeBytes": 19674,
+    "exports": [
+      "BookingDetailsData",
+      "BookingDetailsBase"
+    ],
+    "status": "Implemented",
+    "snippet": "\"use client\";\r\n\r\nimport { ReactNode } from \"react\";\r\nimport { \r\n  Calendar, \r",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "components\\pages\\booking\\BookingTimeline.tsx",
+    "lineCount": 79,
+    "sizeBytes": 2635,
+    "exports": [
+      "BookingTimeline"
+    ],
+    "status": "Implemented",
+    "snippet": "\"use client\";\r\n\r\nimport { BookingStatus } from \"@/@types\";\r\nimport { Check, Clock, X } from \"lucide-react\";\r\n\r",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "components\\pages\\booking\\business\\BusinessBookingDetails.tsx",
+    "lineCount": 260,
+    "sizeBytes": 8025,
+    "exports": [
+      "BusinessBookingDetails"
+    ],
+    "status": "Implemented",
+    "snippet": "\"use client\";\r\n\r\nimport { useState } from \"react\";\r\nimport { BookingDetailsBase, BookingDetailsData } from \"../BookingDetails\";\r\nimport { useRouter } from \"next/navigation\";\r",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "components\\pages\\booking\\renter\\create\\BookingModal.tsx",
+    "lineCount": 885,
+    "sizeBytes": 41280,
+    "exports": [
+      "CreateBookingModal"
+    ],
+    "status": "Implemented",
+    "snippet": "// components/business/CreateBookingModal.tsx\r\n\"use client\";\r\n\r\nimport { useState, useEffect, useMemo, useCallback, useRef } from \"react\";\r\nimport React from \"react\";\r",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "components\\pages\\booking\\renter\\RenterBookingDetails.tsx",
+    "lineCount": 183,
+    "sizeBytes": 4946,
+    "exports": [
+      "RenterBookingDetails"
+    ],
+    "status": "Implemented",
+    "snippet": "\"use client\";\r\n\r\nimport { useState } from \"react\";\r\nimport { BookingDetailsBase, BookingDetailsData } from \"../BookingDetails\";\r\nimport { Button } from \"@/components/ui/button\";\r",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "components\\pages\\business\\FleetList.tsx",
+    "lineCount": 97,
+    "sizeBytes": 3669,
+    "exports": [
+      "FleetList"
+    ],
+    "status": "Implemented",
+    "snippet": "\"use client\";\r\n\r\nimport { Card } from \"@/components/ui/card\";\r\nimport { Button } from \"@/components/ui/button\";\r\n\r",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "components\\pages\\business\\PayoutSummary.tsx",
+    "lineCount": 68,
+    "sizeBytes": 1868,
+    "exports": [
+      "PayoutSummary"
+    ],
+    "status": "Implemented",
+    "snippet": "\"use client\";\r\n\r\nimport { Card } from \"@/components/ui/card\";\r\nimport { formatPrice } from \"@/lib/utils\";\r\nimport { TrendingUp, DollarSign, Clock, CheckCircle } from \"lucide-react\";\r",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "components\\pages\\business\\QuickAction.tsx",
+    "lineCount": 50,
+    "sizeBytes": 1766,
+    "exports": [
+      "QuickActions"
+    ],
+    "status": "Implemented",
+    "snippet": "\"use client\";\r\n\r\nimport { Button } from \"@/components/ui/button\";\r\nimport { Card } from \"@/components/ui/card\";\r\nimport { Search, Calendar, MessageSquare, Star, FileText } from \"lucide-react\";\r",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "components\\pages\\business\\RequestInbox.tsx",
+    "lineCount": 79,
+    "sizeBytes": 2894,
+    "exports": [
+      "RequestInbox"
+    ],
+    "status": "Implemented",
+    "snippet": "\"use client\";\r\n\r\nimport { Card } from \"@/components/ui/card\";\r\nimport { Button } from \"@/components/ui/button\";\r\n\r",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "components\\pages\\business\\UpcomingBooking.tsx",
+    "lineCount": 57,
+    "sizeBytes": 2089,
+    "exports": [
+      "UpcomingBookingCard"
+    ],
+    "status": "Implemented",
+    "snippet": "\"use client\";\r\n\r\nimport { Card } from \"@/components/ui/card\";\r\nimport { Button } from \"@/components/ui/button\";\r\n\r",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "components\\pages\\kyc\\KycForm.tsx",
+    "lineCount": 301,
+    "sizeBytes": 9788,
+    "exports": [
+      "KYCForm"
+    ],
+    "status": "Implemented",
+    "snippet": "\"use client\";\r\n\r\nimport { useState } from \"react\";\r\nimport { Button } from \"@/components/ui/button\";\r\nimport { FormStep } from \"../../base/form/FormStep\";\r",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "components\\pages\\messages\\Messaging.tsx",
+    "lineCount": 669,
+    "sizeBytes": 21751,
+    "exports": [
+      "User",
+      "BookingContext",
+      "Message",
+      "Conversation",
+      "SupportConversation",
+      "SYSTEM_MESSAGES",
+      "BUSINESS_TEMPLATES",
+      "RENTER_TEMPLATES",
+      "ConversationsList",
+      "ChatProps",
+      "Chat",
+      "SupportChatProps",
+      "SupportChat"
+    ],
+    "status": "Implemented",
+    "snippet": "// components/pages/messages/Messaging.tsx\r\n\"use client\";\r\n\r\nimport { useState, useRef, useEffect } from \"react\";\r\nimport { format, formatDistanceToNow } from \"date-fns\";\r",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "components\\pages\\notification\\NotificationBell.tsx",
+    "lineCount": 96,
+    "sizeBytes": 3348,
+    "exports": [
+      "NotificationBell"
+    ],
+    "status": "Implemented",
+    "snippet": "\"use client\";\r\n\r\nimport { useState } from \"react\";\r\nimport { Button } from \"@/components/ui/button\";\r\nimport {\r",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "components\\pages\\profile\\business\\ProfileHeader.tsx",
+    "lineCount": 419,
+    "sizeBytes": 12146,
+    "exports": [
+      "BusinessProfileData",
+      "BusinessProfileHeader"
+    ],
+    "status": "Implemented",
+    "snippet": "// components/business/BusinessProfileHeader.tsx\r\n\"use client\";\r\n\r\nimport { useState } from \"react\";\r\nimport Image from \"next/image\";\r",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "components\\pages\\profile\\business\\VehicleCatalog.tsx",
+    "lineCount": 693,
+    "sizeBytes": 28201,
+    "exports": [
+      "VehicleCardData",
+      "VehicleCatalog"
+    ],
+    "status": "Implemented",
+    "snippet": "// components/business/VehicleCatalog.tsx\r\n\"use client\";\r\n\r\nimport { useState } from \"react\";\r\nimport Image from \"next/image\";\r",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "components\\pages\\review\\RatingStars.tsx",
+    "lineCount": 56,
+    "sizeBytes": 1434,
+    "exports": [
+      "RatingStars"
+    ],
+    "status": "Implemented",
+    "snippet": "\"use client\";\r\n\r\nimport { useState } from \"react\";\r\nimport { Star } from \"lucide-react\";\r\n\r",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "components\\pages\\review\\ReviewForm.tsx",
+    "lineCount": 60,
+    "sizeBytes": 1952,
+    "exports": [
+      "ReviewForm"
+    ],
+    "status": "Implemented",
+    "snippet": "\"use client\";\r\n\r\nimport { useState } from \"react\";\r\nimport { Button } from \"@/components/ui/button\";\r\nimport { Textarea } from \"@/components/ui/textarea\";\r",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "components\\pages\\review\\ReviewList.tsx",
+    "lineCount": 77,
+    "sizeBytes": 2870,
+    "exports": [
+      "ReviewList"
+    ],
+    "status": "Implemented",
+    "snippet": "\"use client\";\r\n\r\nimport { Card } from \"@/components/ui/card\";\r\nimport { Avatar, AvatarFallback, AvatarImage } from \"@/components/ui/avatar\";\r\nimport RatingStars from \"./RatingStars\";\r",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "components\\pages\\search\\Search.tsx",
+    "lineCount": 180,
+    "sizeBytes": 7079,
+    "exports": [
+      "SearchBar"
+    ],
+    "status": "Implemented",
+    "snippet": "\"use client\";\r\n\r\nimport { useState } from \"react\";\r\nimport { Button } from \"@/components/ui/button\";\r\nimport {\r",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "components\\pages\\settings\\Settings.tsx",
+    "lineCount": 1423,
+    "sizeBytes": 53600,
+    "exports": [
+      "RenterSettingsPage",
+      "BusinessSettingsPage"
+    ],
+    "status": "Implemented",
+    "snippet": "// components/settings/SettingsLayout.tsx\r\n\"use client\";\r\n\r\nimport { useState } from \"react\";\r\nimport { \r",
+    "hasTodo": false,
+    "hasMock": true
+  },
+  {
+    "path": "components\\pages\\vehicle\\add\\AddVehicleModal.tsx",
+    "lineCount": 243,
+    "sizeBytes": 7794,
+    "exports": [
+      "AddVehicleModal"
+    ],
+    "status": "Implemented",
+    "snippet": "// components/business/AddVehicleModal.tsx\r\n\"use client\";\r\n\r\nimport { useState } from \"react\";\r\nimport {\r",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "components\\pages\\vehicle\\ImageCarousel.tsx",
+    "lineCount": 57,
+    "sizeBytes": 1927,
+    "exports": [
+      "ImageCarousel"
+    ],
+    "status": "Implemented",
+    "snippet": "'use client';\r\nimport { useState } from 'react';\r\nimport { Button } from '@/components/ui/button';\r\nimport { ChevronLeft, ChevronRight } from 'lucide-react';\r\n\r",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "components\\pages\\vehicle\\PriceBreakdown.tsx",
+    "lineCount": 58,
+    "sizeBytes": 2205,
+    "exports": [
+      "PriceBreakdown"
+    ],
+    "status": "Implemented",
+    "snippet": "'use client';\r\nimport { Card } from '@/components/ui/card';\r\nimport { Separator } from '@/components/ui/separator';\r\nimport { formatPrice, calculateDays } from '@/lib/utils';\r\n\r",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "components\\pages\\vehicle\\SpecsList.tsx",
+    "lineCount": 34,
+    "sizeBytes": 1370,
+    "exports": [
+      "SpecsList"
+    ],
+    "status": "Implemented",
+    "snippet": "'use client';\r\nimport { Fuel, Settings, Users, Gauge, Calendar, Shield } from 'lucide-react';\r\nimport { Vehicle } from \"@/@types\";\r\n\r\ninterface SpecsListProps {\r",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "components\\pages\\vehicle\\VehicleCard.tsx",
+    "lineCount": 97,
+    "sizeBytes": 4122,
+    "exports": [
+      "VehicleCard"
+    ],
+    "status": "Implemented",
+    "snippet": "\"use client\";\r\n\r\nimport { useState } from \"react\";\r\nimport { Badge } from \"@/components/ui/badge\";\r\nimport { Button } from \"@/components/ui/button\";\r",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "components\\pages\\vehicle\\view\\VehicleDetails.tsx",
+    "lineCount": 1276,
+    "sizeBytes": 45829,
+    "exports": [
+      "VehicleDetails",
+      "Review",
+      "MaintenanceRecord",
+      "AvailabilitySlot",
+      "VehicleDetailsProps",
+      "VehicleDetailsComponent"
+    ],
+    "status": "Implemented",
+    "snippet": "// components/vehicles/VehicleDetails.tsx\r\n\"use client\";\r\n\r\nimport { useState } from \"react\";\r\nimport { useRouter } from \"next/navigation\";\r",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "components\\ui\\accordion.tsx",
+    "lineCount": 67,
+    "sizeBytes": 2048,
+    "exports": [],
+    "status": "Implemented",
+    "snippet": "\"use client\"\n\nimport * as React from \"react\"\nimport { ChevronDownIcon } from \"lucide-react\"\nimport { Accordion as AccordionPrimitive } from \"radix-ui\"",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "components\\ui\\alert-dialog.tsx",
+    "lineCount": 197,
+    "sizeBytes": 5439,
+    "exports": [],
+    "status": "Implemented",
+    "snippet": "\"use client\"\n\nimport * as React from \"react\"\nimport { AlertDialog as AlertDialogPrimitive } from \"radix-ui\"\n",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "components\\ui\\avatar.tsx",
+    "lineCount": 110,
+    "sizeBytes": 2921,
+    "exports": [],
+    "status": "Implemented",
+    "snippet": "\"use client\"\n\nimport * as React from \"react\"\nimport * as AvatarPrimitive from \"@radix-ui/react-avatar\"\n",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "components\\ui\\badge.tsx",
+    "lineCount": 55,
+    "sizeBytes": 3040,
+    "exports": [],
+    "status": "Implemented",
+    "snippet": "import * as React from \"react\"\nimport { Slot } from \"@radix-ui/react-slot\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "components\\ui\\button.tsx",
+    "lineCount": 65,
+    "sizeBytes": 2400,
+    "exports": [],
+    "status": "Implemented",
+    "snippet": "import * as React from \"react\"\nimport { Slot } from \"@radix-ui/react-slot\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "components\\ui\\calendar.tsx",
+    "lineCount": 221,
+    "sizeBytes": 7789,
+    "exports": [],
+    "status": "Implemented",
+    "snippet": "\"use client\"\n\nimport * as React from \"react\"\nimport {\n  ChevronDownIcon,",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "components\\ui\\card.tsx",
+    "lineCount": 93,
+    "sizeBytes": 1980,
+    "exports": [],
+    "status": "Implemented",
+    "snippet": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\nfunction Card({ className, ...props }: React.ComponentProps<\"div\">) {",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "components\\ui\\checkbox.tsx",
+    "lineCount": 33,
+    "sizeBytes": 1219,
+    "exports": [],
+    "status": "Implemented",
+    "snippet": "\"use client\"\n\nimport * as React from \"react\"\nimport * as CheckboxPrimitive from \"@radix-ui/react-checkbox\"\nimport { CheckIcon } from \"lucide-react\"",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "components\\ui\\dialog.tsx",
+    "lineCount": 158,
+    "sizeBytes": 4340,
+    "exports": [],
+    "status": "Implemented",
+    "snippet": "\"use client\"\n\nimport * as React from \"react\"\nimport * as DialogPrimitive from \"@radix-ui/react-dialog\"\nimport { XIcon } from \"lucide-react\"",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "components\\ui\\dropdown-menu.tsx",
+    "lineCount": 258,
+    "sizeBytes": 8424,
+    "exports": [],
+    "status": "Implemented",
+    "snippet": "\"use client\"\n\nimport * as React from \"react\"\nimport * as DropdownMenuPrimitive from \"@radix-ui/react-dropdown-menu\"\nimport { CheckIcon, ChevronRightIcon, CircleIcon } from \"lucide-react\"",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "components\\ui\\input.tsx",
+    "lineCount": 22,
+    "sizeBytes": 962,
+    "exports": [],
+    "status": "Implemented",
+    "snippet": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\nfunction Input({ className, type, ...props }: React.ComponentProps<\"input\">) {",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "components\\ui\\label.tsx",
+    "lineCount": 25,
+    "sizeBytes": 611,
+    "exports": [],
+    "status": "Implemented",
+    "snippet": "\"use client\"\n\nimport * as React from \"react\"\nimport * as LabelPrimitive from \"@radix-ui/react-label\"\n",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "components\\ui\\popover.tsx",
+    "lineCount": 90,
+    "sizeBytes": 2356,
+    "exports": [],
+    "status": "Implemented",
+    "snippet": "\"use client\"\n\nimport * as React from \"react\"\nimport * as PopoverPrimitive from \"@radix-ui/react-popover\"\n",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "components\\ui\\progress.tsx",
+    "lineCount": 32,
+    "sizeBytes": 740,
+    "exports": [],
+    "status": "Implemented",
+    "snippet": "\"use client\"\n\nimport * as React from \"react\"\nimport * as ProgressPrimitive from \"@radix-ui/react-progress\"\n",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "components\\ui\\radio-group.tsx",
+    "lineCount": 46,
+    "sizeBytes": 1466,
+    "exports": [],
+    "status": "Implemented",
+    "snippet": "\"use client\"\n\nimport * as React from \"react\"\nimport * as RadioGroupPrimitive from \"@radix-ui/react-radio-group\"\nimport { CircleIcon } from \"lucide-react\"",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "components\\ui\\scroll-area.tsx",
+    "lineCount": 59,
+    "sizeBytes": 1639,
+    "exports": [],
+    "status": "Implemented",
+    "snippet": "\"use client\"\n\nimport * as React from \"react\"\nimport { ScrollArea as ScrollAreaPrimitive } from \"radix-ui\"\n",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "components\\ui\\select.tsx",
+    "lineCount": 191,
+    "sizeBytes": 6358,
+    "exports": [],
+    "status": "Implemented",
+    "snippet": "\"use client\"\n\nimport * as React from \"react\"\nimport * as SelectPrimitive from \"@radix-ui/react-select\"\nimport { CheckIcon, ChevronDownIcon, ChevronUpIcon } from \"lucide-react\"",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "components\\ui\\separator.tsx",
+    "lineCount": 29,
+    "sizeBytes": 699,
+    "exports": [],
+    "status": "Implemented",
+    "snippet": "\"use client\"\n\nimport * as React from \"react\"\nimport * as SeparatorPrimitive from \"@radix-ui/react-separator\"\n",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "components\\ui\\slider.tsx",
+    "lineCount": 64,
+    "sizeBytes": 1996,
+    "exports": [],
+    "status": "Implemented",
+    "snippet": "\"use client\"\n\nimport * as React from \"react\"\nimport * as SliderPrimitive from \"@radix-ui/react-slider\"\n",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "components\\ui\\switch.tsx",
+    "lineCount": 36,
+    "sizeBytes": 1408,
+    "exports": [],
+    "status": "Implemented",
+    "snippet": "\"use client\"\n\nimport * as React from \"react\"\nimport { Switch as SwitchPrimitive } from \"radix-ui\"\n",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "components\\ui\\table.tsx",
+    "lineCount": 117,
+    "sizeBytes": 2448,
+    "exports": [],
+    "status": "Implemented",
+    "snippet": "\"use client\"\n\nimport * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "components\\ui\\tabs.tsx",
+    "lineCount": 199,
+    "sizeBytes": 5830,
+    "exports": [],
+    "status": "Implemented",
+    "snippet": "\"use client\"\n\nimport * as React from \"react\"\nimport * as TabsPrimitive from \"@radix-ui/react-tabs\"\nimport { cva, type VariantProps } from \"class-variance-authority\"",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "components\\ui\\textarea.tsx",
+    "lineCount": 19,
+    "sizeBytes": 759,
+    "exports": [],
+    "status": "Implemented",
+    "snippet": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\nfunction Textarea({ className, ...props }: React.ComponentProps<\"textarea\">) {",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "components\\ui\\tooltip.tsx",
+    "lineCount": 62,
+    "sizeBytes": 1892,
+    "exports": [],
+    "status": "Implemented",
+    "snippet": "\"use client\"\n\nimport * as React from \"react\"\nimport * as TooltipPrimitive from \"@radix-ui/react-tooltip\"\n",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "data\\bookingData.ts",
+    "lineCount": 748,
+    "sizeBytes": 20267,
+    "exports": [
+      "BookingData",
+      "BookingDetailsData",
+      "allBookings",
+      "getActiveBookings",
+      "getRequestedBookings",
+      "getPastBookings",
+      "getBookingById",
+      "bookingDetails",
+      "getBookingDetailsById",
+      "getAllBookingDetails",
+      "getBookingDetailsByStatus",
+      "getBookingDetailsByCategory",
+      "getBusinessBookings",
+      "getBusinessBookingDetails",
+      "requestedCars"
+    ],
+    "status": "Implemented",
+    "snippet": "export interface BookingData {\r\n  id: string;\r\n  carImage: string;\r\n  carName: string;\r\n  carType: string;\r",
+    "hasTodo": false,
+    "hasMock": true
+  },
+  {
+    "path": "data\\carData.ts",
+    "lineCount": 1594,
+    "sizeBytes": 42568,
+    "exports": [
+      "popularCars",
+      "recommendedCars",
+      "mockVehicleDetails",
+      "getVehicleById",
+      "getAllVehicles",
+      "getVehiclesByBusinessId",
+      "getVehiclesByStatus",
+      "getVehiclesByType",
+      "getAvailableVehicles",
+      "allCars"
+    ],
+    "status": "Implemented",
+    "snippet": "// data/carData.ts\r\n\r\nimport { VehicleDetails } from \"@/components/pages/vehicle/view/VehicleDetails\";\r\n\r\n\r",
+    "hasTodo": false,
+    "hasMock": true
+  },
+  {
+    "path": "lib\\config\\add-car.config.ts",
+    "lineCount": 465,
+    "sizeBytes": 13060,
+    "exports": [
+      "VehicleFormData",
+      "VehicleFieldConfig",
+      "VehicleStepConfig",
+      "vehicleFormSteps",
+      "getFieldById",
+      "validateStep",
+      "getInitialFormData"
+    ],
+    "status": "Implemented",
+    "snippet": "// types/vehicle.ts\r\nexport interface VehicleFormData {\r\n  // Step 1: Basic Information\r\n  title: string;\r\n  make: string;\r",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "lib\\config\\business-kyc.config.ts",
+    "lineCount": 334,
+    "sizeBytes": 11682,
+    "exports": [
+      "BusinessKYCConfig"
+    ],
+    "status": "Implemented",
+    "snippet": "\"use client\";\r\n\r\n\r\nimport { KYCFormConfig } from \"@/@types/kyc\";\r\n\r",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "lib\\config\\renter-kyc.config.ts",
+    "lineCount": 362,
+    "sizeBytes": 13123,
+    "exports": [
+      "RenterKYCConfig"
+    ],
+    "status": "Implemented",
+    "snippet": "import { KYCFormConfig } from \"@/@types/kyc\";\r\n\r\nexport const RenterKYCConfig: KYCFormConfig = {\r\n  formId: \"renter_onboarding\",\r\n  title: \"Renter Onboarding\",\r",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "lib\\icons.ts",
+    "lineCount": 72,
+    "sizeBytes": 893,
+    "exports": [
+      "iconMap"
+    ],
+    "status": "Implemented",
+    "snippet": "import {\r\n  Building,\r\n  Phone,\r\n  Mail,\r\n  MapPin,\r",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "lib\\nav.ts",
+    "lineCount": 189,
+    "sizeBytes": 3802,
+    "exports": [
+      "NavItem",
+      "NavigationConfig",
+      "getNavigation",
+      "toggleRole"
+    ],
+    "status": "Implemented",
+    "snippet": "import {\r\n  Home,\r\n  Car,\r\n  Calendar,\r\n  MessageSquare,\r",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "lib\\utils.ts",
+    "lineCount": 130,
+    "sizeBytes": 4643,
+    "exports": [
+      "cn",
+      "formatPrice",
+      "formatDate",
+      "calculateDays",
+      "calculateBookingTotal",
+      "getStatusColor",
+      "getStatusText",
+      "truncateText",
+      "validateNIN",
+      "validateEmail",
+      "validatePhone",
+      "generateBookingReference",
+      "getInitials",
+      "formatTimeAgo"
+    ],
+    "status": "Implemented",
+    "snippet": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\nimport { format, differenceInDays } from \"date-fns\";\n\nexport function cn(...inputs: ClassValue[]) {",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "next-env.d.ts",
+    "lineCount": 7,
+    "sizeBytes": 251,
+    "exports": [],
+    "status": "Implemented",
+    "snippet": "/// <reference types=\"next\" />\n/// <reference types=\"next/image-types/global\" />\nimport \"./.next/dev/types/routes.d.ts\";\n\n// NOTE: This file should not be edited",
+    "hasTodo": false,
+    "hasMock": false
+  },
+  {
+    "path": "next.config.ts",
+    "lineCount": 8,
+    "sizeBytes": 133,
+    "exports": [],
+    "status": "Implemented",
+    "snippet": "import type { NextConfig } from \"next\";\n\nconst nextConfig: NextConfig = {\n  /* config options here */\n};",
+    "hasTodo": false,
+    "hasMock": false
+  }
+]

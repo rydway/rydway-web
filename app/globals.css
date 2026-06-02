@@ -1,26 +1,221 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700&family=Sora:wght@400;500;700&display=swap');
 @import "tailwindcss";
+@import "tw-animate-css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* Dark mode variant */
+@custom-variant dark (&:is(.dark *));
 
+/* ======================================================
+   SHADCN THEME TOKENS
+====================================================== */
 @theme inline {
+  /* Fonts */
+  --font-primary: 'Outfit', sans-serif;
+  --font-secondary: 'Sora', sans-serif;
+
+  /* Core colors */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-destructive: var(--destructive);
+
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  /* Sidebar */
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Radius scale */
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ======================================================
+   LIGHT MODE (RYDWAY)
+====================================================== */
+:root {
+  --radius: 0.75rem;
+
+  /* Backgrounds */
+  --background: oklch(0.98 0 0);              /* light blue-tinted white */
+  --foreground: #3A3A3A; 
+
+
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.15 0 0);
+
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.15 0 0);
+
+  --primary:#0074D1;
+
+;            /* ~ Tailwind blue-500 */
+  --primary-foreground: oklch(0.98 0 0);
+
+  /* Light Blue / Surface */
+  --secondary: #7AC1FF;
+  --secondary-foreground: oklch(0.25 0 0);
+
+  --muted: oklch(0.96 0 0);
+  --muted-foreground: oklch(0.55 0 0);
+
+  --accent: oklch(0.93 0.03 264);
+  --accent-foreground: oklch(0.2 0 0);
+
+  --destructive: oklch(0.6 0.23 27);
+
+  --border: oklch(0.9 0 0);
+  --input: oklch(0.9 0 0);
+  --ring: oklch(0.6 0.22 264);
+
+  /* Sidebar */
+  --sidebar: oklch(0.99 0 0);
+  --sidebar-foreground: oklch(0.15 0 0);
+  --sidebar-primary: var(--primary);
+  --sidebar-primary-foreground: var(--primary-foreground);
+  --sidebar-accent: var(--secondary);
+  --sidebar-accent-foreground: var(--secondary-foreground);
+  --sidebar-border: var(--border);
+  --sidebar-ring: var(--ring);
+}
+
+/* ======================================================
+   DARK MODE (RYDWAY)
+====================================================== */
+.dark {
+  --background: oklch(0.14 0 0);
+  --foreground: oklch(0.98 0 0);
+
+  --card: oklch(0.2 0 0);
+  --card-foreground: oklch(0.98 0 0);
+
+  --popover: oklch(0.2 0 0);
+  --popover-foreground: oklch(0.98 0 0);
+
+  --primary: #0074D1;            /* brighter blue for contrast */
+  --primary-foreground: oklch(0.14 0 0);
+
+  --secondary: oklch(0.25 0 0);
+  --secondary-foreground: oklch(0.98 0 0);
+
+  --muted: oklch(0.25 0 0);
+  --muted-foreground: oklch(0.7 0 0);
+
+  --accent: oklch(0.3 0 0);
+  --accent-foreground: oklch(0.98 0 0);
+
+  --destructive: oklch(0.7 0.19 22);
+
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: #0074D1;
+
+  --sidebar: oklch(0.18 0 0);
+  --sidebar-foreground: oklch(0.98 0 0);
+  --sidebar-primary: var(--primary);
+  --sidebar-primary-foreground: var(--primary-foreground);
+  --sidebar-accent: oklch(0.25 0 0);
+  --sidebar-accent-foreground: oklch(0.98 0 0);
+  --sidebar-border: var(--border);
+  --sidebar-ring: var(--ring);
+}
+
+/* ======================================================
+   BASE STYLES
+====================================================== */
+
+/* Glassmorphism styles */
+.glassmorphism-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06),
+    0 0 0 1px rgba(255, 255, 255, 0.5),
+    0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+.glassmorphism-dropdown {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 
+    0 10px 25px -5px rgba(0, 0, 0, 0.1),
+    0 0 0 1px rgba(255, 255, 255, 0.3),
+    0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+.glassmorphism-button {
+  background: rgba(0, 116, 209, 0.9);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  box-shadow: 
+    0 4px 6px -1px rgba(0, 116, 209, 0.2),
+    0 2px 4px -1px rgba(0, 116, 209, 0.1),
+    0 0 0 1px rgba(255, 255, 255, 0.4),
+    0 0 15px rgba(255, 255, 255, 0.3);
+}
+
+.glassmorphism-button:hover {
+  background: rgba(0, 95, 163, 0.95);
+  box-shadow: 
+    0 10px 15px -3px rgba(0, 116, 209, 0.3),
+    0 4px 6px -2px rgba(0, 116, 209, 0.15),
+    0 0 0 1px rgba(255, 255, 255, 0.5),
+    0 0 20px rgba(255, 255, 255, 0.4);
+}
+
+/* For the shadow-glass effect */
+.shadow-glass {
+  box-shadow: 
+    0 4px 6px -1px rgba(0, 0, 0, 0.05),
+    0 2px 4px -1px rgba(0, 0, 0, 0.03),
+    0 0 0 1px rgba(255, 255, 255, 0.5),
+    0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
   }
-}
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    -webkit-tap-highlight-color: transparent;
+  }
 }

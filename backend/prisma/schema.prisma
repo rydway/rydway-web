@@ -1,0 +1,408 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ─── Enums ───────────────────────────────────────────────────────────────────
+
+enum Role {
+  renter
+  host
+  admin
+}
+
+enum KycStatus {
+  unsubmitted
+  pending
+  verified
+  rejected
+}
+
+enum BookingStatus {
+  requested
+  confirmed
+  paid
+  active
+  completed
+  cancelled
+  disputed
+}
+
+enum PaymentStatus {
+  pending
+  success
+  failed
+  refunded
+  partially_refunded
+}
+
+enum VehicleStatus {
+  available
+  booked
+  maintenance
+  archived
+}
+
+enum KycType {
+  renter
+  host
+}
+
+enum SubscriptionTier {
+  free
+  premium
+  enterprise
+}
+
+// ─── User & Profiles ─────────────────────────────────────────────────────────
+
+model User {
+  id                String    @id @default(uuid())
+  email             String    @unique
+  phone             String?   @unique
+  passwordHash      String
+  firstName         String
+  lastName          String
+  role              Role
+  profileImageUrl   String?
+  isActive          Boolean   @default(true)
+  isSuspended       Boolean   @default(false)
+  suspensionReason  String?
+  kycStatus         KycStatus @default(unsubmitted)
+  emailVerifiedAt   DateTime?
+  phoneVerifiedAt   DateTime?
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  deletedAt         DateTime?
+
+  renterProfile     RenterProfile?
+  hostProfile       HostProfile?
+  kycSubmissions    KycSubmission[]
+  notifications     Notification[]
+  sentMessages      Message[]       @relation("SentMessages")
+  renterBookings    Booking[]       @relation("RenterBookings")
+  renterConvos      Conversation[]  @relation("RenterConversations")
+  hostConvos        Conversation[]  @relation("HostConversations")
+  givenReviews      Review[]        @relation("ReviewGiver")
+  receivedReviews   Review[]        @relation("ReviewReceiver")
+}
+
+model RenterProfile {
+  id                 String   @id @default(uuid())
+  userId             String   @unique
+  user               User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  licenseNumber      String?  @unique
+  licenseExpiry      DateTime?
+  licenseDocumentUrl String?
+  selfieUrl          String?
+  avgRating          Float    @default(0)
+  totalReviews       Int      @default(0)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}
+
+model HostProfile {
+  id                       String   @id @default(uuid())
+  userId                   String   @unique
+  user                     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  businessName             String?
+  cacNumber                String?  @unique
+  taxId                    String?
+  cacDocumentUrl           String?
+  bankName                 String?
+  accountName              String?
+  accountNumber            String?
+  avgRating                Float    @default(0)
+  totalReviews             Int      @default(0)
+  subscriptionTier         SubscriptionTier @default(free)
+  subscriptionExpiresAt    DateTime?
+  createdAt                DateTime @default(now())
+  updatedAt                DateTime @updatedAt
+
+  vehicles                 Vehicle[]
+  payouts                  Payout[]
+  hostBookings             Booking[] @relation("HostBookings")
+}
+
+// ─── Vehicle ─────────────────────────────────────────────────────────────────
+
+model Vehicle {
+  id                String        @id @default(uuid())
+  hostId            String
+  host              HostProfile   @relation(fields: [hostId], references: [id], onDelete: Cascade)
+  name              String
+  slug              String        @unique
+  category          String
+  fuelType          String
+  transmission      String
+  seats             Int
+  dailyRate         Float
+  securityDeposit   Float         @default(0)
+  location          String
+  latitude          Float?
+  longitude         Float?
+  description       String?
+  status            VehicleStatus @default(available)
+  isFeatured        Boolean       @default(false)
+  isVerified        Boolean       @default(false)
+  requiresDriver    Boolean       @default(false)
+  minimumRentalDays Int           @default(1)
+  avgRating         Float         @default(0)
+  totalReviews      Int           @default(0)
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+
+  images            VehicleImage[]
+  bookings          Booking[]
+  maintenanceLogs   MaintenanceLog[]
+  reviews           Review[]
+  conversations     Conversation[]
+  blocks            VehicleBlock[]
+}
+
+model VehicleImage {
+  id        String   @id @default(uuid())
+  vehicleId String
+  vehicle   Vehicle  @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+  url       String
+  position  Int      @default(0)
+  isPrimary Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model MaintenanceLog {
+  id              String   @id @default(uuid())
+  vehicleId       String
+  vehicle         Vehicle  @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+  title           String
+  description     String?
+  maintenanceDate DateTime
+  cost            Float?
+  createdBy       String?
+  createdAt       DateTime @default(now())
+}
+
+model VehicleBlock {
+  id        String   @id @default(uuid())
+  vehicleId String
+  vehicle   Vehicle  @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+  startDate DateTime
+  endDate   DateTime
+  reason    String?
+  createdAt DateTime @default(now())
+}
+
+// ─── Booking ─────────────────────────────────────────────────────────────────
+
+model Booking {
+  id                    String        @id @default(uuid())
+  bookingNumber         String        @unique
+  renterId              String
+  renter                User          @relation("RenterBookings", fields: [renterId], references: [id])
+  hostId                String
+  hostProfile           HostProfile   @relation("HostBookings", fields: [hostId], references: [id])
+  vehicleId             String
+  vehicle               Vehicle       @relation(fields: [vehicleId], references: [id])
+  startDate             DateTime
+  endDate               DateTime
+  pickupTime            String
+  dropoffTime           String
+  pickupLocation        String
+  dropoffLocation       String
+  daysCount             Int
+  baseAmount            Float
+  platformFeeAmount     Float         @default(0)
+  securityDepositAmount Float         @default(0)
+  totalAmount           Float
+  status                BookingStatus @default(requested)
+  paymentStatus         PaymentStatus @default(pending)
+  approvalStatus        String        @default("pending")
+  confirmedAt           DateTime?
+  startedAt             DateTime?
+  completedAt           DateTime?
+  cancelledAt           DateTime?
+  createdAt             DateTime      @default(now())
+  updatedAt             DateTime      @updatedAt
+
+  payments              Payment[]
+  payout                Payout?
+  reviews               Review[]
+  conversation          Conversation?
+  inspections           TripInspection[]
+  dispute               Dispute?
+}
+
+// ─── Inspection ────────────────────────────────────────────────────────────────
+model TripInspection {
+  id           String         @id @default(uuid())
+  bookingId    String
+  booking      Booking        @relation(fields: [bookingId], references: [id])
+  type         InspectionType
+  photoUrls    String[]       // Array of 4 S3 URLs
+  createdAt    DateTime       @default(now())
+
+  @@unique([bookingId, type]) // Ensure only one PRE and one POST per booking
+}
+
+enum InspectionType {
+  PRE
+  POST
+}
+
+// ─── Dispute ───────────────────────────────────────────────────────────────────
+
+model Dispute {
+  id          String        @id @default(uuid())
+  bookingId   String        @unique
+  booking     Booking       @relation(fields: [bookingId], references: [id])
+  raisedBy    String        // userId of renter or host
+  reason      String
+  status      DisputeStatus @default(OPEN)
+  resolution  String?
+  resolvedAt  DateTime?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+}
+
+enum DisputeStatus {
+  OPEN
+  RESOLVED
+  REJECTED
+}
+
+// ─── Webhooks ────────────────────────────────────────────────────────────────
+
+model WebhookEvent {
+  id        String   @id @default(uuid())
+  provider  String
+  eventId   String   @unique
+  payload   Json
+  status    String   @default("pending") // pending, processed, failed
+  error     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ─── Payment ─────────────────────────────────────────────────────────────────
+
+model Payment {
+  id             String        @id @default(uuid())
+  bookingId      String
+  booking        Booking       @relation(fields: [bookingId], references: [id])
+  transactionRef String        @unique
+  provider       String
+  method         String
+  amount         Float
+  currency       String        @default("NGN")
+  status         PaymentStatus @default(pending)
+  paidAt         DateTime?
+  rawPayloadJson Json?
+  idempotencyKey String?       @unique
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+}
+
+// ─── Payout ──────────────────────────────────────────────────────────────────
+
+model Payout {
+  id                       String      @id @default(uuid())
+  hostId                   String
+  host                     HostProfile @relation(fields: [hostId], references: [id])
+  bookingId                String?     @unique
+  booking                  Booking?    @relation(fields: [bookingId], references: [id])
+  amount                   Float
+  status                   String      @default("pending")
+  provider                 String?
+  destinationBankName      String?
+  destinationAccountNumber String?
+  destinationAccountName   String?
+  transactionRef           String?     @unique
+  idempotencyKey           String?     @unique
+  createdAt                DateTime    @default(now())
+  updatedAt                DateTime    @updatedAt
+}
+
+// ─── Messaging ───────────────────────────────────────────────────────────────
+
+model Conversation {
+  id          String    @id @default(uuid())
+  renterId    String
+  renter      User      @relation("RenterConversations", fields: [renterId], references: [id])
+  hostUserId  String
+  host        User      @relation("HostConversations", fields: [hostUserId], references: [id])
+  vehicleId   String
+  vehicle     Vehicle   @relation(fields: [vehicleId], references: [id])
+  bookingId   String?   @unique
+  booking     Booking?  @relation(fields: [bookingId], references: [id])
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  messages    Message[]
+}
+
+model Message {
+  id             String       @id @default(uuid())
+  conversationId String
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  senderId       String
+  sender         User         @relation("SentMessages", fields: [senderId], references: [id])
+  body           String
+  attachmentUrl  String?
+  isRead         Boolean      @default(false)
+  readAt         DateTime?
+  createdAt      DateTime     @default(now())
+}
+
+// ─── Review ──────────────────────────────────────────────────────────────────
+
+model Review {
+  id         String   @id @default(uuid())
+  bookingId  String
+  booking    Booking  @relation(fields: [bookingId], references: [id])
+  vehicleId  String?
+  vehicle    Vehicle? @relation(fields: [vehicleId], references: [id])
+  reviewerId String
+  reviewer   User     @relation("ReviewGiver", fields: [reviewerId], references: [id])
+  revieweeId String
+  reviewee   User     @relation("ReviewReceiver", fields: [revieweeId], references: [id])
+  type       String   // "vehicle" | "host" | "renter"
+  rating     Int
+  body       String?
+  createdAt  DateTime @default(now())
+}
+
+// ─── KYC ─────────────────────────────────────────────────────────────────────
+
+model KycSubmission {
+  id                String    @id @default(uuid())
+  userId            String
+  user              User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type              KycType
+  status            KycStatus @default(pending)
+  submittedDataJson Json?
+  reviewedBy        String?
+  reviewNotes       String?
+  reviewedAt        DateTime?
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+}
+
+// ─── Notification ─────────────────────────────────────────────────────────────
+
+model Notification {
+  id          String   @id @default(uuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type        String
+  title       String
+  message     String
+  isRead      Boolean  @default(false)
+  readAt      DateTime?
+  actionUrl   String?
+  entityId    String?
+  entityType  String?
+  createdAt   DateTime @default(now())
+}
