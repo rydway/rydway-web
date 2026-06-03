@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
+import { MailService } from './mail.service';
 
 export type NotificationType =
   | 'booking_request'
@@ -25,10 +26,13 @@ export interface CreateNotificationPayload {
 
 @Injectable()
 export class NotificationsService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private mailService: MailService,
+  ) {}
 
   async create(payload: CreateNotificationPayload) {
-    return this.prisma.notification.create({
+    const notification = await this.prisma.notification.create({
       data: {
         userId: payload.userId,
         type: payload.type,
@@ -40,6 +44,25 @@ export class NotificationsService {
         isRead: false,
       },
     });
+
+    // Proactively send email notification asynchronously
+    this.prisma.user.findUnique({
+      where: { id: payload.userId },
+      select: { email: true, firstName: true }
+    }).then(async (user) => {
+      if (user?.email) {
+        await this.mailService.sendNotificationEmail(
+          user.email,
+          user.firstName,
+          payload.title,
+          payload.message
+        );
+      }
+    }).catch(err => {
+      console.error('Failed to trigger notification email delivery', err);
+    });
+
+    return notification;
   }
 
   async getMyNotifications(userId: string, page = 1, limit = 20) {

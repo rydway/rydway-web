@@ -216,10 +216,10 @@ export class PaymentsService {
         }
       } catch (err: any) {
         this.logger.error('Failed to verify with Paystack API', err.message);
-        // In dev mode, allow a bypass
-        if (process.env.NODE_ENV !== 'production') {
+        const secret = process.env.PAYSTACK_SECRET_KEY;
+        if (process.env.NODE_ENV !== 'production' && (!secret || secret.startsWith('dev-') || secret.startsWith('mock-'))) {
           isSuccessful = true;
-          this.logger.warn('DEV MODE: Bypassing Paystack verification');
+          this.logger.warn('DEV MODE: Bypassing Paystack verification because mock/dev keys are active');
         } else {
           throw err;
         }
@@ -303,13 +303,37 @@ export class PaymentsService {
       throw error;
     }
 
+
     this.logger.log(`Paystack webhook received: ${event} for ref ${transactionRef}`);
 
     try {
       if (event === 'charge.success' && transactionRef) {
         await this.verifyPayment(transactionRef, payload);
+      } else if (event === 'transfer.success' && transactionRef) {
+        // Mark the matching payout as paid when Paystack confirms the bank transfer
+        const payout = await this.prisma.payout.findUnique({
+          where: { transactionRef },
+        });
+        if (payout && payout.status === 'pending') {
+          await this.prisma.payout.update({
+            where: { id: payout.id },
+            data: { status: 'paid' },
+          });
+          this.logger.log(`Payout ${payout.id} marked paid via transfer.success webhook`);
+        }
+      } else if (event === 'transfer.failed' && transactionRef) {
+        const payout = await this.prisma.payout.findUnique({
+          where: { transactionRef },
+        });
+        if (payout && payout.status === 'pending') {
+          await this.prisma.payout.update({
+            where: { id: payout.id },
+            data: { status: 'failed' },
+          });
+          this.logger.warn(`Payout ${payout.id} marked failed via transfer.failed webhook`);
+        }
       }
-      
+
       await this.prisma.webhookEvent.update({
         where: { eventId },
         data: { status: 'processed' },
@@ -322,7 +346,6 @@ export class PaymentsService {
       throw error;
     }
 
-    // Other events (e.g. transfer.success, refund) can be handled here
     return { handled: true, event };
   }
 

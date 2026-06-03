@@ -1,4 +1,5 @@
 import { NestFactory } from '@nestjs/core';
+import { Logger } from 'nestjs-pino';
 import { AppModule } from './app.module';
 import { ValidationPipe, VersioningType } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
@@ -7,7 +8,8 @@ import { TransformInterceptor } from './common/interceptors/transform.intercepto
 import { ConfigService } from '@nestjs/config';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, { rawBody: true });
+  const app = await NestFactory.create(AppModule, { rawBody: true, bufferLogs: true });
+  app.useLogger(app.get(Logger));
   const configService = app.get(ConfigService);
 
   // Global prefixes and versioning
@@ -38,14 +40,21 @@ async function bootstrap() {
     .setVersion('1.0')
     .addBearerAuth()
     .build();
-  
+
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('docs', app, document);
 
-  // CORS
-  app.enableCors();
+  // CORS — only allow configured frontend origin
+  const frontendUrl =
+    configService.get<string>('FRONTEND_URL') || 'http://localhost:3000';
+  app.enableCors({
+    origin: [frontendUrl],
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'x-idempotency-key'],
+    credentials: true,
+  });
 
-  const port = configService.get<number>('PORT') || 3000;
+  const port = configService.get<number>('PORT') || 8001;
   await app.listen(port);
   console.log(`Application is running on: http://localhost:${port}/api/v1`);
   console.log(`Swagger docs available at: http://localhost:${port}/docs`);

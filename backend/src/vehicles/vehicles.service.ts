@@ -113,6 +113,15 @@ export class VehiclesService {
     const vehicle = await this.getVehicleById(vehicleId);
     await this.ensureOwnership(userId, vehicle.hostId);
 
+    // Validate that the URL points to an image resource
+    const allowedExtensions = /\.(jpg|jpeg|png|webp|gif|avif)(\?.*)?$/i;
+    const isSupabaseUrl = dto.url.includes('.supabase.co/storage/');
+    if (!allowedExtensions.test(dto.url) && !isSupabaseUrl) {
+      throw new BadRequestException(
+        'Vehicle media must be an image URL (jpg, jpeg, png, webp, gif, avif)',
+      );
+    }
+
     const media = await this.prisma.vehicleImage.create({
       data: {
         vehicleId,

@@ -7,6 +7,7 @@ import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
 import * as bcrypt from 'bcrypt';
 import { ConfigService } from '@nestjs/config';
+import { MailService } from '../notifications/mail.service';
 
 @Injectable()
 export class AuthService {
@@ -16,6 +17,7 @@ export class AuthService {
     private redisService: RedisService,
     private auditLogService: AuditLogService,
     private configService: ConfigService,
+    private mailService: MailService,
   ) {}
 
   async register(registerDto: RegisterDto) {
@@ -119,7 +121,19 @@ export class AuthService {
       const otp = Math.floor(100000 + Math.random() * 900000).toString();
       await this.redisService.setex(`auth:otp:password:${email}`, 900, otp); // 15 mins
       
-      // TODO: Send OTP via email/SMS service
+      const emailHtml = `
+        <div style="font-family: sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #e2e8f0; rounded-lg">
+          <h2 style="color: #1e293b; border-bottom: 2px solid #3b82f6; padding-bottom: 10px;">Password Reset Request</h2>
+          <p>Hello,</p>
+          <p>We received a request to reset your password. Use the following OTP to proceed:</p>
+          <h1 style="color: #3b82f6; font-size: 32px; letter-spacing: 4px; text-align: center; margin: 20px 0;">${otp}</h1>
+          <p>This OTP is valid for 15 minutes. If you did not request a password reset, please ignore this email.</p>
+          <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 20px 0;" />
+          <p style="font-size: 12px; color: #64748b;">This is an automated notification from Rydway. Please do not reply to this email.</p>
+        </div>
+      `;
+      
+      await this.mailService.sendEmail(email, 'Rydway: Password Reset OTP', emailHtml);
       console.log(`[DEV ONLY] OTP for ${email} is ${otp}`);
 
       await this.auditLogService.logAction({
@@ -170,6 +184,20 @@ export class AuthService {
 
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
     await this.redisService.setex(`auth:otp:verify:${email}`, 900, otp);
+    
+    const emailHtml = `
+      <div style="font-family: sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #e2e8f0; rounded-lg">
+        <h2 style="color: #1e293b; border-bottom: 2px solid #3b82f6; padding-bottom: 10px;">Email Verification</h2>
+        <p>Hello,</p>
+        <p>Please use the following OTP to verify your email address:</p>
+        <h1 style="color: #3b82f6; font-size: 32px; letter-spacing: 4px; text-align: center; margin: 20px 0;">${otp}</h1>
+        <p>This OTP is valid for 15 minutes. If you did not request this, please ignore this email.</p>
+        <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 20px 0;" />
+        <p style="font-size: 12px; color: #64748b;">This is an automated notification from Rydway. Please do not reply to this email.</p>
+      </div>
+    `;
+
+    await this.mailService.sendEmail(email, 'Rydway: Verify your email', emailHtml);
     console.log(`[DEV ONLY] Verification OTP for ${email} is ${otp}`);
     return true;
   }
