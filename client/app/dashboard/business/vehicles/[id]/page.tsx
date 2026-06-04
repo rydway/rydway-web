@@ -2,15 +2,14 @@
 "use client";
 
 import { VehicleDetailsComponent } from "@/components/pages/vehicle/view/VehicleDetails";
-import { getVehicleById } from "@/data/carData";
+import { useVehicle } from "@/hooks/useVehicles";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
+import { Loader2 } from "lucide-react";
 
 export default function BusinessVehicleDetailsPage({ params }: { params: Promise<{ id: string }> }) {
   const router = useRouter();
-  const [vehicle, setVehicle] = useState<any>(null);
   const [isFavorite, setIsFavorite] = useState(false);
-  const [loading, setLoading] = useState(true);
   const [vehicleId, setVehicleId] = useState<string | null>(null);
 
   // Unwrap params promise
@@ -21,49 +20,81 @@ export default function BusinessVehicleDetailsPage({ params }: { params: Promise
         setVehicleId(resolvedParams.id);
       } catch (error) {
         console.error("Error unwrapping params:", error);
-        setLoading(false);
       }
     };
     
     unwrapParams();
   }, [params]);
 
-  // Fetch vehicle once we have the ID
-  useEffect(() => {
-    if (!vehicleId) return;
-    
-    console.log("Looking for vehicle with ID:", vehicleId);
-    const foundVehicle = getVehicleById(vehicleId);
-    console.log("Found vehicle:", foundVehicle);
-    
-    setVehicle(foundVehicle);
-    setLoading(false);
-  }, [vehicleId]);
+  const { vehicle, isLoading } = useVehicle(vehicleId || "");
 
-  if (loading) {
+  if (isLoading || !vehicleId) {
     return (
       <div className="flex flex-col items-center justify-center h-96">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-        <p className="text-slate-600 mt-4">Loading vehicle details...</p>
+        <Loader2 className="animate-spin h-12 w-12 text-blue-600" />
+        <p className="text-slate-600 mt-4 font-secondary">Loading vehicle details...</p>
       </div>
     );
   }
 
   if (!vehicle) {
     return (
-      <div className="flex flex-col items-center justify-center h-96">
+      <div className="flex flex-col items-center justify-center h-96 font-primary">
         <h2 className="text-2xl font-bold text-slate-800">Vehicle Not Found</h2>
-        <p className="text-slate-600 mt-2">The vehicle you're looking for doesn't exist.</p>
-        <p className="text-slate-500 text-sm mt-1">Vehicle ID: {vehicleId ?? "unknown"}</p>
+        <p className="text-slate-600 mt-2 font-secondary">The vehicle you're looking for doesn't exist.</p>
+        <p className="text-slate-500 text-sm mt-1 font-secondary">Vehicle ID: {vehicleId ?? "unknown"}</p>
         <button 
           onClick={() => router.push("/dashboard/business/vehicles")}
-          className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+          className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-primary"
         >
           Back to Fleet
         </button>
       </div>
     );
   }
+
+  const mappedVehicle = {
+    id: vehicle.id,
+    image: vehicle.images?.[0]?.url || "/car/car2.png",
+    name: vehicle.name || "Unknown Vehicle",
+    make: (vehicle as any).make || vehicle.name?.split(' ')[0] || "Unknown",
+    model: (vehicle as any).model || vehicle.name?.split(' ').slice(1).join(' ') || "Unknown",
+    year: (vehicle as any).year || 2023,
+    vehicleType: vehicle.category || "Sedan",
+    fuelType: vehicle.fuelType || "Petrol",
+    transmission: vehicle.transmission || "Automatic",
+    seats: vehicle.seats || 5,
+    dailyRate: vehicle.dailyRate || 0,
+    securityDeposit: vehicle.securityDeposit || 0,
+    minimumRentalDays: vehicle.minimumRentalDays || 1,
+    location: vehicle.location || "Not specified",
+    city: (vehicle as any).city || "Lagos",
+    state: (vehicle as any).state || "Lagos",
+    status: vehicle.status || "available",
+    isVerified: vehicle.isVerified || false,
+    isFeatured: vehicle.isFeatured || false,
+    features: (vehicle as any).features || [],
+    gallery: vehicle.images?.map((img: any) => img.url) || ["/car/car2.png"],
+    description: vehicle.description || "",
+    businessId: vehicle.hostId || "",
+    businessName: (vehicle as any).businessName || "Rydway Partner",
+    businessPhone: (vehicle as any).businessPhone || "",
+    businessEmail: (vehicle as any).businessEmail || "",
+    businessRating: (vehicle as any).businessRating || 5,
+    businessTotalReviews: (vehicle as any).businessTotalReviews || 0,
+    businessVerified: true,
+    rating: vehicle.avgRating || 0,
+    totalReviews: vehicle.totalReviews || 0,
+    reviews: (vehicle as any).reviews || [],
+    bookingStats: (vehicle as any).bookingStats || {
+      totalBookings: 0,
+      revenue: 0,
+      utilizationRate: 0,
+      averageDaysPerBooking: 0,
+      repeatCustomers: 0
+    },
+    maintenanceHistory: (vehicle as any).maintenanceHistory || []
+  };
 
   const handleEdit = () => {
     router.push(`/dashboard/business/vehicles/${vehicleId}/edit`);
@@ -88,7 +119,7 @@ export default function BusinessVehicleDetailsPage({ params }: { params: Promise
 
   return (
     <VehicleDetailsComponent
-      vehicle={vehicle}
+      vehicle={mappedVehicle as any}
       role="business"
       onEdit={handleEdit}
       onDelete={handleDelete}

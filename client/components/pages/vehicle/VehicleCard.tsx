@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Heart, Fuel, Settings, Users, Star } from "lucide-react";
-import { Vehicle } from "@/@types";
+import { Vehicle } from "@/types";
 import { formatPrice } from "@/lib/utils";
 
 interface VehicleCardProps {

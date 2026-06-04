@@ -37,6 +37,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { StatCard } from "@/components/base/cards/StatCard";
 import { Separator } from "@/components/ui/separator";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -103,77 +104,7 @@ interface UserProfile {
   };
 }
 
-// ============ MOCK DATA ============
 
-const mockProfile: UserProfile = {
-  id: "user-1",
-  name: "John Doe",
-  email: "john.doe@email.com",
-  phone: "+234 812 345 6789",
-  avatar: "/renterProfile.jpg",
-  coverImage: "/renterCover.jpg",
-  bio: "Frequent traveler and car enthusiast. I love exploring new places and driving different vehicles. Currently based in Lagos, Nigeria.",
-  location: "Lagos, Nigeria",
-  memberSince: new Date(2024, 5, 15),
-  lastActive: new Date(),
-  verified: true,
-  kycStatus: "verified",
-  accountType: "personal",
-  preferences: {
-    notifications: true,
-    newsletter: true
-  },
-  stats: {
-    totalTrips: 24,
-    totalSpent: 1850000,
-    totalDays: 68,
-    averageRating: 4.8,
-    reviews: 42
-  },
-  recentVehicles: [
-    {
-      id: "book-1",
-      name: "Toyota Camry 2023",
-      date: new Date(2026, 2, 15),
-      location: "Victoria Island, Lagos"
-    },
-    {
-      id: "book-2",
-      name: "Mercedes GLE",
-      date: new Date(2026, 2, 10),
-      location: "Ikoyi, Lagos"
-    },
-    {
-      id: "book-3",
-      name: "BMW 3 Series",
-      date: new Date(2026, 2, 5),
-      location: "Lekki, Lagos"
-    }
-  ],
-  upcomingBookings: [
-    {
-      id: "up-1",
-      vehicleName: "Range Rover Sport",
-      startDate: new Date(2026, 3, 5),
-      endDate: new Date(2026, 3, 8),
-      location: "Ikoyi, Lagos",
-      status: "confirmed"
-    },
-    {
-      id: "up-2",
-      vehicleName: "Toyota Hilux",
-      startDate: new Date(2026, 3, 15),
-      endDate: new Date(2026, 3, 18),
-      location: "Victoria Island, Lagos",
-      status: "pending"
-    }
-  ],
-  socialLinks: {
-    twitter: "johndoe",
-    instagram: "johndoe",
-    linkedin: "johndoe"
-  }
-};
 
 // ============ COMPONENTS ============
 
@@ -213,18 +144,21 @@ function ProfileHeader({
   return (
     <Card className=" py-0 dark:border-slate-800 overflow-hidden">
       {/* Cover Image */}
-      <div className="relative h-48 bg-teal-100/40">
+      <div className="relative h-48 bg-slate-200 dark:bg-slate-800 flex items-center justify-center group cursor-pointer">
         {profile.coverImage ? (
-          <img 
-            src={profile.coverImage} 
-            alt="Cover" 
+          <img
+            src={profile.coverImage}
+            alt="Cover"
             className="w-full h-full object-cover"
           />
         ) : (
-          <div className="w-full h-full flex items-center justify-center">
-            <span className="text-white/20 text-8xl">🚗</span>
+          <div className="flex flex-col items-center gap-1 text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-300">
+            <Camera className="h-6 w-6" />
+            <span className="text-xs font-medium font-secondary">Add Cover Photo</span>
           </div>
         )}
+        <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity" />
+
 
         {/* Action Buttons */}
         <div className="absolute top-4 right-4 flex gap-2">
@@ -473,65 +407,42 @@ function EditProfileDialog({
   );
 }
 
-// Stats Cards (MODIFIED - Added h-full to ensure equal height)
+// Stats Cards (MODIFIED - Refactored to use unified StatCard component)
 function ProfileStats({ stats }: { stats: UserProfile['stats'] }) {
-  const statCards = [
-    {
-      label: "Total Trips",
-      value: stats.totalTrips,
-      icon: Car,
-      color: "text-primary",
-      bgColor: "bg-primary/10"
-    },
-    {
-      label: "Days Rented",
-      value: stats.totalDays,
-      icon: Calendar,
-      color: "text-green-600",
-      bgColor: "bg-green-50"
-    },
-    {
-      label: "Rating",
-      value: stats.averageRating,
-      suffix: ` (${stats.reviews})`,
-      icon: Star,
-      color: "text-amber-600",
-      bgColor: "bg-amber-50",
-      isRating: true
-    },
-    {
-      label: "Total Spent",
-      value: `₦${(stats.totalSpent / 1000000).toFixed(1)}M`,
-      icon: CreditCard,
-      color: "text-purple-600",
-      bgColor: "bg-purple-50"
-    }
-  ];
-
   return (
     <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-      {statCards.map((stat, index) => (
-        <Card key={index} className=" shadow-sm h-full">
-          <CardContent className="p-4 h-full flex items-center">
-            <div className="flex items-center gap-3 w-full">
-              <div className={cn("p-2 rounded-lg flex-shrink-0", stat.bgColor)}>
-                <stat.icon className={cn("h-5 w-5", stat.color)} />
-              </div>
-              <div className="min-w-0 flex-1">
-                <p className="text-xs font-secondary text-slate-500 truncate">{stat.label}</p>
-                <div className="flex items-center gap-1 flex-wrap">
-                  <p className="text-xl font-bold font-primary text-slate-800">
-                    {stat.value}
-                  </p>
-                  {stat.suffix && (
-                    <span className="text-xs text-slate-500">{stat.suffix}</span>
-                  )}
-                </div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      ))}
+      <StatCard
+        title="Total Trips"
+        value={stats.totalTrips.toString()}
+        icon={Car}
+        trend="Trips completed"
+        trendUp={true}
+        className="shadow-sm"
+      />
+      <StatCard
+        title="Days Rented"
+        value={stats.totalDays.toString()}
+        icon={Calendar}
+        trend="Total rented duration"
+        trendUp={true}
+        className="shadow-sm"
+      />
+      <StatCard
+        title="Rating"
+        value={`${stats.averageRating.toFixed(1)} (${stats.reviews})`}
+        icon={Star}
+        trend="Average rating"
+        trendUp={true}
+        className="shadow-sm"
+      />
+      <StatCard
+        title="Total Spent"
+        value={`₦${(stats.totalSpent / 1000000).toFixed(1)}M`}
+        icon={CreditCard}
+        trend="Lifetime expenditure"
+        trendUp={true}
+        className="shadow-sm"
+      />
     </div>
   );
 }
@@ -834,16 +745,79 @@ function PersonalInformation({ profile }: { profile: UserProfile }) {
 
 // ============ MAIN PAGE ============
 
-export default function ProfilePage() {
-  const [profile] = useState<UserProfile>(mockProfile);
+import { useCurrentUser } from "@/hooks/useUser";
+import { useRenterDashboard } from "@/hooks/useDashboard";
+import { useRenterBookings } from "@/hooks/useBookings";
+import { Loader2 } from "lucide-react";
+
+export default function RenterProfilePage() {
+  const { user, isLoading: isUserLoading } = useCurrentUser();
+  const { summary, isLoading: isSummaryLoading } = useRenterDashboard();
+  const { bookings, isLoading: isBookingsLoading } = useRenterBookings();
+
   const [showEditDialog, setShowEditDialog] = useState(false);
 
-  const handleShare = () => {
-    console.log('Share profile');
+  if (isUserLoading || isSummaryLoading || isBookingsLoading) {
+    return (
+      <div className="flex items-center justify-center h-full min-h-[400px]">
+        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+        <span className="ml-2 font-secondary text-slate-500">Loading profile data...</span>
+      </div>
+    );
+  }
+
+  const profile: UserProfile = {
+    id: user?.id || "user-1",
+    name: user?.firstName && user?.lastName ? `${user.firstName} ${user.lastName}` : "Renter User",
+    email: user?.email || "No email provided",
+    phone: user?.phone,
+    avatar: user?.profileImageUrl,
+    coverImage: "", // Leave blank so default placeholder applies
+    bio: "User bio goes here. Edit your profile to add more details.",
+    location: "Not specified",
+    memberSince: user?.createdAt ? new Date(user.createdAt) : new Date(),
+    lastActive: new Date(),
+    verified: user?.kycStatus === 'verified',
+    kycStatus: (user?.kycStatus === 'verified' || user?.kycStatus === 'pending') ? user.kycStatus : 'unverified',
+    accountType: "personal",
+    preferences: {
+      notifications: true,
+      newsletter: true
+    },
+    stats: {
+      totalTrips: summary?.totalBookings || 0,
+      totalSpent: summary?.totalSpend || 0,
+      totalDays: summary?.completedBookings ? summary.completedBookings * 2 : 0, // Mocked days
+      averageRating: 0,
+      reviews: 0
+    },
+    recentVehicles: bookings
+      .filter((b) => b.status === "completed")
+      .map((b) => ({
+        id: b.id,
+        name: b.vehicle?.name || "Unknown Vehicle",
+        date: new Date(b.endDate),
+        location: b.pickupLocation
+      })),
+    upcomingBookings: bookings
+      .filter((b) => b.status === "active" || b.status === "confirmed" || b.status === "paid")
+      .map((b) => ({
+        id: b.id,
+        vehicleName: b.vehicle?.name || "Unknown Vehicle",
+        startDate: new Date(b.startDate),
+        endDate: new Date(b.endDate),
+        location: b.pickupLocation,
+        status: b.status as any
+      })),
+    socialLinks: {}
   };
 
-  const handleContact = () => {
-    console.log('Contact support');
+  const handleShare = () => {
+    console.log("Share profile");
+  };
+
+  const handleContactSupport = () => {
+    console.log("Contact support");
   };
 
   return (
@@ -853,7 +827,7 @@ export default function ProfilePage() {
         profile={profile} 
         onEditProfile={() => setShowEditDialog(true)}
         onShare={handleShare}
-        onContact={handleContact}
+        onContact={handleContactSupport}
       />
 
       {/* Stats (now with h-full) */}

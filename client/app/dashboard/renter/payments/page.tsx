@@ -2,26 +2,39 @@
 "use client";
 
 import { useState, useMemo, useEffect } from "react";
-import { 
-  Plus, 
-  Search, 
-  Filter, 
-  Download, 
-  Eye, 
-  Printer, 
-  FileText, 
-  DollarSign, 
-  Clock, 
-  CheckCircle
+import {
+  Plus,
+  Search,
+  Filter,
+  Download,
+  Eye,
+  Printer,
+  FileText,
+  DollarSign,
+  Clock,
+  CheckCircle,
 } from "lucide-react";
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Separator } from "@/components/ui/separator";
 import { Input } from "@/components/ui/input";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import {
   Select,
   SelectContent,
@@ -46,7 +59,7 @@ import { format } from "date-fns";
 // Remove AddPaymentMethodDialog imports as we're switching to Paystack checkout flow
 
 // Local sub-components
-import { mockPayments, mockInvoices } from "./components/mockData";
+
 import { TransactionRow } from "./components/TransactionRow";
 import { SpendingChart } from "./components/SpendingChart";
 import { PaymentDetailsDialog } from "./components/PaymentDetailsDialog";
@@ -68,62 +81,69 @@ export default function RenterPaymentsPage() {
 
   // Fetch live transactions from the API, fallback to mock while loading
   const [apiPayments, setApiPayments] = useState<Payment[]>([]);
-  const [invoices] = useState<Invoice[]>(mockInvoices);
+  const [invoices] = useState<Invoice[]>([]);
   const [isLoadingTransactions, setIsLoadingTransactions] = useState(true);
 
   // Active bookings — needed to pick a bookingId for Paystack init
   const { bookings } = useRenterBookings();
   const confirmedBooking = bookings.find(
-    (b) => b.status === 'confirmed' && b.paymentStatus !== 'success'
+    (b) => b.status === "confirmed" && b.paymentStatus !== "success",
   );
 
   useEffect(() => {
     paymentService
       .getTransactions()
       .then((data) => setApiPayments(data as unknown as Payment[]))
-      .catch(() => {/* silently fallback to mock */})
+      .catch(() => {
+        /* silently fallback to mock */
+      })
       .finally(() => setIsLoadingTransactions(false));
   }, []);
 
-  // Use live data if available, else fall back to mock
-  const payments = apiPayments.length > 0 ? apiPayments : mockPayments;
+  // Use live data
+  const payments = apiPayments;
 
   // Calculate metrics
   const metrics = useMemo(() => {
     const totalSpent = payments
-      .filter(p => p.status === 'completed' && p.type !== 'refund')
+      .filter((p) => p.status === "completed" && p.type !== "refund")
       .reduce((sum, p) => sum + p.amount, 0);
-    
+
     const pendingPayments = payments
-      .filter(p => p.status === 'pending' || p.status === 'processing')
+      .filter((p) => p.status === "pending" || p.status === "processing")
       .reduce((sum, p) => sum + p.amount, 0);
-    
-    const upcomingPayments = payments
-      .filter(p => p.status === 'pending')
-      .length;
-    
-    const completedTransactions = payments
-      .filter(p => p.status === 'completed')
-      .length;
+
+    const upcomingPayments = payments.filter(
+      (p) => p.status === "pending",
+    ).length;
+
+    const completedTransactions = payments.filter(
+      (p) => p.status === "completed",
+    ).length;
 
     return {
       totalSpent,
       pendingPayments,
       upcomingPayments,
-      completedTransactions
+      completedTransactions,
     };
   }, [payments]);
 
   // Filter payments
   const filteredPayments = useMemo(() => {
-    return payments.filter(payment => {
-      const matchesSearch = 
-        payment.vehicleName?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        payment.transactionId.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    return payments.filter((payment) => {
+      const matchesSearch =
+        payment.vehicleName
+          ?.toLowerCase()
+          .includes(searchQuery.toLowerCase()) ||
+        payment.transactionId
+          .toLowerCase()
+          .includes(searchQuery.toLowerCase()) ||
         payment.description.toLowerCase().includes(searchQuery.toLowerCase());
-      
-      const matchesStatus = statusFilter === 'all' || payment.status === statusFilter;
-      
+
+      const matchesStatus =
+        statusFilter === "all" || payment.status === statusFilter;
+
       return matchesSearch && matchesStatus;
     });
   }, [payments, searchQuery, statusFilter]);
@@ -139,18 +159,20 @@ export default function RenterPaymentsPage() {
   // Handle Paystack checkout
   const handleInitiatePayment = async () => {
     if (!confirmedBooking) {
-      toast.info('No confirmed booking awaiting payment found.');
+      toast.info("No confirmed booking awaiting payment found.");
       return;
     }
     setIsInitiatingPayment(true);
     try {
       const result = await paymentService.initializePayment({
         bookingId: confirmedBooking.id,
-        method: 'card',
+        method: "card",
       });
       paymentService.openCheckout(result.checkoutUrl);
     } catch (err: any) {
-      toast.error(`Could not start payment: ${err?.message || 'Unknown error'}`);
+      toast.error(
+        `Could not start payment: ${err?.message || "Unknown error"}`,
+      );
     } finally {
       setIsInitiatingPayment(false);
     }
@@ -168,27 +190,33 @@ export default function RenterPaymentsPage() {
             Manage your payment methods and view transaction history
           </p>
         </div>
-        
+
         <div className="flex items-center gap-2">
-          <Button 
-            variant="outline" 
-            size="sm" 
+          <Button
+            variant="outline"
+            size="sm"
             className="h-9"
-            onClick={() => console.log('Export')}
+            onClick={() => console.log("Export")}
           >
             <Download className="h-4 w-4 mr-2" />
             Export
           </Button>
-          <Button 
-            size="sm" 
+          <Button
+            size="sm"
             className="bg-blue-600 hover:bg-blue-700 h-9 min-w-[160px]"
             onClick={handleInitiatePayment}
             disabled={isInitiatingPayment || !confirmedBooking}
           >
             {isInitiatingPayment ? (
-              <><Loader2 className="h-4 w-4 mr-2 animate-spin" />Processing...</>
+              <>
+                <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                Processing...
+              </>
             ) : (
-              <><Plus className="h-4 w-4 mr-2" />Make a Payment</>
+              <>
+                <Plus className="h-4 w-4 mr-2" />
+                Make a Payment
+              </>
             )}
           </Button>
         </div>
@@ -196,27 +224,27 @@ export default function RenterPaymentsPage() {
 
       {/* Stats Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatCard 
-          title="Total Spent" 
-          value={`₦${metrics.totalSpent.toLocaleString()}`} 
+        <StatCard
+          title="Total Spent"
+          value={`₦${metrics.totalSpent.toLocaleString()}`}
           icon={DollarSign}
           trend="+12.5% vs last month"
           trendUp={true}
           iconClassName="text-blue-600"
           className="border-slate-200 shadow-sm"
         />
-        <StatCard 
-          title="Pending Payments" 
-          value={`₦${metrics.pendingPayments.toLocaleString()}`} 
+        <StatCard
+          title="Pending Payments"
+          value={`₦${metrics.pendingPayments.toLocaleString()}`}
           icon={Clock}
           trend={`${metrics.upcomingPayments} payments pending`}
           trendUp={false}
           iconClassName="text-amber-600"
           className="border-slate-200 shadow-sm"
         />
-        <StatCard 
-          title="Completed" 
-          value={metrics.completedTransactions.toString()} 
+        <StatCard
+          title="Completed"
+          value={metrics.completedTransactions.toString()}
           icon={CheckCircle}
           trend="Transactions"
           trendUp={true}
@@ -227,11 +255,22 @@ export default function RenterPaymentsPage() {
       </div>
 
       {/* Main Tabs */}
-      <Tabs defaultValue="transactions" value={activeTab} onValueChange={setActiveTab} className="space-y-6">
+      <Tabs
+        defaultValue="transactions"
+        value={activeTab}
+        onValueChange={setActiveTab}
+        className="space-y-6"
+      >
         <TabsList className="">
-          <TabsTrigger value="transactions" className="text-sm">Transactions</TabsTrigger>
-          <TabsTrigger value="invoices" className="text-sm">Invoices</TabsTrigger>
-          <TabsTrigger value="analytics" className="text-sm">Spending Analytics</TabsTrigger>
+          <TabsTrigger value="transactions" className="text-sm">
+            Transactions
+          </TabsTrigger>
+          <TabsTrigger value="invoices" className="text-sm">
+            Invoices
+          </TabsTrigger>
+          <TabsTrigger value="analytics" className="text-sm">
+            Spending Analytics
+          </TabsTrigger>
         </TabsList>
 
         {/* ============ TRANSACTIONS TAB ============ */}
@@ -249,7 +288,7 @@ export default function RenterPaymentsPage() {
                     className="pl-9 h-10 text-sm"
                   />
                 </div>
-                
+
                 <div className="flex items-center gap-2">
                   <Select value={statusFilter} onValueChange={setStatusFilter}>
                     <SelectTrigger className="w-[140px] h-10 text-sm">
@@ -264,7 +303,7 @@ export default function RenterPaymentsPage() {
                       <SelectItem value="refunded">Refunded</SelectItem>
                     </SelectContent>
                   </Select>
-                  
+
                   <Select value={dateFilter} onValueChange={setDateFilter}>
                     <SelectTrigger className="w-[140px] h-10 text-sm">
                       <SelectValue placeholder="Date" />
@@ -288,20 +327,30 @@ export default function RenterPaymentsPage() {
               <Table>
                 <TableHeader className="bg-slate-50">
                   <TableRow>
-                    <TableHead className="text-xs font-medium text-slate-500">Transaction</TableHead>
-                    <TableHead className="text-xs font-medium text-slate-500">Date</TableHead>
-                    <TableHead className="text-xs font-medium text-slate-500">Method</TableHead>
-                    <TableHead className="text-xs font-medium text-slate-500">Amount</TableHead>
-                    <TableHead className="text-xs font-medium text-slate-500">Status</TableHead>
+                    <TableHead className="text-xs font-medium text-slate-500">
+                      Transaction
+                    </TableHead>
+                    <TableHead className="text-xs font-medium text-slate-500">
+                      Date
+                    </TableHead>
+                    <TableHead className="text-xs font-medium text-slate-500">
+                      Method
+                    </TableHead>
+                    <TableHead className="text-xs font-medium text-slate-500">
+                      Amount
+                    </TableHead>
+                    <TableHead className="text-xs font-medium text-slate-500">
+                      Status
+                    </TableHead>
                     <TableHead className="text-xs font-medium text-slate-500 text-right"></TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {filteredPayments.length > 0 ? (
                     filteredPayments.map((payment) => (
-                      <TransactionRow 
-                        key={payment.id} 
-                        payment={payment} 
+                      <TransactionRow
+                        key={payment.id}
+                        payment={payment}
                         onViewDetails={handleViewPaymentDetails}
                       />
                     ))
@@ -310,7 +359,9 @@ export default function RenterPaymentsPage() {
                       <TableCell colSpan={6} className="h-48 text-center">
                         <div className="flex flex-col items-center justify-center">
                           <FileText className="h-8 w-8 text-slate-300 mb-2" />
-                          <p className="text-sm text-slate-600 mb-1">No transactions found</p>
+                          <p className="text-sm text-slate-600 mb-1">
+                            No transactions found
+                          </p>
                           <p className="text-xs text-slate-500">
                             Try adjusting your search or filter criteria
                           </p>
@@ -320,17 +371,27 @@ export default function RenterPaymentsPage() {
                   )}
                 </TableBody>
               </Table>
-              
+
               {/* Pagination */}
               <div className="flex items-center justify-between p-4 border-t border-slate-200">
                 <div className="text-xs text-slate-500 font-secondary">
-                  Showing {filteredPayments.length} of {payments.length} transactions
+                  Showing {filteredPayments.length} of {payments.length}{" "}
+                  transactions
                 </div>
                 <div className="flex items-center gap-2">
-                  <Button variant="outline" size="sm" disabled className="h-8 text-xs">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    disabled
+                    className="h-8 text-xs"
+                  >
                     Previous
                   </Button>
-                  <Button variant="outline" size="sm" className="h-8 text-xs bg-blue-50 text-blue-700 border-blue-200">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="h-8 text-xs bg-blue-50 text-blue-700 border-blue-200"
+                  >
                     1
                   </Button>
                   <Button variant="outline" size="sm" className="h-8 text-xs">
@@ -373,8 +434,8 @@ export default function RenterPaymentsPage() {
             <CardContent>
               <div className="space-y-3">
                 {invoices.map((invoice) => (
-                  <div 
-                    key={invoice.id} 
+                  <div
+                    key={invoice.id}
                     className="flex items-center justify-between p-4 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors font-secondary"
                   >
                     <div className="flex items-center gap-4">
@@ -386,11 +447,13 @@ export default function RenterPaymentsPage() {
                           <span className="text-sm font-medium text-slate-800">
                             {invoice.invoiceNumber}
                           </span>
-                          <Badge 
+                          <Badge
                             variant={
-                              invoice.status === 'paid' ? 'green' : 
-                              invoice.status === 'pending' ? 'amber' : 
-                              'red'
+                              invoice.status === "paid"
+                                ? "green"
+                                : invoice.status === "pending"
+                                  ? "amber"
+                                  : "red"
                             }
                             className="text-[10px] px-1.5 py-0 h-4"
                           >
@@ -399,7 +462,7 @@ export default function RenterPaymentsPage() {
                         </div>
                         <div className="flex items-center gap-3 mt-1 flex-wrap">
                           <span className="text-xs text-slate-500">
-                            {format(new Date(invoice.date), 'MMM d, yyyy')}
+                            {format(new Date(invoice.date), "MMM d, yyyy")}
                           </span>
                           <span className="text-xs text-slate-300">•</span>
                           <span className="text-xs font-medium text-slate-800">
@@ -408,7 +471,7 @@ export default function RenterPaymentsPage() {
                         </div>
                       </div>
                     </div>
-                    
+
                     <div className="flex items-center gap-2">
                       <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
                         <Eye className="h-4 w-4" />
@@ -461,19 +524,30 @@ export default function RenterPaymentsPage() {
                     </span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-slate-600">Average per booking</span>
+                    <span className="text-sm text-slate-600">
+                      Average per booking
+                    </span>
                     <span className="text-sm font-semibold text-slate-800">
-                      ₦{metrics.completedTransactions > 0 ? (metrics.totalSpent / metrics.completedTransactions).toLocaleString() : 0}
+                      ₦
+                      {metrics.completedTransactions > 0
+                        ? (
+                            metrics.totalSpent / metrics.completedTransactions
+                          ).toLocaleString()
+                        : 0}
                     </span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-slate-600">Most spent on</span>
+                    <span className="text-sm text-slate-600">
+                      Most spent on
+                    </span>
                     <span className="text-sm font-semibold text-slate-800">
                       Luxury SUV
                     </span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-slate-600">Peak spending month</span>
+                    <span className="text-sm text-slate-600">
+                      Peak spending month
+                    </span>
                     <span className="text-sm font-semibold text-slate-800">
                       May 2026
                     </span>
@@ -492,28 +566,36 @@ export default function RenterPaymentsPage() {
                         <div className="h-2 w-2 rounded-full bg-blue-500"></div>
                         <span className="text-xs text-slate-600">Sedan</span>
                       </div>
-                      <span className="text-xs font-medium text-slate-800">35%</span>
+                      <span className="text-xs font-medium text-slate-800">
+                        35%
+                      </span>
                     </div>
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <div className="h-2 w-2 rounded-full bg-amber-500"></div>
                         <span className="text-xs text-slate-600">SUV</span>
                       </div>
-                      <span className="text-xs font-medium text-slate-800">42%</span>
+                      <span className="text-xs font-medium text-slate-800">
+                        42%
+                      </span>
                     </div>
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <div className="h-2 w-2 rounded-full bg-green-500"></div>
                         <span className="text-xs text-slate-600">Luxury</span>
                       </div>
-                      <span className="text-xs font-medium text-slate-800">18%</span>
+                      <span className="text-xs font-medium text-slate-800">
+                        18%
+                      </span>
                     </div>
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <div className="h-2 w-2 rounded-full bg-purple-500"></div>
                         <span className="text-xs text-slate-600">Other</span>
                       </div>
-                      <span className="text-xs font-medium text-slate-800">5%</span>
+                      <span className="text-xs font-medium text-slate-800">
+                        5%
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -531,7 +613,6 @@ export default function RenterPaymentsPage() {
         open={showPaymentDetails}
         onOpenChange={setShowPaymentDetails}
       />
-
     </div>
   );
 }

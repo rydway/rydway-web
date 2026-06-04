@@ -1,6 +1,6 @@
 "use client";
 
-import { BookingStatus } from "@/@types";
+import { BookingStatus } from "@/types";
 import { Check, Clock, X } from "lucide-react";
 
 

@@ -43,20 +43,24 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { StatCard } from "@/components/base/cards/StatCard";
-import {
-  monthlyEarnings,
-  fleetStatus,
-  requestedCars,
-  dispatchedBookings
-} from "@/data/mock/dashboards";
 import { useHostDashboard } from "@/hooks/useDashboard";
+import { useHostBookings } from "@/hooks/useBookings";
+import { useMemo } from "react";
 
 export default function DashboardPage() {
   const { summary, isLoading: isSummaryLoading } = useHostDashboard();
+  const { bookings } = useHostBookings();
 
-  const displayEarnings = summary?.monthlyEarnings || monthlyEarnings;
-  const displayFleet = summary?.fleetStatus || fleetStatus;
-  
+  const displayEarnings = summary?.monthlyEarnings || [];
+  const displayFleet = summary?.fleetStatus || [];
+
+  const requestedCars = useMemo(() =>
+    bookings.filter((b: any) => b.status === 'requested').slice(0, 5),
+  [bookings]);
+
+  const dispatchedBookings = useMemo(() =>
+    bookings.filter((b: any) => ['confirmed', 'active'].includes(b.status)).slice(0, 5),
+  [bookings]);
   const stats = [
     {
       title: "Total Earnings",
@@ -138,7 +142,7 @@ export default function DashboardPage() {
             <div className="h-64">
               <ResponsiveContainer width="100%" height="100%">
                 <AreaChart 
-                  data={monthlyEarnings}
+                  data={displayEarnings}
                   margin={{ top: 10, right: 20, left: 20, bottom: 5 }}
                 >
                   <defs>
@@ -208,17 +212,19 @@ export default function DashboardPage() {
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
                   <Pie
-                    data={fleetStatus}
+                    data={displayFleet}
+                    cx="50%"
                     dataKey="value"
                     nameKey="name"
                     innerRadius={55}
                     outerRadius={85}
                     paddingAngle={2}
                   >
-                    {fleetStatus.map((entry, i) => (
+                    {displayFleet.map((entry: any, i: number) => (
                       <Cell 
                         key={`cell-${i}`} 
                         fill={entry.color} 
+
                         strokeWidth={0}
                       />
                     ))}
@@ -238,7 +244,7 @@ export default function DashboardPage() {
             </div>
 
             <div className="mt-4 space-y-2">
-              {fleetStatus.map((s) => (
+              {displayFleet.map((s: any) => (
                 <div key={s.name} className="flex justify-between items-center p-2 rounded">
                   <span className="flex items-center gap-3 text-sm text-slate-700 dark:text-slate-300 font-secondary">
                     <span
@@ -275,63 +281,68 @@ export default function DashboardPage() {
           </CardHeader>
           <CardContent>
             <div className="space-y-3 max-h-[400px] overflow-y-auto pr-2">
-              {requestedCars.map((r) => (
-                <Card key={r.id} className="p-4 border-slate-200 dark:border-slate-800 hover:border-primary/20 dark:hover:border-primary/30 transition-colors shadow-none">
-                  <div className="flex items-center justify-between">
-                    <div className="space-y-2">
-                      <div className="flex items-center gap-2">
-                        <div className="p-1.5 rounded bg-primary/10 dark:bg-primary/20">
-                          <CarIcon className="h-3.5 w-3.5 text-primary dark:text-primary/90" />
-                        </div>
-                        <p className="font-semibold text-slate-800 dark:text-white font-primary">{r.car}</p>
-                      </div>
-                      <div className="text-sm text-slate-600 dark:text-slate-300 space-y-1 font-secondary">
-                        <div className="flex items-center gap-4">
-                          <span className="flex items-center gap-1">
-                            <User className="h-3 w-3" />
-                            {r.requester}
-                          </span>
-                          <span className="flex items-center gap-1">
-                            <MapPin className="h-3 w-3" />
-                            {r.location}
-                          </span>
-                        </div>
+              {requestedCars.length === 0 ? (
+                <div className="flex flex-col items-center justify-center py-10 text-center">
+                  <AlertCircle className="h-10 w-10 text-slate-300 mb-3" />
+                  <p className="text-slate-500 font-secondary text-sm">No pending booking requests</p>
+                </div>
+              ) : (
+                requestedCars.map((r: any) => (
+                  <Card key={r.id} className="p-4 border-slate-200 dark:border-slate-800 hover:border-primary/20 dark:hover:border-primary/30 transition-colors shadow-none">
+                    <div className="flex items-center justify-between">
+                      <div className="space-y-2">
                         <div className="flex items-center gap-2">
-                          <Calendar className="h-3 w-3" />
-                          <span className="text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-2 py-0.5 rounded font-primary">
-                            {r.date}
-                          </span>
-                          <Badge 
+                          <div className="p-1.5 rounded bg-primary/10 dark:bg-primary/20">
+                            <CarIcon className="h-3.5 w-3.5 text-primary dark:text-primary/90" />
+                          </div>
+                          <p className="font-semibold text-slate-800 dark:text-white font-primary">{r.vehicle?.name || r.vehicleId || 'Unknown Vehicle'}</p>
+                        </div>
+                        <div className="text-sm text-slate-600 dark:text-slate-300 space-y-1 font-secondary">
+                          <div className="flex items-center gap-4">
+                            <span className="flex items-center gap-1">
+                              <User className="h-3 w-3" />
+                              {r.renter?.fullName || r.renterId || 'Unknown Renter'}
+                            </span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <Calendar className="h-3 w-3" />
+                            <span className="text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-2 py-0.5 rounded font-primary">
+                              {r.startDate ? new Date(r.startDate).toLocaleDateString() : '–'}
+                            </span>
+                            <Badge 
+                              variant="outline" 
+                              className="text-xs font-medium bg-primary/10 text-primary border-primary/20 dark:bg-primary/20 dark:text-primary/90 dark:border-primary/30 font-primary"
+                            >
+                              {r.endDate && r.startDate
+                                ? `${Math.ceil((new Date(r.endDate).getTime() - new Date(r.startDate).getTime()) / 86400000)} days`
+                                : '–'}
+                            </Badge>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="flex flex-col items-end gap-2">
+                        <div className="flex gap-2">
+                          <Button 
+                            size="sm" 
                             variant="outline" 
-                            className="text-xs font-medium bg-primary/10 text-primary border-primary/20 dark:bg-primary/20 dark:text-primary/90 dark:border-primary/30 font-primary"
+                            className="text-sm border-red-500 bg-white text-red-600 hover:bg-red-50 hover:text-red-700 dark:border-red-800 dark:text-red-400 dark:hover:bg-red-900/20 font-primary"
                           >
-                            {r.duration}
-                          </Badge>
+                            <XCircle className="h-3 w-3 mr-1" />
+                            Decline
+                          </Button>
+                          <Button 
+                            size="sm"
+                            className="text-sm bg-primary hover:bg-primary/90 text-white font-primary"
+                          >
+                            <CheckCircle2 className="h-3 w-3 mr-1" />
+                            Approve
+                          </Button>
                         </div>
                       </div>
                     </div>
-                    <div className="flex flex-col items-end gap-2">
-                      <div className="flex gap-2">
-                        <Button 
-                          size="sm" 
-                          variant="outline" 
-                          className="text-sm border-red-500 bg-white text-red-600 hover:bg-red-50 hover:text-red-700 dark:border-red-800 dark:text-red-400 dark:hover:bg-red-900/20 font-primary"
-                        >
-                          <XCircle className="h-3 w-3 mr-1" />
-                          Decline
-                        </Button>
-                        <Button 
-                          size="sm"
-                          className="text-sm bg-primary hover:bg-primary/90 text-white font-primary"
-                        >
-                          <CheckCircle2 className="h-3 w-3 mr-1" />
-                          Approve
-                        </Button>
-                      </div>
-                    </div>
-                  </div>
-                </Card>
-              ))}
+                  </Card>
+                ))
+              )}
             </div>
           </CardContent>
         </Card>
@@ -353,68 +364,74 @@ export default function DashboardPage() {
           </CardHeader>
           <CardContent>
             <div className="max-h-[400px] overflow-y-auto">
-              <Table>
-                <TableHeader className="sticky top-0 bg-white dark:bg-slate-900 z-10">
-                  <TableRow>
-                    <TableHead className="text-slate-600 dark:text-slate-300 font-secondary">Client</TableHead>
-                    <TableHead className="text-slate-600 dark:text-slate-300 font-secondary">Car</TableHead>
-                    <TableHead className="text-slate-600 dark:text-slate-300 font-secondary">Duration</TableHead>
-                    <TableHead className="text-slate-600 dark:text-slate-300 font-secondary">Amount</TableHead>
-                    <TableHead className="text-slate-600 dark:text-slate-300 font-secondary">Status</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {dispatchedBookings.map((b) => (
-                    <TableRow 
-                      key={b.id} 
-                      className="border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors"
-                    >
-                      <TableCell>
-                        <div className="space-y-1">
-                          <div className="font-medium text-slate-800 dark:text-white font-primary">
-                            {b.client}
-                          </div>
-                          <div className="text-xs text-slate-500 dark:text-slate-400 font-secondary">
-                            {b.date}
-                          </div>
-                        </div>
-                      </TableCell>
-                      <TableCell>
-                        <div className="space-y-1">
-                          <div className="font-medium text-slate-800 dark:text-white font-primary">
-                            {b.car}
-                          </div>
-                          <div className="text-xs text-slate-500 dark:text-slate-400 font-secondary">
-                            {b.pickup} → {b.destination}
-                          </div>
-                        </div>
-                      </TableCell>
-                      <TableCell>
-                        <div className="flex items-center gap-1 text-slate-600 dark:text-slate-300 font-secondary">
-                          <Calendar className="h-3 w-3" />
-                          {b.duration}
-                        </div>
-                      </TableCell>
-                      <TableCell>
-                        <div className="font-semibold text-primary dark:text-primary/90 font-primary">
-                          {b.amount}
-                        </div>
-                      </TableCell>
-                      <TableCell>
-                        <Badge 
-                          className={`font-normal font-primary ${
-                            b.status === 'active' 
-                              ? 'bg-primary/10 text-primary border-primary/20 dark:bg-primary/20 dark:text-primary/90 dark:border-primary/30'
-                              : 'bg-green-50 text-green-700 border-green-200 dark:bg-green-900/30 dark:text-green-400 dark:border-green-800'
-                          }`}
-                        >
-                          {b.status === 'active' ? 'Active' : 'Completed'}
-                        </Badge>
-                      </TableCell>
+              {dispatchedBookings.length === 0 ? (
+                <div className="flex flex-col items-center justify-center py-10 text-center">
+                  <Navigation className="h-10 w-10 text-slate-300 mb-3" />
+                  <p className="text-slate-500 font-secondary text-sm">No active dispatched bookings</p>
+                </div>
+              ) : (
+                <Table>
+                  <TableHeader className="sticky top-0 bg-white dark:bg-slate-900 z-10">
+                    <TableRow>
+                      <TableHead className="text-slate-600 dark:text-slate-300 font-secondary">Client</TableHead>
+                      <TableHead className="text-slate-600 dark:text-slate-300 font-secondary">Car</TableHead>
+                      <TableHead className="text-slate-600 dark:text-slate-300 font-secondary">Duration</TableHead>
+                      <TableHead className="text-slate-600 dark:text-slate-300 font-secondary">Amount</TableHead>
+                      <TableHead className="text-slate-600 dark:text-slate-300 font-secondary">Status</TableHead>
                     </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
+                  </TableHeader>
+                  <TableBody>
+                    {dispatchedBookings.map((b: any) => (
+                      <TableRow 
+                        key={b.id} 
+                        className="border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors"
+                      >
+                        <TableCell>
+                          <div className="space-y-1">
+                            <div className="font-medium text-slate-800 dark:text-white font-primary">
+                              {b.renter?.fullName || b.renterId || 'Unknown'}
+                            </div>
+                            <div className="text-xs text-slate-500 dark:text-slate-400 font-secondary">
+                              {b.startDate ? new Date(b.startDate).toLocaleDateString() : '–'}
+                            </div>
+                          </div>
+                        </TableCell>
+                        <TableCell>
+                          <div className="space-y-1">
+                            <div className="font-medium text-slate-800 dark:text-white font-primary">
+                              {b.vehicle?.name || b.vehicleId || '–'}
+                            </div>
+                          </div>
+                        </TableCell>
+                        <TableCell>
+                          <div className="flex items-center gap-1 text-slate-600 dark:text-slate-300 font-secondary">
+                            <Calendar className="h-3 w-3" />
+                            {b.startDate && b.endDate
+                              ? `${Math.ceil((new Date(b.endDate).getTime() - new Date(b.startDate).getTime()) / 86400000)} days`
+                              : '–'}
+                          </div>
+                        </TableCell>
+                        <TableCell>
+                          <div className="font-semibold text-primary dark:text-primary/90 font-primary">
+                            {b.totalAmount ? `₦${b.totalAmount.toLocaleString()}` : '–'}
+                          </div>
+                        </TableCell>
+                        <TableCell>
+                          <Badge 
+                            className={`font-normal font-primary ${
+                              b.status === 'active' 
+                                ? 'bg-primary/10 text-primary border-primary/20 dark:bg-primary/20 dark:text-primary/90 dark:border-primary/30'
+                                : 'bg-green-50 text-green-700 border-green-200 dark:bg-green-900/30 dark:text-green-400 dark:border-green-800'
+                            }`}
+                          >
+                            {b.status === 'active' ? 'Active' : 'Confirmed'}
+                          </Badge>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              )}
             </div>
           </CardContent>
         </Card>

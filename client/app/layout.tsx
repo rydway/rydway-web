@@ -1,9 +1,19 @@
 import type { Metadata } from "next"
-import { Montserrat, Nunito } from "next/font/google"
+import { Outfit, DM_Sans } from "next/font/google"
 import "./globals.css"
 import { AuthProvider } from "@/context/AuthContext"
 import { QueryProvider } from "@/providers/QueryProvider"
 import { Toaster } from "@/components/ui/sonner"
+
+const outfit = Outfit({ 
+  subsets: ["latin"],
+  variable: "--font-primary",
+})
+
+const dmSans = DM_Sans({ 
+  subsets: ["latin"],
+  variable: "--font-secondary",
+})
 
 export const metadata: Metadata = {
   title: {
@@ -13,6 +23,7 @@ export const metadata: Metadata = {
   description: "Premium car rentals and mobility experiences with Rydway",
   applicationName: "Rydway",
 }
+
 export default function RootLayout({
   children,
 }: {
@@ -20,7 +31,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body>
+      <body className={`${outfit.variable} ${dmSans.variable}`}>
         <QueryProvider>
           <AuthProvider>
             {children}

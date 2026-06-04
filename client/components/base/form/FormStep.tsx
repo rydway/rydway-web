@@ -1,6 +1,6 @@
 import React from "react";
 import { FormField } from "./FormField";
-import { StepConfig } from "@/@types/kyc";
+import { StepConfig } from "@/types/kyc";
 
 interface FormStepProps {
   step: StepConfig;

@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 
 import { formatPrice } from "@/lib/utils";
 import { Edit, Trash2, Eye, EyeOff } from "lucide-react";
-import { Vehicle } from "@/@types";
+import { Vehicle } from "@/types";
 
 interface FleetListProps {
   vehicles: Vehicle[];

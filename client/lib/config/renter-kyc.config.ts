@@ -1,4 +1,4 @@
-import { KYCFormConfig } from "@/@types/kyc";
+import { KYCFormConfig } from "@/types/kyc";
 
 export const RenterKYCConfig: KYCFormConfig = {
   formId: "renter_onboarding",

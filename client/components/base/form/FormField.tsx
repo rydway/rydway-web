@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/tooltip";
 import { Upload, X, CheckCircle2, HelpCircle, Info } from "lucide-react";
 
-import { FieldConfig } from "@/@types/kyc";
+import { FieldConfig } from "@/types/kyc";
 import { iconMap } from "@/lib/icons";
 
 interface FormFieldProps {

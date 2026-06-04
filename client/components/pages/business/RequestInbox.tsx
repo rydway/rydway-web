@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 
 import { formatPrice, formatDate } from "@/lib/utils";
 import { Check, X, Calendar } from "lucide-react";
-import { Booking } from "@/@types";
+import { Booking } from "@/types";
 import StatusBadge from "@/components/base/StatusBadge";
 
 interface RequestInboxProps {

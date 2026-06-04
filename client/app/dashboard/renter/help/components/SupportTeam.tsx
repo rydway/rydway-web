@@ -3,7 +3,7 @@
 import { Users, CheckCircle } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { supportTeam } from "./mockData";
+import { supportTeamMembers } from "./supportTeamData";
 
 export function SupportTeam() {
   return (
@@ -17,7 +17,7 @@ export function SupportTeam() {
           We're here to help you 24/7. Our dedicated support team is always ready to assist you with any questions or issues.
         </p>
         <div className="flex -space-x-2 overflow-hidden mb-4">
-          {supportTeam.map((member) => (
+          {supportTeamMembers.map((member) => (
             <div key={member.name} className="relative">
               <Avatar className="h-10 w-10 border-2 border-white">
                 <AvatarImage src={member.avatar} />
@@ -26,9 +26,7 @@ export function SupportTeam() {
                 </AvatarFallback>
               </Avatar>
               <span 
-                className={`absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full ring-1 ring-white ${
-                  member.availability === 'online' ? 'bg-green-500' : 'bg-amber-500'
-                }`}
+                className="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full ring-1 ring-white bg-green-500"
               />
             </div>
           ))}

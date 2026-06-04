@@ -1,7 +1,7 @@
 
 "use client";
 
-import { Booking } from "@/@types";
+import { Booking } from "@/types";
 import StatusBadge from "@/components/base/StatusBadge";
 import { Card, CardContent } from "@/components/ui/card";
 

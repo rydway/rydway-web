@@ -27,106 +27,92 @@ import { VehicleCardData, VehicleCatalog } from "@/components/pages/profile/busi
  // Add import if needed
 
 // Mock data with proper typing
-const mockBusinessData: BusinessProfileData = {
-  id: "business-123",
-  name: "Premium Car Rentals Lagos",
-  logo: "/businessLogo.jpg",
-  coverImage: "/coverImage.jpg",
-  tagline: "Luxury & Economy Cars for Every Occasion",
-  description: "Established in 2010, we provide premium car rental services in Lagos with a fleet of well-maintained vehicles. Our commitment to customer satisfaction and safety has made us the preferred choice for both business and leisure travelers.",
-  address: "123 Victoria Island",
-  city: "Lagos",
-  phone: "+234 801 234 5678",
-  email: "info@premiumrentals.com",
-  website: "www.premiumrentals.com",
-  rating: 4.8,
-  totalReviews: 342,
-  yearsInBusiness: 14,
-  verified: true,
-  fleetSize: 48,
-  responseTime: "Under 15 minutes",
-  policies: {
-    cancellation: "Free cancellation up to 24 hours before pickup",
-    insurance: "Full comprehensive insurance included",
-    driverRequirements: "Valid driver's license required, minimum age 25"
-  },
-  isFavorite: false,
-  totalFavorites: 256
-};
 
-const mockVehicles: VehicleCardData[] = [
-  {
-    id: "vehicle-1",
-    image: "/car/car2.png",
-    name: "Toyota Camry 2023",
-    make: "Toyota",
-    model: "Camry",
-    year: 2023,
-    vehicleType: "sedan",
-    fuelType: "Petrol",
-    transmission: "Automatic",
-    seats: 5,
-    dailyRate: 25000,
-    weeklyRate: 150000,
-    location: "Victoria Island, Lagos",
-    rating: 4.9,
-    totalReviews: 124,
-    status: "available",
-    features: ["Air Conditioning", "Navigation", "Bluetooth"],
-    isVerified: true,
-    securityDeposit: 50000,
-    minimumRentalDays: 1,
-    isFeatured: true,
-    bookingStats: {
-      totalBookings: 42,
-      revenue: 1050000,
-      utilizationRate: 78
-    }
-  },
-  {
-    id: "vehicle-2",
-    image:  "/car/car3.png",
-    name: "Mercedes-Benz GLE",
-    make: "Mercedes-Benz",
-    model: "GLE",
-    year: 2022,
-    vehicleType: "suv",
-    fuelType: "Diesel",
-    transmission: "Automatic",
-    seats: 7,
-    dailyRate: 75000,
-    weeklyRate: 450000,
-    location: "Ikoyi, Lagos",
-    rating: 4.8,
-    totalReviews: 89,
-    status: "booked",
-    features: ["Leather Seats", "Sunroof", "Rear Camera"],
-    isVerified: true,
-    securityDeposit: 150000,
-    minimumRentalDays: 2,
-    isFeatured: true,
-    nextAvailable: "in 3 days",
-    bookingStats: {
-      totalBookings: 31,
-      revenue: 2325000,
-      utilizationRate: 85
-    }
-  },
-  // Add more mock vehicles...
-];
+
+import { useCurrentUser } from "@/hooks/useUser";
+import { useHostDashboard } from "@/hooks/useDashboard";
+import { useVehicles } from "@/hooks/useVehicles";
+import { Loader2 } from "lucide-react";
 
 export default function BusinessPage() {
   const router = useRouter();
   const params = useParams();
   const businessId = params.id as string;
   
-  const [role, setRole] = useState<"renter" | "business">("renter");
+  const [role, setRole] = useState<"renter" | "business">("business");
   const [isEditing, setIsEditing] = useState(false);
-  const [businessData, setBusinessData] = useState<BusinessProfileData>(mockBusinessData);
-  const [vehicles, setVehicles] = useState<VehicleCardData[]>(mockVehicles);
+
+  const { user, isLoading: isUserLoading } = useCurrentUser();
+  const { summary, isLoading: isSummaryLoading } = useHostDashboard();
+  const { vehicles: apiVehicles, isLoading: isVehiclesLoading } = useVehicles({ businessId: user?.id || '' });
+
+  if (isUserLoading || isSummaryLoading || isVehiclesLoading) {
+    return (
+      <div className="flex items-center justify-center h-full min-h-[400px]">
+        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+        <span className="ml-2 font-secondary text-slate-500">Loading business profile...</span>
+      </div>
+    );
+  }
+
+  const businessData: BusinessProfileData = {
+    id: user?.id || "business-1",
+    name: user?.firstName && user?.lastName ? `${user.firstName} ${user.lastName}` : "Premium Car Rentals",
+    logo: user?.profileImageUrl || "/businessLogo.jpg",
+    coverImage: "",
+    tagline: "Quality Rentals",
+    description: "Business profile description. Add more details about your fleet and services.",
+    address: "Not specified",
+    city: "Not specified",
+    phone: user?.phone || "No phone",
+    email: user?.email || "No email",
+    website: "",
+    rating: 0,
+    totalReviews: 0,
+    yearsInBusiness: 1,
+    verified: user?.kycStatus === 'verified',
+    fleetSize: apiVehicles?.length || 0,
+    responseTime: "Under 1 hour",
+    policies: {
+      cancellation: "Standard cancellation policy",
+      insurance: "Basic insurance included",
+      driverRequirements: "Valid driver's license"
+    },
+    isFavorite: false,
+    totalFavorites: 0
+  };
+
+  const vehicles: VehicleCardData[] = apiVehicles.map((v) => ({
+    id: v.id,
+    image: v.images?.[0]?.url || "/car/car2.png",
+    name: v.name || "Unknown Vehicle",
+    make: (v as any).make || "Unknown",
+    model: (v as any).model || "Unknown",
+    year: (v as any).year || 2023,
+    vehicleType: v.category,
+    fuelType: v.fuelType,
+    transmission: v.transmission,
+    seats: v.seats || 5,
+    dailyRate: v.dailyRate || 0,
+    weeklyRate: (v.dailyRate || 0) * 6,
+    location: v.location,
+    rating: v.avgRating || 0,
+    totalReviews: v.totalReviews || 0,
+    status: "available",
+    features: (v as any).features || [],
+    isVerified: true,
+    securityDeposit: v.securityDeposit || 0,
+    minimumRentalDays: 1,
+    isFeatured: false,
+    bookingStats: {
+      totalBookings: v.totalReviews || 0,
+      revenue: 0,
+      utilizationRate: 0
+    }
+  }));
 
   const handleSaveProfile = (updatedData: BusinessProfileData) => {
-    setBusinessData(updatedData);
+    // In real app, call mutation
     setIsEditing(false);
   };
 
@@ -143,13 +129,7 @@ export default function BusinessPage() {
   };
 
   const handleToggleFavorite = () => {
-    setBusinessData((prev: BusinessProfileData) => ({
-      ...prev,
-      isFavorite: !prev.isFavorite,
-      totalFavorites: prev.isFavorite
-        ? (prev.totalFavorites ?? 0) - 1
-        : (prev.totalFavorites ?? 0) + 1
-    }));
+    console.log("Toggle favorite");
   };
 
   const handleAddVehicle = () => {
@@ -169,7 +149,7 @@ export default function BusinessPage() {
   };
 
   const handleDeleteVehicle = (vehicleId: string) => {
-    setVehicles(prev => prev.filter(v => v.id !== vehicleId));
+    console.log("Delete vehicle", vehicleId);
   };
 
   const handleBookVehicle = (vehicleId: string) => {
@@ -177,16 +157,7 @@ export default function BusinessPage() {
   };
 
   const handleToggleVehicleStatus = (vehicleId: string) => {
-    setVehicles(prev => prev.map(vehicle => {
-      if (vehicle.id === vehicleId) {
-        const newStatus = vehicle.status === "available" ? "unavailable" : "available";
-        return {
-          ...vehicle,
-          status: newStatus
-        };
-      }
-      return vehicle;
-    }));
+    console.log("Toggle vehicle status", vehicleId);
   };
 
   const handleToggleRole = () => {
@@ -314,9 +285,9 @@ export default function BusinessPage() {
                   <div className="p-4 bg-slate-50 rounded-lg">
                     <div className="flex items-center gap-3 mb-2">
                       <DollarSign className="h-5 w-5 text-green-500" />
-                      <span className="text-2xl font-bold text-slate-800">₦2.4M</span>
+                      <span className="text-2xl font-bold text-slate-800">₦{(summary?.totalEarnings || 0).toLocaleString()}</span>
                     </div>
-                    <p className="text-sm text-slate-600">Monthly Revenue</p>
+                    <p className="text-sm text-slate-600">Total Earnings</p>
                   </div>
                   
                   <div className="p-4 bg-slate-50 rounded-lg">
@@ -330,9 +301,9 @@ export default function BusinessPage() {
                   <div className="p-4 bg-slate-50 rounded-lg">
                     <div className="flex items-center gap-3 mb-2">
                       <Users className="h-5 w-5 text-purple-500" />
-                      <span className="text-2xl font-bold text-slate-800">156</span>
+                      <span className="text-2xl font-bold text-slate-800">{summary?.totalBookings || 0}</span>
                     </div>
-                    <p className="text-sm text-slate-600">Active Customers</p>
+                    <p className="text-sm text-slate-600">Total Bookings</p>
                   </div>
                   
                   <div className="p-4 bg-slate-50 rounded-lg">

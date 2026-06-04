@@ -1,53 +1,41 @@
 "use client";
 
 import { RenterBookingDetails } from "@/components/pages/booking/renter/RenterBookingDetails";
-import { getBookingDetailsById } from "@/data/bookingData";
+import { useBooking } from "@/hooks/useBookings";
 import { useParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Loader2 } from "lucide-react";
 
 export default function RenterBookingPage() {
   const params = useParams();
-  const [bookingData, setBookingData] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
-  
   const id = params.id as string;
 
-  useEffect(() => {
-    console.log("Booking ID:", id);
-    
-    if (id) {
-      const data = getBookingDetailsById(id);
-      console.log("Booking Data:", data);
-      setBookingData(data);
-      setLoading(false);
-    }
-  }, [id]);
+  const { booking, isLoading } = useBooking(id);
 
-  if (loading) {
+  if (isLoading) {
     return (
       <div className="flex items-center justify-center h-[60vh]">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
+          <Loader2 className="animate-spin h-12 w-12 text-primary mx-auto" />
           <p className="mt-4 text-slate-600 dark:text-slate-300 font-secondary">Loading booking details...</p>
         </div>
       </div>
     );
   }
 
-  if (!bookingData) {
+  if (!booking) {
     return (
       <div className="flex flex-col items-center justify-center h-[60vh]">
         <h1 className="text-2xl font-bold text-slate-800 dark:text-white font-primary">
           Booking Not Found
         </h1>
-    
+        <p className="text-slate-500 mt-2 font-secondary">The booking you're looking for doesn't exist or you don't have access to it.</p>
       </div>
     );
   }
 
   return (
     <RenterBookingDetails
-      data={bookingData}
+      data={booking}
       onContactOwner={() => console.log("Contact owner")}
       onTrackVehicle={() => console.log("Track vehicle")}
       onExtendBooking={() => console.log("Extend booking")}
@@ -57,4 +45,4 @@ export default function RenterBookingPage() {
       onReportIssue={() => console.log("Report issue")}
     />
   );
-}
+}

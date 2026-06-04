@@ -14,7 +14,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { CalendarIcon, Search, MapPin } from "lucide-react";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
-import { SearchFilters } from "@/@types";
+import { SearchFilters } from "@/types";
 
 interface SearchBarProps {
   onSearch: (filters: SearchFilters) => void;

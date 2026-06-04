@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -12,14 +12,15 @@ import {
   CheckCircle,
   Clock,
   TrendingUp,
-  Users
+  Users,
+  Loader2
 } from "lucide-react";
 import Link from "next/link";
 import { BookingCard } from "@/components/base/cards/BookingCard";
 import { StatCard } from "@/components/base/cards/StatCard";
 import { CustomPagination } from "@/components/base/Pagination";
 import { CustomTabs } from "@/components/base/Tabs";
-import { getActiveBookings, getRequestedBookings, getPastBookings, getBookingDetailsById, allBookings } from "@/data/bookingData";
+import { useHostBookings } from "@/hooks/useBookings";
 
 interface BusinessBookingsPageProps {
   role?: "business";
@@ -31,51 +32,41 @@ export default function BusinessBookingsPage({ role = "business" }: BusinessBook
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 8;
 
-  // Get bookings for business view
-  const activeBusinessBookings = getActiveBookings();
-  const requestedBusinessBookings = getRequestedBookings();
-  const pastBusinessBookings = getPastBookings();
+  const { bookings, isLoading } = useHostBookings();
+
+  const requestedBusinessBookings = useMemo(() => 
+    bookings.filter((b: any) => b.status === 'requested'), [bookings]
+  );
   
+  const activeBusinessBookings = useMemo(() => 
+    bookings.filter((b: any) => ['confirmed', 'paid', 'active'].includes(b.status)), [bookings]
+  );
+  
+  const pastBusinessBookings = useMemo(() => 
+    bookings.filter((b: any) => ['completed', 'cancelled', 'disputed'].includes(b.status)), [bookings]
+  );
 
-  const activeBookingsWithRenter = activeBusinessBookings.map(booking => ({
-    ...booking,
-    renterName: getBookingDetailsById(booking.id)?.renterName || "Unknown Renter"
-  }));
-
-  const requestedBookingsWithRenter = requestedBusinessBookings.map(booking => ({
-    ...booking,
-    renterName: getBookingDetailsById(booking.id)?.renterName || "Unknown Renter"
-  }));
-
-  const pastBookingsWithRenter = pastBusinessBookings.map(booking => ({
-    ...booking,
-    renterName: getBookingDetailsById(booking.id)?.renterName || "Unknown Renter"
-  }));
-
-  // Business tabs
   const businessTabs = [
-    { id: "requests", label: "Requests", count: requestedBookingsWithRenter.length },
-    { id: "active", label: "Active", count: activeBookingsWithRenter.length },
-    { id: "past", label: "Past", count: pastBookingsWithRenter.length },
+    { id: "requests", label: "Requests", count: requestedBusinessBookings.length },
+    { id: "active", label: "Active", count: activeBusinessBookings.length },
+    { id: "past", label: "Past", count: pastBusinessBookings.length },
   ];
 
-  // Get current bookings based on active tab
   let currentBookings = [];
   switch (activeTab) {
     case "requests":
-      currentBookings = requestedBookingsWithRenter;
+      currentBookings = requestedBusinessBookings;
       break;
     case "active":
-      currentBookings = activeBookingsWithRenter;
+      currentBookings = activeBusinessBookings;
       break;
     case "past":
-      currentBookings = pastBookingsWithRenter;
+      currentBookings = pastBusinessBookings;
       break;
     default:
-      currentBookings = requestedBookingsWithRenter;
+      currentBookings = requestedBusinessBookings;
   }
   
-  // Calculate pagination
   const totalItems = currentBookings.length;
   const totalPages = Math.ceil(totalItems / pageSize);
   const startIndex = (currentPage - 1) * pageSize;
@@ -98,10 +89,7 @@ export default function BusinessBookingsPage({ role = "business" }: BusinessBook
   };
 
   const handleContact = (id: string) => {
-    const booking = getBookingDetailsById(id);
-    if (booking) {
-      console.log("Contact renter:", booking.renterName);
-    }
+    console.log("Contact renter for booking:", id);
   };
 
   const handleTrack = (id: string) => {
@@ -112,24 +100,18 @@ export default function BusinessBookingsPage({ role = "business" }: BusinessBook
     console.log("Download receipt for booking:", id);
   };
 
-  // Calculate business metrics
-  const totalRevenue = allBookings
-    .filter(booking => booking.paymentStatus === "paid")
-    .reduce((total, booking) => total + booking.totalAmount, 0);
+  const totalRevenue = bookings
+    .filter((booking: any) => booking.paymentStatus === "success" || booking.status === "completed")
+    .reduce((total: number, booking: any) => total + (booking.totalAmount || 0), 0);
 
-  const pendingRequests = requestedBookingsWithRenter.filter(
-    booking => booking.status === "requested"
-  ).length;
-
-  const completionRate = pastBusinessBookings.length > 0
-    ? Math.round((pastBusinessBookings.length / allBookings.length) * 100)
+  const completionRate = bookings.length > 0
+    ? Math.round((pastBusinessBookings.length / bookings.length) * 100)
     : 0;
 
-  // Business stats
   const businessStats = [
     {
       title: "Pending Requests",
-      value: pendingRequests.toString(),
+      value: requestedBusinessBookings.length.toString(),
       icon: AlertCircle,
       trend: "Need your response",
       trendUp: false,
@@ -137,7 +119,7 @@ export default function BusinessBookingsPage({ role = "business" }: BusinessBook
     },
     {
       title: "Active Bookings",
-      value: activeBookingsWithRenter.length.toString(),
+      value: activeBusinessBookings.length.toString(),
       icon: CheckCircle,
       trend: "All on track",
       trendUp: true,
@@ -161,17 +143,6 @@ export default function BusinessBookingsPage({ role = "business" }: BusinessBook
     }
   ];
 
-  // Get tab label for empty state
-  const getTabLabel = () => {
-    switch (activeTab) {
-      case "requests": return "Pending Requests";
-      case "active": return "Active Bookings";
-      case "past": return "Past Bookings";
-      default: return "Bookings";
-    }
-  };
-
-  // Get empty state message
   const getEmptyMessage = () => {
     switch (activeTab) {
       case "requests":
@@ -185,7 +156,6 @@ export default function BusinessBookingsPage({ role = "business" }: BusinessBook
     }
   };
 
-  // Get empty state action button
   const getEmptyAction = () => {
     if (activeTab === "requests") {
       return (
@@ -211,7 +181,6 @@ export default function BusinessBookingsPage({ role = "business" }: BusinessBook
 
   return (
     <div className="space-y-6">
-      {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-2">
         <div className="space-y-1">
           <h1 className="text-2xl font-bold tracking-tight text-slate-900 font-primary">
@@ -223,7 +192,6 @@ export default function BusinessBookingsPage({ role = "business" }: BusinessBook
         </div>
       </div>
 
-      {/* Stats */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {businessStats.map((stat, index) => (
           <StatCard 
@@ -238,7 +206,6 @@ export default function BusinessBookingsPage({ role = "business" }: BusinessBook
         ))}
       </div>
 
-      {/* Tabs */}
       <CustomTabs 
         tabs={businessTabs}
         activeTab={activeTab}
@@ -249,8 +216,11 @@ export default function BusinessBookingsPage({ role = "business" }: BusinessBook
         className="mt-6"
       />
 
-      {/* Bookings Grid */}
-      {currentBookingsPage.length === 0 ? (
+      {isLoading ? (
+        <div className="flex justify-center py-12">
+          <Loader2 className="h-8 w-8 animate-spin text-primary" />
+        </div>
+      ) : currentBookingsPage.length === 0 ? (
         <Card>
           <CardContent className="flex flex-col items-center justify-center py-12">
             <Calendar className="h-12 w-12 text-slate-400 mb-4" />
@@ -270,7 +240,7 @@ export default function BusinessBookingsPage({ role = "business" }: BusinessBook
       ) : (
         <>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-            {currentBookingsPage.map((booking) => (
+            {currentBookingsPage.map((booking: any) => (
               <BookingCard
                 key={booking.id}
                 {...booking}
@@ -286,7 +256,6 @@ export default function BusinessBookingsPage({ role = "business" }: BusinessBook
             ))}
           </div>
 
-          {/* Pagination */}
           {totalPages > 1 && (
             <CustomPagination
               currentPage={currentPage}

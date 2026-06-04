@@ -112,7 +112,7 @@ export default function BookingsPage({ role = "renter" }: BookingsPageProps) {
 
   // Calculate average rating from completed trips with ratings
   // For now, hardcode to 4.8 as backend schema doesn't embed specific booking rating easily yet.
-  const averageRating = "4.8";
+  const averageRating = "N/A";
 
   // Renter stats
   const renterStats = [

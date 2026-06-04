@@ -9,7 +9,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Bell, Check } from "lucide-react";
-import { Notification } from "@/@types";
+import { Notification } from "@/types";
 import { formatTimeAgo } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 

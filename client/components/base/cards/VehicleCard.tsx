@@ -15,7 +15,7 @@ import {
   Battery, 
   Droplet
 } from "lucide-react";
-import { Vehicle } from "@/@types/vehicle";
+import { Vehicle } from "@/types/vehicle";
 
 interface VehicleCardProps {
   vehicle: Vehicle;

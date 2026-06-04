@@ -20,7 +20,8 @@ import {
   MessageSquare,
   Share2,
   Heart,
-  Verified
+  Verified,
+  Camera
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -207,15 +208,22 @@ export function BusinessProfileHeader({
   return (
     <Card className={cn("border-slate-200 py-0 dark:border-slate-800 overflow-hidden", className)}>
       {/* Cover Image */}
-      <div className="relative h-48 bg-teal-100/40">
-        {data.coverImage && (
+      <div className="relative h-48 bg-slate-200 dark:bg-slate-800 flex items-center justify-center group cursor-pointer">
+        {data.coverImage ? (
           <Image
             src={data.coverImage}
             alt="Cover"
             fill
             className="object-cover"
           />
+        ) : (
+          <div className="flex flex-col items-center gap-1 text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-300">
+            <Camera className="h-6 w-6" />
+            <span className="text-xs font-medium font-secondary">Add Cover Photo</span>
+          </div>
         )}
+        <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity" />
+
         
         {/* Logo and Basic Info */}
    

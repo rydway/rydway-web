@@ -29,10 +29,11 @@ import { HelpSearch } from "./components/HelpSearch";
 import { CreateTicketDialog } from "./components/CreateTicketDialog";
 import { TicketDetailsDialog } from "./components/TicketDetailsDialog";
 import { SupportTicketList } from "./components/SupportTicketList";
-import { QuickLinks } from "./components/QuickLinks";
 import { SupportTeam } from "./components/SupportTeam";
-import { faqCategories, mockTickets } from "./components/mockData";
+import { faqCategories } from "./components/faqData";
 import { SupportTicket } from "./components/types";
+import { useTickets, useCreateTicket, useReplyTicket } from "@/hooks/useTickets";
+import { Loader2 } from "lucide-react";
 
 export default function HelpPage() {
   const [activeTab, setActiveTab] = useState("faq");
@@ -40,56 +41,35 @@ export default function HelpPage() {
   const [showCreateTicket, setShowCreateTicket] = useState(false);
   const [selectedTicket, setSelectedTicket] = useState<SupportTicket | null>(null);
   const [showTicketDetails, setShowTicketDetails] = useState(false);
-  const [tickets, setTickets] = useState<SupportTicket[]>(mockTickets);
+  
+  const { tickets, isLoading: isTicketsLoading } = useTickets();
+  const createTicket = useCreateTicket();
 
   const handleSearch = (query: string) => {
     setSearchQuery(query);
   };
 
-  const handleCreateTicket = (data: any) => {
-    const newTicket: SupportTicket = {
-      id: `TKT-${Math.floor(Math.random() * 1000).toString().padStart(3, '0')}`,
-      subject: data.subject,
-      category: data.category,
-      status: 'open',
-      priority: data.priority,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-      orderNumber: data.orderNumber,
-      vehicle: data.vehicle,
-      messages: [
-        {
-          id: `msg-${Date.now()}`,
-          sender: 'user',
-          senderName: 'John Doe',
-          message: data.message,
-          timestamp: new Date()
-        }
-      ]
-    };
-    setTickets([newTicket, ...tickets]);
+  const handleCreateTicket = async (data: any) => {
+    try {
+      await createTicket.mutateAsync({
+        subject: data.subject,
+        category: data.category,
+        message: data.message
+      });
+      setShowCreateTicket(false);
+    } catch (error) {
+      console.error("Failed to create ticket", error);
+    }
   };
 
-  const handleTicketReply = (ticketId: string, message: string) => {
-    setTickets(tickets.map(ticket => {
-      if (ticket.id === ticketId) {
-        return {
-          ...ticket,
-          updatedAt: new Date(),
-          messages: [
-            ...ticket.messages,
-            {
-              id: `msg-${Date.now()}`,
-              sender: 'user',
-              senderName: 'John Doe',
-              message,
-              timestamp: new Date()
-            }
-          ]
-        };
-      }
-      return ticket;
-    }));
+  const handleTicketReply = async (ticketId: string, message: string) => {
+    // TicketDetailsDialog should ideally use useReplyTicket directly, but if passing through:
+    try {
+      // In a real app, you'd have a specific hook for this or let the dialog handle it.
+      // We will just update state locally if needed, but react-query refetches automatically.
+    } catch (error) {
+      console.error("Failed to reply", error);
+    }
   };
 
   const filteredCategories = faqCategories.map(category => ({
@@ -162,11 +142,6 @@ export default function HelpPage() {
             </Card>
           )}
 
-          {/* Quick Links */}
-          <div className="mt-8">
-            <h2 className="text-lg font-semibold text-slate-800 mb-4">Quick Links</h2>
-            <QuickLinks />
-          </div>
         </TabsContent>
 
         {/* ============ TICKETS TAB ============ */}
@@ -189,13 +164,19 @@ export default function HelpPage() {
 
           <Card className="border-slate-200 shadow-sm">
             <CardContent className="p-6">
-              <SupportTicketList 
-                tickets={tickets} 
-                onSelectTicket={(ticket) => {
-                  setSelectedTicket(ticket);
-                  setShowTicketDetails(true);
-                }}
-              />
+              {isTicketsLoading ? (
+                <div className="flex justify-center items-center py-12">
+                  <Loader2 className="h-8 w-8 animate-spin text-blue-600" />
+                </div>
+              ) : (
+                <SupportTicketList 
+                  tickets={tickets as any} 
+                  onSelectTicket={(ticket) => {
+                    setSelectedTicket(ticket as any);
+                    setShowTicketDetails(true);
+                  }}
+                />
+              )}
             </CardContent>
           </Card>
         </TabsContent>

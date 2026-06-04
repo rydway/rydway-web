@@ -1,6 +1,6 @@
 'use client';
 import { Fuel, Settings, Users, Gauge, Calendar, Shield } from 'lucide-react';
-import { Vehicle } from "@/@types";
+import { Vehicle } from "@/types";
 
 interface SpecsListProps {
   vehicle: Vehicle;

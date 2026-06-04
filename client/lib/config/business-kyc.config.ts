@@ -1,7 +1,7 @@
 "use client";
 
 
-import { KYCFormConfig } from "@/@types/kyc";
+import { KYCFormConfig } from "@/types/kyc";
 
 export const BusinessKYCConfig: KYCFormConfig = {
   formId: "business_partner_kyc",

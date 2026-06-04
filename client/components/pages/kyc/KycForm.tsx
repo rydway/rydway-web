@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { FormStep } from "../../base/form/FormStep";
 import { ChevronLeft, ChevronRight, ArrowRight, AlertCircle, CheckCircle2 } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import { KYCFormConfig } from "@/@types/kyc";
+import { KYCFormConfig } from "@/types/kyc";
 import { toast } from "sonner";
 
 interface KYCFormProps {

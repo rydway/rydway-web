@@ -57,6 +57,20 @@ enum SubscriptionTier {
   enterprise
 }
 
+enum TicketCategory {
+  payment
+  technical
+  dispute
+  general
+}
+
+enum TicketStatus {
+  open
+  in_progress
+  resolved
+  closed
+}
+
 // ─── User & Profiles ─────────────────────────────────────────────────────────
 
 model User {
@@ -88,6 +102,8 @@ model User {
   hostConvos        Conversation[]  @relation("HostConversations")
   givenReviews      Review[]        @relation("ReviewGiver")
   receivedReviews   Review[]        @relation("ReviewReceiver")
+  supportTickets    SupportTicket[]
+  sentSupportMsgs   SupportMessage[] @relation("SentSupportMessages")
 }
 
 model RenterProfile {
@@ -406,3 +422,29 @@ model Notification {
   entityType  String?
   createdAt   DateTime @default(now())
 }
+
+// ─── Support Tickets ────────────────────────────────────────────────────────
+
+model SupportTicket {
+  id          String        @id @default(uuid())
+  userId      String
+  user        User          @relation(fields: [userId], references: [id])
+  subject     String
+  category    TicketCategory
+  status      TicketStatus  @default(open)
+  messages    SupportMessage[]
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+}
+
+model SupportMessage {
+  id          String        @id @default(uuid())
+  ticketId    String
+  ticket      SupportTicket @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+  senderId    String
+  sender      User          @relation("SentSupportMessages", fields: [senderId], references: [id])
+  body        String
+  attachmentUrl String?
+  createdAt   DateTime      @default(now())
+}
+

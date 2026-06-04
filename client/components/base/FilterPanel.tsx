@@ -7,7 +7,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Slider } from "@/components/ui/slider";
 import { Button } from "@/components/ui/button";
 import { Filter, X } from "lucide-react";
-import { SearchFilters } from "@/@types";
+import { SearchFilters } from "@/types";
 import { formatPrice } from "@/lib/utils";
 
 interface FilterPanelProps {

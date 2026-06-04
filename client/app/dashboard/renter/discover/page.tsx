@@ -1,83 +1,64 @@
 "use client";
-import { useState } from "react";
-import { useRouter } from "next/navigation"; // Add this import
-import { Search, Menu, User, Bell, ChevronDown } from "lucide-react";
-import { Input } from "@/components/ui/input";
+import { useState, useMemo } from "react";
+import { useRouter } from "next/navigation";
+import { Search, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import SearchBar from "@/components/pages/search/Search";
-import { popularCars, recommendedCars } from "@/data/carData";
-import CarCard from "@/components/base/cards/VehicleCard";
-import Navbar from "@/components/layout/NavBar";
-import { SearchFilters } from "@/@types";
 import VehicleCard from "@/components/base/cards/VehicleCard";
-
-const allCars = [...popularCars, ...recommendedCars];
+import { useVehicles } from "@/hooks/useVehicles";
+import { SearchFilters } from "@/types";
 
 export default function SearchWithNavbar() {
   const [searchQuery, setSearchQuery] = useState("");
-  const [filteredCars, setFilteredCars] = useState(allCars);
   const [activeFilter, setActiveFilter] = useState("all");
-  const router = useRouter(); // Initialize the router
+  const router = useRouter();
+  
+  const { vehicles, isLoading } = useVehicles();
 
-  // Handle search
   const handleSearch = (filters: SearchFilters) => {
     const query = (filters.query ?? "").toLowerCase();
     setSearchQuery(query);
-
-    if (query.trim() === "") {
-      setFilteredCars(allCars);
-      return;
-    }
-
-    const filtered = allCars.filter(
-      (car) =>
-        car.name.toLowerCase().includes(query) ||
-        car.category.toLowerCase().includes(query) ||
-        car.fuel.toLowerCase().includes(query) ||
-        car.transmission.toLowerCase().includes(query)
-    );
-
-    setFilteredCars(filtered);
   };
 
-  // Handle filter change
   const handleFilterChange = (filter: string) => {
     setActiveFilter(filter);
-    
-    let filtered = allCars;
-    
-    if (filter !== "all") {
-      filtered = allCars.filter(car => 
-        filter === "favorites" 
-          ? car.isFavorite 
-          : car.category.toLowerCase() === filter.toLowerCase()
-      );
-    }
-    
-    setFilteredCars(searchQuery ? 
-      filtered.filter(car => 
-        car.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        car.category.toLowerCase().includes(searchQuery.toLowerCase())
-      ) 
-      : filtered
-    );
   };
 
-  // Handle favorite toggle
   const handleFavoriteToggle = (carId: string) => {
     console.log("Toggled favorite for car:", carId);
-    // You can implement API call here
   };
 
-  // Handle rent now - Navigate to vehicle details
   const handleRentNow = (carId: string) => {
-    console.log("Rent now for car:", carId);
     router.push(`/dashboard/renter/vehicles/${carId}`);
   };
 
+  const filteredCars = useMemo(() => {
+    if (!vehicles) return [];
+    
+    let filtered = vehicles;
+    
+    if (activeFilter !== "all") {
+      filtered = vehicles.filter((car: any) => 
+        activeFilter === "favorites" 
+          ? car.isFavorite 
+          : car.category?.toLowerCase() === activeFilter.toLowerCase()
+      );
+    }
+    
+    if (searchQuery) {
+      filtered = filtered.filter((car: any) => 
+        car.name?.toLowerCase().includes(searchQuery) ||
+        car.category?.toLowerCase().includes(searchQuery) ||
+        car.fuel?.toLowerCase().includes(searchQuery) ||
+        car.transmission?.toLowerCase().includes(searchQuery)
+      );
+    }
+    
+    return filtered;
+  }, [vehicles, activeFilter, searchQuery]);
+
   return (
     <div className="space-y-6 font-primary">
-      {/* Search Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-2">
         <div className="space-y-1">
           <h1 className="text-2xl font-bold tracking-tight text-slate-900 font-primary">
@@ -89,58 +70,23 @@ export default function SearchWithNavbar() {
         </div>
       </div>
 
-      {/* Search Bar */}
       <div className="max-w-4xl">
         <SearchBar onSearch={handleSearch} />
       </div>
 
-      {/* Filter Buttons */}
       <div className="flex flex-wrap gap-3">
-        <Button
-          variant={activeFilter === "all" ? "default" : "outline"}
-          className={`rounded-full font-primary ${activeFilter === "all" ? "bg-primary text-white hover:bg-primary/95" : ""}`}
-          onClick={() => handleFilterChange("all")}
-        >
-          All Cars
-        </Button>
-        <Button
-          variant={activeFilter === "sport" ? "default" : "outline"}
-          className={`rounded-full font-primary ${activeFilter === "sport" ? "bg-primary text-white hover:bg-primary/95" : ""}`}
-          onClick={() => handleFilterChange("sport")}
-        >
-          Sport
-        </Button>
-        <Button
-          variant={activeFilter === "suv" ? "default" : "outline"}
-          className={`rounded-full font-primary ${activeFilter === "suv" ? "bg-primary text-white hover:bg-primary/95" : ""}`}
-          onClick={() => handleFilterChange("suv")}
-        >
-          SUV
-        </Button>
-        <Button
-          variant={activeFilter === "luxury" ? "default" : "outline"}
-          className={`rounded-full font-primary ${activeFilter === "luxury" ? "bg-primary text-white hover:bg-primary/95" : ""}`}
-          onClick={() => handleFilterChange("luxury")}
-        >
-          Luxury
-        </Button>
-        <Button
-          variant={activeFilter === "hatchback" ? "default" : "outline"}
-          className={`rounded-full font-primary ${activeFilter === "hatchback" ? "bg-primary text-white hover:bg-primary/95" : ""}`}
-          onClick={() => handleFilterChange("hatchback")}
-        >
-          Hatchback
-        </Button>
-        <Button
-          variant={activeFilter === "favorites" ? "default" : "outline"}
-          className={`rounded-full font-primary ${activeFilter === "favorites" ? "bg-primary text-white hover:bg-primary/95" : ""}`}
-          onClick={() => handleFilterChange("favorites")}
-        >
-          Favorites
-        </Button>
+        {["all", "sport", "suv", "luxury", "hatchback", "favorites"].map((filter) => (
+          <Button
+            key={filter}
+            variant={activeFilter === filter ? "default" : "outline"}
+            className={`rounded-full font-primary capitalize ${activeFilter === filter ? "bg-primary text-white hover:bg-primary/95" : ""}`}
+            onClick={() => handleFilterChange(filter)}
+          >
+            {filter === "all" ? "All Cars" : filter}
+          </Button>
+        ))}
       </div>
 
-      {/* Results Count */}
       <div>
         <p className="text-sm text-slate-500 font-secondary">
           Showing <span className="font-bold text-primary font-primary">{filteredCars.length}</span> cars
@@ -150,10 +96,13 @@ export default function SearchWithNavbar() {
         </p>
       </div>
 
-      {/* Car Grid */}
-      {filteredCars.length > 0 ? (
+      {isLoading ? (
+        <div className="flex justify-center items-center py-24">
+          <Loader2 className="h-8 w-8 animate-spin text-primary" />
+        </div>
+      ) : filteredCars.length > 0 ? (
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {filteredCars.map((car) => (
+          {filteredCars.map((car: any) => (
             <VehicleCard
               key={car.id}
               vehicle={car}

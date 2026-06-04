@@ -11,6 +11,9 @@ import { Separator } from "@/components/ui/separator";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
 import { getNavigation, NavItem } from "@/lib/nav";
+import { useRenterBookings, useHostBookings } from "@/hooks/useBookings";
+import { useConversations } from "@/hooks/useMessaging";
+import { useCurrentUser } from "@/hooks/useUser";
 
 interface SidebarProps {
   role?: 'renter' | 'business';
@@ -28,19 +31,50 @@ export default function Sidebar({
   const pathname = usePathname();
   const navigation = getNavigation(role);
 
-const isActive = (href: string) => {
-  // Exact match
-  if (pathname === href) {
-    return true;
-  }
-  
-  // For parent routes like /dashboard, also match direct children like /dashboard/analytics
-  if (href === '/dashboard' && pathname.startsWith('/dashboard/')) {
-    return true;
-  }
-  
-  return false;
-};
+  const { user } = useCurrentUser();
+  // Only fetch the bookings that are relevant to the current role to avoid forbidden API calls
+  const { bookings: renterBookings } = useRenterBookings();
+  const { bookings: hostBookings } = useHostBookings();
+  const { conversations } = useConversations();
+
+  // BookingStatus uses 'requested' not 'pending' - match the backend enum
+  const renterPending = role === 'renter'
+    ? renterBookings.filter(b => b.status === 'requested').length
+    : 0;
+  const hostPending = role === 'business'
+    ? hostBookings.filter(b => b.status === 'requested').length
+    : 0;
+  const unreadConvs = conversations.filter(c =>
+    c.messages?.some(m => !m.isRead && m.senderId !== user?.id)
+  ).length;
+
+  const dynamicNavigation = {
+    ...navigation,
+    primary: navigation.primary.map(item => {
+      if (item.id === 'my-bookings' || item.id === 'bookings') {
+        const count = role === 'business' ? hostPending : renterPending;
+        return { ...item, badge: count > 0 ? count : undefined };
+      }
+      if (item.id === 'messages') {
+        return { ...item, badge: unreadConvs > 0 ? unreadConvs : undefined };
+      }
+      return item;
+    })
+  };
+
+  const isActive = (href: string) => {
+    // Exact match
+    if (pathname === href) {
+      return true;
+    }
+    
+    // For parent routes like /dashboard, also match direct children like /dashboard/analytics
+    if (href === '/dashboard' && pathname.startsWith('/dashboard/')) {
+      return true;
+    }
+    
+    return false;
+  };
   return (
     <aside className={cn(
       "flex flex-col h-screen border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 transition-all duration-200 font-primary",
@@ -83,7 +117,7 @@ const isActive = (href: string) => {
             </h3>
           )}
           
-          {navigation.primary.map((item) => {
+          {dynamicNavigation.primary.map((item) => {
             const active = isActive(item.href);
             return (
               <Link

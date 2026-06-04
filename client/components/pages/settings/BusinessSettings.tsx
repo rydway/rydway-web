@@ -568,11 +568,37 @@ function BusinessVerificationStatus({ user }: { user: User }) {
 }
 
 // ============ EXPORTED COMPONENT ============
+import { useCurrentUser } from "@/hooks/useUser";
+import { Loader2 } from "lucide-react";
 
 export function BusinessSettingsPage() {
+  const { user, isLoading } = useCurrentUser();
   const [notificationPrefs, setNotificationPrefs] = useState<NotificationPreferences>(mockBusinessNotifications);
   const [payoutDetails, setPayoutDetails] = useState<PayoutDetails>(mockPayoutDetails);
-  const [user] = useState<User>(mockBusiness);
+
+  if (isLoading) {
+    return (
+      <div className="flex h-[60vh] items-center justify-center">
+        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+      </div>
+    );
+  }
+
+  if (!user) {
+    return null;
+  }
+
+  const mappedBusinessUser: User = {
+    id: user.id,
+    name: user.firstName ? `${user.firstName} ${user.lastName}` : "Business Owner",
+    email: user.email,
+    phone: user.phone || "Not provided",
+    avatar: user.profileImageUrl || "/api/placeholder/32/32",
+    role: "business",
+    verified: user.kycStatus === 'verified',
+    businessVerification: user.kycStatus as any, // Using kycStatus as proxy
+    documentExpiry: new Date(2026, 11, 31) // Keep mock expiry for now until backend provides it
+  };
 
   return (
     <div className="space-y-6">
@@ -598,7 +624,7 @@ export function BusinessSettingsPage() {
         </div>
 
         <div className="space-y-6">
-          <BusinessVerificationStatus user={user} />
+          <BusinessVerificationStatus user={mappedBusinessUser} />
           <BusinessNotificationSettings 
             preferences={notificationPrefs}
             onUpdate={setNotificationPrefs}
@@ -608,16 +634,16 @@ export function BusinessSettingsPage() {
             <CardContent className="p-5">
               <div className="flex items-center gap-3">
                 <Avatar className="h-12 w-12 border-2 border-white shadow-sm">
-                  <AvatarImage src={user.avatar} />
+                  <AvatarImage src={mappedBusinessUser.avatar} />
                   <AvatarFallback className="bg-blue-100 text-blue-700">
-                    {user.name.split(' ').map(n => n[0]).join('')}
+                    {mappedBusinessUser.name.split(' ').map(n => n[0]).join('')}
                   </AvatarFallback>
                 </Avatar>
                 <div>
-                  <h3 className="text-sm font-semibold text-slate-800">{user.name}</h3>
-                  <p className="text-xs text-slate-500 mt-0.5">{user.email}</p>
-                  {user.phone && (
-                    <p className="text-xs text-slate-500 mt-0.5">{user.phone}</p>
+                  <h3 className="text-sm font-semibold text-slate-800">{mappedBusinessUser.name}</h3>
+                  <p className="text-xs text-slate-500 mt-0.5">{mappedBusinessUser.email}</p>
+                  {mappedBusinessUser.phone && (
+                    <p className="text-xs text-slate-500 mt-0.5">{mappedBusinessUser.phone}</p>
                   )}
                 </div>
               </div>

@@ -582,10 +582,36 @@ function RenterVerificationStatus({ user }: { user: User }) {
 }
 
 // ============ EXPORTED COMPONENT ============
+import { useCurrentUser } from "@/hooks/useUser";
+import { Loader2 } from "lucide-react";
 
 export function RenterSettingsPage() {
+  const { user, isLoading } = useCurrentUser();
   const [notificationPrefs, setNotificationPrefs] = useState<NotificationPreferences>(mockRenterNotifications);
-  const [user] = useState<User>(mockRenter);
+
+  if (isLoading) {
+    return (
+      <div className="flex h-[60vh] items-center justify-center">
+        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+      </div>
+    );
+  }
+
+  if (!user) {
+    return null;
+  }
+
+  const mappedUser: User = {
+    id: user.id,
+    name: user.firstName ? `${user.firstName} ${user.lastName}` : "Renter",
+    email: user.email,
+    phone: user.phone || "Not provided",
+    avatar: user.profileImageUrl || "/api/placeholder/32/32",
+    role: "renter",
+    verified: user.kycStatus === 'verified',
+    kycStatus: user.kycStatus as any,
+    licenseStatus: user.kycStatus as any // Using kycStatus as a proxy for now
+  };
 
   return (
     <div className="space-y-6">
@@ -596,7 +622,7 @@ export function RenterSettingsPage() {
             Settings
           </h1>
           <p className="text-sm text-slate-500 font-secondary">
-            Manage your account, payment methods, and preferences
+            Manage your account and preferences
           </p>
         </div>
       </div>
@@ -604,11 +630,10 @@ export function RenterSettingsPage() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2 space-y-6">
           <RenterAccountSettings />
-          <RenterPaymentMethods />
         </div>
 
         <div className="space-y-6">
-          <RenterVerificationStatus user={user} />
+          <RenterVerificationStatus user={mappedUser} />
           <RenterNotificationSettings 
             preferences={notificationPrefs}
             onUpdate={setNotificationPrefs}
@@ -618,16 +643,16 @@ export function RenterSettingsPage() {
             <CardContent className="p-5">
               <div className="flex items-center gap-3">
                 <Avatar className="h-12 w-12 border-2 border-white shadow-sm">
-                  <AvatarImage src={user.avatar} />
+                  <AvatarImage src={mappedUser.avatar} />
                   <AvatarFallback className="bg-blue-100 text-blue-700">
-                    {user.name.split(' ').map(n => n[0]).join('')}
+                    {mappedUser.name.split(' ').map(n => n[0]).join('')}
                   </AvatarFallback>
                 </Avatar>
                 <div>
-                  <h3 className="text-sm font-semibold text-slate-800">{user.name}</h3>
-                  <p className="text-xs text-slate-500 mt-0.5">{user.email}</p>
-                  {user.phone && (
-                    <p className="text-xs text-slate-500 mt-0.5">{user.phone}</p>
+                  <h3 className="text-sm font-semibold text-slate-800">{mappedUser.name}</h3>
+                  <p className="text-xs text-slate-500 mt-0.5">{mappedUser.email}</p>
+                  {mappedUser.phone && (
+                    <p className="text-xs text-slate-500 mt-0.5">{mappedUser.phone}</p>
                   )}
                 </div>
               </div>

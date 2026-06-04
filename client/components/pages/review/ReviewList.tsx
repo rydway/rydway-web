@@ -3,7 +3,7 @@
 import { Card } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import RatingStars from "./RatingStars";
-import { Review } from "@/@types";
+import { Review } from "@/types";
 import { formatTimeAgo, getInitials } from "@/lib/utils";
 import { Star } from "lucide-react";
 

@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 
 import { formatPrice, formatDate, calculateDays } from "@/lib/utils";
 import { Calendar, MapPin, ArrowRight, Clock } from "lucide-react";
-import { Booking } from "@/@types";
+import { Booking } from "@/types";
 
 interface UpcomingBookingCardProps {
   booking: Booking;
