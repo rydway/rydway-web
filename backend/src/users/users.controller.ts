@@ -66,6 +66,16 @@ export class UsersController {
     };
   }
 
+  @Get('vendors')
+  @ApiOperation({ summary: 'Get all verified vendors (hosts)' })
+  async getVendors() {
+    const data = await this.usersService.getVendors();
+    return {
+      message: 'Vendors fetched successfully',
+      data,
+    };
+  }
+
   @Get(':id')
   @ApiOperation({ summary: 'Get user by ID' })
   async getUserById(@Param('id') id: string) {

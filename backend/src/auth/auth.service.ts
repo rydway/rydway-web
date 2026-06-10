@@ -8,6 +8,7 @@ import { LoginDto } from './dto/login.dto';
 import * as bcrypt from 'bcrypt';
 import { ConfigService } from '@nestjs/config';
 import { MailService } from '../notifications/mail.service';
+import { createClient } from '@supabase/supabase-js';
 
 @Injectable()
 export class AuthService {
@@ -54,6 +55,10 @@ export class AuthService {
     const user = await this.usersService.findByEmail(loginDto.email);
     if (!user || !user.isActive) {
       throw new UnauthorizedException('Invalid credentials');
+    }
+
+    if (!user.emailVerifiedAt) {
+      throw new UnauthorizedException('Email not verified');
     }
 
     const isMatch = await bcrypt.compare(loginDto.password, user.passwordHash);
@@ -242,5 +247,89 @@ export class AuthService {
     await this.redisService.setex(`auth:refresh:${userId}:${refreshToken}`, 7 * 24 * 60 * 60, '1');
 
     return { accessToken, refreshToken };
+  }
+
+  /**
+   * Returns a Supabase OAuth redirect URL for the given provider.
+   * All secrets stay server-side — the client never touches Supabase directly.
+   */
+  async getOAuthUrl(provider: 'google' | 'facebook'): Promise<string> {
+    const supabase = this.getSupabaseClient();
+    const redirectTo = `${this.configService.get<string>('CLIENT_URL') || 'http://localhost:3000'}/auth/callback`;
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider,
+      options: { redirectTo, skipBrowserRedirect: true },
+    });
+    if (error || !data?.url) {
+      throw new BadRequestException(`Failed to generate OAuth URL: ${error?.message}`);
+    }
+    return data.url;
+  }
+
+  /**
+   * Accepts a Supabase access token (from the OAuth callback fragment),
+   * looks up or creates the user in our DB, and returns Rydway JWTs.
+   */
+  async exchangeOAuthToken(accessToken: string, preferredRole?: string) {
+    const supabase = this.getSupabaseClient();
+
+    // Validate the token with Supabase and fetch the user
+    const { data: { user: supabaseUser }, error } = await supabase.auth.getUser(accessToken);
+    if (error || !supabaseUser) {
+      throw new UnauthorizedException('Invalid OAuth token');
+    }
+
+    const email = supabaseUser.email;
+    if (!email) throw new UnauthorizedException('OAuth account has no email');
+
+    // Find or create user in our own DB
+    let existingUser = await this.usersService.findByEmail(email);
+    let userId: string;
+    let userRole: string;
+    let kycStatus: string;
+
+    if (!existingUser) {
+      const nameParts = (supabaseUser.user_metadata?.full_name || '').split(' ');
+      const newUser = await this.usersService.createUser({
+        email,
+        firstName: nameParts[0] || 'User',
+        lastName: nameParts.slice(1).join(' ') || '',
+        role: (preferredRole as any) || 'renter',
+        passwordHash: '',           // no password for OAuth users
+        emailVerifiedAt: new Date(), // already verified by provider
+      } as any);
+      userId = newUser.id;
+      userRole = newUser.role;
+      kycStatus = newUser.kycStatus;
+    } else {
+      userId = existingUser.id;
+      userRole = existingUser.role;
+      kycStatus = existingUser.kycStatus;
+    }
+
+    const tokens = await this.generateTokens(userId, userRole);
+
+    await this.auditLogService.logAction({
+      actorId: userId,
+      action: 'USER_OAUTH_LOGIN',
+      entityType: 'User',
+      entityId: userId,
+    });
+
+    return {
+      user: {
+        id: userId,
+        email,
+        role: userRole,
+        kycStatus,
+      },
+      tokens,
+    };
+  }
+
+  private getSupabaseClient() {
+    const url = this.configService.get<string>('SUPABASE_URL') || '';
+    const key = this.configService.get<string>('SUPABASE_SERVICE_ROLE_KEY') || this.configService.get<string>('SUPABASE_KEY') || ''; 
+    return createClient(url, key, { auth: { autoRefreshToken: false, persistSession: false } });
   }
 }

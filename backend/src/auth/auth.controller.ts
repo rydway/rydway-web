@@ -7,6 +7,7 @@ import { RefreshDto, ForgotPasswordDto, ResetPasswordDto, VerifyOtpDto } from '.
 import { Public } from './decorators/public.decorator';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { CurrentUser } from './decorators/current-user.decorator';
+import { IsString, IsIn } from 'class-validator';
 
 @ApiTags('Auth')
 @Controller('auth')
@@ -106,6 +107,30 @@ export class AuthController {
     return {
       message: 'Email verified successfully',
       data: null,
+    };
+  }
+
+  @Public()
+  @Post('oauth/url')
+  @HttpCode(HttpStatus.OK)
+  @ApiOperation({ summary: 'Get OAuth redirect URL for a provider (google | facebook)' })
+  async getOAuthUrl(@Body('provider') provider: 'google' | 'facebook') {
+    const url = await this.authService.getOAuthUrl(provider);
+    return {
+      message: 'OAuth URL generated',
+      data: { url },
+    };
+  }
+
+  @Public()
+  @Post('oauth/exchange')
+  @HttpCode(HttpStatus.OK)
+  @ApiOperation({ summary: 'Exchange Supabase OAuth access token for a Rydway JWT' })
+  async exchangeOAuthToken(@Body('accessToken') accessToken: string, @Body('role') role?: string) {
+    const data = await this.authService.exchangeOAuthToken(accessToken, role);
+    return {
+      message: 'OAuth login successful',
+      data,
     };
   }
 }

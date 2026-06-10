@@ -8,7 +8,10 @@ import { TransformInterceptor } from './common/interceptors/transform.intercepto
 import { ConfigService } from '@nestjs/config';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, { rawBody: true, bufferLogs: true });
+  const app = await NestFactory.create(AppModule, {
+    rawBody: true,
+    bufferLogs: true,
+  });
   app.useLogger(app.get(Logger));
   const configService = app.get(ConfigService);
 
@@ -46,7 +49,7 @@ async function bootstrap() {
 
   // CORS — only allow configured frontend origin
   const frontendUrl =
-    configService.get<string>('FRONTEND_URL') || 'http://localhost:3000';
+    configService.get<string>('FRONTEND_URL') || 'http://localhost:3001';
   app.enableCors({
     origin: [frontendUrl],
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
