@@ -53,4 +53,18 @@ export declare class AuthService {
     sendVerificationOtp(email: string): Promise<boolean>;
     verifyOtp(email: string, otp: string): Promise<boolean>;
     private generateTokens;
+    getOAuthUrl(provider: 'google' | 'facebook'): Promise<string>;
+    exchangeOAuthToken(accessToken: string, preferredRole?: string): Promise<{
+        user: {
+            id: string;
+            email: string;
+            role: string;
+            kycStatus: string;
+        };
+        tokens: {
+            accessToken: string;
+            refreshToken: string;
+        };
+    }>;
+    private getSupabaseClient;
 }

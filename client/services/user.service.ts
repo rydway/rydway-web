@@ -21,4 +21,8 @@ export const userService = {
   async getUser(id: string): Promise<User> {
     return api.get<User>(`/users/${id}`);
   },
+
+  async getVendors(): Promise<any[]> {
+    return api.get<any[]>('/users/vendors');
+  },
 };

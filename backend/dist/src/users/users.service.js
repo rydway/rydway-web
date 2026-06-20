@@ -100,6 +100,37 @@ let UsersService = class UsersService {
             },
         });
     }
+    async getVendors() {
+        return this.prisma.user.findMany({
+            where: {
+                role: client_1.Role.host,
+                kycStatus: 'verified',
+                isActive: true,
+            },
+            select: {
+                id: true,
+                email: true,
+                phone: true,
+                firstName: true,
+                lastName: true,
+                role: true,
+                profileImageUrl: true,
+                kycStatus: true,
+                hostProfile: {
+                    select: {
+                        id: true,
+                        businessName: true,
+                        tradingName: true,
+                        businessAddress: true,
+                        businessPhone: true,
+                        businessEmail: true,
+                        avgRating: true,
+                        totalReviews: true,
+                    },
+                },
+            },
+        });
+    }
 };
 exports.UsersService = UsersService;
 exports.UsersService = UsersService = __decorate([

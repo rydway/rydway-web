@@ -129,7 +129,7 @@ export default function BusinessBookingsPage({ role = "business" }: BusinessBook
       title: "Total Revenue",
       value: `₦${(totalRevenue / 1000000).toFixed(2)}M`,
       icon: DollarSign,
-      trend: "+25% this month",
+      trend: "From past bookings",
       trendUp: true,
       iconColor: "text-primary"
     },
@@ -137,7 +137,7 @@ export default function BusinessBookingsPage({ role = "business" }: BusinessBook
       title: "Completion Rate",
       value: `${completionRate}%`,
       icon: TrendingUp,
-      trend: "+3% this month",
+      trend: "Based on total trips",
       trendUp: true,
       iconColor: "text-secondary"
     }

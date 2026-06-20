@@ -33,13 +33,14 @@ import { useCurrentUser } from "@/hooks/useUser";
 import { useHostDashboard } from "@/hooks/useDashboard";
 import { useVehicles } from "@/hooks/useVehicles";
 import { Loader2 } from "lucide-react";
+import { userService } from "@/services/user.service";
+import { toast } from "sonner";
 
 export default function BusinessPage() {
   const router = useRouter();
   const params = useParams();
   const businessId = params.id as string;
   
-  const [role, setRole] = useState<"renter" | "business">("business");
   const [isEditing, setIsEditing] = useState(false);
 
   const { user, isLoading: isUserLoading } = useCurrentUser();
@@ -111,9 +112,19 @@ export default function BusinessPage() {
     }
   }));
 
-  const handleSaveProfile = (updatedData: BusinessProfileData) => {
-    // In real app, call mutation
-    setIsEditing(false);
+  const handleSaveProfile = async (updatedData: BusinessProfileData) => {
+    try {
+      await userService.updateMe({
+        firstName: updatedData.name.split(" ")[0] || "",
+        lastName: updatedData.name.split(" ").slice(1).join(" ") || "",
+        phone: updatedData.phone,
+        // Assuming description and other details are added to the User or HostProfile model in the future
+      });
+      toast.success("Profile updated successfully");
+      setIsEditing(false);
+    } catch (error) {
+      toast.error("Failed to update profile");
+    }
   };
 
   const handleEditToggle = () => {
@@ -121,11 +132,16 @@ export default function BusinessPage() {
   };
 
   const handleContact = () => {
-    console.log("Contact business:", businessData.id);
+    router.push(`/dashboard/renter/messages?userId=${businessData.id}`);
   };
 
-  const handleShare = () => {
-    console.log("Share business:", businessData.id);
+  const handleShare = async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      toast.success("Profile link copied to clipboard");
+    } catch (error) {
+      toast.error("Failed to copy link");
+    }
   };
 
   const handleToggleFavorite = () => {
@@ -160,28 +176,12 @@ export default function BusinessPage() {
     console.log("Toggle vehicle status", vehicleId);
   };
 
-  const handleToggleRole = () => {
-    setRole(role === "renter" ? "business" : "renter");
-  };
-
   return (
     <div className="space-y-6 font-secondary">
-      {/* Role Toggle (for demo purposes) */}
-      <div className="flex justify-end">
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={handleToggleRole}
-          className="font-primary"
-        >
-          View as: {role === "renter" ? "Renter" : "Business"}
-        </Button>
-      </div>
-
       {/* Business Profile Header */}
       <BusinessProfileHeader
         data={businessData}
-        role={role}
+        role="business"
         isEditing={isEditing}
         onEditToggle={handleEditToggle}
         onSave={handleSaveProfile}
@@ -199,14 +199,14 @@ export default function BusinessPage() {
           <TabsTrigger value="fleet">Vehicle Fleet</TabsTrigger>
           <TabsTrigger value="reviews">Reviews</TabsTrigger>
           <TabsTrigger value="policies">Policies</TabsTrigger>
-          {role === "business" && <TabsTrigger value="analytics">Analytics</TabsTrigger>}
+          <TabsTrigger value="analytics">Analytics</TabsTrigger>
         </TabsList>
 
         {/* Fleet Tab */}
         <TabsContent value="fleet" className="space-y-6">
           <VehicleCatalog
             vehicles={vehicles}
-            role={role}
+            role="business"
             onView={handleViewVehicle}
             onEdit={handleEditVehicle}
             onDelete={handleDeleteVehicle}
@@ -274,9 +274,8 @@ export default function BusinessPage() {
           </Card>
         </TabsContent>
 
-        {/* Analytics Tab (Business Only) */}
-        {role === "business" && (
-          <TabsContent value="analytics" className="space-y-6">
+        {/* Analytics Tab */}
+        <TabsContent value="analytics" className="space-y-6">
             <Card>
               <CardContent className="p-6">
                 <h3 className="text-xl font-semibold text-slate-800 mb-6">Business Analytics</h3>
@@ -284,34 +283,42 @@ export default function BusinessPage() {
                 <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
                   <div className="p-4 bg-slate-50 rounded-lg">
                     <div className="flex items-center gap-3 mb-2">
-                      <DollarSign className="h-5 w-5 text-green-500" />
-                      <span className="text-2xl font-bold text-slate-800">₦{(summary?.totalEarnings || 0).toLocaleString()}</span>
+                      <DollarSign className="h-5 w-5 text-primary" />
+                      <span className="text-2xl font-bold text-slate-800">₦{((summary as any)?.totalEarned || 0).toLocaleString()}</span>
                     </div>
                     <p className="text-sm text-slate-600">Total Earnings</p>
                   </div>
                   
                   <div className="p-4 bg-slate-50 rounded-lg">
                     <div className="flex items-center gap-3 mb-2">
-                      <Car className="h-5 w-5 text-blue-500" />
-                      <span className="text-2xl font-bold text-slate-800">68%</span>
+                      <Car className="h-5 w-5 text-primary" />
+                      <span className="text-2xl font-bold text-slate-800">
+                        {(() => {
+                          const s = summary as any;
+                          if (!s?.totalVehicles || s.totalVehicles === 0) return "0%";
+                          const utilized = s.totalVehicles - (s.availableVehicles || 0);
+                          const percentage = (utilized / s.totalVehicles) * 100;
+                          return `${Math.round(percentage)}%`;
+                        })()}
+                      </span>
                     </div>
                     <p className="text-sm text-slate-600">Fleet Utilization</p>
                   </div>
                   
                   <div className="p-4 bg-slate-50 rounded-lg">
                     <div className="flex items-center gap-3 mb-2">
-                      <Users className="h-5 w-5 text-purple-500" />
-                      <span className="text-2xl font-bold text-slate-800">{summary?.totalBookings || 0}</span>
+                      <Users className="h-5 w-5 text-primary" />
+                      <span className="text-2xl font-bold text-slate-800">{(summary as any)?.totalBookings || 0}</span>
                     </div>
                     <p className="text-sm text-slate-600">Total Bookings</p>
                   </div>
                   
                   <div className="p-4 bg-slate-50 rounded-lg">
                     <div className="flex items-center gap-3 mb-2">
-                      <TrendingUp className="h-5 w-5 text-amber-500" />
-                      <span className="text-2xl font-bold text-slate-800">+24%</span>
+                      <TrendingUp className="h-5 w-5 text-primary" />
+                      <span className="text-2xl font-bold text-slate-800">{(summary as any)?.activeBookings || 0}</span>
                     </div>
-                    <p className="text-sm text-slate-600">Growth Rate</p>
+                    <p className="text-sm text-slate-600">Active Bookings</p>
                   </div>
                 </div>
                 
@@ -323,7 +330,6 @@ export default function BusinessPage() {
               </CardContent>
             </Card>
           </TabsContent>
-        )}
       </Tabs>
     </div>
   );

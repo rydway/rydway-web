@@ -9,7 +9,10 @@ const all_exceptions_filter_1 = require("./common/filters/all-exceptions.filter"
 const transform_interceptor_1 = require("./common/interceptors/transform.interceptor");
 const config_1 = require("@nestjs/config");
 async function bootstrap() {
-    const app = await core_1.NestFactory.create(app_module_1.AppModule, { rawBody: true, bufferLogs: true });
+    const app = await core_1.NestFactory.create(app_module_1.AppModule, {
+        rawBody: true,
+        bufferLogs: true,
+    });
     app.useLogger(app.get(nestjs_pino_1.Logger));
     const configService = app.get(config_1.ConfigService);
     app.setGlobalPrefix('api');
@@ -35,7 +38,7 @@ async function bootstrap() {
         .build();
     const document = swagger_1.SwaggerModule.createDocument(app, config);
     swagger_1.SwaggerModule.setup('docs', app, document);
-    const frontendUrl = configService.get('FRONTEND_URL') || 'http://localhost:3000';
+    const frontendUrl = configService.get('FRONTEND_URL') || 'http://localhost:3001';
     app.enableCors({
         origin: [frontendUrl],
         methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],

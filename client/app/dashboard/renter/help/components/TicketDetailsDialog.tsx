@@ -118,7 +118,7 @@ export function TicketDetailsDialog({
                 className="min-h-[80px] text-sm"
               />
               <Button 
-                className="self-end bg-blue-600 hover:bg-blue-700"
+                className="self-end bg-primary hover:bg-primary/90"
                 size="sm"
                 onClick={handleSendReply}
                 disabled={!replyMessage.trim()}

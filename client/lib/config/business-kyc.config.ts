@@ -114,7 +114,8 @@ export const BusinessKYCConfig: KYCFormConfig = {
           tooltip: "Official business contact number",
           validation: (value: string) => {
             if (!value.trim()) return "Business phone is required";
-            // Phone validation logic
+            if (value.replace(/\D/g, '').length < 10) return "Phone number is too short";
+            if (value.replace(/\D/g, '').length > 15) return "Phone number is too long";
             return null;
           },
           grid: "half"
@@ -216,7 +217,12 @@ export const BusinessKYCConfig: KYCFormConfig = {
           required: true,
           placeholder: "12345678901",
           tooltip: "National Identity Number",
-          validation: (value: string) => value.trim() ? null : "Owner NIN is required",
+          validation: (value: string) => {
+            if (!value.trim()) return "Owner NIN is required";
+            if (value.trim().length !== 11) return "NIN must be exactly 11 digits";
+            if (!/^\d+$/.test(value.trim())) return "NIN must contain only digits";
+            return null;
+          },
           grid: "half"
         },
         {
@@ -239,6 +245,8 @@ export const BusinessKYCConfig: KYCFormConfig = {
           tooltip: "Personal contact number",
           validation: (value: string) => {
             if (!value.trim()) return "Owner phone is required";
+            if (value.replace(/\D/g, '').length < 10) return "Phone number is too short";
+            if (value.replace(/\D/g, '').length > 15) return "Phone number is too long";
             return null;
           },
           grid: "half"

@@ -109,7 +109,7 @@ export default function BusinessVehiclesPage() {
       title: "Monthly Revenue",
       value: `₦${(metrics.totalRevenue / 1000000).toFixed(2)}M`,
       icon: DollarSign,
-      trend: "+18% this month",
+      trend: "Current total",
       trendUp: true,
       iconColor: "text-green-600"
     },
@@ -117,7 +117,7 @@ export default function BusinessVehiclesPage() {
       title: "Utilization Rate",
       value: `${Math.round(metrics.averageUtilization)}%`,
       icon: TrendingUp,
-      trend: "+5% vs last month",
+      trend: "Average across fleet",
       trendUp: true,
       iconColor: "text-amber-600"
     },

@@ -15,6 +15,7 @@ import { useAuth } from "@/context/AuthContext";
 import { useCurrentUser } from "@/hooks/useUser";
 import { useNotifications } from "@/hooks/useNotifications";
 import { ShieldAlert } from "lucide-react";
+import { BaseLoader } from "@/components/ui/BaseLoader";
 
 export default function DashboardLayout({
   children,
@@ -26,7 +27,7 @@ export default function DashboardLayout({
   const { user: authUser, isLoading: authLoading, logout } = useAuth();
   const { user } = useCurrentUser();
   const { unreadCount } = useNotifications();
-  const userRole = authUser?.role === 'host' ? 'business' : 'renter';
+  const userRole = authUser?.role === "host" ? "business" : "renter";
   const policies = usePolicy();
   const router = useRouter();
   const pathname = usePathname();
@@ -34,49 +35,54 @@ export default function DashboardLayout({
   // Client-side auth guard
   useEffect(() => {
     if (!authLoading && !authUser) {
-      router.replace('/auth/login');
+      router.replace("/auth");
     }
   }, [authLoading, authUser, router]);
 
   // Role-based route protection
   useEffect(() => {
     if (!authLoading && authUser) {
-      const isHostRoute = pathname.startsWith('/dashboard/business') || pathname.startsWith('/dashboard/host');
-      const isRenterRoute = pathname.startsWith('/dashboard/renter');
+      const isHostRoute =
+        pathname.startsWith("/dashboard/business") ||
+        pathname.startsWith("/dashboard/host");
+      const isRenterRoute = pathname.startsWith("/dashboard/renter");
       const role = authUser.role; // 'renter' | 'host' | 'admin'
 
-      if (role === 'renter' && isHostRoute) {
-        router.replace('/dashboard/renter');
-      } else if (role === 'host' && isRenterRoute) {
-        router.replace('/dashboard/business');
+      if (role === "renter" && isHostRoute) {
+        router.replace("/dashboard/renter");
+      } else if (role === "host" && isRenterRoute) {
+        router.replace("/dashboard/business");
       }
     }
   }, [authLoading, authUser, pathname, router]);
 
   if (authLoading) {
-    return (
-      <div className="flex h-screen items-center justify-center bg-slate-50">
-        <Loader2 className="h-8 w-8 animate-spin text-primary" />
-      </div>
-    );
+    return <BaseLoader fullScreen />;
   }
 
   if (!authUser) return null;
 
   const displayName = user
     ? `${user.firstName} ${user.lastName}`.trim()
-    : authUser?.firstName ?? 'User';
+    : (authUser?.firstName ?? "User");
 
   const avatarUrl = user?.profileImageUrl;
-  const initials = displayName.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase();
+  const initials = displayName
+    .split(" ")
+    .map((n) => n[0])
+    .join("")
+    .slice(0, 2)
+    .toUpperCase();
 
-  const profilePath = userRole === 'business'
-    ? '/dashboard/business/profile'
-    : '/dashboard/renter/profile';
+  const profilePath =
+    userRole === "business"
+      ? "/dashboard/business/profile"
+      : "/dashboard/renter/profile";
 
-  const settingsPath = userRole === 'business'
-    ? '/dashboard/business/settings'
-    : '/dashboard/renter/settings';
+  const settingsPath =
+    userRole === "business"
+      ? "/dashboard/business/settings"
+      : "/dashboard/renter/settings";
 
   return (
     <div className="flex h-screen bg-slate-50 dark:bg-slate-950">
@@ -98,10 +104,12 @@ export default function DashboardLayout({
       )}
 
       {/* Mobile sidebar drawer */}
-      <div className={cn(
-        "md:hidden fixed top-0 left-0 h-full z-50 transition-transform duration-300",
-        sidebarOpen ? "translate-x-0" : "-translate-x-full"
-      )}>
+      <div
+        className={cn(
+          "md:hidden fixed top-0 left-0 h-full z-50 transition-transform duration-300",
+          sidebarOpen ? "translate-x-0" : "-translate-x-full",
+        )}
+      >
         <div className="relative">
           <Sidebar
             role={userRole}
@@ -130,10 +138,15 @@ export default function DashboardLayout({
             >
               <Menu className="h-5 w-5" />
             </button>
-            {/* Page breadcrumb placeholder - can be dynamic */}
-            <span className="hidden md:block text-sm text-slate-400 font-secondary capitalize">
-              {pathname.split('/').filter(Boolean).slice(-1)[0]?.replace(/-/g, ' ') ?? 'Dashboard'}
-            </span>
+            {/* Personalized greeting */}
+            <div className="hidden md:flex flex-col leading-tight">
+              <span className="text-sm font-semibold text-slate-800 dark:text-white font-primary">
+                Welcome back, {displayName}
+              </span>
+              <span className="text-xs text-slate-400 font-secondary capitalize">
+                {userRole === "business" ? "Business Account" : "Renter Account"}
+              </span>
+            </div>
           </div>
 
           {/* Right: action icons + avatar */}
@@ -191,8 +204,12 @@ export default function DashboardLayout({
               {/* Dropdown on hover */}
               <div className="absolute right-0 top-full mt-2 w-48 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
                 <div className="p-2 border-b border-slate-100 dark:border-slate-800">
-                  <p className="text-xs text-slate-500 font-secondary px-2 py-1">Signed in as</p>
-                  <p className="text-sm font-medium text-slate-800 dark:text-white font-primary px-2 truncate">{displayName}</p>
+                  <p className="text-xs text-slate-500 font-secondary px-2 py-1">
+                    Signed in as
+                  </p>
+                  <p className="text-sm font-medium text-slate-800 dark:text-white font-primary px-2 truncate">
+                    {displayName}
+                  </p>
                 </div>
                 <div className="p-1">
                   <Link href={profilePath}>
@@ -231,11 +248,35 @@ export default function DashboardLayout({
           </div>
         )}
 
+        {/* KYC Banner */}
+        {authUser && authUser.kycStatus !== 'verified' && !policies.isSuspended && (
+          <div className="bg-primary px-6 py-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-white shadow-inner">
+            <div className="flex items-center gap-3">
+              <ShieldAlert size={20} className="shrink-0" />
+              <div>
+                <h3 className="font-semibold text-base font-primary">
+                  {authUser.kycStatus === 'pending' ? 'KYC Under Review' : 'Complete Your KYC'}
+                </h3>
+                <p className="text-sm text-white/90 font-secondary mt-0.5">
+                  {authUser.kycStatus === 'pending'
+                    ? 'Your documents are currently being reviewed. You will be notified once verified.'
+                    : 'You need to verify your identity to unlock all platform features and start earning/renting.'}
+                </p>
+              </div>
+            </div>
+            {authUser.kycStatus !== 'pending' && (
+              <Link href={`/kyc/${userRole}`}>
+                <Button variant="secondary" className="bg-white/20 ml-6 text-white hover:bg-white/30 font-semibold whitespace-nowrap border-none">
+                  Complete KYC Now
+                </Button>
+              </Link>
+            )}
+          </div>
+        )}
+
         {/* Page content */}
         <main className="flex-1 overflow-auto">
-          <div className="p-4 md:p-6">
-            {children}
-          </div>
+          <div className="p-4 md:p-6">{children}</div>
         </main>
       </div>
     </div>

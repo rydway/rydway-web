@@ -495,7 +495,7 @@ function RenterVerificationStatus({ user }: { user: User }) {
       case 'pending':
         return <Badge variant="amber" className="bg-amber-50 text-amber-700 border-amber-200">Pending</Badge>;
       case 'unverified':
-        return <Badge variant="red" className="bg-red-50 text-red-700 border-red-200">Not Submitted</Badge>;
+        return <Badge variant="amber" className="bg-amber-50 text-amber-700 border-amber-200">Not Verified</Badge>;
       default:
         return <Badge variant="slate">Unknown</Badge>;
     }
@@ -559,20 +559,23 @@ function RenterVerificationStatus({ user }: { user: User }) {
           ) : null}
 
           {user.kycStatus === 'unverified' || user.licenseStatus === 'unverified' ? (
-            <div className="mt-4 p-3 bg-blue-50 rounded-lg border border-blue-200">
-              <div className="flex items-center gap-2">
-                <AlertCircle className="h-4 w-4 text-blue-600" />
-                <span className="text-xs font-medium text-blue-700">
-                  Complete your verification to start booking vehicles.
-                </span>
+            <div className="mt-4 p-3 bg-amber-50 rounded-lg border border-amber-200">
+              <div className="flex items-start gap-3 w-full">
+                <AlertCircle className="h-4 w-4 text-amber-600 flex-shrink-0 mt-0.5" />
+                <div className="flex-1">
+                  <span className="text-xs font-medium text-amber-700 block">
+                    Complete your verification to start booking vehicles.
+                  </span>
+                  <div className="flex justify-start">
+                    <Button 
+                      size="sm" 
+                      className="mt-3 w-auto px-4 bg-amber-600 text-white hover:bg-amber-700 border-none text-xs h-8"
+                    >
+                      Start Verification
+                    </Button>
+                  </div>
+                </div>
               </div>
-              <Button 
-                size="sm" 
-                variant="outline" 
-                className="mt-3 w-full border-blue-200 bg-white text-blue-700 hover:bg-blue-100 text-xs h-8"
-              >
-                Start Verification
-              </Button>
             </div>
           ) : null}
         </div>

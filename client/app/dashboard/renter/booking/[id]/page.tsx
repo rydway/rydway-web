@@ -16,7 +16,9 @@ export default function RenterBookingPage() {
       <div className="flex items-center justify-center h-[60vh]">
         <div className="text-center">
           <Loader2 className="animate-spin h-12 w-12 text-primary mx-auto" />
-          <p className="mt-4 text-slate-600 dark:text-slate-300 font-secondary">Loading booking details...</p>
+          <p className="mt-4 text-slate-600 dark:text-slate-300 font-secondary">
+            Loading booking details...
+          </p>
         </div>
       </div>
     );
@@ -28,14 +30,17 @@ export default function RenterBookingPage() {
         <h1 className="text-2xl font-bold text-slate-800 dark:text-white font-primary">
           Booking Not Found
         </h1>
-        <p className="text-slate-500 mt-2 font-secondary">The booking you're looking for doesn't exist or you don't have access to it.</p>
+        <p className="text-slate-500 mt-2 font-secondary">
+          The booking you're looking for doesn't exist or you don't have access
+          to it.
+        </p>
       </div>
     );
   }
 
   return (
     <RenterBookingDetails
-      data={booking}
+      data={booking as any}
       onContactOwner={() => console.log("Contact owner")}
       onTrackVehicle={() => console.log("Track vehicle")}
       onExtendBooking={() => console.log("Extend booking")}
@@ -45,4 +50,4 @@ export default function RenterBookingPage() {
       onReportIssue={() => console.log("Report issue")}
     />
   );
-}
+}

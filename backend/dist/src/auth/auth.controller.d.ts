@@ -67,4 +67,25 @@ export declare class AuthController {
         message: string;
         data: null;
     }>;
+    getOAuthUrl(provider: 'google' | 'facebook'): Promise<{
+        message: string;
+        data: {
+            url: string;
+        };
+    }>;
+    exchangeOAuthToken(accessToken: string, role?: string): Promise<{
+        message: string;
+        data: {
+            user: {
+                id: string;
+                email: string;
+                role: string;
+                kycStatus: string;
+            };
+            tokens: {
+                accessToken: string;
+                refreshToken: string;
+            };
+        };
+    }>;
 }

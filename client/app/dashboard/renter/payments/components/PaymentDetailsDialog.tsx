@@ -166,7 +166,7 @@ export function PaymentDetailsDialog({
               Download
             </Button>
             {payment.status === 'failed' && (
-              <Button size="sm" className="bg-blue-600 hover:bg-blue-700">
+              <Button size="sm" className="bg-primary hover:bg-primary/90">
                 Retry Payment
               </Button>
             )}

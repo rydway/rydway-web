@@ -83,6 +83,20 @@ let AuthController = class AuthController {
             data: null,
         };
     }
+    async getOAuthUrl(provider) {
+        const url = await this.authService.getOAuthUrl(provider);
+        return {
+            message: 'OAuth URL generated',
+            data: { url },
+        };
+    }
+    async exchangeOAuthToken(accessToken, role) {
+        const data = await this.authService.exchangeOAuthToken(accessToken, role);
+        return {
+            message: 'OAuth login successful',
+            data,
+        };
+    }
 };
 exports.AuthController = AuthController;
 __decorate([
@@ -166,6 +180,27 @@ __decorate([
     __metadata("design:paramtypes", [auth_dto_1.VerifyOtpDto]),
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "verifyOtp", null);
+__decorate([
+    (0, public_decorator_1.Public)(),
+    (0, common_1.Post)('oauth/url'),
+    (0, common_1.HttpCode)(common_1.HttpStatus.OK),
+    (0, swagger_1.ApiOperation)({ summary: 'Get OAuth redirect URL for a provider (google | facebook)' }),
+    __param(0, (0, common_1.Body)('provider')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], AuthController.prototype, "getOAuthUrl", null);
+__decorate([
+    (0, public_decorator_1.Public)(),
+    (0, common_1.Post)('oauth/exchange'),
+    (0, common_1.HttpCode)(common_1.HttpStatus.OK),
+    (0, swagger_1.ApiOperation)({ summary: 'Exchange Supabase OAuth access token for a Rydway JWT' }),
+    __param(0, (0, common_1.Body)('accessToken')),
+    __param(1, (0, common_1.Body)('role')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, String]),
+    __metadata("design:returntype", Promise)
+], AuthController.prototype, "exchangeOAuthToken", null);
 exports.AuthController = AuthController = __decorate([
     (0, swagger_1.ApiTags)('Auth'),
     (0, common_1.Controller)('auth'),

@@ -25,8 +25,8 @@ export declare class HostEarningsController {
             status: string;
             hostId: string;
             bookingId: string | null;
-            transactionRef: string | null;
             provider: string | null;
+            transactionRef: string | null;
             amount: number;
             idempotencyKey: string | null;
             destinationBankName: string | null;
@@ -43,8 +43,8 @@ export declare class HostEarningsController {
             status: string;
             hostId: string;
             bookingId: string | null;
-            transactionRef: string | null;
             provider: string | null;
+            transactionRef: string | null;
             amount: number;
             idempotencyKey: string | null;
             destinationBankName: string | null;

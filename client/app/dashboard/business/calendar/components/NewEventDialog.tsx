@@ -235,7 +235,7 @@ export function NewEventDialog({
               size="sm"
               onClick={handleSubmit}
               disabled={!formData.title || !formData.vehicleId}
-              className="bg-blue-600 hover:bg-blue-700 text-white"
+              className="bg-primary hover:bg-primary/90 text-white"
             >
               <CheckCircle className="h-4 w-4 mr-2" />
               Create Event

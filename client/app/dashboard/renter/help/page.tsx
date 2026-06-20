@@ -85,8 +85,8 @@ export default function HelpPage() {
       {/* Header */}
       <div className="space-y-2 text-center max-w-3xl mx-auto">
         <div className="flex justify-center mb-4">
-          <div className="h-16 w-16 bg-blue-50 rounded-full flex items-center justify-center">
-            <LifeBuoy className="h-8 w-8 text-blue-600" />
+          <div className="h-16 w-16 bg-primary/10 rounded-full flex items-center justify-center">
+            <LifeBuoy className="h-8 w-8 text-primary" />
           </div>
         </div>
         <h1 className="text-3xl font-bold tracking-tight text-slate-900 font-primary">
@@ -154,7 +154,7 @@ export default function HelpPage() {
               </p>
             </div>
             <Button 
-              className="bg-blue-600 hover:bg-blue-700"
+              className="bg-primary hover:bg-primary/90"
               onClick={() => setShowCreateTicket(true)}
             >
               <Plus className="h-4 w-4 mr-2" />
@@ -166,7 +166,7 @@ export default function HelpPage() {
             <CardContent className="p-6">
               {isTicketsLoading ? (
                 <div className="flex justify-center items-center py-12">
-                  <Loader2 className="h-8 w-8 animate-spin text-blue-600" />
+                  <Loader2 className="h-8 w-8 animate-spin text-primary" />
                 </div>
               ) : (
                 <SupportTicketList 
@@ -193,8 +193,8 @@ export default function HelpPage() {
                   {/* Live Chat */}
                   <div className="flex items-center justify-between p-5 hover:bg-slate-50 transition-colors border-b border-slate-200 last:border-0">
                     <div className="flex items-center gap-4">
-                      <div className="h-10 w-10 bg-blue-50 rounded-lg flex items-center justify-center flex-shrink-0">
-                        <MessageCircle className="h-5 w-5 text-blue-600" />
+                      <div className="h-10 w-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <MessageCircle className="h-5 w-5 text-primary" />
                       </div>
                       <div>
                         <h3 className="text-sm font-semibold text-slate-800">Live Chat</h3>
@@ -204,7 +204,7 @@ export default function HelpPage() {
                         </Badge>
                       </div>
                     </div>
-                    <Button className="bg-blue-600 hover:bg-blue-700 ml-4 flex-shrink-0">
+                    <Button className="bg-primary hover:bg-primary/90 ml-4 flex-shrink-0">
                       Start Chat
                       <MessageCircle className="h-4 w-4 ml-2" />
                     </Button>
@@ -285,7 +285,7 @@ export default function HelpPage() {
                       />
                     </div>
 
-                    <Button className="w-full bg-blue-600 hover:bg-blue-700">
+                    <Button className="w-full bg-primary hover:bg-primary/90">
                       <Send className="h-4 w-4 mr-2" />
                       Send Message
                     </Button>
@@ -302,8 +302,8 @@ export default function HelpPage() {
                 <CardContent className="p-6">
                   <div className="space-y-4">
                     <div className="flex items-start gap-3">
-                      <div className="p-2 bg-blue-50 rounded-lg">
-                        <MapPin className="h-5 w-5 text-blue-600" />
+                      <div className="p-2 bg-primary/10 rounded-lg">
+                        <MapPin className="h-5 w-5 text-primary" />
                       </div>
                       <div>
                         <h4 className="text-sm font-medium text-slate-800">Visit Us</h4>
@@ -317,8 +317,8 @@ export default function HelpPage() {
                     <Separator />
                     
                     <div className="flex items-start gap-3">
-                      <div className="p-2 bg-blue-50 rounded-lg">
-                        <Clock className="h-5 w-5 text-blue-600" />
+                      <div className="p-2 bg-primary/10 rounded-lg">
+                        <Clock className="h-5 w-5 text-primary" />
                       </div>
                       <div>
                         <h4 className="text-sm font-medium text-slate-800">Support Hours</h4>

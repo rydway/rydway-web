@@ -103,7 +103,7 @@ const renterNavigation: NavigationConfig = {
       id: 'logout',
       label: 'Logout',
       icon: LogOut,
-      href: '/logout',
+      href: '/',
     }
   ]
 };
@@ -162,6 +162,12 @@ const businessNavigation: NavigationConfig = {
       label: 'Business Profile',
       icon: Building,
       href: '/dashboard/business/profile',
+    },
+    {
+      id: 'help',
+      label: 'Help & Support',
+      icon: HelpCircle,
+      href: '/dashboard/business/help',
     },
     {
       id: 'settings',

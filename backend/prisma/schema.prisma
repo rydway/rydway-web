@@ -114,6 +114,23 @@ model RenterProfile {
   licenseExpiry      DateTime?
   licenseDocumentUrl String?
   selfieUrl          String?
+  
+  // New profile and preferences fields
+  dateOfBirth        DateTime?
+  state              String?
+  city               String?
+  address            String?
+  emergencyContactName  String?
+  emergencyContactPhone String?
+  drivingChoice      String?
+  identificationType String?
+  identificationDocumentUrl String?
+  preferredCarType   String?
+  primaryRentalPurpose String?
+  usageFrequency     String?
+  typicalTripType    String?
+  vehiclePreference  String?
+
   avgRating          Float    @default(0)
   totalReviews       Int      @default(0)
   createdAt          DateTime @default(now())
@@ -121,26 +138,61 @@ model RenterProfile {
 }
 
 model HostProfile {
-  id                       String   @id @default(uuid())
-  userId                   String   @unique
-  user                     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id                       String           @id @default(uuid())
+  userId                   String           @unique
+  user                     User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  // Existing fields
   businessName             String?
-  cacNumber                String?  @unique
+  cacNumber                String?          @unique
   taxId                    String?
   cacDocumentUrl           String?
   bankName                 String?
   accountName              String?
   accountNumber            String?
-  avgRating                Float    @default(0)
-  totalReviews             Int      @default(0)
+  
+  // New business information fields
+  legalBusinessName        String?
+  tradingName              String?
+  businessType             String?          // sole_proprietorship, partnership, limited_liability, corporation
+  rcNumber                 String?          @unique
+  dateOfIncorporation      DateTime?
+  businessState            String?
+  businessCity             String?
+  businessAddress          String?
+  businessPhone            String?
+  businessEmail            String?
+  tin                      String?          @unique
+  vatStatus                String?          // pending, registered, exempt
+  frscFleetStatus          String?          // yes, no, pending
+  stateTransportPermit     String?          // yes, no, pending
+  
+  // Owner/Beneficial owner information
+  ownerName                String?
+  ownerPhone               String?
+  ownerNIN                 String?          @unique
+  ownerDOB                 DateTime?
+  ownerEmail               String?
+  ownershipPercentage      Int?             // 0-100
+  
+  // Document URLs (stored as strings)
+  cacCertificateUrl        String?
+  cacStatusReportUrl       String?
+  utilityBillUrl           String?
+  taxClearanceCertificateUrl String?
+  
+  // Existing fields (keeping them)
+  avgRating                Float            @default(0)
+  totalReviews             Int              @default(0)
   subscriptionTier         SubscriptionTier @default(free)
   subscriptionExpiresAt    DateTime?
-  createdAt                DateTime @default(now())
-  updatedAt                DateTime @updatedAt
+  createdAt                DateTime         @default(now())
+  updatedAt                DateTime         @updatedAt
 
+  // Relations
   vehicles                 Vehicle[]
   payouts                  Payout[]
-  hostBookings             Booking[] @relation("HostBookings")
+  hostBookings             Booking[]        @relation("HostBookings")
 }
 
 // ─── Vehicle ─────────────────────────────────────────────────────────────────

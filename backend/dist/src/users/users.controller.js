@@ -96,6 +96,13 @@ let UsersController = class UsersController {
             data: null,
         };
     }
+    async getVendors() {
+        const data = await this.usersService.getVendors();
+        return {
+            message: 'Vendors fetched successfully',
+            data,
+        };
+    }
     async getUserById(id) {
         const data = await this.usersService.findById(id);
         return {
@@ -139,6 +146,13 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], UsersController.prototype, "softDelete", null);
+__decorate([
+    (0, common_1.Get)('vendors'),
+    (0, swagger_1.ApiOperation)({ summary: 'Get all verified vendors (hosts)' }),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], UsersController.prototype, "getVendors", null);
 __decorate([
     (0, common_1.Get)(':id'),
     (0, swagger_1.ApiOperation)({ summary: 'Get user by ID' }),

@@ -21,4 +21,8 @@ export const messagingService = {
   async markAsRead(conversationId: string): Promise<void> {
     return api.post<void>(`/conversations/${conversationId}/read`, {});
   },
+
+  async createConversation(data: { vehicleId: string; hostUserId: string; initialMessage: string; bookingId?: string }): Promise<Conversation> {
+    return api.post<Conversation>('/conversations', data);
+  },
 };

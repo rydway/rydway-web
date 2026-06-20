@@ -324,7 +324,7 @@ export function BusinessProfileHeader({
         {/* Description */}
         <div className="space-y-4 mb-6 ">
                <div className=" left-6 flex items-end gap-4">
-          <div className="relative w-32 h-32 -top-6 rounded-lg border-4 border-white dark:border-slate-900 bg-white shadow-lg">
+          <div className="relative w-32 h-32 -top-6 rounded-lg border-4 border-white dark:border-slate-900 bg-white">
             <Image
               src={data.logo}
               alt={data.name}

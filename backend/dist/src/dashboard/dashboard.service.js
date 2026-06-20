@@ -42,6 +42,27 @@ let DashboardService = class DashboardService {
                 include: { vehicle: { include: { images: { take: 1 } } } },
             }),
         ]);
+        const now = new Date();
+        const currentMonthStart = new Date(now.getFullYear(), now.getMonth(), 1);
+        const lastMonthStart = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+        const lastMonthEnd = new Date(now.getFullYear(), now.getMonth(), 0, 23, 59, 59, 999);
+        const [currentMonthBookings, lastMonthBookings, currentMonthSpend, lastMonthSpend] = await Promise.all([
+            this.prisma.booking.count({ where: { renterId, createdAt: { gte: currentMonthStart } } }),
+            this.prisma.booking.count({ where: { renterId, createdAt: { gte: lastMonthStart, lte: lastMonthEnd } } }),
+            this.prisma.booking.aggregate({
+                where: { renterId, status: client_1.BookingStatus.completed, createdAt: { gte: currentMonthStart } },
+                _sum: { totalAmount: true },
+            }),
+            this.prisma.booking.aggregate({
+                where: { renterId, status: client_1.BookingStatus.completed, createdAt: { gte: lastMonthStart, lte: lastMonthEnd } },
+                _sum: { totalAmount: true },
+            }),
+        ]);
+        const calculateTrend = (current, previous) => {
+            if (previous === 0)
+                return current > 0 ? 100 : 0;
+            return Math.round(((current - previous) / previous) * 100);
+        };
         const result = {
             totalBookings,
             activeBookings,
@@ -49,6 +70,10 @@ let DashboardService = class DashboardService {
             pendingPayments,
             totalSpend: totalSpend._sum.totalAmount ?? 0,
             recentBookings,
+            trends: {
+                bookings: calculateTrend(currentMonthBookings, lastMonthBookings),
+                spend: calculateTrend(currentMonthSpend._sum.totalAmount ?? 0, lastMonthSpend._sum.totalAmount ?? 0),
+            }
         };
         await this.redisService.setex(cacheKey, 120, JSON.stringify(result));
         return result;
@@ -102,6 +127,27 @@ let DashboardService = class DashboardService {
                 orderBy: { createdAt: 'desc' },
             }),
         ]);
+        const now = new Date();
+        const currentMonthStart = new Date(now.getFullYear(), now.getMonth(), 1);
+        const lastMonthStart = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+        const lastMonthEnd = new Date(now.getFullYear(), now.getMonth(), 0, 23, 59, 59, 999);
+        const [currentMonthBookings, lastMonthBookings, currentMonthEarned, lastMonthEarned] = await Promise.all([
+            this.prisma.booking.count({ where: { hostId: hostProfile.id, createdAt: { gte: currentMonthStart } } }),
+            this.prisma.booking.count({ where: { hostId: hostProfile.id, createdAt: { gte: lastMonthStart, lte: lastMonthEnd } } }),
+            this.prisma.booking.aggregate({
+                where: { hostId: hostProfile.id, status: client_1.BookingStatus.completed, createdAt: { gte: currentMonthStart } },
+                _sum: { baseAmount: true },
+            }),
+            this.prisma.booking.aggregate({
+                where: { hostId: hostProfile.id, status: client_1.BookingStatus.completed, createdAt: { gte: lastMonthStart, lte: lastMonthEnd } },
+                _sum: { baseAmount: true },
+            }),
+        ]);
+        const calculateTrend = (current, previous) => {
+            if (previous === 0)
+                return current > 0 ? 100 : 0;
+            return Math.round(((current - previous) / previous) * 100);
+        };
         const totalEarned = completedBookings._sum.baseAmount ?? 0;
         const totalWithdrawn = payouts.filter(p => p.status === 'paid').reduce((s, p) => s + p.amount, 0);
         const pendingWithdrawal = payouts.filter(p => p.status === 'pending').reduce((s, p) => s + p.amount, 0);
@@ -117,6 +163,10 @@ let DashboardService = class DashboardService {
             totalReviews: hostProfile.totalReviews,
             recentRequests,
             fleetSnapshot,
+            trends: {
+                bookings: calculateTrend(currentMonthBookings, lastMonthBookings),
+                earnings: calculateTrend(currentMonthEarned._sum.baseAmount ?? 0, lastMonthEarned._sum.baseAmount ?? 0),
+            }
         };
         await this.redisService.setex(cacheKey, 120, JSON.stringify(result));
         return result;

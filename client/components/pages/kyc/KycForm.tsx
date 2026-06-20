@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { FormStep } from "../../base/form/FormStep";
 import { ChevronLeft, ChevronRight, ArrowRight, AlertCircle, CheckCircle2 } from "lucide-react";
@@ -19,6 +20,9 @@ export const KYCForm: React.FC<KYCFormProps> = ({
   onSubmit,
   initialData = {}
 }) => {
+  const router = useRouter();
+  const formCacheKey = `kyc_form_${config.formId}`;
+  
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState<Record<string, any>>(initialData);
@@ -26,6 +30,33 @@ export const KYCForm: React.FC<KYCFormProps> = ({
   const [filePreviews, setFilePreviews] = useState<Record<string, string>>({});
   const [selectedState, setSelectedState] = useState<string>("");
   const [availableCities, setAvailableCities] = useState<string[]>([]);
+  const [isInitialized, setIsInitialized] = useState(false);
+
+  // Load from localStorage on mount
+  useEffect(() => {
+    try {
+      const cached = localStorage.getItem(formCacheKey);
+      if (cached) {
+        const parsed = JSON.parse(cached);
+        if (parsed.step) setStep(parsed.step);
+        if (parsed.formData) setFormData(parsed.formData);
+      }
+    } catch (e) {
+      console.error("Failed to load cached form data", e);
+    }
+    setIsInitialized(true);
+  }, [formCacheKey]);
+
+  // Save to localStorage when step or formData changes
+  useEffect(() => {
+    if (isInitialized) {
+      try {
+        localStorage.setItem(formCacheKey, JSON.stringify({ step, formData }));
+      } catch (e) {
+        console.error("Failed to cache form data", e);
+      }
+    }
+  }, [step, formData, formCacheKey, isInitialized]);
 
   const currentStep = config.steps[step - 1];
 
@@ -125,6 +156,12 @@ export const KYCForm: React.FC<KYCFormProps> = ({
     setStep(prev => Math.max(1, prev - 1));
   };
 
+  const handleSkip = () => {
+    // Navigate back to dashboard based on form type or a general dashboard redirect
+    const isBusiness = config.formId.includes('business');
+    router.push(`/dashboard/${isBusiness ? 'business' : 'renter'}`);
+  };
+
   const handleSubmit = async () => {
     if (!validateStep()) return;
     
@@ -137,6 +174,8 @@ export const KYCForm: React.FC<KYCFormProps> = ({
         await new Promise(resolve => setTimeout(resolve, 2000));
         toast.success(config.successMessage);
       }
+      // Clear cache on successful submission
+      localStorage.removeItem(formCacheKey);
     } finally {
       setLoading(false);
     }
@@ -200,16 +239,21 @@ export const KYCForm: React.FC<KYCFormProps> = ({
     );
   };
 
+  if (!isInitialized) return null; // Prevent hydration mismatch
+
   return (
     <TooltipProvider>
       <div className="w-full max-w-4xl py-12 mx-auto font-primary">
         {/* Progress Header */}
         <div className="mb-8">
-          <div className="flex items-center justify-between mb-4">
+          <div className="flex items-start justify-between mb-4">
             <div>
               <h1 className="text-2xl font-bold text-slate-900">{config.title}</h1>
               <p className="text-slate-600">{config.description}</p>
             </div>
+            <Button variant="ghost" onClick={handleSkip} className="text-slate-500 hover:text-slate-800">
+              Skip for now
+            </Button>
           </div>
 
           {/* Progress Bar */}

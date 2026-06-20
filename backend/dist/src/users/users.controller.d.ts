@@ -41,6 +41,29 @@ export declare class UsersController {
         message: string;
         data: null;
     }>;
+    getVendors(): Promise<{
+        message: string;
+        data: {
+            id: string;
+            email: string;
+            phone: string | null;
+            firstName: string;
+            lastName: string;
+            role: import("@prisma/client").$Enums.Role;
+            profileImageUrl: string | null;
+            kycStatus: import("@prisma/client").$Enums.KycStatus;
+            hostProfile: {
+                id: string;
+                businessName: string | null;
+                tradingName: string | null;
+                businessAddress: string | null;
+                businessPhone: string | null;
+                businessEmail: string | null;
+                avgRating: number;
+                totalReviews: number;
+            } | null;
+        }[];
+    }>;
     getUserById(id: string): Promise<{
         message: string;
         data: {

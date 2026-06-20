@@ -4,6 +4,7 @@ import "./globals.css"
 import { AuthProvider } from "@/context/AuthContext"
 import { QueryProvider } from "@/providers/QueryProvider"
 import { Toaster } from "@/components/ui/sonner"
+import CookieBanner from "@/components/features/CookieBanner"
 
 const outfit = Outfit({ 
   subsets: ["latin"],
@@ -38,6 +39,7 @@ export default function RootLayout({
           </AuthProvider>
         </QueryProvider>
         <Toaster position="top-center" />
+        <CookieBanner />
       </body>
     </html>
   )

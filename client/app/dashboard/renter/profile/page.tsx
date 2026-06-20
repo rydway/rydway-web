@@ -109,13 +109,13 @@ interface UserProfile {
 // ============ COMPONENTS ============
 
 // Profile Header (UNCHANGED)
-function ProfileHeader({ 
-  profile, 
+function ProfileHeader({
+  profile,
   onEditProfile,
   onShare,
-  onContact 
-}: { 
-  profile: UserProfile; 
+  onContact
+}: {
+  profile: UserProfile;
   onEditProfile: () => void;
   onShare?: () => void;
   onContact?: () => void;
@@ -144,7 +144,7 @@ function ProfileHeader({
   return (
     <Card className=" py-0 dark:border-slate-800 overflow-hidden">
       {/* Cover Image */}
-      <div className="relative h-48 bg-slate-200 dark:bg-slate-800 flex items-center justify-center group cursor-pointer">
+      <div className="relative h-32 md:h-48 bg-slate-200 dark:bg-slate-800 flex items-center justify-center group cursor-pointer">
         {profile.coverImage ? (
           <img
             src={profile.coverImage}
@@ -166,56 +166,56 @@ function ProfileHeader({
             size="sm"
             variant="outline"
             onClick={onShare}
-            className="bg-white hover:bg-white/90 font-secondary"
+            className="bg-white hover:bg-white/90 font-secondary px-2 md:px-3"
           >
-            <Share2 className="h-4 w-4 mr-2" />
-            Share
+            <Share2 className="h-4 w-4 md:mr-2" />
+            <span className="hidden md:inline">Share</span>
           </Button>
-          
+
           <Button
             size="sm"
             onClick={onContact}
-            className="bg-primary hover:bg-primary/90 text-white font-secondary"
+            className="bg-primary hover:bg-primary/90 text-white font-secondary px-2 md:px-3"
           >
-            <MessageSquare className="h-4 w-4 mr-2" />
-            Contact
+            <MessageSquare className="h-4 w-4 md:mr-2" />
+            <span className="hidden md:inline">Contact</span>
           </Button>
         </div>
       </div>
 
       {/* Content */}
-      <CardContent className="relative -top-6">
+      <CardContent className="relative ">
         {/* Logo/Avatar and Basic Info */}
-        <div className="flex items-end gap-4">
-          <div className="relative">
-            <div className="relative w-32 h-32 -top-6 rounded-lg border-4 border-white dark:border-slate-900 bg-white shadow-lg overflow-hidden">
+        <div className="flex flex-col md:flex-row md:items-end gap-4">
+          <div className="relative lg:-top-8 self-start md:self-auto">
+            <div className="relative w-24 h-24 md:w-32 md:h-32 -top-12 md:-top-6 rounded-lg border-4 border-white dark:border-slate-900 bg-white overflow-hidden">
               {profile.avatar ? (
-                <img 
-                  src={profile.avatar} 
+                <img
+                  src={profile.avatar}
                   alt={profile.name}
                   className="w-full h-full object-cover"
                 />
               ) : (
-                <div className="w-full h-full  bg-teal-100 flex items-center justify-center text-teal-700 text-3xl font-bold">
-                  {profile.name.split(' ').map(n => n[0]).join('')}
+                <div className="w-full h-full bg-slate-100 flex items-center justify-center">
+                  <User className="h-16 w-16 text-slate-400" />
                 </div>
               )}
             </div>
-            <Button 
-              size="icon" 
-              variant="outline" 
-              className="absolute bottom-0 right-0 h-8 w-8 rounded-full bg-white shadow-md hover:bg-slate-50"
+            <Button
+              size="icon"
+              variant="outline"
+              className="absolute bottom-10 md:bottom-0 right-0 h-8 w-8 rounded-full bg-white hover:bg-slate-50"
               onClick={() => setShowAvatarDialog(true)}
             >
               <Camera className="h-4 w-4 text-slate-600" />
             </Button>
           </div>
-          
-          <div className="mb-6 flex-1">
-            <div className="flex items-center justify-between">
-              <div>
+
+          <div className="mb-6 flex-1 w-full -mt-10 md:-mt-2 pt-0 md:pt-2">
+            <div className="flex items-start justify-between gap-4">
+              <div className="flex-1">
                 <div className="flex items-center gap-2 mb-2">
-                  <h1 className="text-2xl   font-primary font-bold text-slate-800 dark:text-white">
+                  <h1 className="text-2xl font-primary font-bold text-slate-800 dark:text-white">
                     {profile.name}
                   </h1>
                   {profile.verified && (
@@ -224,7 +224,7 @@ function ProfileHeader({
                     </Badge>
                   )}
                 </div>
-                <div className="flex items-center gap-3 text-sm text-slate-500">
+                <div className="flex items-center gap-3 text-sm text-slate-500 flex-wrap">
                   <div className="flex items-center gap-1">
                     <Mail className="h-4 w-4" />
                     {profile.email}
@@ -237,24 +237,24 @@ function ProfileHeader({
                   )}
                 </div>
               </div>
-              
-              <Button 
+
+              <Button
                 size="sm"
                 onClick={onEditProfile}
-                className="bg-primary hover:bg-primary/90 text-white font-secondary"
+                className="bg-primary hover:bg-primary/90 text-white font-secondary flex-shrink-0 px-2 md:px-3"
               >
-                <Edit2 className="h-4 w-4 mr-2" />
-                Edit Profile
+                <Edit2 className="h-4 w-4 md:mr-2" />
+                <span className="hidden md:inline">Edit Profile</span>
               </Button>
             </div>
-            
+
             {profile.location && (
               <div className="flex items-center gap-1 mt-2 text-sm text-slate-500">
                 <MapPin className="h-4 w-4" />
                 {profile.location}
               </div>
             )}
-            
+
             {renderStars(profile.stats.averageRating, profile.stats.reviews)}
           </div>
         </div>
@@ -263,13 +263,8 @@ function ProfileHeader({
         {profile.bio && (
           <div className="space-y-4 mb-6">
             <h3 className="font-primary font-semibold text-slate-800">About Me</h3>
-            <div className="flex items-start gap-3">
-              <div className="p-2 bg-slate-100 rounded-lg">
-                <User className="h-4 w-4" />
-              </div>
-              <div className="flex-1">
-                <p className="text-slate-600 font-primary leading-relaxed">{profile.bio}</p>
-              </div>
+            <div className="flex-1">
+              <p className="text-slate-600 font-primary leading-relaxed">{profile.bio}</p>
             </div>
           </div>
         )}
@@ -318,13 +313,16 @@ function ProfileHeader({
 }
 
 // Edit Profile Dialog
-function EditProfileDialog({ 
-  profile, 
-  open, 
-  onOpenChange 
-}: { 
-  profile: UserProfile; 
-  open: boolean; 
+import { userService } from "@/services/user.service";
+import { toast } from "sonner";
+
+function EditProfileDialog({
+  profile,
+  open,
+  onOpenChange
+}: {
+  profile: UserProfile;
+  open: boolean;
   onOpenChange: (open: boolean) => void;
 }) {
   const [formData, setFormData] = useState({
@@ -334,9 +332,23 @@ function EditProfileDialog({
     bio: profile.bio || ''
   });
 
-  const handleSave = () => {
-    console.log('Save profile:', formData);
-    onOpenChange(false);
+  const [isSaving, setIsSaving] = useState(false);
+
+  const handleSave = async () => {
+    setIsSaving(true);
+    try {
+      await userService.updateMe({
+        firstName: formData.name.split(" ")[0] || "",
+        lastName: formData.name.split(" ").slice(1).join(" ") || "",
+        phone: formData.phone,
+      });
+      toast.success("Profile updated successfully");
+      onOpenChange(false);
+    } catch (error) {
+      toast.error("Failed to update profile");
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   return (
@@ -355,7 +367,7 @@ function EditProfileDialog({
             <Input
               id="name"
               value={formData.name}
-              onChange={(e) => setFormData({...formData, name: e.target.value})}
+              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
               className="h-10 text-sm font-primary"
             />
           </div>
@@ -365,7 +377,7 @@ function EditProfileDialog({
             <Input
               id="phone"
               value={formData.phone}
-              onChange={(e) => setFormData({...formData, phone: e.target.value})}
+              onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
               className="h-10 text-sm font-primary"
               placeholder="+234 XXX XXX XXXX"
             />
@@ -376,7 +388,7 @@ function EditProfileDialog({
             <Input
               id="location"
               value={formData.location}
-              onChange={(e) => setFormData({...formData, location: e.target.value})}
+              onChange={(e) => setFormData({ ...formData, location: e.target.value })}
               className="h-10 text-sm font-primary"
               placeholder="City, Country"
             />
@@ -387,7 +399,7 @@ function EditProfileDialog({
             <Textarea
               id="bio"
               value={formData.bio}
-              onChange={(e) => setFormData({...formData, bio: e.target.value})}
+              onChange={(e) => setFormData({ ...formData, bio: e.target.value })}
               className="min-h-[100px] text-sm font-primary"
               placeholder="Tell us a little about yourself"
             />
@@ -395,11 +407,11 @@ function EditProfileDialog({
         </div>
 
         <DialogFooter>
-          <Button variant="outline" size="sm" onClick={() => onOpenChange(false)} className="font-secondary">
+          <Button variant="outline" size="sm" onClick={() => onOpenChange(false)} className="font-secondary" disabled={isSaving}>
             Cancel
           </Button>
-          <Button size="sm" className="bg-primary hover:bg-primary/90 font-secondary" onClick={handleSave}>
-            Save Changes
+          <Button size="sm" className="bg-primary hover:bg-primary/90 font-secondary" onClick={handleSave} disabled={isSaving}>
+            {isSaving ? "Saving..." : "Save Changes"}
           </Button>
         </DialogFooter>
       </DialogContent>
@@ -447,7 +459,7 @@ function ProfileStats({ stats }: { stats: UserProfile['stats'] }) {
   );
 }
 
-// Verification Status (MODIFIED - Added flex-1 to ensure content fills height)
+// Verification Status (MODIFIED - Added h-full flex flex-col and flex-1 to ensure content fills height)
 function VerificationStatus({ profile }: { profile: UserProfile }) {
   const getStatusConfig = (status: string) => {
     switch (status) {
@@ -471,12 +483,13 @@ function VerificationStatus({ profile }: { profile: UserProfile }) {
         };
       default:
         return {
-          bg: 'bg-slate-50',
-          border: '',
+          bg: 'bg-amber-50',
+          border: 'border-amber-200',
           icon: AlertCircle,
-          iconColor: 'text-slate-600',
+          iconColor: 'text-amber-600',
           text: 'Not Verified',
-          message: 'Complete your KYC verification to start booking vehicles.'
+          message: 'Complete your KYC verification to start booking vehicles.',
+          btnVariant: 'outline'
         };
     }
   };
@@ -485,28 +498,32 @@ function VerificationStatus({ profile }: { profile: UserProfile }) {
   const Icon = config.icon;
 
   return (
-    <Card className=" shadow-sm h-full">
+    <Card className=" shadow-sm h-full flex flex-col">
       <CardHeader className="pb-3">
         <CardTitle className="text-base font-semibold font-primary text-slate-800 flex items-center gap-2">
           <Shield className="h-5 w-5 text-primary" />
           Verification Status
         </CardTitle>
       </CardHeader>
-      <CardContent className="flex-1">
-        <div className={cn("p-4 rounded-lg border h-full", config.bg, config.border, "flex items-start gap-3")}>
-          <Icon className={cn("h-4 w-4 flex-shrink-0", config.iconColor)} />
-          <div className="flex-1">
-            <p className="text-sm font-medium font-primary text-slate-800">
-              KYC Verification: {config.text}
-            </p>
-            <p className="text-xs font-secondary text-slate-500 mt-1">
-              {config.message}
-            </p>
-            {profile.kycStatus !== 'verified' && (
-              <Button variant="outline" size="sm" className="mt-3 text-xs h-8 font-secondary">
-                Complete Verification
-              </Button>
-            )}
+      <CardContent className="flex-1 flex flex-col">
+        <div className={cn("p-4 rounded-lg border", config.bg, config.border)}>
+          <div className="flex items-start gap-3">
+            <Icon className={cn("h-4 w-4 flex-shrink-0 mt-0.5", config.iconColor)} />
+            <div className="flex-1">
+              <div className="flex items-center justify-between gap-2">
+                <p className={cn("text-sm font-medium font-primary", config.iconColor)}>
+                  KYC Verification: {config.text}
+                </p>
+                {profile.kycStatus !== 'verified' && (
+                  <Button size="sm" className="flex-shrink-0 text-xs h-7 px-3 font-secondary bg-amber-600 text-white hover:bg-amber-700 border-none">
+                    Complete Now
+                  </Button>
+                )}
+              </div>
+              <p className="text-xs font-secondary text-slate-500 mt-1">
+                {config.message}
+              </p>
+            </div>
           </div>
         </div>
       </CardContent>
@@ -514,12 +531,12 @@ function VerificationStatus({ profile }: { profile: UserProfile }) {
   );
 }
 
-// Recent Activity (MODIFIED - Added flex-1 to ensure content fills height)
+// Recent Activity (MODIFIED - Added h-full flex flex-col and flex-1 to ensure content fills height)
 function RecentActivity({ vehicles }: { vehicles: UserProfile['recentVehicles'] }) {
   if (!vehicles || vehicles.length === 0) return null;
 
   return (
-    <Card className=" shadow-sm h-full">
+    <Card className=" shadow-sm h-full flex flex-col">
       <CardHeader className="pb-3">
         <CardTitle className="text-base font-semibold font-primary text-slate-800 flex items-center gap-2">
           <Clock className="h-5 w-5 text-primary" />
@@ -554,19 +571,19 @@ function RecentActivity({ vehicles }: { vehicles: UserProfile['recentVehicles'] 
   );
 }
 
-// Upcoming Bookings (MODIFIED - Added flex-1 to ensure content fills height)
+// Upcoming Bookings (MODIFIED - Added h-full flex flex-col and flex-1 to ensure content fills height)
 function UpcomingBookings({ bookings }: { bookings: UserProfile['upcomingBookings'] }) {
   if (!bookings || bookings.length === 0) return null;
 
   return (
-    <Card className=" shadow-sm h-full">
+    <Card className=" shadow-sm h-full flex flex-col">
       <CardHeader className="pb-3">
         <CardTitle className="text-base font-semibold font-primary text-slate-800 flex items-center gap-2">
           <Calendar className="h-5 w-5 text-primary" />
           Upcoming Trips
         </CardTitle>
       </CardHeader>
-      <CardContent className="flex-1">
+      <CardContent className="flex-1 flex flex-col justify-between">
         <div className="space-y-4">
           {bookings.map((booking) => (
             <div key={booking.id} className="flex items-center justify-between">
@@ -585,7 +602,7 @@ function UpcomingBookings({ bookings }: { bookings: UserProfile['upcomingBooking
                   </div>
                 </div>
               </div>
-              <Badge 
+              <Badge
                 variant={booking.status === 'confirmed' ? 'blue' : 'amber'}
                 className="text-[10px] font-secondary flex-shrink-0 ml-2"
               >
@@ -603,7 +620,7 @@ function UpcomingBookings({ bookings }: { bookings: UserProfile['upcomingBooking
   );
 }
 
-// Social Links (MODIFIED - Added flex-1 to ensure content fills height)
+// Social Links (MODIFIED - Added h-full flex flex-col and flex-1 to ensure content fills height)
 function SocialLinks({ links }: { links?: UserProfile['socialLinks'] }) {
   if (!links) return null;
 
@@ -611,7 +628,7 @@ function SocialLinks({ links }: { links?: UserProfile['socialLinks'] }) {
   if (!hasLinks) return null;
 
   return (
-    <Card className=" shadow-sm h-full">
+    <Card className=" shadow-sm h-full flex flex-col">
       <CardHeader className="">
         <CardTitle className="text-base font-semibold font-primary text-slate-800 flex items-center gap-2">
           <Globe className="h-5 w-5 text-primary" />
@@ -680,7 +697,7 @@ function AchievementCard({ stats }: { stats: UserProfile['stats'] }) {
               Renter Milestone
             </h3>
             <p className="text-xs font-secondary text-slate-600">
-              You've completed {stats.totalTrips} trips! 
+              You've completed {stats.totalTrips} trips!
               {stats.totalTrips >= 20 ? ' 🎉' : ' 5 more to reach 25 trips.'}
             </p>
             <div className="mt-3">
@@ -823,8 +840,8 @@ export default function RenterProfilePage() {
   return (
     <div className="space-y-6">
       {/* Profile Header (UNCHANGED) */}
-      <ProfileHeader 
-        profile={profile} 
+      <ProfileHeader
+        profile={profile}
         onEditProfile={() => setShowEditDialog(true)}
         onShare={handleShare}
         onContact={handleContactSupport}
@@ -835,45 +852,45 @@ export default function RenterProfilePage() {
 
       {/* Main Content - Using flex for equal height columns */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {/* Left Column - Profile Details */}
-    
-            {/* Personal Information - takes full height of its container */}
-            <div className="">
-              <PersonalInformation profile={profile} />
-            </div>
-            
-            {/* Recent Activity - takes full height of its container */}
-            <div className="">
-              <RecentActivity vehicles={profile.recentVehicles} />
-            </div>
+        {/* Personal Information */}
+        <div className="h-full flex flex-col">
+          <PersonalInformation profile={profile} />
+        </div>
 
-            {/* Achievement Card - takes full height of its container */}
-     
+        {/* Recent Activity */}
+        {profile.recentVehicles && profile.recentVehicles.length > 0 && (
+          <div className="h-full flex flex-col">
+            <RecentActivity vehicles={profile.recentVehicles} />
+          </div>
+        )}
 
-     
-            {/* Verification Status - takes full height */}
-            <div className="">
-              <VerificationStatus profile={profile} />
-            </div>
+        {/* Verification Status */}
+        <div className="h-full flex flex-col">
+          <VerificationStatus profile={profile} />
+        </div>
 
-            {/* Upcoming Bookings - takes full height */}
-            <div className="">
-              <UpcomingBookings bookings={profile.upcomingBookings} />
-            </div>
+        {/* Upcoming Bookings */}
+        {profile.upcomingBookings && profile.upcomingBookings.length > 0 && (
+          <div className="h-full flex flex-col">
+            <UpcomingBookings bookings={profile.upcomingBookings} />
+          </div>
+        )}
 
-            {/* Social Links - takes full height */}
-            <div className="">
-              <SocialLinks links={profile.socialLinks} />
-            </div>
-                   <div className="">
-              <AchievementCard stats={profile.stats} />
-            </div>
-        
-    
+        {/* Social Links */}
+        {profile.socialLinks && Object.values(profile.socialLinks).some(Boolean) && (
+          <div className="h-full flex flex-col">
+            <SocialLinks links={profile.socialLinks} />
+          </div>
+        )}
+
+        {/* Achievement Card */}
+        <div className="h-full flex flex-col">
+          <AchievementCard stats={profile.stats} />
+        </div>
       </div>
 
       {/* Edit Profile Dialog */}
-      <EditProfileDialog 
+      <EditProfileDialog
         profile={profile}
         open={showEditDialog}
         onOpenChange={setShowEditDialog}

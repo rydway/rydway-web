@@ -150,7 +150,7 @@ export default function RenterMessagesPage() {
                 <p className="text-sm text-slate-500 max-w-sm">
                   Select a conversation from the list to message car rental businesses
                 </p>
-                <Button className="mt-4 bg-blue-600 hover:bg-blue-700 text-sm">
+                <Button className="mt-4 bg-primary hover:bg-primary/90 text-sm">
                   Browse available cars
                 </Button>
               </div>

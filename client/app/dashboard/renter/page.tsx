@@ -9,7 +9,6 @@ import {
   Search,
   ArrowRight,
   HelpCircle,
-  Loader2,
 } from "lucide-react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -32,12 +31,16 @@ import { useRenterDashboard } from "@/hooks/useDashboard";
 import { useRenterBookings } from "@/hooks/useBookings";
 import { useVehicles } from "@/hooks/useVehicles";
 import { useTransactions } from "@/hooks/useTransactions";
+import { useTickets } from "@/hooks/useTickets";
+import { BaseLoader } from "@/components/ui/BaseLoader";
 
 export default function RenterDashboardPage() {
   const { summary, isLoading: isSummaryLoading } = useRenterDashboard();
   const { bookings: apiBookings, isLoading: isBookingsLoading } = useRenterBookings();
   const { vehicles: apiVehicles, isLoading: isVehiclesLoading } = useVehicles({ recommended: "true" });
   const { transactions: apiTransactions, isLoading: isTransactionsLoading } = useTransactions();
+  const { tickets } = useTickets();
+  const openTickets = tickets?.filter((t: any) => t.status !== 'closed' && t.status !== 'resolved').length ?? 0;
 
   const stats = [
     {
@@ -46,8 +49,8 @@ export default function RenterDashboardPage() {
       icon: Car,
       trend: isSummaryLoading
         ? "Loading..."
-        : `${summary?.completedBookings ?? 0} completed, ${summary?.activeBookings ?? 0} active`,
-      trendUp: true,
+        : `${(summary?.trends?.bookings ?? 0) >= 0 ? '+' : ''}${summary?.trends?.bookings ?? 0}% this month`,
+      trendUp: (summary?.trends?.bookings ?? 0) >= 0,
       iconColor: "text-primary",
     },
     {
@@ -62,16 +65,18 @@ export default function RenterDashboardPage() {
       title: "Total Spent",
       value: isSummaryLoading ? "..." : `₦${(summary?.totalSpend ?? 0).toLocaleString()}`,
       icon: CreditCard,
-      trend: "Based on completed trips",
-      trendUp: true,
+      trend: isSummaryLoading
+        ? "Loading..."
+        : `${(summary?.trends?.spend ?? 0) >= 0 ? '+' : ''}${summary?.trends?.spend ?? 0}% this month`,
+      trendUp: (summary?.trends?.spend ?? 0) >= 0,
       iconColor: "text-primary",
     },
     {
       title: "Active Support",
-      value: "0 Tickets",
+      value: `${openTickets} Ticket${openTickets !== 1 ? "s" : ""}`,
       icon: HelpCircle,
-      trend: "All resolved",
-      trendUp: true,
+      trend: openTickets > 0 ? "Open tickets require attention" : "All tickets resolved",
+      trendUp: openTickets === 0,
       iconColor: "text-secondary",
     },
   ];
@@ -346,7 +351,7 @@ export default function RenterDashboardPage() {
                     <TableRow>
                       <TableCell colSpan={3} className="py-6">
                         <div className="flex justify-center">
-                          <Loader2 className="h-4 w-4 animate-spin text-slate-400" />
+                          <BaseLoader />
                         </div>
                       </TableCell>
                     </TableRow>

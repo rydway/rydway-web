@@ -17,8 +17,8 @@ export declare class PaymentsService {
         updatedAt: Date;
         status: import("@prisma/client").$Enums.PaymentStatus;
         bookingId: string;
-        transactionRef: string;
         provider: string;
+        transactionRef: string;
         method: string;
         amount: number;
         currency: string;
@@ -49,8 +49,8 @@ export declare class PaymentsService {
         updatedAt: Date;
         status: import("@prisma/client").$Enums.PaymentStatus;
         bookingId: string;
-        transactionRef: string;
         provider: string;
+        transactionRef: string;
         method: string;
         amount: number;
         currency: string;

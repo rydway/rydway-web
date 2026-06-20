@@ -1,5 +1,6 @@
 import React from "react";
 import { Instagram, Twitter, Mail } from "lucide-react";
+import Link from "next/link";
 
 export default function Footer() {
   return (
@@ -50,12 +51,12 @@ export default function Footer() {
             ©2025 Rydway. All rights reserved
           </p>
           <div className="flex items-center gap-8 font-secondary">
-            <span className="text-sm font-semibold text-muted-foreground">
+            <Link href="/privacy" className="text-sm font-semibold text-muted-foreground hover:text-primary transition-colors">
               Privacy Policy
-            </span>
-            <span className="text-sm font-semibold text-muted-foreground">
+            </Link>
+            <Link href="/terms" className="text-sm font-semibold text-muted-foreground hover:text-primary transition-colors">
               Terms & Conditions
-            </span>
+            </Link>
           </div>
         </div>
       </div>

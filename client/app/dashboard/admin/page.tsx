@@ -43,7 +43,7 @@ export default function AdminOverviewPage() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{metrics.totalUsers}</div>
-            <p className="text-xs text-muted-foreground">+180 this month</p>
+            <p className="text-xs text-muted-foreground">Total registered users</p>
           </CardContent>
         </Card>
         
@@ -54,7 +54,7 @@ export default function AdminOverviewPage() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{metrics.totalVehicles}</div>
-            <p className="text-xs text-muted-foreground">+24 this month</p>
+            <p className="text-xs text-muted-foreground">Total platform vehicles</p>
           </CardContent>
         </Card>
         

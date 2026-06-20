@@ -129,6 +129,56 @@ export default function RenterPaymentsPage() {
     };
   }, [payments]);
 
+  // Compute monthly spending
+  const monthlySpendData = useMemo(() => {
+    const data = payments.filter((p) => p.status === "completed" && p.type !== "refund");
+    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    const currentMonth = new Date().getMonth();
+    const last6Months: { month: string; amount: number; }[] = [];
+    for (let i = 5; i >= 0; i--) {
+      let m = currentMonth - i;
+      if (m < 0) m += 12;
+      last6Months.push({ month: months[m], amount: 0 });
+    }
+
+    data.forEach((p) => {
+      const d = new Date(p.date);
+      const m = months[d.getMonth()];
+      const entry = last6Months.find((x) => x.month === m);
+      if (entry) {
+        entry.amount += p.amount;
+      }
+    });
+    return last6Months;
+  }, [payments]);
+
+  // Compute category spend
+  const categorySpendData = useMemo(() => {
+    const data = payments.filter((p) => p.status === "completed" && p.type !== "refund");
+    const categories: Record<string, number> = {};
+    let total = 0;
+    data.forEach((p) => {
+      // Use transaction type or description for category proxy
+      const cat = p.type ? p.type.charAt(0).toUpperCase() + p.type.slice(1) : "Other";
+      categories[cat] = (categories[cat] || 0) + p.amount;
+      total += p.amount;
+    });
+
+    const result = Object.entries(categories)
+      .map(([name, amount]) => ({
+        name,
+        amount,
+        percentage: total > 0 ? Math.round((amount / total) * 100) : 0,
+      }))
+      .sort((a, b) => b.amount - a.amount)
+      .slice(0, 4);
+
+    if (result.length === 0) {
+      return [{ name: "No data", amount: 0, percentage: 0 }];
+    }
+    return result;
+  }, [payments]);
+
   // Filter payments
   const filteredPayments = useMemo(() => {
     return payments.filter((payment) => {
@@ -203,7 +253,7 @@ export default function RenterPaymentsPage() {
           </Button>
           <Button
             size="sm"
-            className="bg-blue-600 hover:bg-blue-700 h-9 min-w-[160px]"
+            className="bg-primary hover:bg-primary/90 h-9 min-w-[160px]"
             onClick={handleInitiatePayment}
             disabled={isInitiatingPayment || !confirmedBooking}
           >
@@ -228,7 +278,7 @@ export default function RenterPaymentsPage() {
           title="Total Spent"
           value={`₦${metrics.totalSpent.toLocaleString()}`}
           icon={DollarSign}
-          trend="+12.5% vs last month"
+          trend="Based on active trips"
           trendUp={true}
           iconClassName="text-blue-600"
           className="border-slate-200 shadow-sm"
@@ -243,15 +293,23 @@ export default function RenterPaymentsPage() {
           className="border-slate-200 shadow-sm"
         />
         <StatCard
-          title="Completed"
+          title="Completed Bookings"
           value={metrics.completedTransactions.toString()}
           icon={CheckCircle}
-          trend="Transactions"
+          trend="Successful payments"
           trendUp={true}
           iconClassName="text-green-600"
           className="border-slate-200 shadow-sm"
         />
-        {/* Removed Payment Methods stat card */}
+        <StatCard
+          title="Upcoming Payments"
+          value={metrics.upcomingPayments.toString()}
+          icon={FileText}
+          trend="Pending invoices"
+          trendUp={false}
+          iconClassName="text-slate-600"
+          className="border-slate-200 shadow-sm"
+        />
       </div>
 
       {/* Main Tabs */}
@@ -504,7 +562,7 @@ export default function RenterPaymentsPage() {
                 </div>
               </CardHeader>
               <CardContent>
-                <SpendingChart />
+                <SpendingChart data={monthlySpendData} />
               </CardContent>
             </Card>
 
@@ -531,8 +589,8 @@ export default function RenterPaymentsPage() {
                       ₦
                       {metrics.completedTransactions > 0
                         ? (
-                            metrics.totalSpent / metrics.completedTransactions
-                          ).toLocaleString()
+                          metrics.totalSpent / metrics.completedTransactions
+                        ).toLocaleString()
                         : 0}
                     </span>
                   </div>
@@ -561,42 +619,21 @@ export default function RenterPaymentsPage() {
                     Spending by Category
                   </h4>
                   <div className="space-y-2">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <div className="h-2 w-2 rounded-full bg-blue-500"></div>
-                        <span className="text-xs text-slate-600">Sedan</span>
-                      </div>
-                      <span className="text-xs font-medium text-slate-800">
-                        35%
-                      </span>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <div className="h-2 w-2 rounded-full bg-amber-500"></div>
-                        <span className="text-xs text-slate-600">SUV</span>
-                      </div>
-                      <span className="text-xs font-medium text-slate-800">
-                        42%
-                      </span>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <div className="h-2 w-2 rounded-full bg-green-500"></div>
-                        <span className="text-xs text-slate-600">Luxury</span>
-                      </div>
-                      <span className="text-xs font-medium text-slate-800">
-                        18%
-                      </span>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <div className="h-2 w-2 rounded-full bg-purple-500"></div>
-                        <span className="text-xs text-slate-600">Other</span>
-                      </div>
-                      <span className="text-xs font-medium text-slate-800">
-                        5%
-                      </span>
-                    </div>
+                    {categorySpendData.map((cat, index) => {
+                      const colorLevels = ['bg-primary', 'bg-primary/80', 'bg-primary/60', 'bg-primary/40'];
+                      const bgClass = colorLevels[index] || 'bg-primary/20';
+                      return (
+                        <div key={cat.name} className="flex items-center justify-between">
+                          <div className="flex items-center gap-2">
+                            <div className={`h-2 w-2 rounded-full ${bgClass}`}></div>
+                            <span className="text-xs text-slate-600">{cat.name}</span>
+                          </div>
+                          <span className="text-xs font-medium text-slate-800">
+                            {cat.percentage}%
+                          </span>
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
               </CardContent>

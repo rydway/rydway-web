@@ -128,7 +128,7 @@ export default function BookingsPage({ role = "renter" }: BookingsPageProps) {
       title: "Total Spent",
       value: `₦${(totalSpent / 1000000).toFixed(2)}M`,
       icon: DollarSign,
-      trend: "+15% from last month",
+      trend: "Based on past trips",
       trendUp: true,
       iconColor: "text-secondary"
     },
@@ -144,7 +144,7 @@ export default function BookingsPage({ role = "renter" }: BookingsPageProps) {
       title: "Average Rating",
       value: averageRating,
       icon: TrendingUp,
-      trend: "+0.2 this month",
+      trend: "Based on reviews",
       trendUp: true,
       iconColor: "text-secondary"
     }

@@ -2,17 +2,19 @@
 
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
-export function SpendingChart() {
-  const monthlySpend = [
-    { month: 'Jan', amount: 85000 },
-    { month: 'Feb', amount: 120000 },
-    { month: 'Mar', amount: 225000 },
-    { month: 'Apr', amount: 180000 },
-    { month: 'May', amount: 275000 },
-    { month: 'Jun', amount: 215000 },
+export function SpendingChart({ data }: { data?: { month: string; amount: number }[] }) {
+  const defaultData = [
+    { month: 'Jan', amount: 0 },
+    { month: 'Feb', amount: 0 },
+    { month: 'Mar', amount: 0 },
+    { month: 'Apr', amount: 0 },
+    { month: 'May', amount: 0 },
+    { month: 'Jun', amount: 0 },
   ];
 
-  const maxAmount = Math.max(...monthlySpend.map(m => m.amount));
+  const chartData = data && data.length > 0 ? data : defaultData;
+
+  const maxAmount = Math.max(...chartData.map(m => m.amount));
 
   return (
     <div className="space-y-4 font-secondary">
@@ -31,12 +33,12 @@ export function SpendingChart() {
       </div>
 
       <div className="h-40 flex items-end gap-3 pt-6">
-        {monthlySpend.map((month) => (
+        {chartData.map((month) => (
           <div key={month.month} className="flex-1 flex flex-col items-center gap-2">
             <div 
-              className="w-full bg-blue-100 rounded-t-lg relative group hover:bg-blue-200 transition-colors"
+              className="w-full bg-primary/20 rounded-t-lg relative group hover:bg-primary/40 transition-colors"
               style={{ 
-                height: `${(month.amount / maxAmount) * 100}px`,
+                height: `${maxAmount > 0 ? (month.amount / maxAmount) * 100 : 0}px`,
                 minHeight: '20px'
               }}
             >

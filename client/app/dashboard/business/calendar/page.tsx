@@ -347,7 +347,7 @@ export default function BusinessCalendarPage() {
           <Button
             size="sm"
             onClick={() => setIsNewEventDialogOpen(true)}
-            className="bg-blue-600 hover:bg-blue-700 h-8 text-sm text-white"
+            className="bg-primary hover:bg-primary/90 h-8 text-sm text-white"
           >
             <Plus className="h-4 w-4 mr-2" />
             Create

@@ -42,6 +42,8 @@ export const RenterKYCConfig: KYCFormConfig = {
           tooltip: "Enter a valid phone number with country code",
           validation: (value: string) => {
             if (!value.trim()) return "Phone number is required";
+            if (value.replace(/\D/g, '').length < 10) return "Phone number is too short";
+            if (value.replace(/\D/g, '').length > 15) return "Phone number is too long";
             return null;
           },
           grid: "half"
@@ -100,6 +102,8 @@ export const RenterKYCConfig: KYCFormConfig = {
           tooltip: "Emergency contact's phone number",
           validation: (value: string) => {
             if (!value.trim()) return "Emergency contact phone is required";
+            if (value.replace(/\D/g, '').length < 10) return "Phone number is too short";
+            if (value.replace(/\D/g, '').length > 15) return "Phone number is too long";
             return null;
           },
           grid: "half"

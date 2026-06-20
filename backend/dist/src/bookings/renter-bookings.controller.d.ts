@@ -123,8 +123,8 @@ export declare class RenterBookingsController {
                 updatedAt: Date;
                 status: import("@prisma/client").$Enums.PaymentStatus;
                 bookingId: string;
-                transactionRef: string;
                 provider: string;
+                transactionRef: string;
                 method: string;
                 amount: number;
                 currency: string;

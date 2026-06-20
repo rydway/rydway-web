@@ -203,7 +203,7 @@ export function EventDetailsDialog({
               <Button
                 size="sm"
                 onClick={handleSave}
-                className="bg-blue-600 hover:bg-blue-700"
+                className="bg-primary hover:bg-primary/90"
               >
                 <Save className="h-4 w-4 mr-2" />
                 Save Notes
@@ -212,7 +212,7 @@ export function EventDetailsDialog({
               <Button
                 size="sm"
                 onClick={() => setIsEditing(true)}
-                className="bg-blue-600 hover:bg-blue-700"
+                className="bg-primary hover:bg-primary/90"
               >
                 <Edit className="h-4 w-4 mr-2" />
                 Edit Notes

@@ -55,3 +55,16 @@ export function useUser(id: string) {
     error: query.error as Error | null,
   };
 }
+
+export function useVendors() {
+  const query = useQuery({
+    queryKey: ['vendors'],
+    queryFn: () => userService.getVendors(),
+  });
+
+  return {
+    vendors: query.data || [],
+    isLoading: query.isLoading,
+    error: query.error as Error | null,
+  };
+}
