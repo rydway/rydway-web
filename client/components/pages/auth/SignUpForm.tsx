@@ -104,20 +104,20 @@ export default function SignUpForm({
   return (
     <div>
       <div className="mb-8">
-        <h2 className="text-3xl font-bold text-slate-900 mb-2">Create Account</h2>
-        <p className="text-slate-600">Start your journey with Rydway</p>
+        <h2 className="text-3xl font-bold text-foreground mb-2">Create Account</h2>
+        <p className="text-muted-foreground">Start your journey with Rydway</p>
       </div>
 
       {/* User Type Tabs */}
       <div className="mb-8">
-        <div className="flex rounded-lg bg-slate-100 p-1">
+        <div className="flex rounded-lg bg-muted p-1">
           <button
             type="button"
             onClick={() => setUserType('renter')}
             className={`flex-1 py-3 px-4 rounded-md text-sm font-medium transition-all ${
               userType === 'renter'
                 ? 'bg-primary text-white shadow-sm'
-                : 'text-slate-600 hover:text-slate-900 bg-transparent'
+                : 'text-muted-foreground hover:text-foreground bg-transparent'
             }`}
           >
             <div className="flex items-center justify-center gap-2">
@@ -131,7 +131,7 @@ export default function SignUpForm({
             className={`flex-1 py-3 px-4 rounded-md text-sm font-medium transition-all ${
               userType === 'business'
                 ? 'bg-primary text-white shadow-sm'
-                : 'text-slate-600 hover:text-slate-900 bg-transparent'
+                : 'text-muted-foreground hover:text-foreground bg-transparent'
             }`}
           >
             <div className="flex items-center justify-center gap-2">
@@ -149,7 +149,7 @@ export default function SignUpForm({
               <p className="text-sm font-medium text-primary mb-1">
                 {userType === 'renter' ? 'Rent Cars' : 'Rent Out Your Cars'}
               </p>
-              <p className="text-xs text-slate-600">
+              <p className="text-xs text-muted-foreground">
                 {userType === 'renter' 
                   ? 'Browse and rent cars for your personal or business needs' 
                   : 'List your vehicles and manage your rental business'}
@@ -161,7 +161,7 @@ export default function SignUpForm({
 
       <form onSubmit={handleSubmit} className="space-y-6">
         <div>
-          <Label htmlFor="name" className="text-sm font-medium text-slate-700 mb-2 block">
+          <Label htmlFor="name" className="text-sm font-medium text-foreground mb-2 block">
             {userType === 'renter' ? 'Full Name' : 'Business Name'}
           </Label>
           <Input
@@ -170,7 +170,7 @@ export default function SignUpForm({
             placeholder={userType === 'renter' ? "John Doe" : "Acme Car Rentals"}
             value={formData.name}
             onChange={(e) => handleChange('name', e.target.value)}
-            className={`h-12 rounded-lg border-slate-300 ${
+            className={`h-12 rounded-lg border-input ${
               errors.name ? 'border-red-500' : ''
             }`}
           />
@@ -180,18 +180,18 @@ export default function SignUpForm({
         </div>
 
         <div>
-          <Label htmlFor="email" className="text-sm font-medium text-slate-700 mb-2 block">
+          <Label htmlFor="email" className="text-sm font-medium text-foreground mb-2 block">
             Email Address
           </Label>
           <div className="relative">
-            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" />
+            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
             <Input
               id="email"
               type="email"
               placeholder={userType === 'renter' ? "john@example.com" : "contact@yourbusiness.com"}
               value={formData.email}
               onChange={(e) => handleChange('email', e.target.value)}
-              className={`h-12 pl-11 rounded-lg border-slate-300 ${
+              className={`h-12 pl-11 rounded-lg border-input ${
                 errors.email ? 'border-red-500' : ''
               }`}
             />
@@ -202,25 +202,25 @@ export default function SignUpForm({
         </div>
 
         <div>
-          <Label htmlFor="password" className="text-sm font-medium text-slate-700 mb-2 block">
+          <Label htmlFor="password" className="text-sm font-medium text-foreground mb-2 block">
             Password
           </Label>
           <div className="relative">
-            <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" />
+            <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
             <Input
               id="password"
               type={showPassword ? "text" : "password"}
               placeholder="••••••••"
               value={formData.password}
               onChange={(e) => handleChange('password', e.target.value)}
-              className={`h-12 pl-11 pr-11 rounded-lg border-slate-300 ${
+              className={`h-12 pl-11 pr-11 rounded-lg border-input ${
                 errors.password ? 'border-red-500' : ''
               }`}
             />
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-muted-foreground"
             >
               {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
             </button>
@@ -228,7 +228,7 @@ export default function SignUpForm({
           {errors.password && (
             <p className="mt-1 text-sm text-red-600">{errors.password}</p>
           )}
-          <p className="text-xs text-slate-500 mt-2">
+          <p className="text-xs text-muted-foreground mt-2">
             Must be at least 8 characters long
           </p>
         </div>
@@ -259,9 +259,9 @@ export default function SignUpForm({
       {/* Alternative Signup Options */}
       <div className="mt-8">
         <div className="flex items-center mb-4">
-          <div className="flex-1 border-t border-slate-300"></div>
-          <span className="mx-4 text-sm text-slate-500">Or sign up with</span>
-          <div className="flex-1 border-t border-slate-300"></div>
+          <div className="flex-1 border-t border-input"></div>
+          <span className="mx-4 text-sm text-muted-foreground">Or sign up with</span>
+          <div className="flex-1 border-t border-input"></div>
         </div>
 
         <div className="flex gap-3">
@@ -269,7 +269,7 @@ export default function SignUpForm({
             type="button"
             variant="outline"
             onClick={onGoogleSignIn}
-            className="flex-1 h-12 rounded-lg border-slate-300 hover:bg-slate-50 flex items-center justify-center gap-2"
+            className="flex-1 h-12 rounded-lg border-input hover:bg-accent flex items-center justify-center gap-2"
           >
             {/* Google Icon SVG with brand colors */}
             <svg className="h-5 w-5" viewBox="0 0 24 24">
@@ -296,7 +296,7 @@ export default function SignUpForm({
             type="button"
             variant="outline"
             onClick={handleFacebookClick}
-            className="flex-1 h-12 rounded-lg border-slate-300 hover:bg-slate-50 flex items-center justify-center gap-2"
+            className="flex-1 h-12 rounded-lg border-input hover:bg-accent flex items-center justify-center gap-2"
           >
             {/* Facebook Icon SVG with brand colors */}
             <svg className="h-5 w-5" viewBox="0 0 24 24" fill="#1877F2">
@@ -308,7 +308,7 @@ export default function SignUpForm({
       </div>
 
       <div className="mt-8 text-center">
-        <p className="text-sm text-slate-600">
+        <p className="text-sm text-muted-foreground">
           Already have an account?{" "}
           <button
             onClick={onToggleMode}

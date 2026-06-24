@@ -95,19 +95,19 @@ export default function Sidebar({
   return (
     <aside
       className={cn(
-        "relative flex flex-col h-screen border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 transition-all duration-200 font-primary",
+        "relative flex flex-col h-screen border-r border-border dark:border-border bg-white dark:bg-background transition-all duration-200 font-primary",
         collapsed ? "w-16" : "w-64",
         className,
       )}
     >
       {/* Sidebar header */}
-      <div className="relative flex items-center h-16 px-4 border-b border-slate-200 dark:border-slate-800">
+      <div className="relative flex items-center h-16 px-4 border-b border-border dark:border-border">
         <div className="flex items-center gap-2 flex-1 min-w-0">
-          <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center shrink-0">
+          <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center shrink-0 text-primary-foreground">
             <Image src="/rydway3.png" alt="rydwaylogo" width={20} height={20} />
           </div>
           {!collapsed && (
-            <span className="font-bold text-lg text-slate-800 dark:text-white font-primary truncate">
+            <span className="font-bold text-lg text-foreground dark:text-white font-primary truncate">
               Rydway
             </span>
           )}
@@ -118,7 +118,7 @@ export default function Sidebar({
             variant="ghost"
             size="sm"
             onClick={onToggleCollapse}
-            className="h-8 w-8 p-0 shrink-0 hover:bg-primary/5 dark:hover:bg-primary/10 text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary transition-colors duration-200"
+            className="h-8 w-8 p-0 shrink-0 hover:bg-primary/5 dark:hover:bg-primary/10 text-muted-foreground dark:text-muted-foreground hover:text-primary dark:hover:text-primary transition-colors duration-200 text-primary-foreground"
           >
             <ChevronLeft className="h-4 w-4" />
           </Button>
@@ -129,7 +129,7 @@ export default function Sidebar({
       {onToggleCollapse && collapsed && (
         <button
           onClick={onToggleCollapse}
-          className="absolute top-[18px] -right-4 z-50 h-8 w-8 rounded-full flex items-center justify-center bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border border-slate-200 dark:border-slate-700 shadow text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary transition-colors duration-200"
+          className="absolute top-[18px] -right-4 z-50 h-8 w-8 rounded-full flex items-center justify-center bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border border-border dark:border-slate-700 shadow text-muted-foreground dark:text-slate-300 hover:text-primary dark:hover:text-primary transition-colors duration-200"
           aria-label="Expand sidebar"
         >
           <ChevronRight className="h-4 w-4" />
@@ -139,7 +139,7 @@ export default function Sidebar({
       <ScrollArea className="flex-1 p-4">
         <div className="space-y-1 mb-6">
           {!collapsed && (
-            <h3 className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2 font-primary">
+            <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2 font-primary">
               Navigation
             </h3>
           )}
@@ -155,7 +155,7 @@ export default function Sidebar({
                   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30 focus-visible:ring-offset-1",
                   active
                     ? "bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary/90"
-                    : "hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300",
+                    : "hover:bg-muted dark:hover:bg-slate-800 text-foreground dark:text-slate-300",
                   item.disabled && "opacity-50 cursor-not-allowed",
                 )}
               >
@@ -164,7 +164,7 @@ export default function Sidebar({
                     "h-4 w-4 shrink-0 transition-colors duration-200",
                     active
                       ? "text-primary dark:text-primary/90"
-                      : "text-slate-500 dark:text-slate-400 group-hover:text-primary dark:group-hover:text-primary",
+                      : "text-muted-foreground dark:text-muted-foreground group-hover:text-primary dark:group-hover:text-primary",
                   )}
                 />
 
@@ -190,7 +190,7 @@ export default function Sidebar({
                           className={cn(
                             "h-5 min-w-5 flex items-center justify-center text-xs px-1 font-primary",
                             item.badgeColor === "red"
-                              ? "bg-red-50 text-red-700 border-red-200 dark:bg-red-900/20 dark:text-red-400 dark:border-red-800"
+                              ? "bg-destructive/10 text-destructive dark:text-red-400 border-destructive/20 dark:bg-red-900/20 dark:text-red-400 dark:border-red-800"
                               : "bg-primary/10 text-primary border-primary/20 dark:bg-primary/20 dark:text-primary/90 dark:border-primary/30",
                           )}
                         >
@@ -208,7 +208,7 @@ export default function Sidebar({
         {navigation.secondary.length > 0 && (
           <div className="space-y-1 mb-6">
             {!collapsed && (
-              <h3 className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2 font-secondary">
+              <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2 font-secondary">
                 Saved
               </h3>
             )}
@@ -224,7 +224,7 @@ export default function Sidebar({
                     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30 focus-visible:ring-offset-1",
                     active
                       ? "bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary/90"
-                      : "hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300",
+                      : "hover:bg-muted dark:hover:bg-slate-800 text-foreground dark:text-slate-300",
                     item.disabled && "opacity-50 cursor-not-allowed",
                   )}
                 >
@@ -233,7 +233,7 @@ export default function Sidebar({
                       "h-4 w-4 flex-shrink-0 transition-colors duration-200",
                       active
                         ? "text-primary dark:text-primary/90"
-                        : "text-slate-500 dark:text-slate-400 group-hover:text-primary dark:group-hover:text-primary",
+                        : "text-muted-foreground dark:text-muted-foreground group-hover:text-primary dark:group-hover:text-primary",
                     )}
                   />
 
@@ -259,7 +259,7 @@ export default function Sidebar({
 
         <div className="space-y-1">
           {!collapsed && (
-            <h3 className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2 font-secondary">
+            <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2 font-secondary">
               Account
             </h3>
           )}
@@ -278,7 +278,7 @@ export default function Sidebar({
                   className={cn(
                     "w-full flex items-center gap-3 px-3 py-2 rounded-md transition-colors duration-200",
                     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30 focus-visible:ring-offset-1",
-                    "hover:bg-red-50 dark:hover:bg-red-900/20 text-red-600 dark:text-red-400"
+                    "hover:bg-destructive/10 dark:hover:bg-red-900/20 text-red-600 dark:text-red-400"
                   )}
                 >
                   <item.icon className="h-4 w-4 flex-shrink-0 transition-colors duration-200 text-red-600 dark:text-red-400" />
@@ -302,7 +302,7 @@ export default function Sidebar({
                   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30 focus-visible:ring-offset-1",
                   active
                     ? "bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary/90"
-                    : "hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300",
+                    : "hover:bg-muted dark:hover:bg-slate-800 text-foreground dark:text-slate-300",
                   item.disabled && "opacity-50 cursor-not-allowed",
                 )}
               >
@@ -311,7 +311,7 @@ export default function Sidebar({
                     "h-4 w-4 flex-shrink-0 transition-colors duration-200",
                     active
                       ? "text-primary dark:text-primary/90"
-                      : "text-slate-500 dark:text-slate-400 group-hover:text-primary dark:group-hover:text-primary",
+                      : "text-muted-foreground dark:text-muted-foreground group-hover:text-primary dark:group-hover:text-primary",
                   )}
                 />
 
@@ -341,21 +341,21 @@ export default function Sidebar({
 
       <div
         className={cn(
-          "p-4 border-t border-slate-200 dark:border-slate-800",
+          "p-4 border-t border-border dark:border-border",
           collapsed && "px-2",
         )}
       >
         <div className="flex items-center gap-3">
-          <div className="h-8 w-8 rounded-full bg-primary/10 dark:bg-primary/20 flex items-center justify-center">
+          <div className="h-8 w-8 rounded-full bg-primary/10 dark:bg-primary/20 flex items-center justify-center text-primary-foreground">
             <User className="h-4 w-4 text-primary dark:text-primary/90" />
           </div>
 
           {!collapsed && (
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-slate-800 dark:text-white truncate font-primary">
+              <p className="text-sm font-medium text-foreground dark:text-white truncate font-primary">
                 {role === "business" ? "Business Account" : "Personal Account"}
               </p>
-              <p className="text-xs text-slate-500 dark:text-slate-400 capitalize font-secondary">
+              <p className="text-xs text-muted-foreground dark:text-muted-foreground capitalize font-secondary">
                 {role}
               </p>
             </div>

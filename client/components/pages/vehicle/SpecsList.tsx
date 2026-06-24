@@ -19,13 +19,13 @@ export default function SpecsList({ vehicle }: SpecsListProps) {
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 gap-4 font-secondary">
       {specs.map((spec, idx) => (
-        <div key={idx} className="flex items-center gap-3 p-4 rounded-xl bg-slate-50 dark:bg-slate-800">
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
+        <div key={idx} className="flex items-center gap-3 p-4 rounded-xl bg-muted/50 dark:bg-slate-800">
+          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary-foreground">
             <spec.icon className="h-5 w-5 text-primary" />
           </div>
           <div>
-            <p className="text-xs text-slate-500">{spec.label}</p>
-            <p className="text-sm font-semibold text-slate-800 dark:text-white">{spec.value}</p>
+            <p className="text-xs text-muted-foreground">{spec.label}</p>
+            <p className="text-sm font-semibold text-foreground dark:text-white">{spec.value}</p>
           </div>
         </div>
       ))}

@@ -123,7 +123,7 @@ export function BusinessProfileHeader({
             )}
           />
         ))}
-        <span className="ml-2 text-sm font-primary text-slate-700">
+        <span className="ml-2 text-sm font-primary text-foreground">
           {rating.toFixed(1)} ({data.totalReviews} reviews)
         </span>
       </div>
@@ -140,7 +140,7 @@ export function BusinessProfileHeader({
     if (isEditing) {
       return (
         <div className="space-y-2">
-          <Label htmlFor={field} className="text-sm font-secondary text-slate-700">
+          <Label htmlFor={field} className="text-sm font-secondary text-foreground">
             {label}
           </Label>
           {multiline ? (
@@ -153,7 +153,7 @@ export function BusinessProfileHeader({
           ) : (
             <div className="relative">
               {icon && (
-                <div className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">
+                <div className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">
                   {icon}
                 </div>
               )}
@@ -172,13 +172,13 @@ export function BusinessProfileHeader({
     return (
       <div className="flex items-start gap-3">
         {icon && (
-          <div className="p-2 bg-slate-100 rounded-lg">
+          <div className="p-2 bg-muted rounded-lg">
             {icon}
           </div>
         )}
         <div className="flex-1">
-          <p className="text-sm font-secondary text-slate-700 mb-1">{label}</p>
-          <p className="text-slate-600 font-primary">{value || "Not specified"}</p>
+          <p className="text-sm font-secondary text-foreground mb-1">{label}</p>
+          <p className="text-muted-foreground font-primary">{value || "Not specified"}</p>
         </div>
       </div>
     );
@@ -206,9 +206,9 @@ export function BusinessProfileHeader({
   ];
 
   return (
-    <Card className={cn("border-slate-200 py-0 dark:border-slate-800 overflow-hidden", className)}>
+    <Card className={cn("border-border py-0 dark:border-border overflow-hidden", className)}>
       {/* Cover Image */}
-      <div className="relative h-48 bg-slate-200 dark:bg-slate-800 flex items-center justify-center group cursor-pointer">
+      <div className="relative h-48 bg-secondary dark:bg-slate-800 flex items-center justify-center group cursor-pointer">
         {data.coverImage ? (
           <Image
             src={data.coverImage}
@@ -217,7 +217,7 @@ export function BusinessProfileHeader({
             className="object-cover"
           />
         ) : (
-          <div className="flex flex-col items-center gap-1 text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-300">
+          <div className="flex flex-col items-center gap-1 text-muted-foreground hover:text-foreground dark:text-muted-foreground dark:hover:text-slate-300">
             <Camera className="h-6 w-6" />
             <span className="text-xs font-medium font-secondary">Add Cover Photo</span>
           </div>
@@ -238,7 +238,7 @@ export function BusinessProfileHeader({
               onClick={handleFavoriteToggle}
               className={cn(
                 "bg-white hover:bg-white/90 font-secondary",
-                isFavorite && "bg-red-50 border-red-200 hover:bg-red-100"
+                isFavorite && "bg-destructive/10 border-destructive/20 hover:bg-red-100"
               )}
             >
               <Heart className={cn(
@@ -311,12 +311,12 @@ export function BusinessProfileHeader({
         {/* Quick Stats */}
         {/* <div className="grid grid-cols-3 gap-4 mb-8">
           {quickStats.map((stat, index) => (
-            <div key={index} className="text-center p-4 bg-slate-50 rounded-lg">
+            <div key={index} className="text-center p-4 bg-muted/50 rounded-lg">
               <div className="flex items-center justify-center gap-2 mb-2">
                 <stat.icon className={`h-5 w-5 ${stat.color}`} />
-                <span className="text-2xl font-primary font-bold text-slate-800">{stat.value}</span>
+                <span className="text-2xl font-primary font-bold text-foreground">{stat.value}</span>
               </div>
-              <p className="text-sm font-secondary text-slate-600">{stat.label}</p>
+              <p className="text-sm font-secondary text-muted-foreground">{stat.label}</p>
             </div>
           ))}
         </div> */}
@@ -324,7 +324,7 @@ export function BusinessProfileHeader({
         {/* Description */}
         <div className="space-y-4 mb-6 ">
                <div className=" left-6 flex items-end gap-4">
-          <div className="relative w-32 h-32 -top-6 rounded-lg border-4 border-white dark:border-slate-900 bg-white">
+          <div className="relative w-32 h-32 -top-6 rounded-lg border-4 border-white dark:border-primary bg-white">
             <Image
               src={data.logo}
               alt={data.name}
@@ -336,7 +336,7 @@ export function BusinessProfileHeader({
           
           <div className="mb-6">
             <div className="flex items-center gap-2 mb-2">
-              <h1 className="text-2xl font-primary font-bold text-slate-800 dark:text-white">
+              <h1 className="text-2xl font-primary font-bold text-foreground dark:text-white">
                 {data.name}
               </h1>
               {data.verified && (
@@ -346,12 +346,12 @@ export function BusinessProfileHeader({
               )}
             </div>
             {data.tagline && (
-              <p className="text-slate-600 font-secondary mb-2">{data.tagline}</p>
+              <p className="text-muted-foreground font-secondary mb-2">{data.tagline}</p>
             )}
             {renderStars(data.rating)}
           </div>
         </div>
-          <h3 className="font-primary font-semibold text-slate-800">About Us</h3>
+          <h3 className="font-primary font-semibold text-foreground">About Us</h3>
           {renderField(
             "About Us",
             isEditing ? editData.description : data.description,
@@ -365,7 +365,7 @@ export function BusinessProfileHeader({
 
         {/* Contact Information */}
         <div className="space-y-4">
-          <h3 className="font-primary font-semibold text-slate-800 mb-4">Contact Information</h3>
+          <h3 className="font-primary font-semibold text-foreground mb-4">Contact Information</h3>
           <div className="grid md:grid-cols-2 gap-4">
             {renderField(
               "Address",

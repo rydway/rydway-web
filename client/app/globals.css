@@ -85,9 +85,7 @@
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.15 0 0);
 
-  --primary:#0074D1;
-
-;            /* ~ Tailwind blue-500 */
+  --primary: #0074D1;           /* ~ Tailwind blue-500 */
   --primary-foreground: oklch(0.98 0 0);
 
   /* Light Blue / Surface */
@@ -121,25 +119,25 @@
    DARK MODE (RYDWAY)
 ====================================================== */
 .dark {
-  --background: oklch(0.14 0 0);
+  --background: #000B18;
   --foreground: oklch(0.98 0 0);
 
-  --card: oklch(0.2 0 0);
+  --card: #01152A;
   --card-foreground: oklch(0.98 0 0);
 
-  --popover: oklch(0.2 0 0);
+  --popover: #01152A;
   --popover-foreground: oklch(0.98 0 0);
 
   --primary: #0074D1;            /* brighter blue for contrast */
-  --primary-foreground: oklch(0.14 0 0);
+  --primary-foreground: oklch(0.98 0 0);
 
-  --secondary: oklch(0.25 0 0);
+  --secondary: #022040;
   --secondary-foreground: oklch(0.98 0 0);
 
-  --muted: oklch(0.25 0 0);
+  --muted: #022040;
   --muted-foreground: oklch(0.7 0 0);
 
-  --accent: oklch(0.3 0 0);
+  --accent: #022040;
   --accent-foreground: oklch(0.98 0 0);
 
   --destructive: oklch(0.7 0.19 22);
@@ -148,11 +146,11 @@
   --input: oklch(1 0 0 / 15%);
   --ring: #0074D1;
 
-  --sidebar: oklch(0.18 0 0);
+  --sidebar: #01152A;
   --sidebar-foreground: oklch(0.98 0 0);
   --sidebar-primary: var(--primary);
   --sidebar-primary-foreground: var(--primary-foreground);
-  --sidebar-accent: oklch(0.25 0 0);
+  --sidebar-accent: #022040;
   --sidebar-accent-foreground: oklch(0.98 0 0);
   --sidebar-border: var(--border);
   --sidebar-ring: var(--ring);
@@ -201,5 +199,18 @@
   body {
     @apply bg-background text-foreground font-sans antialiased;
     -webkit-tap-highlight-color: transparent;
+    overflow-x: hidden;
+    max-width: 100vw;
   }
+}
+
+
+.dark .glassmorphism-card {
+  background: rgba(0, 11, 24, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dark .glassmorphism-dropdown {
+  background: rgba(0, 11, 24, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }

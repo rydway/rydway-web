@@ -119,7 +119,7 @@ export function VehicleDetailsComponent({
             </Badge>
             
             {vehicle.isVerified && (
-              <Badge variant="blue" className="bg-blue-100 text-blue-700 border-blue-200">
+              <Badge variant="blue" className="bg-blue-100 text-blue-600 dark:text-blue-400 border-blue-500/20">
                 <Shield className="h-3 w-3 mr-1" />
                 Verified
               </Badge>
@@ -189,7 +189,7 @@ export function VehicleDetailsComponent({
 
             {/* Tabs for different sections */}
             <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-              <TabsList className="w-full grid grid-cols-4 bg-slate-100 p-1">
+              <TabsList className="w-full grid grid-cols-4 bg-muted p-1">
                 <TabsTrigger value="details" className="text-sm">Details</TabsTrigger>
                 <TabsTrigger value="features" className="text-sm">Features</TabsTrigger>
                 <TabsTrigger value="reviews" className="text-sm">Reviews</TabsTrigger>
@@ -200,14 +200,14 @@ export function VehicleDetailsComponent({
 
               <TabsContent value="details" className="space-y-6">
                 {/* Description */}
-                <Card className="border-slate-200 shadow-sm">
+                <Card className="border-border shadow-sm">
                   <CardHeader className="pb-3">
-                    <CardTitle className="text-base font-semibold text-slate-800">
+                    <CardTitle className="text-base font-semibold text-foreground">
                       Description
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-sm text-slate-600 leading-relaxed whitespace-pre-line">
+                    <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">
                       {vehicle.description}
                     </p>
                   </CardContent>
@@ -249,18 +249,18 @@ export function VehicleDetailsComponent({
           {/* Right Column - Booking/Actions & Business Info */}
           <div className="space-y-6">
             {/* Price Card & Actions */}
-            <Card className="border-slate-200 shadow-sm sticky top-6">
+            <Card className="border-border shadow-sm sticky top-6">
               <CardContent className="p-6 space-y-6">
                 {/* Price */}
                 <div className="flex items-baseline gap-2">
-                  <span className="text-3xl font-bold text-slate-800">
+                  <span className="text-3xl font-bold text-foreground">
                     ₦{vehicle.dailyRate.toLocaleString()}
                   </span>
-                  <span className="text-sm text-slate-500">/ day</span>
+                  <span className="text-sm text-muted-foreground">/ day</span>
                 </div>
 
                 {/* Location */}
-                <div className="flex items-center gap-2 text-slate-600">
+                <div className="flex items-center gap-2 text-muted-foreground">
                   <MapPin className="h-4 w-4" />
                   <span className="text-sm">{vehicle.location}</span>
                 </div>
@@ -269,31 +269,31 @@ export function VehicleDetailsComponent({
 
                 {/* Quick Specs */}
                 <div className="grid grid-cols-2 gap-3">
-                  <div className="flex items-center gap-2 p-2 bg-slate-50 rounded-lg">
-                    <Users className="h-4 w-4 text-slate-500" />
+                  <div className="flex items-center gap-2 p-2 bg-muted/50 rounded-lg">
+                    <Users className="h-4 w-4 text-muted-foreground" />
                     <div>
-                      <p className="text-xs text-slate-500">Seats</p>
+                      <p className="text-xs text-muted-foreground">Seats</p>
                       <p className="text-sm font-medium">{vehicle.seats}</p>
                     </div>
                   </div>
-                  <div className="flex items-center gap-2 p-2 bg-slate-50 rounded-lg">
-                    <Fuel className="h-4 w-4 text-slate-500" />
+                  <div className="flex items-center gap-2 p-2 bg-muted/50 rounded-lg">
+                    <Fuel className="h-4 w-4 text-muted-foreground" />
                     <div>
-                      <p className="text-xs text-slate-500">Fuel</p>
+                      <p className="text-xs text-muted-foreground">Fuel</p>
                       <p className="text-sm font-medium">{vehicle.fuelType}</p>
                     </div>
                   </div>
-                  <div className="flex items-center gap-2 p-2 bg-slate-50 rounded-lg">
-                    <Gauge className="h-4 w-4 text-slate-500" />
+                  <div className="flex items-center gap-2 p-2 bg-muted/50 rounded-lg">
+                    <Gauge className="h-4 w-4 text-muted-foreground" />
                     <div>
-                      <p className="text-xs text-slate-500">Transmission</p>
+                      <p className="text-xs text-muted-foreground">Transmission</p>
                       <p className="text-sm font-medium">{vehicle.transmission}</p>
                     </div>
                   </div>
-                  <div className="flex items-center gap-2 p-2 bg-slate-50 rounded-lg">
-                    <Car className="h-4 w-4 text-slate-500" />
+                  <div className="flex items-center gap-2 p-2 bg-muted/50 rounded-lg">
+                    <Car className="h-4 w-4 text-muted-foreground" />
                     <div>
-                      <p className="text-xs text-slate-500">Type</p>
+                      <p className="text-xs text-muted-foreground">Type</p>
                       <p className="text-sm font-medium capitalize">{vehicle.vehicleType}</p>
                     </div>
                   </div>
@@ -321,17 +321,17 @@ export function VehicleDetailsComponent({
             <BusinessInfo vehicle={vehicle} />
 
             {/* Insurance & Deposit Info */}
-            <Card className="border-slate-200 shadow-sm bg-gradient-to-br from-blue-50 to-white">
+            <Card className="border-border shadow-sm bg-gradient-to-br from-blue-500/10 to-transparent">
               <CardContent className="p-5">
                 <div className="flex items-start gap-3">
                   <div className="p-2 bg-blue-100 rounded-lg">
                     <Shield className="h-5 w-5 text-blue-600" />
                   </div>
                   <div>
-                    <h4 className="text-sm font-semibold text-slate-800 mb-1">
+                    <h4 className="text-sm font-semibold text-foreground mb-1">
                       Insurance Included
                     </h4>
-                    <p className="text-xs text-slate-600">
+                    <p className="text-xs text-muted-foreground">
                       Comprehensive insurance coverage included in your rental. 
                       Security deposit of ₦{vehicle.securityDeposit.toLocaleString()} is required.
                     </p>

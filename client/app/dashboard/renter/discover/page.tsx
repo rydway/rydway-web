@@ -116,22 +116,22 @@ export default function SearchWithNavbar() {
     <div className="space-y-6 font-primary">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-2">
         <div className="space-y-1">
-          <h1 className="text-2xl font-bold tracking-tight text-slate-900 font-primary">
+          <h1 className="text-2xl font-bold tracking-tight text-foreground font-primary">
             Discover
           </h1>
-          <p className="text-sm text-slate-500 font-secondary">
+          <p className="text-sm text-muted-foreground font-secondary">
             Find premium vehicles or connect with verified rental businesses
           </p>
         </div>
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-4 border-b border-slate-200 pb-px">
+      <div className="flex gap-4 border-b border-border pb-px">
         <button
           onClick={() => { setTab("vehicles"); setSearchQuery(""); }}
           className={`pb-3 text-sm font-semibold border-b-2 px-1 transition-all ${tab === "vehicles"
               ? "border-primary text-primary"
-              : "border-transparent text-slate-500 hover:text-slate-700"
+              : "border-transparent text-muted-foreground hover:text-foreground"
             }`}
         >
           Available Cars
@@ -140,7 +140,7 @@ export default function SearchWithNavbar() {
           onClick={() => { setTab("businesses"); setSearchQuery(""); }}
           className={`pb-3 text-sm font-semibold border-b-2 px-1 transition-all ${tab === "businesses"
               ? "border-primary text-primary"
-              : "border-transparent text-slate-500 hover:text-slate-700"
+              : "border-transparent text-muted-foreground hover:text-foreground"
             }`}
         >
           Rental Businesses
@@ -167,7 +167,7 @@ export default function SearchWithNavbar() {
           </div>
 
           <div>
-            <p className="text-sm text-slate-500 font-secondary">
+            <p className="text-sm text-muted-foreground font-secondary">
               Showing <span className="font-bold text-primary font-primary">{filteredCars.length}</span> cars
               {searchQuery && (
                 <span> for "<span className="font-bold">{searchQuery}</span>"</span>
@@ -192,13 +192,13 @@ export default function SearchWithNavbar() {
             </div>
           ) : (
             <div className="flex flex-col items-center justify-center py-16 text-center">
-              <div className="mb-4 rounded-full bg-slate-100 p-6">
-                <Search className="h-12 w-12 text-slate-400" />
+              <div className="mb-4 rounded-full bg-muted p-6">
+                <Search className="h-12 w-12 text-muted-foreground" />
               </div>
-              <h3 className="mb-2 text-lg font-bold text-slate-800 font-primary">
+              <h3 className="mb-2 text-lg font-bold text-foreground font-primary">
                 No cars found
               </h3>
-              <p className="text-sm text-slate-500 font-secondary">
+              <p className="text-sm text-muted-foreground font-secondary">
                 Try adjusting your search or filter to find what you're looking for.
               </p>
             </div>
@@ -208,7 +208,7 @@ export default function SearchWithNavbar() {
         // Businesses Listing
         <>
           <div>
-            <p className="text-sm text-slate-500 font-secondary">
+            <p className="text-sm text-muted-foreground font-secondary">
               Showing <span className="font-bold text-primary font-primary">{filteredVendors.length}</span> verified businesses
             </p>
           </div>
@@ -225,32 +225,32 @@ export default function SearchWithNavbar() {
                 const reviews = vendor.hostProfile?.totalReviews || 0;
 
                 return (
-                  <div key={vendor.id} className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between space-y-4">
+                  <div key={vendor.id} className="bg-white border border-border rounded-2xl p-5 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between space-y-4">
                     <div className="space-y-3">
                       <div className="flex items-center gap-3">
-                        <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary font-bold text-lg border border-primary/20 shrink-0">
+                        <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary font-bold text-lg border border-primary/20 shrink-0 text-primary-foreground">
                           {businessName.slice(0, 2).toUpperCase()}
                         </div>
                         <div className="min-w-0">
                           <div className="flex items-center gap-1.5">
-                            <h3 className="font-semibold text-slate-900 truncate font-primary">{businessName}</h3>
+                            <h3 className="font-semibold text-foreground truncate font-primary">{businessName}</h3>
                             <ShieldCheck className="h-4 w-4 text-emerald-500 shrink-0" />
                           </div>
                           <div className="flex items-center gap-1 mt-0.5">
                             <Star className="h-3.5 w-3.5 fill-amber-400 text-amber-400" />
-                            <span className="text-xs font-bold text-slate-700">{rating.toFixed(1)}</span>
-                            <span className="text-xs text-slate-400">({reviews} reviews)</span>
+                            <span className="text-xs font-bold text-foreground">{rating.toFixed(1)}</span>
+                            <span className="text-xs text-muted-foreground">({reviews} reviews)</span>
                           </div>
                         </div>
                       </div>
 
-                      <div className="space-y-1.5 pt-1 text-xs text-slate-500 font-secondary">
+                      <div className="space-y-1.5 pt-1 text-xs text-muted-foreground font-secondary">
                         <div className="flex items-center gap-2">
-                          <MapPin className="h-3.5 w-3.5 text-slate-400 shrink-0" />
+                          <MapPin className="h-3.5 w-3.5 text-muted-foreground shrink-0" />
                           <span className="truncate">{vendor.hostProfile?.businessAddress || "Lagos, Nigeria"}</span>
                         </div>
                         <div className="flex items-center gap-2">
-                          <Building2 className="h-3.5 w-3.5 text-slate-400 shrink-0" />
+                          <Building2 className="h-3.5 w-3.5 text-muted-foreground shrink-0" />
                           <span>Verified Fleet Host</span>
                         </div>
                       </div>
@@ -283,13 +283,13 @@ export default function SearchWithNavbar() {
             </div>
           ) : (
             <div className="flex flex-col items-center justify-center py-16 text-center">
-              <div className="mb-4 rounded-full bg-slate-100 p-6">
-                <Building2 className="h-12 w-12 text-slate-400" />
+              <div className="mb-4 rounded-full bg-muted p-6">
+                <Building2 className="h-12 w-12 text-muted-foreground" />
               </div>
-              <h3 className="mb-2 text-lg font-bold text-slate-800 font-primary">
+              <h3 className="mb-2 text-lg font-bold text-foreground font-primary">
                 No businesses found
               </h3>
-              <p className="text-sm text-slate-500 font-secondary">
+              <p className="text-sm text-muted-foreground font-secondary">
                 We couldn't find any rental companies matching your criteria.
               </p>
             </div>
@@ -310,7 +310,7 @@ export default function SearchWithNavbar() {
             <DialogContent className="max-w-xl font-secondary rounded-2xl">
               <DialogHeader>
                 <div className="flex items-center gap-4">
-                  <div className="h-14 w-14 rounded-2xl bg-primary/10 flex items-center justify-center text-primary font-bold text-xl border border-primary/20 shrink-0">
+                  <div className="h-14 w-14 rounded-2xl bg-primary/10 flex items-center justify-center text-primary font-bold text-xl border border-primary/20 shrink-0 text-primary-foreground">
                     {businessName.slice(0, 2).toUpperCase()}
                   </div>
                   <div>
@@ -320,46 +320,46 @@ export default function SearchWithNavbar() {
                     </DialogTitle>
                     <div className="flex items-center gap-1 mt-1">
                       <Star className="h-4 w-4 fill-amber-400 text-amber-400" />
-                      <span className="text-sm font-bold text-slate-700">{rating.toFixed(1)}</span>
-                      <span className="text-sm text-slate-500">({reviews} reviews)</span>
+                      <span className="text-sm font-bold text-foreground">{rating.toFixed(1)}</span>
+                      <span className="text-sm text-muted-foreground">({reviews} reviews)</span>
                     </div>
                   </div>
                 </div>
               </DialogHeader>
 
-              <div className="space-y-5 py-4 border-t border-b border-slate-100 my-2 text-sm text-slate-700">
+              <div className="space-y-5 py-4 border-t border-b border-slate-100 my-2 text-sm text-foreground">
                 <div>
-                  <h4 className="font-semibold text-slate-900 font-primary mb-1">About Business</h4>
-                  <p className="text-slate-500 text-xs leading-relaxed">
+                  <h4 className="font-semibold text-foreground font-primary mb-1">About Business</h4>
+                  <p className="text-muted-foreground text-xs leading-relaxed">
                     This is a verified professional vehicle supplier on Rydway. Offering premium services, clean fleets, and comprehensive insurance.
                   </p>
                 </div>
 
                 <div className="grid grid-cols-2 gap-4 text-xs font-secondary">
                   <div className="space-y-1">
-                    <span className="text-slate-400 block">Fleet Location</span>
-                    <div className="flex items-center gap-2 font-medium text-slate-800">
-                      <MapPin className="h-4 w-4 text-slate-400 shrink-0" />
+                    <span className="text-muted-foreground block">Fleet Location</span>
+                    <div className="flex items-center gap-2 font-medium text-foreground">
+                      <MapPin className="h-4 w-4 text-muted-foreground shrink-0" />
                       <span>{selectedVendor.hostProfile?.businessAddress || "Lagos, Nigeria"}</span>
                     </div>
                   </div>
                   <div className="space-y-1">
-                    <span className="text-slate-400 block">Active Vehicles</span>
-                    <div className="flex items-center gap-2 font-medium text-slate-800">
+                    <span className="text-muted-foreground block">Active Vehicles</span>
+                    <div className="flex items-center gap-2 font-medium text-foreground">
                       <span>{hostVehiclesCount} Cars Registered</span>
                     </div>
                   </div>
                   <div className="space-y-1">
-                    <span className="text-slate-400 block">Support Email</span>
-                    <div className="flex items-center gap-2 font-medium text-slate-800">
-                      <Mail className="h-4 w-4 text-slate-400 shrink-0" />
+                    <span className="text-muted-foreground block">Support Email</span>
+                    <div className="flex items-center gap-2 font-medium text-foreground">
+                      <Mail className="h-4 w-4 text-muted-foreground shrink-0" />
                       <span className="truncate">{selectedVendor.hostProfile?.businessEmail || selectedVendor.email}</span>
                     </div>
                   </div>
                   <div className="space-y-1">
-                    <span className="text-slate-400 block">Support Phone</span>
-                    <div className="flex items-center gap-2 font-medium text-slate-800">
-                      <Phone className="h-4 w-4 text-slate-400 shrink-0" />
+                    <span className="text-muted-foreground block">Support Phone</span>
+                    <div className="flex items-center gap-2 font-medium text-foreground">
+                      <Phone className="h-4 w-4 text-muted-foreground shrink-0" />
                       <span>{selectedVendor.hostProfile?.businessPhone || selectedVendor.phone || "N/A"}</span>
                     </div>
                   </div>
@@ -407,7 +407,7 @@ export default function SearchWithNavbar() {
               </DialogHeader>
 
               <div className="space-y-3 py-3">
-                <Label htmlFor="initial-message" className="text-xs font-semibold text-slate-700">Initial Inquiry Message</Label>
+                <Label htmlFor="initial-message" className="text-xs font-semibold text-foreground">Initial Inquiry Message</Label>
                 <Textarea
                   id="initial-message"
                   value={initialMessage}

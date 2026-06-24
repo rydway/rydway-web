@@ -13,11 +13,11 @@ interface CategoryBreakdownProps {
 
 export function CategoryBreakdown({ categories, totalRevenue, formatCompactCurrency }: CategoryBreakdownProps) {
   return (
-    <Card className="border-slate-200 shadow-sm font-secondary">
+    <Card className="border-border shadow-sm font-secondary">
       <CardHeader>
         <div className="flex items-center gap-2">
           <Car className="h-5 w-5 text-blue-600" />
-          <CardTitle className="text-lg font-semibold text-slate-800 font-primary">
+          <CardTitle className="text-lg font-semibold text-foreground font-primary">
             Revenue by Vehicle Category
           </CardTitle>
         </div>
@@ -52,18 +52,18 @@ export function CategoryBreakdown({ categories, totalRevenue, formatCompactCurre
               <div key={cat.name} className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <div className="h-3 w-3 rounded-full" style={{ background: cat.color }} />
-                  <span className="text-sm text-slate-700">{cat.name}</span>
+                  <span className="text-sm text-foreground">{cat.name}</span>
                 </div>
                 <div className="text-right">
-                  <span className="text-sm font-semibold text-slate-800">{formatCompactCurrency(cat.value)}</span>
-                  <span className="text-xs text-slate-500 ml-2">({cat.count} cars)</span>
+                  <span className="text-sm font-semibold text-foreground">{formatCompactCurrency(cat.value)}</span>
+                  <span className="text-xs text-muted-foreground ml-2">({cat.count} cars)</span>
                 </div>
               </div>
             ))}
             
-            <div className="pt-3 mt-2 border-t border-slate-200">
+            <div className="pt-3 mt-2 border-t border-border">
               <div className="flex items-center justify-between">
-                <span className="text-sm font-medium text-slate-800">Total</span>
+                <span className="text-sm font-medium text-foreground">Total</span>
                 <span className="text-sm font-bold text-blue-600">{formatCompactCurrency(totalRevenue)}</span>
               </div>
             </div>

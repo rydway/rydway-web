@@ -195,25 +195,25 @@ export const KYCForm: React.FC<KYCFormProps> = ({
     const statusConfig = {
       error: {
         icon: AlertCircle,
-        bgColor: 'bg-red-50',
-        borderColor: 'border-red-200',
-        textColor: 'text-red-800',
+        bgColor: 'bg-destructive/10',
+        borderColor: 'border-destructive/20',
+        textColor: 'text-destructive dark:text-red-400',
         title: 'Validation Errors',
         description: 'Please fix the errors before submitting.'
       },
       ready: {
         icon: CheckCircle2,
-        bgColor: 'bg-green-50',
-        borderColor: 'border-green-200',
-        textColor: 'text-green-800',
+        bgColor: 'bg-emerald-500/10',
+        borderColor: 'border-emerald-500/20',
+        textColor: 'text-emerald-600 dark:text-emerald-400',
         title: 'Ready for Submission',
         description: 'All information is complete and ready for verification.'
       },
       pending: {
         icon: AlertCircle,
-        bgColor: 'bg-amber-50',
-        borderColor: 'border-amber-200',
-        textColor: 'text-amber-800',
+        bgColor: 'bg-amber-500/100/10',
+        borderColor: 'border-amber-500/20',
+        textColor: 'text-amber-600 dark:text-amber-400',
         title: 'Pending Verification',
         description: 'Your documents will be verified within 24-48 hours.'
       }
@@ -243,22 +243,22 @@ export const KYCForm: React.FC<KYCFormProps> = ({
 
   return (
     <TooltipProvider>
-      <div className="w-full max-w-4xl py-12 mx-auto font-primary">
+      <div className="w-full max-w-4xl py-6 md:py-12 px-4 sm:px-6 mx-auto font-primary">
         {/* Progress Header */}
         <div className="mb-8">
           <div className="flex items-start justify-between mb-4">
             <div>
-              <h1 className="text-2xl font-bold text-slate-900">{config.title}</h1>
-              <p className="text-slate-600">{config.description}</p>
+              <h1 className="text-2xl font-bold text-foreground">{config.title}</h1>
+              <p className="text-muted-foreground">{config.description}</p>
             </div>
-            <Button variant="ghost" onClick={handleSkip} className="text-slate-500 hover:text-slate-800">
+            <Button variant="ghost" onClick={handleSkip} className="text-muted-foreground hover:text-foreground">
               Skip for now
             </Button>
           </div>
 
           {/* Progress Bar */}
           <div className="mb-8">
-            <div className="flex justify-between text-xs text-slate-500 mb-2">
+            <div className="flex justify-between text-xs text-muted-foreground mb-2">
               <span>Step {step} of {config.totalSteps}</span>
               <span>Verification</span>
             </div>
@@ -268,7 +268,7 @@ export const KYCForm: React.FC<KYCFormProps> = ({
                 <div
                   key={i}
                   className={`h-2 flex-1 rounded-lg transition-all ${
-                    step >= i + 1 ? "bg-primary" : "bg-slate-200"
+                    step >= i + 1 ? "bg-primary" : "bg-secondary"
                   }`}
                 />
               ))}
@@ -293,11 +293,11 @@ export const KYCForm: React.FC<KYCFormProps> = ({
         {step === config.totalSteps && renderKYCStatus()}
 
         {/* Navigation Buttons */}
-        <div className="flex gap-3 mt-8">
+        <div className="flex flex-col-reverse sm:flex-row gap-3 mt-8">
           <Button
             type="button"
             variant="outline"
-            className="flex-1 h-12 rounded-lg border-slate-300"
+            className="flex-1 h-12 rounded-lg border-input"
             disabled={step === 1 || loading}
             onClick={handlePrevious}
           >
@@ -337,7 +337,7 @@ export const KYCForm: React.FC<KYCFormProps> = ({
           )}
         </div>
 
-        <p className="text-xs text-center text-slate-400 mt-6">
+        <p className="text-xs text-center text-muted-foreground mt-6">
           {config.disclaimer}
         </p>
       </div>

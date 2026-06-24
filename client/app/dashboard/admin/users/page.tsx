@@ -47,11 +47,11 @@ export default function AdminUsersPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">User Management</h1>
-        <p className="text-slate-500 font-secondary mt-1">View and manage all registered platform users.</p>
+        <h1 className="text-3xl font-bold tracking-tight text-foreground dark:text-white">User Management</h1>
+        <p className="text-muted-foreground font-secondary mt-1">View and manage all registered platform users.</p>
       </div>
 
-      <div className="rounded-md border bg-white dark:bg-slate-950 dark:border-slate-800">
+      <div className="rounded-md border bg-white dark:bg-slate-950 dark:border-border">
         <Table>
           <TableHeader>
             <TableRow>
@@ -73,7 +73,7 @@ export default function AdminUsersPage() {
                   {!user.isActive ? (
                     <Badge variant="destructive">Suspended</Badge>
                   ) : (
-                    <Badge variant="default" className="bg-green-500 hover:bg-green-600">Active</Badge>
+                    <Badge variant="default" className="bg-emerald-500/100 hover:bg-green-600">Active</Badge>
                   )}
                 </TableCell>
                 <TableCell>
@@ -110,7 +110,7 @@ export default function AdminUsersPage() {
             ))}
             {users.length === 0 && (
               <TableRow>
-                <TableCell colSpan={6} className="h-24 text-center text-slate-500">
+                <TableCell colSpan={6} className="h-24 text-center text-muted-foreground">
                   No users found.
                 </TableCell>
               </TableRow>

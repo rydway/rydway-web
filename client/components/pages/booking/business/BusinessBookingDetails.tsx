@@ -155,7 +155,7 @@ const router = useRouter();
         <Button 
           key="report" 
           variant="outline" 
-          className="w-full font-primary border-red-300 text-red-600 hover:bg-red-50 dark:border-red-700 dark:text-red-400 dark:hover:bg-red-900/20"
+          className="w-full font-primary border-red-300 text-red-600 hover:bg-destructive/10 dark:border-red-700 dark:text-red-400 dark:hover:bg-red-900/20"
           onClick={onReportIssue}
         >
           <AlertTriangle className="h-4 w-4 mr-2" />
@@ -198,9 +198,9 @@ const router = useRouter();
       rightColumn={
         <>
           {/* Business Stats */}
-          <Card className="border-slate-200 dark:border-slate-800">
+          <Card className="border-border dark:border-border">
             <CardContent className="p-6">
-              <h3 className="font-semibold text-slate-800 dark:text-white mb-4 font-primary">Trip Stats</h3>
+              <h3 className="font-semibold text-foreground dark:text-white mb-4 font-primary">Trip Stats</h3>
               <div className="space-y-4">
                 {businessStats.map((stat, index) => (
                   <div key={index} className="flex items-center justify-between">
@@ -208,11 +208,11 @@ const router = useRouter();
                       <div className={`p-2 rounded ${stat.color.replace('text-', 'bg-')} bg-opacity-10`}>
                         <stat.icon className={`h-4 w-4 ${stat.color}`} />
                       </div>
-                      <span className="text-sm text-slate-600 dark:text-slate-300 font-secondary">
+                      <span className="text-sm text-muted-foreground dark:text-slate-300 font-secondary">
                         {stat.label}
                       </span>
                     </div>
-                    <span className="font-semibold text-slate-800 dark:text-white font-primary">
+                    <span className="font-semibold text-foreground dark:text-white font-primary">
                       {stat.value}
                     </span>
                   </div>
@@ -222,9 +222,9 @@ const router = useRouter();
           </Card>
 
           {/* Business Actions */}
-          <Card className="border-slate-200 dark:border-slate-800">
+          <Card className="border-border dark:border-border">
             <CardContent className="p-6">
-              <h3 className="font-semibold text-slate-800 dark:text-white mb-4 font-primary">Management</h3>
+              <h3 className="font-semibold text-foreground dark:text-white mb-4 font-primary">Management</h3>
               <div className="space-y-3">
                 {getBusinessActions()}
               </div>
@@ -233,20 +233,20 @@ const router = useRouter();
 
           {/* Performance Metrics (for completed trips) */}
           {data.status === 'completed' && (
-            <Card className="border-slate-200 dark:border-slate-800">
+            <Card className="border-border dark:border-border">
               <CardContent className="p-6">
-                <h3 className="font-semibold text-slate-800 dark:text-white mb-4 font-primary">Performance</h3>
+                <h3 className="font-semibold text-foreground dark:text-white mb-4 font-primary">Performance</h3>
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-slate-600 dark:text-slate-300 font-secondary">Vehicle Condition</span>
+                    <span className="text-sm text-muted-foreground dark:text-slate-300 font-secondary">Vehicle Condition</span>
                     <Badge variant="green" className="font-primary">Excellent</Badge>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-slate-600 dark:text-slate-300 font-secondary">Fuel Used</span>
+                    <span className="text-sm text-muted-foreground dark:text-slate-300 font-secondary">Fuel Used</span>
                     <span className="font-medium font-primary">35%</span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-slate-600 dark:text-slate-300 font-secondary">Late Return</span>
+                    <span className="text-sm text-muted-foreground dark:text-slate-300 font-secondary">Late Return</span>
                     <span className="font-medium font-primary">No</span>
                   </div>
                 </div>

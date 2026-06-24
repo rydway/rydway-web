@@ -38,7 +38,7 @@ export function VehicleCard({ vehicle, onFavoriteToggle, onRentNow }: VehicleCar
             isFavorite ? 'shadow-md' : ''
           }`}
         >
-          <Heart className={`h-4 w-4 ${isFavorite ? 'fill-red-500 text-red-500' : 'text-slate-500'}`} />
+          <Heart className={`h-4 w-4 ${isFavorite ? 'fill-red-500 text-red-500' : 'text-muted-foreground'}`} />
         </Button>
       </div>
       
@@ -46,10 +46,10 @@ export function VehicleCard({ vehicle, onFavoriteToggle, onRentNow }: VehicleCar
         <CardContent className="flex-1 p-4 font-secondary">
           <div className="mb-3 flex items-start justify-between gap-2">
             <div className="min-w-0 flex-1">
-              <h3 className="text-sm font-bold text-slate-800 font-primary sm:text-base line-clamp-1">
+              <h3 className="text-sm font-bold text-foreground font-primary sm:text-base line-clamp-1">
                 {vehicle.make} {vehicle.model}
               </h3>
-              <p className="mt-1 text-xs text-slate-500 sm:text-sm line-clamp-1">
+              <p className="mt-1 text-xs text-muted-foreground sm:text-sm line-clamp-1">
                 {vehicle.category} • {vehicle.businessName}
               </p>
             </div>
@@ -58,12 +58,12 @@ export function VehicleCard({ vehicle, onFavoriteToggle, onRentNow }: VehicleCar
                 <span className="text-base font-primary font-bold text-primary sm:text-lg">
                   {formatPrice(vehicle.rateDaily)}
                 </span>
-                <span className="text-xs text-slate-400 sm:text-sm">/day</span>
+                <span className="text-xs text-muted-foreground sm:text-sm">/day</span>
               </div>
             </div>
           </div>
           
-          <div className="mb-4 flex items-center justify-between border-t border-slate-100 pt-4 text-slate-500">
+          <div className="mb-4 flex items-center justify-between border-t border-slate-100 pt-4 text-muted-foreground">
             <div className="flex flex-col items-center gap-1">
               <Fuel className="h-3.5 w-3.5" />
               <span className="text-xs font-medium">{vehicle.fuelType}</span>

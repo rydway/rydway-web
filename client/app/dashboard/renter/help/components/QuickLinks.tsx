@@ -16,14 +16,14 @@ export function QuickLinks() {
         <a
           key={link.title}
           href={link.href}
-          className="p-4 bg-white border border-slate-200 rounded-lg hover:border-blue-200 hover:shadow-sm transition-all group"
+          className="p-4 bg-white border border-border rounded-lg hover:border-blue-500/20 hover:shadow-sm transition-all group"
         >
           <div className="flex flex-col items-center text-center">
-            <div className="h-10 w-10 bg-blue-50 rounded-lg flex items-center justify-center mb-3 group-hover:bg-blue-100 transition-colors">
+            <div className="h-10 w-10 bg-blue-500/10 rounded-lg flex items-center justify-center mb-3 group-hover:bg-blue-100 transition-colors">
               <link.icon className="h-5 w-5 text-blue-600" />
             </div>
-            <h4 className="text-sm font-medium text-slate-800 mb-1">{link.title}</h4>
-            <p className="text-xs text-slate-500">{link.description}</p>
+            <h4 className="text-sm font-medium text-foreground mb-1">{link.title}</h4>
+            <p className="text-xs text-muted-foreground">{link.description}</p>
           </div>
         </a>
       ))}

@@ -106,7 +106,7 @@ const router = useRouter();
           <Button 
             key="report" 
             variant="outline" 
-            className="w-full font-primary border-amber-300 text-amber-700 hover:bg-amber-50 dark:border-amber-700 dark:text-amber-400 dark:hover:bg-amber-900/20"
+            className="w-full font-primary border-amber-300 text-amber-600 dark:text-amber-400 hover:bg-amber-500/10 dark:border-amber-700 dark:text-amber-400 dark:hover:bg-amber-900/20"
             onClick={onReportIssue}
           >
             <AlertTriangle className="h-4 w-4 mr-2" />
@@ -144,8 +144,8 @@ const router = useRouter();
     // Additional protection for active trips
     if (data.status === 'active') {
       actions.push(
-        <div key="protection" className="pt-4 border-t border-slate-200 dark:border-slate-800">
-          <div className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-300">
+        <div key="protection" className="pt-4 border-t border-border dark:border-border">
+          <div className="flex items-center gap-2 text-sm text-muted-foreground dark:text-slate-300">
             <ShieldCheck className="h-4 w-4 text-green-500" />
             <span className="font-medium">24/7 Roadside Assistance Active</span>
           </div>
@@ -168,9 +168,9 @@ const router = useRouter();
           {/* Price Summary is included in base */}
           
           {/* Renter Actions */}
-          <Card className="border-slate-200 dark:border-slate-800">
+          <Card className="border-border dark:border-border">
             <CardContent className="p-6">
-              <h3 className="font-semibold text-slate-800 dark:text-white mb-4 font-primary">Actions</h3>
+              <h3 className="font-semibold text-foreground dark:text-white mb-4 font-primary">Actions</h3>
               <div className="space-y-3">
                 {getRenterActions()}
               </div>

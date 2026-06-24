@@ -84,15 +84,15 @@ export default function BusinessMessagesPage() {
       <div className="shrink-0 pb-2 mb-6">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="space-y-1">
-            <h1 className="text-2xl font-bold tracking-tight text-slate-900 font-primary">
+            <h1 className="text-2xl font-bold tracking-tight text-foreground font-primary">
               Renter Messages
             </h1>
-            <p className="text-sm text-slate-500 font-secondary">
+            <p className="text-sm text-muted-foreground font-secondary">
               Manage communications with your customers
             </p>
           </div>
           <div className="flex items-center gap-2">
-            <span className="text-xs text-slate-500 bg-slate-100 px-3 py-1.5 rounded-md font-primary">
+            <span className="text-xs text-muted-foreground bg-muted px-3 py-1.5 rounded-md font-primary">
               {mappedConversations.reduce((acc, c) => acc + c.unreadCount, 0)} unread
             </span>
           </div>
@@ -100,16 +100,16 @@ export default function BusinessMessagesPage() {
       </div>
 
       {/* Main Messaging Interface */}
-      <Card className="flex-1 border-slate-200 shadow-sm overflow-hidden bg-white">
+      <Card className="flex-1 border-border shadow-sm overflow-hidden bg-white">
         <div className="flex h-full">
           {/* Conversations List - Left Panel */}
-          <div className={`w-full lg:w-80 h-full border-r border-slate-200 ${
+          <div className={`w-full lg:w-80 h-full border-r border-border ${
             showMobileChat ? 'hidden lg:block' : 'block'
           }`}>
             {isLoadingConversations ? (
-              <div className="flex justify-center p-8"><Car className="h-8 w-8 animate-spin text-slate-400" /></div>
+              <div className="flex justify-center p-8"><Car className="h-8 w-8 animate-spin text-muted-foreground" /></div>
             ) : mappedConversations.length === 0 ? (
-              <div className="flex flex-col items-center justify-center p-8 text-center text-slate-500 h-full">
+              <div className="flex flex-col items-center justify-center p-8 text-center text-muted-foreground h-full">
                 <p>No conversations yet.</p>
               </div>
             ) : (
@@ -128,7 +128,7 @@ export default function BusinessMessagesPage() {
           }`}>
             {selectedConversation ? (
               isLoadingMessages ? (
-                <div className="flex h-full items-center justify-center"><Car className="h-8 w-8 animate-spin text-slate-400" /></div>
+                <div className="flex h-full items-center justify-center"><Car className="h-8 w-8 animate-spin text-muted-foreground" /></div>
               ) : (
                 <Chat
                   conversation={selectedConversation}
@@ -141,13 +141,13 @@ export default function BusinessMessagesPage() {
               )
             ) : (
               <div className="h-full flex flex-col items-center justify-center text-center p-8">
-                <div className="h-16 w-16 rounded-full bg-slate-100 flex items-center justify-center mb-4">
-                  <Car className="h-8 w-8 text-slate-400" />
+                <div className="h-16 w-16 rounded-full bg-muted flex items-center justify-center mb-4">
+                  <Car className="h-8 w-8 text-muted-foreground" />
                 </div>
-                <h3 className="text-base font-medium text-slate-700 mb-2">
+                <h3 className="text-base font-medium text-foreground mb-2">
                   No conversation selected
                 </h3>
-                <p className="text-sm text-slate-500 max-w-sm">
+                <p className="text-sm text-muted-foreground max-w-sm">
                   Choose a conversation from the list to start messaging with renters
                 </p>
               </div>

@@ -21,11 +21,11 @@ export default function VehicleCatalog() {
   if (!vehicles || vehicles.length === 0) {
     return (
       <section className="w-full py-16 px-4 sm:px-6 lg:px-8 font-primary flex flex-col items-center justify-center">
-        <div className="h-16 w-16 bg-slate-100 rounded-full flex items-center justify-center mb-4">
-          <Car className="h-8 w-8 text-slate-400" />
+        <div className="h-16 w-16 bg-muted rounded-full flex items-center justify-center mb-4">
+          <Car className="h-8 w-8 text-muted-foreground" />
         </div>
-        <h2 className="text-xl font-bold text-slate-800 dark:text-white mb-2">No Vehicles Found</h2>
-        <p className="text-slate-500 text-center max-w-md">
+        <h2 className="text-xl font-bold text-foreground dark:text-white mb-2">No Vehicles Found</h2>
+        <p className="text-muted-foreground text-center max-w-md">
           There are currently no vehicles available for rent. Check back later or try adjusting your search filters.
         </p>
       </section>
@@ -39,7 +39,7 @@ export default function VehicleCatalog() {
         {popularCars.length > 0 && (
           <div className="mb-10">
             <div className="mb-5 flex items-center justify-between">
-              <h2 className="text-lg font-bold text-slate-800 dark:text-white">
+              <h2 className="text-lg font-bold text-foreground dark:text-white">
                 Popular 
               </h2>
               <button className="text-primary text-sm font-semibold hover:text-blue-600 transition-colors">
@@ -62,7 +62,7 @@ export default function VehicleCatalog() {
         {recommendedCars.length > 0 && (
           <div>
             <div className="mb-5">
-              <h2 className="text-lg font-bold text-slate-800 dark:text-white">
+              <h2 className="text-lg font-bold text-foreground dark:text-white">
                 Recommendations
               </h2>
             </div>

@@ -162,10 +162,10 @@ export function AddVehicleModal({
     <Dialog open={open} onOpenChange={handleDialogClose}>
       <DialogContent className="max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle className="text-2xl font-bold text-slate-900">
+          <DialogTitle className="text-2xl font-bold text-foreground">
             Add New Vehicle
           </DialogTitle>
-          <DialogDescription className="text-slate-600">
+          <DialogDescription className="text-muted-foreground">
             Fill in the details below to add a new vehicle to your fleet.
           </DialogDescription>
         </DialogHeader>
@@ -176,7 +176,7 @@ export function AddVehicleModal({
 
           {/* Progress Bar */}
           <div className="mb-8">
-            <div className="flex justify-between text-xs text-slate-500 mb-2">
+            <div className="flex justify-between text-xs text-muted-foreground mb-2">
               <span>Step {currentStep + 1} of {vehicleFormSteps.length}</span>
               <span>Vehicle Details</span>
             </div>
@@ -186,7 +186,7 @@ export function AddVehicleModal({
                 <div
                   key={i}
                   className={`h-2 flex-1 rounded-lg transition-all ${
-                    currentStep >= i ? "bg-primary" : "bg-slate-200"
+                    currentStep >= i ? "bg-primary" : "bg-secondary"
                   }`}
                 />
               ))}
@@ -212,7 +212,7 @@ export function AddVehicleModal({
           <Button
             type="button"
             variant="outline"
-            className="flex-1 h-12 rounded-lg border-slate-300"
+            className="flex-1 h-12 rounded-lg border-input"
             onClick={handlePreviousStep}
             disabled={currentStep === 0}
           >

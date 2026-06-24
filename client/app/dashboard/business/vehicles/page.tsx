@@ -284,10 +284,10 @@ export default function BusinessVehiclesPage() {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-2">
         <div className="space-y-1">
-          <h1 className="text-2xl font-bold tracking-tight text-slate-900 font-primary">
+          <h1 className="text-2xl font-bold tracking-tight text-foreground font-primary">
             Vehicle Fleet Management
           </h1>
-          <p className="text-sm text-slate-500 font-secondary">
+          <p className="text-sm text-muted-foreground font-secondary">
             Manage your rental fleet, track performance, and optimize availability
           </p>
         </div>
@@ -302,7 +302,6 @@ export default function BusinessVehiclesPage() {
           </Button> */}
           <Button
             onClick={() => setIsAddModalOpen(true)}
-            className="bg-primary hover:bg-primary/90"
           >
             <Plus className="h-4 w-4 mr-2" />
             Add Vehicle
@@ -348,10 +347,10 @@ export default function BusinessVehiclesPage() {
         <CardContent className="p-6">
           <div className="flex items-center justify-between mb-6">
             <div>
-              <h3 className="text-xl font-semibold text-slate-800 font-primary">
+              <h3 className="text-xl font-semibold text-foreground font-primary">
                 Performance Insights
               </h3>
-              <p className="text-slate-600 font-secondary">
+              <p className="text-muted-foreground font-secondary">
                 Key metrics and recommendations for your fleet
               </p>
             </div>
@@ -360,10 +359,10 @@ export default function BusinessVehiclesPage() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {/* Top Performing Vehicle */}
-            <div className="p-4 bg-green-50 rounded-lg">
+            <div className="p-4 bg-emerald-500/10 rounded-lg">
               <div className="flex items-center gap-3 mb-2">
                 <TrendingUp className="h-5 w-5 text-green-600" />
-                <h4 className="font-semibold text-slate-800">Top Performer</h4>
+                <h4 className="font-semibold text-foreground">Top Performer</h4>
               </div>
               {(() => {
                 if (mappedVehicles.length === 0) return null;
@@ -372,8 +371,8 @@ export default function BusinessVehiclesPage() {
                 , mappedVehicles[0]);
                 return (
                   <>
-                    <p className="text-lg font-bold text-slate-800">{topVehicle?.name}</p>
-                    <p className="text-slate-600">
+                    <p className="text-lg font-bold text-foreground">{topVehicle?.name}</p>
+                    <p className="text-muted-foreground">
                       ₦{topVehicle?.bookingStats?.revenue?.toLocaleString()} revenue
                     </p>
                   </>
@@ -382,10 +381,10 @@ export default function BusinessVehiclesPage() {
             </div>
 
             {/* Low Utilization Alert */}
-            <div className="p-4 bg-amber-50 rounded-lg">
+            <div className="p-4 bg-amber-500/10 rounded-lg">
               <div className="flex items-center gap-3 mb-2">
                 <Clock className="h-5 w-5 text-amber-600" />
-                <h4 className="font-semibold text-slate-800">Needs Attention</h4>
+                <h4 className="font-semibold text-foreground">Needs Attention</h4>
               </div>
               {(() => {
                 const lowUtilizationVehicles = mappedVehicles.filter(v => 
@@ -393,20 +392,20 @@ export default function BusinessVehiclesPage() {
                 );
                 return (
                   <>
-                    <p className="text-lg font-bold text-slate-800">
+                    <p className="text-lg font-bold text-foreground">
                       {lowUtilizationVehicles.length} vehicles
                     </p>
-                    <p className="text-slate-600">Below 50% utilization</p>
+                    <p className="text-muted-foreground">Below 50% utilization</p>
                   </>
                 );
               })()}
             </div>
 
             {/* Upcoming Availability */}
-            <div className="p-4 bg-blue-50 rounded-lg">
+            <div className="p-4 bg-blue-500/10 rounded-lg">
               <div className="flex items-center gap-3 mb-2">
                 <Calendar className="h-5 w-5 text-blue-600" />
-                <h4 className="font-semibold text-slate-800">Coming Available</h4>
+                <h4 className="font-semibold text-foreground">Coming Available</h4>
               </div>
               {(() => {
                 const upcomingVehicles = mappedVehicles.filter(v => 
@@ -414,10 +413,10 @@ export default function BusinessVehiclesPage() {
                 );
                 return (
                   <>
-                    <p className="text-lg font-bold text-slate-800">
+                    <p className="text-lg font-bold text-foreground">
                       {upcomingVehicles.length} vehicles
                     </p>
-                    <p className="text-slate-600">Will be available soon</p>
+                    <p className="text-muted-foreground">Will be available soon</p>
                   </>
                 );
               })()}

@@ -43,8 +43,8 @@ export default function PayoutSummary({
       label: "Completed Trips",
       value: completedBookings.toString(),
       icon: CheckCircle,
-      color: "text-slate-600",
-      bgColor: "bg-slate-100"
+      color: "text-muted-foreground",
+      bgColor: "bg-muted"
     }
   ];
 
@@ -57,7 +57,7 @@ export default function PayoutSummary({
               <stat.icon className={`h-6 w-6 ${stat.color}`} />
             </div>
             <div>
-              <p className="text-sm text-slate-600 font-secondary">{stat.label}</p>
+              <p className="text-sm text-muted-foreground font-secondary">{stat.label}</p>
               <p className="text-2xl font-bold font-primary mt-1">{stat.value}</p>
             </div>
           </div>

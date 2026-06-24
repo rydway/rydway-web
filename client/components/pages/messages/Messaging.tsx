@@ -124,9 +124,9 @@ export function ConversationsList({
   onSelect 
 }: ConversationsListProps) {
   return (
-    <div className="h-full flex flex-col border-r border-slate-200">
-      <div className="p-3 border-b border-slate-200">
-        <h2 className="text-sm font-semibold text-slate-700">Messages</h2>
+    <div className="h-full flex flex-col border-r border-border">
+      <div className="p-3 border-b border-border">
+        <h2 className="text-sm font-semibold text-foreground">Messages</h2>
       </div>
       
       <ScrollArea className="flex-1">
@@ -138,35 +138,35 @@ export function ConversationsList({
               <button
                 key={conv.id}
                 onClick={() => onSelect(conv)}
-                className={`w-full px-3 py-3 flex items-start gap-3 hover:bg-slate-50 transition-colors text-left
-                  ${isSelected ? 'bg-blue-50' : ''}`}
+                className={`w-full px-3 py-3 flex items-start gap-3 hover:bg-muted/50 transition-colors text-left
+                  ${isSelected ? 'bg-blue-500/10' : ''}`}
               >
-                <Avatar className="h-10 w-10 shrink-0 border border-slate-200">
+                <Avatar className="h-10 w-10 shrink-0 border border-border">
                   <AvatarImage src={conv.otherParty.avatar} />
-                  <AvatarFallback className="bg-slate-100 text-xs">
+                  <AvatarFallback className="bg-muted text-xs">
                     {conv.otherParty.name.charAt(0)}
                   </AvatarFallback>
                 </Avatar>
                 
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center justify-between">
-                    <span className="text-sm font-medium text-slate-800 truncate">
+                    <span className="text-sm font-medium text-foreground truncate">
                       {conv.otherParty.name}
                     </span>
-                    <span className="text-[10px] text-slate-500 whitespace-nowrap ml-2">
+                    <span className="text-[10px] text-muted-foreground whitespace-nowrap ml-2">
                       {formatDistanceToNow(conv.updatedAt, { addSuffix: true })}
                     </span>
                   </div>
                   
                   <div className="flex items-center gap-1 mt-0.5">
-                    <Car className="h-3 w-3 text-slate-400 shrink-0" />
-                    <span className="text-[11px] text-slate-600 truncate">
+                    <Car className="h-3 w-3 text-muted-foreground shrink-0" />
+                    <span className="text-[11px] text-muted-foreground truncate">
                       {conv.booking.carName}
                     </span>
                   </div>
                   
                   {conv.lastMessage && (
-                    <p className="text-xs text-slate-500 truncate mt-1">
+                    <p className="text-xs text-muted-foreground truncate mt-1">
                       {conv.lastMessage.senderId === currentUserId ? 'You: ' : ''}
                       {conv.lastMessage.text}
                     </p>
@@ -174,7 +174,7 @@ export function ConversationsList({
                 </div>
                 
                 {conv.unreadCount > 0 && (
-                  <span className="min-w-[1.25rem] h-5 flex items-center justify-center bg-blue-500 text-white text-[10px] font-medium rounded-full px-1.5 ml-1">
+                  <span className="min-w-[1.25rem] h-5 flex items-center justify-center bg-blue-500/100 text-white text-[10px] font-medium rounded-full px-1.5 ml-1">
                     {conv.unreadCount}
                   </span>
                 )}
@@ -198,43 +198,43 @@ interface ChatHeaderProps {
 function ChatHeader({ booking, otherParty, onBack }: ChatHeaderProps) {
   const getStatusColor = (status: BookingContext['status']) => {
     switch (status) {
-      case 'active': return 'bg-green-100 text-green-700 border-green-200';
-      case 'completed': return 'bg-slate-100 text-slate-600 border-slate-200';
-      case 'cancelled': return 'bg-red-100 text-red-700 border-red-200';
+      case 'active': return 'bg-green-100 text-emerald-600 dark:text-emerald-400 border-emerald-500/20';
+      case 'completed': return 'bg-muted text-muted-foreground border-border';
+      case 'cancelled': return 'bg-red-100 text-destructive dark:text-red-400 border-destructive/20';
     }
   };
 
   return (
-    <div className="flex items-center gap-3 p-4 border-b border-slate-200 bg-white shrink-0">
+    <div className="flex items-center gap-3 p-4 border-b border-border bg-white shrink-0">
       {onBack && (
         <Button variant="ghost" size="sm" className="h-8 w-8 p-0 lg:hidden" onClick={onBack}>
           <ChevronLeft className="h-4 w-4" />
         </Button>
       )}
       
-      <Avatar className="h-10 w-10 border border-slate-200 shrink-0">
+      <Avatar className="h-10 w-10 border border-border shrink-0">
         <AvatarImage src={otherParty.avatar} />
-        <AvatarFallback className="bg-slate-100 text-slate-700">
+        <AvatarFallback className="bg-muted text-foreground">
           {otherParty.name.charAt(0)}
         </AvatarFallback>
       </Avatar>
       
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-2">
-          <h3 className="text-sm font-semibold text-slate-800 truncate">
+          <h3 className="text-sm font-semibold text-foreground truncate">
             {otherParty.name}
           </h3>
-          <Badge variant="outline" className="text-[10px] h-5 px-1.5 bg-slate-50">
+          <Badge variant="outline" className="text-[10px] h-5 px-1.5 bg-muted/50">
             {booking.type === 'with-driver' ? 'With Driver' : 'Self-Drive'}
           </Badge>
         </div>
         
         <div className="flex items-center gap-2 mt-0.5">
-          <span className="text-xs text-slate-600 truncate">
+          <span className="text-xs text-muted-foreground truncate">
             {booking.carName}
           </span>
           <span className="text-xs text-slate-300">•</span>
-          <span className="text-xs text-slate-500">
+          <span className="text-xs text-muted-foreground">
             #{booking.id.slice(-6)}
           </span>
           <Badge 
@@ -262,8 +262,8 @@ function MessageBubble({ message, isOwn, senderName }: MessageBubbleProps) {
   if (message.type === 'system') {
     return (
       <div className="flex justify-center my-3">
-        <div className="px-4 py-2 bg-slate-100 rounded-full">
-          <span className="text-xs text-slate-600">{message.text}</span>
+        <div className="px-4 py-2 bg-muted rounded-full">
+          <span className="text-xs text-muted-foreground">{message.text}</span>
         </div>
       </div>
     );
@@ -274,7 +274,7 @@ function MessageBubble({ message, isOwn, senderName }: MessageBubbleProps) {
     <div className={`flex mb-4 ${isOwn ? 'justify-end' : 'justify-start'}`}>
       <div className={`max-w-[80%] ${isOwn ? 'order-2' : 'order-1'}`}>
         {!isOwn && (
-          <span className="text-[10px] text-slate-500 ml-1 mb-1 block">
+          <span className="text-[10px] text-muted-foreground ml-1 mb-1 block">
             {senderName}
           </span>
         )}
@@ -282,8 +282,8 @@ function MessageBubble({ message, isOwn, senderName }: MessageBubbleProps) {
         <div
           className={`px-3 py-2 rounded-lg ${
             isOwn 
-              ? 'bg-blue-500 text-white' 
-              : 'bg-slate-100 text-slate-800'
+              ? 'bg-blue-500/100 text-white' 
+              : 'bg-muted text-foreground'
           }`}
         >
           <p className="text-sm break-words">{message.text}</p>
@@ -292,7 +292,7 @@ function MessageBubble({ message, isOwn, senderName }: MessageBubbleProps) {
           {message.attachments?.map((att) => (
             <div key={att.id} className="mt-2">
               {att.type === 'image' ? (
-                <div className="rounded-lg overflow-hidden border border-slate-200">
+                <div className="rounded-lg overflow-hidden border border-border">
                   <img 
                     src={att.url} 
                     alt={att.name}
@@ -300,7 +300,7 @@ function MessageBubble({ message, isOwn, senderName }: MessageBubbleProps) {
                   />
                 </div>
               ) : (
-                <div className="flex items-center gap-2 p-2 bg-white/10 rounded border border-slate-200">
+                <div className="flex items-center gap-2 p-2 bg-white/10 rounded border border-border">
                   <FileText className="h-4 w-4 shrink-0" />
                   <span className="text-xs truncate flex-1">{att.name}</span>
                   <Button variant="ghost" size="sm" className="h-6 w-6 p-0">
@@ -312,7 +312,7 @@ function MessageBubble({ message, isOwn, senderName }: MessageBubbleProps) {
           ))}
         </div>
         
-        <div className={`flex items-center gap-1 mt-1 text-[10px] text-slate-500 ${isOwn ? 'justify-end' : 'justify-start'}`}>
+        <div className={`flex items-center gap-1 mt-1 text-[10px] text-muted-foreground ${isOwn ? 'justify-end' : 'justify-start'}`}>
           <span>{format(message.timestamp, 'h:mm a')}</span>
           {isOwn && message.status === 'failed' && (
             <span className="flex items-center gap-1 text-red-500">
@@ -321,7 +321,7 @@ function MessageBubble({ message, isOwn, senderName }: MessageBubbleProps) {
             </span>
           )}
           {isOwn && message.status === 'sent' && (
-            <Check className="h-3 w-3 text-slate-400" />
+            <Check className="h-3 w-3 text-muted-foreground" />
           )}
         </div>
       </div>
@@ -346,7 +346,7 @@ function QuickReplies({ templates, onSelect }: QuickRepliesProps) {
         variant="outline"
         size="sm"
         onClick={() => setIsOpen(!isOpen)}
-        className="h-8 text-xs border-slate-200"
+        className="h-8 text-xs border-border"
       >
         Quick Replies
       </Button>
@@ -357,7 +357,7 @@ function QuickReplies({ templates, onSelect }: QuickRepliesProps) {
             className="fixed inset-0 z-40" 
             onClick={() => setIsOpen(false)}
           />
-          <div className="absolute bottom-full left-0 mb-2 w-64 bg-white border border-slate-200 rounded-lg shadow-lg z-50 p-2">
+          <div className="absolute bottom-full left-0 mb-2 w-64 bg-white border border-border rounded-lg shadow-lg z-50 p-2">
             <div className="flex flex-wrap gap-1.5">
               {templates.map((template) => (
                 <button
@@ -366,7 +366,7 @@ function QuickReplies({ templates, onSelect }: QuickRepliesProps) {
                     onSelect(template.text, template.requiresAttachment, template.attachmentType);
                     setIsOpen(false);
                   }}
-                  className="px-2.5 py-1.5 text-xs bg-slate-50 hover:bg-slate-100 text-slate-700 rounded-md border border-slate-200 transition-colors text-left"
+                  className="px-2.5 py-1.5 text-xs bg-muted/50 hover:bg-muted text-foreground rounded-md border border-border transition-colors text-left"
                 >
                   {template.text}
                 </button>
@@ -443,11 +443,11 @@ function MessageInput({ onSendMessage, templates, maxFileSize = 10 }: MessageInp
   };
 
   return (
-    <form onSubmit={handleSubmit} className="p-4 border-t border-slate-200 bg-white shrink-0">
+    <form onSubmit={handleSubmit} className="p-4 border-t border-border bg-white shrink-0">
       {attachments.length > 0 && (
         <div className="flex flex-wrap gap-2 mb-3">
           {attachments.map((file, index) => (
-            <div key={index} className="flex items-center gap-2 px-2 py-1 bg-slate-100 rounded-md text-xs">
+            <div key={index} className="flex items-center gap-2 px-2 py-1 bg-muted rounded-md text-xs">
               {file.type.startsWith('image/') ? (
                 <ImageIcon className="h-3 w-3" />
               ) : (
@@ -457,7 +457,7 @@ function MessageInput({ onSendMessage, templates, maxFileSize = 10 }: MessageInp
               <button
                 type="button"
                 onClick={() => removeAttachment(index)}
-                className="text-slate-500 hover:text-slate-700"
+                className="text-muted-foreground hover:text-foreground"
               >
                 <X className="h-3 w-3" />
               </button>
@@ -479,7 +479,7 @@ function MessageInput({ onSendMessage, templates, maxFileSize = 10 }: MessageInp
             placeholder="Type a message..."
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            className="min-h-[40px] max-h-[120px] resize-none text-sm border-slate-200"
+            className="min-h-[40px] max-h-[120px] resize-none text-sm border-border"
             onKeyDown={(e) => {
               if (e.key === 'Enter' && !e.shiftKey) {
                 e.preventDefault();
@@ -503,7 +503,7 @@ function MessageInput({ onSendMessage, templates, maxFileSize = 10 }: MessageInp
               className="h-7 w-7 p-0"
               onClick={() => imageInputRef.current?.click()}
             >
-              <ImageIcon className="h-4 w-4 text-slate-500" />
+              <ImageIcon className="h-4 w-4 text-muted-foreground" />
             </Button>
             
             <input
@@ -520,7 +520,7 @@ function MessageInput({ onSendMessage, templates, maxFileSize = 10 }: MessageInp
               className="h-7 w-7 p-0"
               onClick={() => fileInputRef.current?.click()}
             >
-              <Paperclip className="h-4 w-4 text-slate-500" />
+              <Paperclip className="h-4 w-4 text-muted-foreground" />
             </Button>
           </div>
         </div>
@@ -624,7 +624,7 @@ export function SupportChat({
 
   return (
     <div className="flex flex-col h-full bg-white">
-      <div className="flex items-center gap-3 p-4 border-b border-slate-200 bg-white shrink-0">
+      <div className="flex items-center gap-3 p-4 border-b border-border bg-white shrink-0">
         {onBack && (
           <Button variant="ghost" size="sm" className="h-8 w-8 p-0 lg:hidden" onClick={onBack}>
             <ChevronLeft className="h-4 w-4" />
@@ -633,14 +633,14 @@ export function SupportChat({
         
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2">
-            <h3 className="text-sm font-semibold text-slate-800 truncate">
+            <h3 className="text-sm font-semibold text-foreground truncate">
               {conversation.subject}
             </h3>
-            <Badge variant="outline" className="text-[10px] h-5 px-1.5 bg-slate-50">
+            <Badge variant="outline" className="text-[10px] h-5 px-1.5 bg-muted/50">
               {conversation.category}
             </Badge>
           </div>
-          <span className="text-xs text-slate-500">
+          <span className="text-xs text-muted-foreground">
             Support conversation
           </span>
         </div>

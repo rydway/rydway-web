@@ -11,23 +11,23 @@ interface RevenueChartProps {
 
 export function RevenueChart({ data }: RevenueChartProps) {
   return (
-    <Card className="border-slate-200 shadow-sm font-secondary">
+    <Card className="border-border shadow-sm font-secondary">
       <CardHeader className="pb-2">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
           <div className="flex items-center gap-2">
             <BarChart3 className="h-5 w-5 text-blue-600" />
-            <CardTitle className="text-lg font-semibold text-slate-800 font-primary">
+            <CardTitle className="text-lg font-semibold text-foreground font-primary">
               Revenue & Profit Trend
             </CardTitle>
           </div>
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-2">
               <div className="h-3 w-3 rounded bg-blue-600"></div>
-              <span className="text-xs text-slate-600">Revenue</span>
+              <span className="text-xs text-muted-foreground">Revenue</span>
             </div>
             <div className="flex items-center gap-2">
-              <div className="h-3 w-3 rounded bg-green-500"></div>
-              <span className="text-xs text-slate-600">Profit</span>
+              <div className="h-3 w-3 rounded bg-emerald-500/100"></div>
+              <span className="text-xs text-muted-foreground">Profit</span>
             </div>
           </div>
         </div>

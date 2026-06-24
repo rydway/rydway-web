@@ -78,24 +78,24 @@ export default function SignInForm({
   return (
     <div>
       <div className="mb-8">
-        <h2 className="text-3xl font-bold text-slate-900 mb-2">Welcome Back</h2>
-        <p className="text-slate-600">Login to continue your journey</p>
+        <h2 className="text-3xl font-bold text-foreground mb-2">Welcome Back</h2>
+        <p className="text-muted-foreground">Login to continue your journey</p>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-6">
         <div>
-          <Label htmlFor="email" className="text-sm font-medium text-slate-700 mb-2 block">
+          <Label htmlFor="email" className="text-sm font-medium text-foreground mb-2 block">
             Email Address
           </Label>
           <div className="relative">
-            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" />
+            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
             <Input
               id="email"
               type="email"
               placeholder="you@example.com"
               value={formData.email}
               onChange={(e) => handleChange('email', e.target.value)}
-              className={`h-12 pl-11 rounded-lg border-slate-300 ${
+              className={`h-12 pl-11 rounded-lg border-input ${
                 errors.email ? 'border-red-500' : ''
               }`}
             />
@@ -107,7 +107,7 @@ export default function SignInForm({
 
         <div>
           <div className="flex justify-between items-center mb-2">
-            <Label htmlFor="password" className="text-sm font-medium text-slate-700">
+            <Label htmlFor="password" className="text-sm font-medium text-foreground">
               Password
             </Label>
             <Link href="/forgot-password" className="text-sm text-primary hover:underline">
@@ -115,21 +115,21 @@ export default function SignInForm({
             </Link>
           </div>
           <div className="relative">
-            <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" />
+            <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
             <Input
               id="password"
               type={showPassword ? "text" : "password"}
               placeholder="••••••••"
               value={formData.password}
               onChange={(e) => handleChange('password', e.target.value)}
-              className={`h-12 pl-11 pr-11 rounded-lg border-slate-300 ${
+              className={`h-12 pl-11 pr-11 rounded-lg border-input ${
                 errors.password ? 'border-red-500' : ''
               }`}
             />
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-muted-foreground"
             >
               {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
             </button>
@@ -161,9 +161,9 @@ export default function SignInForm({
       {/* Alternative Login Options */}
       <div className="mt-8">
         <div className="flex items-center mb-4">
-          <div className="flex-1 border-t border-slate-300"></div>
-          <span className="mx-4 text-sm text-slate-500">Or continue with</span>
-          <div className="flex-1 border-t border-slate-300"></div>
+          <div className="flex-1 border-t border-input"></div>
+          <span className="mx-4 text-sm text-muted-foreground">Or continue with</span>
+          <div className="flex-1 border-t border-input"></div>
         </div>
 
         <div className="flex gap-3">
@@ -171,7 +171,7 @@ export default function SignInForm({
             type="button"
             variant="outline"
             onClick={onGoogleSignIn}
-            className="flex-1 h-12 rounded-lg border-slate-300 hover:bg-slate-50 flex items-center justify-center gap-2"
+            className="flex-1 h-12 rounded-lg border-input hover:bg-accent flex items-center justify-center gap-2"
           >
             {/* Google Icon SVG with brand colors */}
             <svg className="h-5 w-5" viewBox="0 0 24 24">
@@ -198,7 +198,7 @@ export default function SignInForm({
             type="button"
             variant="outline"
             onClick={onFacebookSignIn}
-            className="flex-1 h-12 rounded-lg border-slate-300 hover:bg-slate-50 flex items-center justify-center gap-2"
+            className="flex-1 h-12 rounded-lg border-input hover:bg-accent flex items-center justify-center gap-2"
           >
             {/* Facebook Icon SVG with brand colors */}
             <svg className="h-5 w-5" viewBox="0 0 24 24" fill="#1877F2">
@@ -210,7 +210,7 @@ export default function SignInForm({
       </div>
 
       <div className="mt-8 text-center">
-        <p className="text-sm text-slate-600">
+        <p className="text-sm text-muted-foreground">
           Don't have an account?{" "}
           <button
             onClick={onToggleMode}

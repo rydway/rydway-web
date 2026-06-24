@@ -23,7 +23,7 @@ export function CustomTabs({
 }: CustomTabsProps) {
   return (
     <div className={cn(
-      "flex border-b border-slate-200 dark:border-slate-800 font-primary",
+      "flex overflow-x-auto scrollbar-hide whitespace-nowrap border-b border-border dark:border-border font-primary w-full max-w-full",
       className
     )}>
       {tabs.map((tab) => (
@@ -35,7 +35,7 @@ export function CustomTabs({
             "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30 focus-visible:ring-offset-1",
             activeTab === tab.id
               ? "text-primary dark:text-primary/90 font-semibold"
-              : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-300 font-secondary hover:bg-slate-50 dark:hover:bg-slate-800/50"
+              : "text-muted-foreground dark:text-muted-foreground hover:text-foreground dark:hover:text-slate-300 font-secondary hover:bg-muted/50 dark:hover:bg-slate-800/50"
           )}
         >
           {tab.label}
@@ -44,13 +44,13 @@ export function CustomTabs({
               "h-5 min-w-5 flex items-center justify-center text-xs rounded-full px-1 font-primary transition-colors duration-200",
               activeTab === tab.id
                 ? "bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary/90"
-                : "bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400"
+                : "bg-muted text-muted-foreground dark:bg-slate-800 dark:text-muted-foreground"
             )}>
               {tab.count}
             </span>
           )}
           {activeTab === tab.id && (
-            <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary dark:bg-primary/90" />
+            <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary dark:bg-primary/90 text-primary-foreground" />
           )}
         </button>
       ))}

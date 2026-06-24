@@ -105,27 +105,27 @@ export function BookingDetailsBase({
 
       <TabsContent value="details" className="space-y-6">
         {/* Car & Contact Info */}
-        <Card className="border-slate-200 dark:border-slate-800">
+        <Card className="border-border dark:border-border">
           <CardContent className="p-6 space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Car Info */}
               <div className="space-y-4">
                 <div className="flex items-center gap-2">
                   <Car className="h-5 w-5 text-primary" />
-                  <h3 className="font-semibold text-slate-800 dark:text-white font-primary">Vehicle Information</h3>
+                  <h3 className="font-semibold text-foreground dark:text-white font-primary">Vehicle Information</h3>
                 </div>
                 <div className="space-y-3">
                   <div>
-                    <p className="text-sm text-slate-600 dark:text-slate-300 font-secondary">Car Model</p>
-                    <p className="font-medium text-slate-800 dark:text-white font-primary">{data.carName}</p>
+                    <p className="text-sm text-muted-foreground dark:text-slate-300 font-secondary">Car Model</p>
+                    <p className="font-medium text-foreground dark:text-white font-primary">{data.carName}</p>
                   </div>
                   <div>
-                    <p className="text-sm text-slate-600 dark:text-slate-300 font-secondary">Car Type</p>
-                    <p className="font-medium text-slate-800 dark:text-white font-primary">{data.carType}</p>
+                    <p className="text-sm text-muted-foreground dark:text-slate-300 font-secondary">Car Type</p>
+                    <p className="font-medium text-foreground dark:text-white font-primary">{data.carType}</p>
                   </div>
                   <div>
-                    <p className="text-sm text-slate-600 dark:text-slate-300 font-secondary">Daily Rate</p>
-                    <p className="font-medium text-slate-800 dark:text-white font-primary">₦{data.dailyRate.toLocaleString()}/day</p>
+                    <p className="text-sm text-muted-foreground dark:text-slate-300 font-secondary">Daily Rate</p>
+                    <p className="font-medium text-foreground dark:text-white font-primary">₦{data.dailyRate.toLocaleString()}/day</p>
                   </div>
                 </div>
               </div>
@@ -134,20 +134,20 @@ export function BookingDetailsBase({
               <div className="space-y-4">
                 <div className="flex items-center gap-2">
                   <User className="h-5 w-5 text-primary" />
-                  <h3 className="font-semibold text-slate-800 dark:text-white font-primary">
+                  <h3 className="font-semibold text-foreground dark:text-white font-primary">
                     {role === 'renter' ? 'Owner' : 'Renter'} Information
                   </h3>
                 </div>
                 <div className="space-y-3">
                   <div>
-                    <p className="text-sm text-slate-600 dark:text-slate-300 font-secondary">Name</p>
-                    <p className="font-medium text-slate-800 dark:text-white font-primary">
+                    <p className="text-sm text-muted-foreground dark:text-slate-300 font-secondary">Name</p>
+                    <p className="font-medium text-foreground dark:text-white font-primary">
                       {role === 'renter' ? data.ownerName : data.renterName}
                     </p>
                   </div>
                   <div>
-                    <p className="text-sm text-slate-600 dark:text-slate-300 font-secondary">Phone</p>
-                    <p className="font-medium text-slate-800 dark:text-white font-primary">
+                    <p className="text-sm text-muted-foreground dark:text-slate-300 font-secondary">Phone</p>
+                    <p className="font-medium text-foreground dark:text-white font-primary">
                       {role === 'renter' ? data.ownerPhone : data.renterPhone}
                     </p>
                   </div>
@@ -168,30 +168,30 @@ export function BookingDetailsBase({
         </Card>
 
         {/* Rental Details */}
-        <Card className="border-slate-200 dark:border-slate-800">
+        <Card className="border-border dark:border-border">
           <CardContent className="p-6 space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Dates & Times */}
               <div className="space-y-4">
                 <div className="flex items-center gap-2">
                   <Calendar className="h-5 w-5 text-primary" />
-                  <h3 className="font-semibold text-slate-800 dark:text-white font-primary">Dates & Times</h3>
+                  <h3 className="font-semibold text-foreground dark:text-white font-primary">Dates & Times</h3>
                 </div>
                 <div className="space-y-3">
                   <div>
-                    <p className="text-sm text-slate-600 dark:text-slate-300 font-secondary">Rental Period</p>
-                    <p className="font-medium text-slate-800 dark:text-white font-primary">
+                    <p className="text-sm text-muted-foreground dark:text-slate-300 font-secondary">Rental Period</p>
+                    <p className="font-medium text-foreground dark:text-white font-primary">
                       {data.startDate} - {data.endDate} ({data.totalDays} days)
                     </p>
                   </div>
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <p className="text-sm text-slate-600 dark:text-slate-300 font-secondary">Pickup Time</p>
-                      <p className="font-medium text-slate-800 dark:text-white font-primary">{data.pickupTime}</p>
+                      <p className="text-sm text-muted-foreground dark:text-slate-300 font-secondary">Pickup Time</p>
+                      <p className="font-medium text-foreground dark:text-white font-primary">{data.pickupTime}</p>
                     </div>
                     <div>
-                      <p className="text-sm text-slate-600 dark:text-slate-300 font-secondary">Dropoff Time</p>
-                      <p className="font-medium text-slate-800 dark:text-white font-primary">{data.dropoffTime}</p>
+                      <p className="text-sm text-muted-foreground dark:text-slate-300 font-secondary">Dropoff Time</p>
+                      <p className="font-medium text-foreground dark:text-white font-primary">{data.dropoffTime}</p>
                     </div>
                   </div>
                 </div>
@@ -201,16 +201,16 @@ export function BookingDetailsBase({
               <div className="space-y-4">
                 <div className="flex items-center gap-2">
                   <MapPin className="h-5 w-5 text-primary" />
-                  <h3 className="font-semibold text-slate-800 dark:text-white font-primary">Locations</h3>
+                  <h3 className="font-semibold text-foreground dark:text-white font-primary">Locations</h3>
                 </div>
                 <div className="space-y-3">
                   <div>
-                    <p className="text-sm text-slate-600 dark:text-slate-300 font-secondary">Pickup Location</p>
-                    <p className="font-medium text-slate-800 dark:text-white font-primary">{data.pickupLocation}</p>
+                    <p className="text-sm text-muted-foreground dark:text-slate-300 font-secondary">Pickup Location</p>
+                    <p className="font-medium text-foreground dark:text-white font-primary">{data.pickupLocation}</p>
                   </div>
                   <div>
-                    <p className="text-sm text-slate-600 dark:text-slate-300 font-secondary">Dropoff Location</p>
-                    <p className="font-medium text-slate-800 dark:text-white font-primary">{data.dropoffLocation}</p>
+                    <p className="text-sm text-muted-foreground dark:text-slate-300 font-secondary">Dropoff Location</p>
+                    <p className="font-medium text-foreground dark:text-white font-primary">{data.dropoffLocation}</p>
                   </div>
                 </div>
               </div>
@@ -220,24 +220,24 @@ export function BookingDetailsBase({
 
         {/* Current Status */}
         {data.status === 'active' && data.currentLocation && (
-          <Card className="border-slate-200 dark:border-slate-800">
+          <Card className="border-border dark:border-border">
             <CardContent className="p-6">
               <div className="flex items-center gap-2 mb-4">
                 <Navigation className="h-5 w-5 text-primary" />
-                <h3 className="font-semibold text-slate-800 dark:text-white font-primary">Current Status</h3>
+                <h3 className="font-semibold text-foreground dark:text-white font-primary">Current Status</h3>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
-                  <p className="text-sm text-slate-600 dark:text-slate-300 mb-1 font-secondary">Current Location</p>
-                  <p className="font-medium text-slate-800 dark:text-white font-primary">{data.currentLocation}</p>
+                  <p className="text-sm text-muted-foreground dark:text-slate-300 mb-1 font-secondary">Current Location</p>
+                  <p className="font-medium text-foreground dark:text-white font-primary">{data.currentLocation}</p>
                 </div>
                 {data.fuelLevel && (
                   <div>
-                    <p className="text-sm text-slate-600 dark:text-slate-300 mb-1 font-secondary">Fuel Level</p>
+                    <p className="text-sm text-muted-foreground dark:text-slate-300 mb-1 font-secondary">Fuel Level</p>
                     <div className="flex items-center gap-3">
-                      <div className="flex-1 h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+                      <div className="flex-1 h-2 bg-secondary dark:bg-slate-700 rounded-full overflow-hidden">
                         <div 
-                          className="h-full bg-green-500"
+                          className="h-full bg-emerald-500/100"
                           style={{ width: `${data.fuelLevel}%` }}
                         />
                       </div>
@@ -251,26 +251,26 @@ export function BookingDetailsBase({
         )}
 
         {/* Extras & Notes */}
-        <Card className="border-slate-200 dark:border-slate-800">
+        <Card className="border-border dark:border-border">
           <CardContent className="p-6">
             <div className="space-y-4">
               <div>
-                <h3 className="font-semibold text-slate-800 dark:text-white mb-3 font-primary">Additional Services</h3>
+                <h3 className="font-semibold text-foreground dark:text-white mb-3 font-primary">Additional Services</h3>
                 <div className="flex flex-wrap gap-3">
                   {data.extras.insurance && (
-                    <Badge className="flex items-center gap-1 bg-primary/10 text-primary border-primary/20 dark:bg-primary/20 dark:text-primary/90 dark:border-primary/30 font-primary">
+                    <Badge className="flex items-center gap-1 bg-primary/10 text-primary border-primary/20 dark:bg-primary/20 dark:text-primary/90 dark:border-primary/30 font-primary text-primary-foreground">
                       <Shield className="h-3 w-3" />
                       Insurance
                     </Badge>
                   )}
                   {data.extras.gps && (
-                    <Badge className="flex items-center gap-1 bg-primary/10 text-primary border-primary/20 dark:bg-primary/20 dark:text-primary/90 dark:border-primary/30 font-primary">
+                    <Badge className="flex items-center gap-1 bg-primary/10 text-primary border-primary/20 dark:bg-primary/20 dark:text-primary/90 dark:border-primary/30 font-primary text-primary-foreground">
                       <Navigation className="h-3 w-3" />
                       GPS
                     </Badge>
                   )}
                   {data.extras.childSeat && (
-                    <Badge className="flex items-center gap-1 bg-primary/10 text-primary border-primary/20 dark:bg-primary/20 dark:text-primary/90 dark:border-primary/30 font-primary">
+                    <Badge className="flex items-center gap-1 bg-primary/10 text-primary border-primary/20 dark:bg-primary/20 dark:text-primary/90 dark:border-primary/30 font-primary text-primary-foreground">
                       Child Seat
                     </Badge>
                   )}
@@ -279,8 +279,8 @@ export function BookingDetailsBase({
 
               {data.notes && (
                 <div>
-                  <h3 className="font-semibold text-slate-800 dark:text-white mb-2 font-primary">Special Notes</h3>
-                  <p className="text-slate-600 dark:text-slate-300 bg-slate-50 dark:bg-slate-800 p-3 rounded font-secondary">
+                  <h3 className="font-semibold text-foreground dark:text-white mb-2 font-primary">Special Notes</h3>
+                  <p className="text-muted-foreground dark:text-slate-300 bg-muted/50 dark:bg-slate-800 p-3 rounded font-secondary">
                     {data.notes}
                   </p>
                 </div>
@@ -292,17 +292,17 @@ export function BookingDetailsBase({
 
       <TabsContent value="timeline">
         {/* Timeline Content */}
-        <Card className="border-slate-200 dark:border-slate-800">
+        <Card className="border-border dark:border-border">
           <CardContent className="p-6">
             <div className="space-y-6">
               <div className="flex items-start gap-4">
-                <div className="h-8 w-8 rounded-full bg-green-50 dark:bg-green-900/30 flex items-center justify-center flex-shrink-0">
+                <div className="h-8 w-8 rounded-full bg-emerald-500/10 dark:bg-green-900/30 flex items-center justify-center flex-shrink-0">
                   <CheckCircle className="h-4 w-4 text-green-600 dark:text-green-400" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="font-medium text-slate-800 dark:text-white font-primary">Booking Requested</p>
-                  <p className="text-sm text-slate-500 dark:text-slate-400 font-secondary">{data.createdAt} • 10:30 AM</p>
-                  <p className="text-sm text-slate-600 dark:text-slate-300 mt-1 font-secondary">
+                  <p className="font-medium text-foreground dark:text-white font-primary">Booking Requested</p>
+                  <p className="text-sm text-muted-foreground dark:text-muted-foreground font-secondary">{data.createdAt} • 10:30 AM</p>
+                  <p className="text-sm text-muted-foreground dark:text-slate-300 mt-1 font-secondary">
                     Booking request submitted by {data.renterName}
                   </p>
                 </div>
@@ -314,15 +314,15 @@ export function BookingDetailsBase({
 
       <TabsContent value="documents">
         {/* Documents Content */}
-        <Card className="border-slate-200 dark:border-slate-800">
+        <Card className="border-border dark:border-border">
           <CardContent className="p-6">
             <div className="space-y-4">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between p-4 border border-slate-200 dark:border-slate-800 rounded-lg gap-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between p-4 border border-border dark:border-border rounded-lg gap-4">
                 <div className="flex items-center gap-3">
                   <FileText className="h-5 w-5 text-primary" />
                   <div className="min-w-0">
-                    <p className="font-medium text-slate-800 dark:text-white font-primary truncate">Rental Agreement</p>
-                    <p className="text-sm text-slate-500 dark:text-slate-400 font-secondary">PDF • 2.4 MB</p>
+                    <p className="font-medium text-foreground dark:text-white font-primary truncate">Rental Agreement</p>
+                    <p className="text-sm text-muted-foreground dark:text-muted-foreground font-secondary">PDF • 2.4 MB</p>
                   </div>
                 </div>
                 <Button variant="outline" size="sm" className="flex items-center gap-2 font-primary flex-shrink-0">
@@ -340,33 +340,33 @@ export function BookingDetailsBase({
   const defaultRightColumn = (
     <>
       {/* Price Summary */}
-      <Card className="border-slate-200 dark:border-slate-800">
+      <Card className="border-border dark:border-border">
         <CardContent className="p-6">
-          <h3 className="font-semibold text-slate-800 dark:text-white mb-4 font-primary">Price Summary</h3>
+          <h3 className="font-semibold text-foreground dark:text-white mb-4 font-primary">Price Summary</h3>
           <div className="space-y-3">
             <div className="flex justify-between">
-              <span className="text-slate-600 dark:text-slate-300 font-secondary">Daily Rate × {data.totalDays} days</span>
+              <span className="text-muted-foreground dark:text-slate-300 font-secondary">Daily Rate × {data.totalDays} days</span>
               <span className="font-medium font-primary">₦{(data.dailyRate * data.totalDays).toLocaleString()}</span>
             </div>
             {data.extras.insurance && (
               <div className="flex justify-between">
-                <span className="text-slate-600 dark:text-slate-300 font-secondary">Insurance</span>
+                <span className="text-muted-foreground dark:text-slate-300 font-secondary">Insurance</span>
                 <span className="font-medium font-primary">₦5,000</span>
               </div>
             )}
             {data.extras.childSeat && (
               <div className="flex justify-between">
-                <span className="text-slate-600 dark:text-slate-300 font-secondary">Child Seat</span>
+                <span className="text-muted-foreground dark:text-slate-300 font-secondary">Child Seat</span>
                 <span className="font-medium font-primary">₦3,000</span>
               </div>
             )}
             <Separator />
             <div className="flex justify-between font-bold text-lg">
-              <span className="text-slate-800 dark:text-white font-primary">Total Amount</span>
+              <span className="text-foreground dark:text-white font-primary">Total Amount</span>
               <span className="text-primary dark:text-primary/90 font-primary">₦{data.totalAmount.toLocaleString()}</span>
             </div>
             <div className="flex items-center justify-between">
-              <span className="text-sm text-slate-500 dark:text-slate-400 font-secondary">Payment Status</span>
+              <span className="text-sm text-muted-foreground dark:text-muted-foreground font-secondary">Payment Status</span>
               <Badge variant={getPaymentBadgeVariant(data.paymentStatus)} className="font-primary">
                 {data.paymentStatus}
               </Badge>
@@ -376,20 +376,20 @@ export function BookingDetailsBase({
       </Card>
 
       {/* Quick Info */}
-      <Card className="border-slate-200 dark:border-slate-800">
+      <Card className="border-border dark:border-border">
         <CardContent className="p-6">
-          <h3 className="font-semibold text-slate-800 dark:text-white mb-4 font-primary">Quick Info</h3>
+          <h3 className="font-semibold text-foreground dark:text-white mb-4 font-primary">Quick Info</h3>
           <div className="space-y-3 text-sm">
             <div>
-              <p className="text-slate-500 dark:text-slate-400 font-secondary">Booking ID</p>
-              <p className="font-medium text-slate-800 dark:text-white font-primary">{data.id}</p>
+              <p className="text-muted-foreground dark:text-muted-foreground font-secondary">Booking ID</p>
+              <p className="font-medium text-foreground dark:text-white font-primary">{data.id}</p>
             </div>
             <div>
-              <p className="text-slate-500 dark:text-slate-400 font-secondary">Created On</p>
-              <p className="font-medium text-slate-800 dark:text-white font-primary">{data.createdAt}</p>
+              <p className="text-muted-foreground dark:text-muted-foreground font-secondary">Created On</p>
+              <p className="font-medium text-foreground dark:text-white font-primary">{data.createdAt}</p>
             </div>
             <div>
-              <p className="text-slate-500 dark:text-slate-400 font-secondary">Booking Status</p>
+              <p className="text-muted-foreground dark:text-muted-foreground font-secondary">Booking Status</p>
               <div className="mt-1">
                 <StatusBadge status={data.status} showIcon={true} />
               </div>
@@ -419,10 +419,10 @@ export function BookingDetailsBase({
             </Button>
           )}
           <div className="space-y-1">
-            <h1 className="text-2xl font-bold tracking-tight text-slate-900 font-primary">
+            <h1 className="text-2xl font-bold tracking-tight text-foreground font-primary">
               Booking #{data.id}
             </h1>
-            <p className="text-sm text-slate-500 font-secondary">
+            <p className="text-sm text-muted-foreground font-secondary">
               {data.carName} • {data.carType}
             </p>
           </div>

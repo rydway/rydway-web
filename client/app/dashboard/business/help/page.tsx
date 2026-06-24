@@ -92,14 +92,14 @@ export default function BusinessHelpPage() {
       {/* Header */}
       <div className="space-y-2 text-center max-w-3xl mx-auto">
         <div className="flex justify-center mb-4">
-          <div className="h-16 w-16 bg-primary/10 rounded-full flex items-center justify-center">
+          <div className="h-16 w-16 bg-primary/10 rounded-full flex items-center justify-center text-primary-foreground">
             <Headphones className="h-8 w-8 text-primary" />
           </div>
         </div>
-        <h1 className="text-3xl font-bold tracking-tight text-slate-900 font-primary">
+        <h1 className="text-3xl font-bold tracking-tight text-foreground font-primary">
           Business Partner Support
         </h1>
-        <p className="text-sm text-slate-500 font-secondary">
+        <p className="text-sm text-muted-foreground font-secondary">
           Dedicated support for Rydway business partners — fleet management, payouts, and compliance
         </p>
 
@@ -109,11 +109,11 @@ export default function BusinessHelpPage() {
             <Building2 className="h-3 w-3" />
             Business Account
           </Badge>
-          <Badge variant="outline" className="gap-1.5 py-1 px-3 text-xs border-green-300 text-green-700">
+          <Badge variant="outline" className="gap-1.5 py-1 px-3 text-xs border-green-300 text-emerald-600 dark:text-emerald-400">
             <ShieldCheck className="h-3 w-3" />
             Priority Support
           </Badge>
-          <Badge variant="outline" className="gap-1.5 py-1 px-3 text-xs border-amber-300 text-amber-700">
+          <Badge variant="outline" className="gap-1.5 py-1 px-3 text-xs border-amber-300 text-amber-600 dark:text-amber-400">
             <DollarSign className="h-3 w-3" />
             Revenue & Payouts Help
           </Badge>
@@ -136,7 +136,7 @@ export default function BusinessHelpPage() {
         {/* ============ FAQ TAB ============ */}
         <TabsContent value="faq" className="space-y-6">
           {searchQuery && (
-            <div className="text-sm text-slate-600 mb-4">
+            <div className="text-sm text-muted-foreground mb-4">
               Found {filteredCategories.reduce((acc, cat) => acc + cat.questions.length, 0)} results for &ldquo;{searchQuery}&rdquo;
             </div>
           )}
@@ -151,8 +151,8 @@ export default function BusinessHelpPage() {
             <Card className="shadow-sm py-0">
               <CardContent className="p-12 text-center">
                 <Search className="h-12 w-12 text-slate-300 mx-auto mb-4" />
-                <h3 className="text-lg font-semibold text-slate-800 mb-2">No results found</h3>
-                <p className="text-sm text-slate-500 mb-6">
+                <h3 className="text-lg font-semibold text-foreground mb-2">No results found</h3>
+                <p className="text-sm text-muted-foreground mb-6">
                   We couldn&apos;t find any articles matching &ldquo;{searchQuery}&rdquo;
                 </p>
                 <Button variant="outline" onClick={() => setSearchQuery("")}>
@@ -167,13 +167,13 @@ export default function BusinessHelpPage() {
         <TabsContent value="tickets" className="space-y-6">
           <div className="flex items-center justify-between">
             <div>
-              <h2 className="text-lg font-semibold text-slate-800">Your Support Tickets</h2>
-              <p className="text-sm text-slate-500 mt-1">
+              <h2 className="text-lg font-semibold text-foreground">Your Support Tickets</h2>
+              <p className="text-sm text-muted-foreground mt-1">
                 Track and manage your business support requests
               </p>
             </div>
             <Button
-              className="bg-primary hover:bg-primary/90"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground"
               onClick={() => setShowCreateTicket(true)}
             >
               <Plus className="h-4 w-4 mr-2" />
@@ -181,7 +181,7 @@ export default function BusinessHelpPage() {
             </Button>
           </div>
 
-          <Card className="border-slate-200 shadow-sm">
+          <Card className="border-border shadow-sm">
             <CardContent className="p-6">
               {isTicketsLoading ? (
                 <div className="flex justify-center items-center py-12">
@@ -206,42 +206,42 @@ export default function BusinessHelpPage() {
             {/* Contact Options */}
             <div className="lg:col-span-2 space-y-6">
               <div>
-                <h2 className="text-lg font-semibold text-slate-800 mb-1">Business Partner Hotline</h2>
-                <p className="text-sm text-slate-500 mb-4">
+                <h2 className="text-lg font-semibold text-foreground mb-1">Business Partner Hotline</h2>
+                <p className="text-sm text-muted-foreground mb-4">
                   As a business partner, you have access to our dedicated fleet support team.
                 </p>
 
-                <Card className="border-slate-200 shadow-sm overflow-hidden">
+                <Card className="border-border shadow-sm overflow-hidden">
                   {/* Priority Chat */}
-                  <div className="flex items-center justify-between p-5 hover:bg-slate-50 transition-colors border-b border-slate-200">
+                  <div className="flex items-center justify-between p-5 hover:bg-muted/50 transition-colors border-b border-border">
                     <div className="flex items-center gap-4">
-                      <div className="h-10 w-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <div className="h-10 w-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0 text-primary-foreground">
                         <MessageCircle className="h-5 w-5 text-primary" />
                       </div>
                       <div>
-                        <h3 className="text-sm font-semibold text-slate-800">Priority Live Chat</h3>
-                        <p className="text-xs text-slate-500 mt-0.5">Dedicated business support line — skip the queue</p>
-                        <Badge className="mt-2 bg-green-50 text-green-700 border-green-200 text-[10px] px-1.5 py-0.5">
+                        <h3 className="text-sm font-semibold text-foreground">Priority Live Chat</h3>
+                        <p className="text-xs text-muted-foreground mt-0.5">Dedicated business support line — skip the queue</p>
+                        <Badge className="mt-2 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20 text-[10px] px-1.5 py-0.5">
                           Business Priority
                         </Badge>
                       </div>
                     </div>
-                    <Button className="bg-primary hover:bg-primary/90 ml-4 flex-shrink-0">
+                    <Button className="bg-primary hover:bg-primary/90 ml-4 flex-shrink-0 text-primary-foreground">
                       Start Chat
                       <MessageCircle className="h-4 w-4 ml-2" />
                     </Button>
                   </div>
 
                   {/* Fleet Ops Phone */}
-                  <div className="flex items-center justify-between p-5 hover:bg-slate-50 transition-colors border-b border-slate-200">
+                  <div className="flex items-center justify-between p-5 hover:bg-muted/50 transition-colors border-b border-border">
                     <div className="flex items-center gap-4">
-                      <div className="h-10 w-10 bg-amber-50 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <div className="h-10 w-10 bg-amber-500/10 rounded-lg flex items-center justify-center flex-shrink-0">
                         <Phone className="h-5 w-5 text-amber-600" />
                       </div>
                       <div>
-                        <h3 className="text-sm font-semibold text-slate-800">Fleet Operations Line</h3>
-                        <p className="text-xs text-slate-500 mt-0.5">Speak with our fleet operations team</p>
-                        <p className="text-sm font-semibold text-slate-800 mt-1.5">+234 800 123 9999</p>
+                        <h3 className="text-sm font-semibold text-foreground">Fleet Operations Line</h3>
+                        <p className="text-xs text-muted-foreground mt-0.5">Speak with our fleet operations team</p>
+                        <p className="text-sm font-semibold text-foreground mt-1.5">+234 800 123 9999</p>
                       </div>
                     </div>
                     <Button variant="outline" className="ml-4 flex-shrink-0">
@@ -251,15 +251,15 @@ export default function BusinessHelpPage() {
                   </div>
 
                   {/* Partner Email */}
-                  <div className="flex items-center justify-between p-5 hover:bg-slate-50 transition-colors">
+                  <div className="flex items-center justify-between p-5 hover:bg-muted/50 transition-colors">
                     <div className="flex items-center gap-4">
                       <div className="h-10 w-10 bg-purple-50 rounded-lg flex items-center justify-center flex-shrink-0">
                         <Mail className="h-5 w-5 text-purple-600" />
                       </div>
                       <div>
-                        <h3 className="text-sm font-semibold text-slate-800">Partner Email</h3>
-                        <p className="text-xs text-slate-500 mt-0.5">Response within 4 business hours for partners</p>
-                        <p className="text-xs font-medium text-slate-800 mt-1.5 font-mono">partners@rydway.com</p>
+                        <h3 className="text-sm font-semibold text-foreground">Partner Email</h3>
+                        <p className="text-xs text-muted-foreground mt-0.5">Response within 4 business hours for partners</p>
+                        <p className="text-xs font-medium text-foreground mt-1.5 font-mono">partners@rydway.com</p>
                       </div>
                     </div>
                     <Button variant="outline" className="ml-4 flex-shrink-0">
@@ -271,12 +271,12 @@ export default function BusinessHelpPage() {
               </div>
 
               {/* Contact Form */}
-              <Card className="border-slate-200 shadow-sm">
+              <Card className="border-border shadow-sm">
                 <CardHeader>
-                  <CardTitle className="text-base font-semibold text-slate-800">
+                  <CardTitle className="text-base font-semibold text-foreground">
                     Send a Business Inquiry
                   </CardTitle>
-                  <CardDescription className="text-sm text-slate-500">
+                  <CardDescription className="text-sm text-muted-foreground">
                     For fleet, payout, or compliance questions — we'll respond within 4 hours
                   </CardDescription>
                 </CardHeader>
@@ -307,7 +307,7 @@ export default function BusinessHelpPage() {
                       />
                     </div>
 
-                    <Button className="w-full bg-primary hover:bg-primary/90">
+                    <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
                       <Send className="h-4 w-4 mr-2" />
                       Send Inquiry
                     </Button>
@@ -319,17 +319,17 @@ export default function BusinessHelpPage() {
             {/* Right Column - Info */}
             <div className="space-y-6">
               {/* Account manager card */}
-              <Card className="border-slate-200 shadow-sm">
+              <Card className="border-border shadow-sm">
                 <CardContent className="p-6">
-                  <h4 className="text-sm font-semibold text-slate-800 mb-4">Your Support Details</h4>
+                  <h4 className="text-sm font-semibold text-foreground mb-4">Your Support Details</h4>
                   <div className="space-y-4">
                     <div className="flex items-start gap-3">
-                      <div className="p-2 bg-primary/10 rounded-lg">
+                      <div className="p-2 bg-primary/10 rounded-lg text-primary-foreground">
                         <Clock className="h-5 w-5 text-primary" />
                       </div>
                       <div>
-                        <h4 className="text-sm font-medium text-slate-800">Response Times</h4>
-                        <p className="text-xs text-slate-500 mt-1">
+                        <h4 className="text-sm font-medium text-foreground">Response Times</h4>
+                        <p className="text-xs text-muted-foreground mt-1">
                           Chat: Immediate<br />
                           Email: Within 4 hours<br />
                           Phone: Mon – Sat, 8am – 8pm
@@ -340,12 +340,12 @@ export default function BusinessHelpPage() {
                     <Separator />
 
                     <div className="flex items-start gap-3">
-                      <div className="p-2 bg-primary/10 rounded-lg">
+                      <div className="p-2 bg-primary/10 rounded-lg text-primary-foreground">
                         <MapPin className="h-5 w-5 text-primary" />
                       </div>
                       <div>
-                        <h4 className="text-sm font-medium text-slate-800">Partner Office</h4>
-                        <p className="text-xs text-slate-500 mt-1">
+                        <h4 className="text-sm font-medium text-foreground">Partner Office</h4>
+                        <p className="text-xs text-muted-foreground mt-1">
                           123 Victoria Island<br />
                           Lagos, Nigeria
                         </p>
@@ -354,7 +354,7 @@ export default function BusinessHelpPage() {
 
                     <Separator />
 
-                    <div className="p-3 bg-primary/5 rounded-lg border border-primary/20">
+                    <div className="p-3 bg-primary/5 rounded-lg border border-primary/20 text-primary-foreground">
                       <p className="text-xs text-primary font-medium">
                         Business partners receive priority support across all channels. Include your business name in all communications for faster resolution.
                       </p>
@@ -364,9 +364,9 @@ export default function BusinessHelpPage() {
               </Card>
 
               {/* Useful links */}
-              <Card className="border-slate-200 shadow-sm">
+              <Card className="border-border shadow-sm">
                 <CardContent className="p-6">
-                  <h4 className="text-sm font-semibold text-slate-800 mb-4">Quick Resources</h4>
+                  <h4 className="text-sm font-semibold text-foreground mb-4">Quick Resources</h4>
                   <div className="space-y-2">
                     {[
                       "Fleet Management Guide",
@@ -379,7 +379,7 @@ export default function BusinessHelpPage() {
                         key={link}
                         className="w-full text-left text-sm text-primary hover:underline flex items-center gap-2 py-1"
                       >
-                        <span className="h-1 w-1 bg-primary rounded-full shrink-0" />
+                        <span className="h-1 w-1 bg-primary rounded-full shrink-0 text-primary-foreground" />
                         {link}
                       </button>
                     ))}

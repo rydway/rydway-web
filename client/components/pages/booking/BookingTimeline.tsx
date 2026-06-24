@@ -38,9 +38,9 @@ export default function BookingTimeline({ currentStatus }: BookingTimelineProps)
     <div className="w-full font-primary">
       <div className="flex items-center justify-between relative">
         {/* Connection Line */}
-        <div className="absolute top-5 left-0 right-0 h-0.5 bg-slate-200">
+        <div className="absolute top-5 left-0 right-0 h-0.5 bg-secondary">
           <div 
-            className="h-full bg-primary transition-all duration-500"
+            className="h-full bg-primary transition-all duration-500 text-primary-foreground"
             style={{ width: `${(currentStep / (steps.length - 1)) * 100}%` }}
           />
         </div>
@@ -58,15 +58,15 @@ export default function BookingTimeline({ currentStatus }: BookingTimelineProps)
                   relative z-10 flex h-10 w-10 items-center justify-center rounded-full border-2 transition-all
                   ${isComplete ? 'bg-primary border-primary' : ''}
                   ${isCurrent ? 'bg-primary/10 border-primary scale-110' : ''}
-                  ${isPending ? 'bg-white border-slate-200' : ''}
-                  ${isFailed ? 'bg-red-50 border-red-500' : ''}
+                  ${isPending ? 'bg-white border-border' : ''}
+                  ${isFailed ? 'bg-destructive/10 border-red-500' : ''}
                 `}
               >
                 {isComplete && <Check className="h-5 w-5 text-white" />}
                 {isCurrent && <Clock className="h-5 w-5 text-primary" />}
                 {isFailed && <X className="h-5 w-5 text-red-500" />}
               </div>
-              <span className={`text-xs font-medium ${isCurrent ? 'text-primary' : 'text-slate-600'} font-secondary`}>
+              <span className={`text-xs font-medium ${isCurrent ? 'text-primary' : 'text-muted-foreground'} font-secondary`}>
                 {step.label}
               </span>
             </div>

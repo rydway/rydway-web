@@ -36,15 +36,15 @@ export function PaymentDetailsDialog({
   const getStatusBadge = (status: Payment['status']) => {
     switch (status) {
       case 'completed':
-        return <Badge variant="green" className="bg-green-50 text-green-700 border-green-200">Completed</Badge>;
+        return <Badge variant="green" className="bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20">Completed</Badge>;
       case 'pending':
-        return <Badge variant="amber" className="bg-amber-50 text-amber-700 border-amber-200">Pending</Badge>;
+        return <Badge variant="amber" className="bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20">Pending</Badge>;
       case 'processing':
-        return <Badge variant="blue" className="bg-blue-50 text-blue-700 border-blue-200">Processing</Badge>;
+        return <Badge variant="blue" className="bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20">Processing</Badge>;
       case 'failed':
-        return <Badge variant="red" className="bg-red-50 text-red-700 border-red-200">Failed</Badge>;
+        return <Badge variant="red" className="bg-destructive/10 text-destructive dark:text-red-400 border-destructive/20">Failed</Badge>;
       case 'refunded':
-        return <Badge variant="slate" className="bg-slate-50 text-slate-700 border-slate-200">Refunded</Badge>;
+        return <Badge variant="slate" className="bg-muted/50 text-foreground border-border">Refunded</Badge>;
     }
   };
 
@@ -66,16 +66,16 @@ export function PaymentDetailsDialog({
             <DialogTitle className="font-primary text-lg">Payment Details</DialogTitle>
             {getStatusBadge(payment.status)}
           </div>
-          <DialogDescription className="font-secondary text-sm text-slate-500 font-mono">
+          <DialogDescription className="font-secondary text-sm text-muted-foreground font-mono">
             Transaction ID: {payment.transactionId}
           </DialogDescription>
         </DialogHeader>
 
         <div className="space-y-6">
           {/* Amount */}
-          <div className="flex items-center justify-between p-4 bg-slate-50 rounded-lg">
-            <span className="text-sm text-slate-600">Total Amount</span>
-            <span className="text-2xl font-bold text-slate-800">
+          <div className="flex items-center justify-between p-4 bg-muted/50 rounded-lg">
+            <span className="text-sm text-muted-foreground">Total Amount</span>
+            <span className="text-2xl font-bold text-foreground">
               ₦{payment.amount.toLocaleString()}
             </span>
           </div>
@@ -83,40 +83,40 @@ export function PaymentDetailsDialog({
           {/* Payment Details Grid */}
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-1">
-              <p className="text-xs text-slate-500">Date</p>
-              <p className="text-sm font-medium text-slate-800">
+              <p className="text-xs text-muted-foreground">Date</p>
+              <p className="text-sm font-medium text-foreground">
                 {format(new Date(payment.date), 'MMMM d, yyyy')}
               </p>
-              <p className="text-xs text-slate-500">
+              <p className="text-xs text-muted-foreground">
                 {format(new Date(payment.date), 'h:mm a')}
               </p>
             </div>
             
             <div className="space-y-1">
-              <p className="text-xs text-slate-500">Payment Method</p>
+              <p className="text-xs text-muted-foreground">Payment Method</p>
               <div className="flex items-center gap-2">
-                {payment.method === 'card' && <CreditCard className="h-4 w-4 text-slate-400" />}
-                {payment.method === 'bank_transfer' && <Landmark className="h-4 w-4 text-slate-400" />}
-                {payment.method === 'wallet' && <Wallet className="h-4 w-4 text-slate-400" />}
-                <p className="text-sm font-medium text-slate-800 capitalize">
+                {payment.method === 'card' && <CreditCard className="h-4 w-4 text-muted-foreground" />}
+                {payment.method === 'bank_transfer' && <Landmark className="h-4 w-4 text-muted-foreground" />}
+                {payment.method === 'wallet' && <Wallet className="h-4 w-4 text-muted-foreground" />}
+                <p className="text-sm font-medium text-foreground capitalize">
                   {payment.method.replace('_', ' ')}
                 </p>
               </div>
             </div>
             
             <div className="space-y-1">
-              <p className="text-xs text-slate-500">Payment Type</p>
+              <p className="text-xs text-muted-foreground">Payment Type</p>
               <div className="flex items-center gap-2">
                 {getTypeIcon(payment.type)}
-                <p className="text-sm font-medium text-slate-800 capitalize">
+                <p className="text-sm font-medium text-foreground capitalize">
                   {payment.type}
                 </p>
               </div>
             </div>
             
             <div className="space-y-1">
-              <p className="text-xs text-slate-500">Booking ID</p>
-              <p className="text-sm font-medium text-slate-800 font-mono">
+              <p className="text-xs text-muted-foreground">Booking ID</p>
+              <p className="text-sm font-medium text-foreground font-mono">
                 {payment.bookingId || 'N/A'}
               </p>
             </div>
@@ -127,15 +127,15 @@ export function PaymentDetailsDialog({
           {/* Vehicle Information */}
           {payment.vehicleName && (
             <div className="space-y-3">
-              <h4 className="text-sm font-semibold text-slate-800">Vehicle</h4>
+              <h4 className="text-sm font-semibold text-foreground">Vehicle</h4>
               <div className="flex items-center gap-3">
-                <div className="h-12 w-12 bg-slate-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <Car className="h-6 w-6 text-slate-400" />
+                <div className="h-12 w-12 bg-muted rounded-lg flex items-center justify-center flex-shrink-0">
+                  <Car className="h-6 w-6 text-muted-foreground" />
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-slate-800">{payment.vehicleName}</p>
+                  <p className="text-sm font-medium text-foreground">{payment.vehicleName}</p>
                   {payment.location && (
-                    <p className="text-xs text-slate-500 flex items-center gap-1 mt-1">
+                    <p className="text-xs text-muted-foreground flex items-center gap-1 mt-1">
                       <MapPin className="h-3 w-3" />
                       {payment.location}
                     </p>
@@ -147,8 +147,8 @@ export function PaymentDetailsDialog({
 
           {/* Description */}
           <div className="space-y-2">
-            <h4 className="text-sm font-semibold text-slate-800">Description</h4>
-            <p className="text-sm text-slate-600 bg-slate-50 p-3 rounded-lg">
+            <h4 className="text-sm font-semibold text-foreground">Description</h4>
+            <p className="text-sm text-muted-foreground bg-muted/50 p-3 rounded-lg">
               {payment.description}
             </p>
           </div>
@@ -166,7 +166,7 @@ export function PaymentDetailsDialog({
               Download
             </Button>
             {payment.status === 'failed' && (
-              <Button size="sm" className="bg-primary hover:bg-primary/90">
+              <Button size="sm" className="bg-primary hover:bg-primary/90 text-primary-foreground">
                 Retry Payment
               </Button>
             )}

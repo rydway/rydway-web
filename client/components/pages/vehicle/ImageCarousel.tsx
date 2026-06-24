@@ -15,7 +15,7 @@ export default function ImageCarousel({ images, alt }: ImageCarouselProps) {
   const prev = () => setCurrentIndex((currentIndex - 1 + images.length) % images.length);
 
   return (
-    <div className="relative aspect-[16/9] w-full overflow-hidden rounded-2xl bg-slate-100">
+    <div className="relative aspect-[16/9] w-full overflow-hidden rounded-2xl bg-muted">
       <img
         src={images[currentIndex]}
         alt={alt}

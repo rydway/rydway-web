@@ -86,7 +86,7 @@ export class PaymentsService {
       amount: Math.round(booking.totalAmount * 100), // Paystack expects kobo (smallest currency unit)
       reference: transactionRef,
       currency: 'NGN',
-      callback_url: `${process.env.FRONTEND_URL || 'http://localhost:3000'}/payments/callback`,
+      callback_url: `${process.env.FRONTEND_URL || 'http://localhost:3001'}/payments/callback`,
       metadata: {
         bookingId: booking.id,
         paymentId: payment.id,

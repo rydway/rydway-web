@@ -10,23 +10,23 @@ interface WeeklyPerformanceProps {
 
 export function WeeklyPerformance({ data }: WeeklyPerformanceProps) {
   return (
-    <Card className="border-slate-200 shadow-sm font-secondary">
+    <Card className="border-border shadow-sm font-secondary">
       <CardHeader className="pb-2">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
           <div className="flex items-center gap-2">
             <Calendar className="h-5 w-5 text-amber-600" />
-            <CardTitle className="text-lg font-semibold text-slate-800 font-primary">
+            <CardTitle className="text-lg font-semibold text-foreground font-primary">
               Weekly Performance
             </CardTitle>
           </div>
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-2">
               <div className="h-3 w-3 rounded bg-blue-600"></div>
-              <span className="text-xs text-slate-600">This Week</span>
+              <span className="text-xs text-muted-foreground">This Week</span>
             </div>
             <div className="flex items-center gap-2">
               <div className="h-3 w-3 rounded bg-slate-300"></div>
-              <span className="text-xs text-slate-600">Last Week</span>
+              <span className="text-xs text-muted-foreground">Last Week</span>
             </div>
           </div>
         </div>
@@ -51,10 +51,10 @@ export function WeeklyPerformance({ data }: WeeklyPerformanceProps) {
             </BarChart>
           </ResponsiveContainer>
         </div>
-        <div className="mt-4 flex items-center justify-between p-3 bg-blue-50 rounded-lg border border-blue-200">
+        <div className="mt-4 flex items-center justify-between p-3 bg-blue-500/10 rounded-lg border border-blue-500/20">
           <div className="flex items-center gap-2">
             <TrendingUp className="h-4 w-4 text-blue-600" />
-            <span className="text-sm text-slate-700">Week-over-week growth</span>
+            <span className="text-sm text-foreground">Week-over-week growth</span>
           </div>
           <div className="flex items-center gap-1">
             <ArrowUpRight className="h-4 w-4 text-green-600" />

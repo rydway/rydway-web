@@ -159,19 +159,19 @@ export default function BusinessBookingsPage({ role = "business" }: BusinessBook
   const getEmptyAction = () => {
     if (activeTab === "requests") {
       return (
-        <Button asChild className="bg-primary hover:bg-primary/90 mt-4 font-primary">
+        <Button asChild className="bg-primary hover:bg-primary/90 mt-4 font-primary text-primary-foreground">
           <Link href="/dashboard/business/vehicles">Manage Fleet</Link>
         </Button>
       );
     } else if (activeTab === "active") {
       return (
-        <Button asChild className="bg-primary hover:bg-primary/90 mt-4 font-primary">
+        <Button asChild className="bg-primary hover:bg-primary/90 mt-4 font-primary text-primary-foreground">
           <Link href="/dashboard/business/vehicles">View Fleet Status</Link>
         </Button>
       );
     } else if (activeTab === "past") {
       return (
-        <Button asChild className="bg-primary hover:bg-primary/90 mt-4 font-primary">
+        <Button asChild className="bg-primary hover:bg-primary/90 mt-4 font-primary text-primary-foreground">
           <Link href="/dashboard/business/earnings">View Analytics</Link>
         </Button>
       );
@@ -183,10 +183,10 @@ export default function BusinessBookingsPage({ role = "business" }: BusinessBook
     <div className="space-y-6">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-2">
         <div className="space-y-1">
-          <h1 className="text-2xl font-bold tracking-tight text-slate-900 font-primary">
+          <h1 className="text-2xl font-bold tracking-tight text-foreground font-primary">
             Bookings Management
           </h1>
-          <p className="text-sm text-slate-500 font-secondary">
+          <p className="text-sm text-muted-foreground font-secondary">
             Manage booking requests, active rentals, and past bookings
           </p>
         </div>
@@ -223,15 +223,15 @@ export default function BusinessBookingsPage({ role = "business" }: BusinessBook
       ) : currentBookingsPage.length === 0 ? (
         <Card>
           <CardContent className="flex flex-col items-center justify-center py-12">
-            <Calendar className="h-12 w-12 text-slate-400 mb-4" />
-            <h3 className="text-lg font-semibold text-slate-800 dark:text-white mb-2 font-primary">
+            <Calendar className="h-12 w-12 text-muted-foreground mb-4" />
+            <h3 className="text-lg font-semibold text-foreground dark:text-white mb-2 font-primary">
               {activeTab === "requests" 
                 ? "No Pending Requests" 
                 : activeTab === "active"
                 ? "No Active Bookings"
                 : "No Past Bookings"}
             </h3>
-            <p className="text-slate-600 dark:text-slate-300 text-center mb-6 max-w-md font-secondary">
+            <p className="text-muted-foreground dark:text-slate-300 text-center mb-6 max-w-md font-secondary">
               {getEmptyMessage()}
             </p>
             {getEmptyAction()}

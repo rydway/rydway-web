@@ -24,10 +24,10 @@ export function VehicleGallery({
   const [mainImage, setMainImage] = useState(images[0] || "/api/placeholder/400/300");
 
   return (
-    <Card className="border-slate-200 shadow-sm overflow-hidden">
+    <Card className="border-border shadow-sm overflow-hidden">
       <CardContent className="p-4">
         {/* Main Image */}
-        <div className="relative h-80 w-full bg-slate-50 rounded-lg overflow-hidden mb-4">
+        <div className="relative h-80 w-full bg-muted/50 rounded-lg overflow-hidden mb-4">
           <Image
             src={mainImage}
             alt={name}
@@ -64,8 +64,8 @@ export function VehicleGallery({
             {images.map((img, idx) => (
               <div
                 key={idx}
-                className={`relative h-20 bg-slate-50 rounded-lg overflow-hidden cursor-pointer border-2 transition-all
-                  ${mainImage === img ? 'border-blue-500' : 'border-transparent hover:border-slate-300'}`}
+                className={`relative h-20 bg-muted/50 rounded-lg overflow-hidden cursor-pointer border-2 transition-all
+                  ${mainImage === img ? 'border-blue-500' : 'border-transparent hover:border-input'}`}
                 onClick={() => setMainImage(img)}
               >
                 <Image

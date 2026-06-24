@@ -78,13 +78,13 @@ export const FormField: React.FC<FormFieldProps> = ({
     return (
       <div key={field.id} className={getGridClass(field.grid)}>
         <div className="flex items-center gap-2 mb-2">
-          <Label htmlFor={field.id} className="text-sm font-medium text-slate-700">
+          <Label htmlFor={field.id} className="text-sm font-medium text-foreground">
             {field.label} {field.required && <span className="text-red-500">*</span>}
           </Label>
           {field.tooltip && (
             <Tooltip>
               <TooltipTrigger>
-                <HelpCircle className="h-4 w-4 text-slate-400" />
+                <HelpCircle className="h-4 w-4 text-muted-foreground" />
               </TooltipTrigger>
               <TooltipContent>
                 <p className="text-sm">{field.tooltip}</p>
@@ -105,13 +105,13 @@ export const FormField: React.FC<FormFieldProps> = ({
     return (
       <div key={field.id} className={getGridClass(field.grid)}>
         <div className="flex items-center gap-2 mb-2">
-          <Label htmlFor={field.id} className="text-sm font-medium text-slate-700">
+          <Label htmlFor={field.id} className="text-sm font-medium text-foreground">
             {field.label} {field.required && <span className="text-red-500">*</span>}
           </Label>
           {field.tooltip && (
             <Tooltip>
               <TooltipTrigger>
-                <HelpCircle className="h-4 w-4 text-slate-400" />
+                <HelpCircle className="h-4 w-4 text-muted-foreground" />
               </TooltipTrigger>
               <TooltipContent>
                 <p className="text-sm">{field.tooltip}</p>
@@ -121,7 +121,7 @@ export const FormField: React.FC<FormFieldProps> = ({
         </div>
         <div className="relative">
           {IconComponent && (
-            <IconComponent className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" />
+            <IconComponent className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
           )}
           <Input
             id={field.id}
@@ -129,13 +129,13 @@ export const FormField: React.FC<FormFieldProps> = ({
             placeholder={field.placeholder}
             value={value || ''}
             onChange={(e) => onFieldChange(field.id, e.target.value)}
-            className={`h-12 ${IconComponent ? 'pl-11' : ''} rounded-lg border-slate-300 ${error ? 'border-red-500' : ''}`}
+            className={`h-12 ${IconComponent ? 'pl-11' : ''} rounded-lg border-input ${error ? 'border-red-500' : ''}`}
             min={field.min}
             max={field.max}
           />
         </div>
         {field.hint && typeof field.hint === 'string' && (
-          <p className="text-xs text-slate-500 mt-1">{field.hint}</p>
+          <p className="text-xs text-muted-foreground mt-1">{field.hint}</p>
         )}
         {error && <p className="mt-1 text-sm text-red-600">{error}</p>}
         {field.info && value && renderInfoBox(field.info(value))}
@@ -149,13 +149,13 @@ export const FormField: React.FC<FormFieldProps> = ({
       return (
         <div key={field.id} className={getGridClass(field.grid)}>
           <div className="flex items-center gap-2 mb-2">
-            <Label htmlFor={field.id} className="text-sm font-medium text-slate-700">
+            <Label htmlFor={field.id} className="text-sm font-medium text-foreground">
               {field.label} {field.required && <span className="text-red-500">*</span>}
             </Label>
             {field.tooltip && (
               <Tooltip>
                 <TooltipTrigger>
-                  <HelpCircle className="h-4 w-4 text-slate-400" />
+                  <HelpCircle className="h-4 w-4 text-muted-foreground" />
                 </TooltipTrigger>
                 <TooltipContent>
                   <p className="text-sm">{field.tooltip}</p>
@@ -187,13 +187,13 @@ export const FormField: React.FC<FormFieldProps> = ({
     return (
       <div key={field.id} className={getGridClass(field.grid)}>
         <div className="flex items-center gap-2 mb-2">
-          <Label htmlFor={field.id} className="text-sm font-medium text-slate-700">
+          <Label htmlFor={field.id} className="text-sm font-medium text-foreground">
             {field.label} {field.required && <span className="text-red-500">*</span>}
           </Label>
           {field.tooltip && (
             <Tooltip>
               <TooltipTrigger>
-                <HelpCircle className="h-4 w-4 text-slate-400" />
+                <HelpCircle className="h-4 w-4 text-muted-foreground" />
               </TooltipTrigger>
               <TooltipContent>
                 <p className="text-sm">{field.tooltip}</p>
@@ -238,31 +238,31 @@ export const FormField: React.FC<FormFieldProps> = ({
     return (
       <div key={field.id} className={getGridClass(field.grid)}>
         <div className="space-y-2">
-          <Label className="text-sm font-medium text-slate-900">
+          <Label className="text-sm font-medium text-foreground">
             {field.label} {field.required && <span className="text-red-500">*</span>}
           </Label>
-          {hint && <p className="text-xs text-slate-500">{hint}</p>}
+          {hint && <p className="text-xs text-muted-foreground">{hint}</p>}
           
           {!value ? (
             <div
               onClick={() => document.getElementById(`${field.id}-upload`)?.click()}
-              className="border-2 border-dashed border-slate-300 rounded-lg p-6 flex flex-col items-center gap-3 bg-slate-50 hover:bg-slate-100 cursor-pointer transition-colors"
+              className="border-2 border-dashed border-input rounded-lg p-6 flex flex-col items-center gap-3 bg-muted/50 hover:bg-muted cursor-pointer transition-colors"
             >
               <Upload className="h-8 w-8 text-primary" />
-              <p className="text-sm text-slate-600">Tap to upload</p>
-              <p className="text-xs text-slate-400">
+              <p className="text-sm text-muted-foreground">Tap to upload</p>
+              <p className="text-xs text-muted-foreground">
                 {field.accept?.includes('pdf') ? 'PDF or image, max 10MB' : 'PNG or JPG, max 10MB'}
               </p>
             </div>
           ) : (
-            <div className="relative rounded-lg overflow-hidden border border-slate-200">
+            <div className="relative rounded-lg overflow-hidden border border-border">
               <img src={preview} alt="Upload preview" className="w-full h-48 object-cover" />
               <button
                 type="button"
                 onClick={() => onRemoveFile(field.id)}
-                className="absolute top-2 right-2 bg-white p-1.5 rounded-full shadow-lg hover:bg-slate-50 transition-colors"
+                className="absolute top-2 right-2 bg-white p-1.5 rounded-full shadow-lg hover:bg-muted/50 transition-colors"
               >
-                <X className="h-4 w-4 text-slate-600" />
+                <X className="h-4 w-4 text-muted-foreground" />
               </button>
               <div className="absolute bottom-2 left-2 flex items-center gap-1 bg-black/70 text-white text-xs px-3 py-1.5 rounded-full">
                 <CheckCircle2 className="h-4 w-4 text-green-400" />
@@ -293,13 +293,13 @@ export const FormField: React.FC<FormFieldProps> = ({
             checked={value}
             onCheckedChange={(checked) => onFieldChange(field.id, checked)}
           />
-          <Label htmlFor={field.id} className="text-sm font-medium text-slate-700">
+          <Label htmlFor={field.id} className="text-sm font-medium text-foreground">
             {field.label}
           </Label>
           {field.tooltip && (
             <Tooltip>
               <TooltipTrigger>
-                <HelpCircle className="h-4 w-4 text-slate-400 ml-1" />
+                <HelpCircle className="h-4 w-4 text-muted-foreground ml-1" />
               </TooltipTrigger>
               <TooltipContent>
                 <p className="text-sm">{field.tooltip}</p>
@@ -318,14 +318,14 @@ export const FormField: React.FC<FormFieldProps> = ({
     return (
       <div key={field.id} className={getGridClass(field.grid)}>
         <div className="space-y-4">
-          <h3 className="text-lg font-medium text-slate-900">{field.label}</h3>
+          <h3 className="text-lg font-medium text-foreground">{field.label}</h3>
           <div className="grid md:grid-cols-2 gap-4">
             {field.fields.map((reviewField) => {
               const value = formData[reviewField.id];
               const formattedValue = reviewField.format ? reviewField.format(value) : value;
               return (
                 <div key={reviewField.id}>
-                  <p className="text-sm text-slate-500">{reviewField.label}</p>
+                  <p className="text-sm text-muted-foreground">{reviewField.label}</p>
                   <p className="font-medium">{formattedValue || 'Not provided'}</p>
                 </div>
               );
@@ -342,8 +342,8 @@ export const FormField: React.FC<FormFieldProps> = ({
     return (
       <div key={field.id} className="space-y-6 border-t pt-6">
         <div>
-          <h3 className="text-lg font-medium text-slate-900">{field.label}</h3>
-          {field.tooltip && <p className="text-sm text-slate-500">{field.tooltip}</p>}
+          <h3 className="text-lg font-medium text-foreground">{field.label}</h3>
+          {field.tooltip && <p className="text-sm text-muted-foreground">{field.tooltip}</p>}
         </div>
         <div className="grid md:grid-cols-2 gap-6">
           {field.fields.map((subField) => (
@@ -369,12 +369,12 @@ export const FormField: React.FC<FormFieldProps> = ({
     if (!info) return null;
     
     return (
-      <div className="mt-4 p-3 rounded-lg bg-slate-50 border border-slate-200">
+      <div className="mt-4 p-3 rounded-lg bg-muted/50 border border-border">
         <div className="flex items-start gap-3">
           <Info className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
           <div>
             <p className="text-sm font-medium text-primary mb-1">{info.title}</p>
-            <p className="text-xs text-slate-600">{info.description}</p>
+            <p className="text-xs text-muted-foreground">{info.description}</p>
           </div>
         </div>
       </div>

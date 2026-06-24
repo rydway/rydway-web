@@ -31,12 +31,12 @@ export default function ReviewForm({ onSubmit, loading = false }: ReviewFormProp
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label className="text-sm font-medium text-slate-700 mb-2 block">Your Rating</label>
+          <label className="text-sm font-medium text-foreground mb-2 block">Your Rating</label>
           <RatingStars value={rating} onChange={setRating} size="lg" />
         </div>
 
         <div>
-          <label className="text-sm font-medium text-slate-700 mb-2 block">Your Review</label>
+          <label className="text-sm font-medium text-foreground mb-2 block">Your Review</label>
           <Textarea
             value={text}
             onChange={(e) => setText(e.target.value)}

@@ -5,6 +5,7 @@ import { AuthProvider } from "@/context/AuthContext"
 import { QueryProvider } from "@/providers/QueryProvider"
 import { Toaster } from "@/components/ui/sonner"
 import CookieBanner from "@/components/features/CookieBanner"
+import { ThemeProvider } from "@/providers/ThemeProvider"
 
 const outfit = Outfit({ 
   subsets: ["latin"],
@@ -31,15 +32,17 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className="overflow-x-hidden">
       <body className={`${outfit.variable} ${dmSans.variable}`}>
-        <QueryProvider>
-          <AuthProvider>
-            {children}
-          </AuthProvider>
-        </QueryProvider>
-        <Toaster position="top-center" />
-        <CookieBanner />
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          <QueryProvider>
+            <AuthProvider>
+              {children}
+            </AuthProvider>
+          </QueryProvider>
+          <Toaster position="top-center" />
+          <CookieBanner />
+        </ThemeProvider>
       </body>
     </html>
   )

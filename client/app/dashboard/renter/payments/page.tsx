@@ -233,10 +233,10 @@ export default function RenterPaymentsPage() {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-2">
         <div className="space-y-1">
-          <h1 className="text-2xl font-bold tracking-tight text-slate-900 font-primary">
+          <h1 className="text-2xl font-bold tracking-tight text-foreground font-primary">
             Payments & Transactions
           </h1>
-          <p className="text-sm text-slate-500 font-secondary">
+          <p className="text-sm text-muted-foreground font-secondary">
             Manage your payment methods and view transaction history
           </p>
         </div>
@@ -253,7 +253,7 @@ export default function RenterPaymentsPage() {
           </Button>
           <Button
             size="sm"
-            className="bg-primary hover:bg-primary/90 h-9 min-w-[160px]"
+            className="bg-primary hover:bg-primary/90 h-9 min-w-[160px] text-primary-foreground"
             onClick={handleInitiatePayment}
             disabled={isInitiatingPayment || !confirmedBooking}
           >
@@ -281,7 +281,7 @@ export default function RenterPaymentsPage() {
           trend="Based on active trips"
           trendUp={true}
           iconClassName="text-blue-600"
-          className="border-slate-200 shadow-sm"
+          className="border-border shadow-sm"
         />
         <StatCard
           title="Pending Payments"
@@ -290,7 +290,7 @@ export default function RenterPaymentsPage() {
           trend={`${metrics.upcomingPayments} payments pending`}
           trendUp={false}
           iconClassName="text-amber-600"
-          className="border-slate-200 shadow-sm"
+          className="border-border shadow-sm"
         />
         <StatCard
           title="Completed Bookings"
@@ -299,7 +299,7 @@ export default function RenterPaymentsPage() {
           trend="Successful payments"
           trendUp={true}
           iconClassName="text-green-600"
-          className="border-slate-200 shadow-sm"
+          className="border-border shadow-sm"
         />
         <StatCard
           title="Upcoming Payments"
@@ -307,8 +307,8 @@ export default function RenterPaymentsPage() {
           icon={FileText}
           trend="Pending invoices"
           trendUp={false}
-          iconClassName="text-slate-600"
-          className="border-slate-200 shadow-sm"
+          iconClassName="text-muted-foreground"
+          className="border-border shadow-sm"
         />
       </div>
 
@@ -334,11 +334,11 @@ export default function RenterPaymentsPage() {
         {/* ============ TRANSACTIONS TAB ============ */}
         <TabsContent value="transactions" className="space-y-6">
           {/* Filters */}
-          <Card className="border-slate-200 shadow-sm">
+          <Card className="border-border shadow-sm">
             <CardContent className="p-4">
               <div className="flex flex-col md:flex-row md:items-center gap-4">
                 <div className="flex-1 relative">
-                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                   <Input
                     placeholder="Search by vehicle, transaction ID, or description..."
                     value={searchQuery}
@@ -380,27 +380,27 @@ export default function RenterPaymentsPage() {
           </Card>
 
           {/* Transactions Table */}
-          <Card className="border-slate-200 shadow-sm">
+          <Card className="border-border shadow-sm">
             <CardContent className="p-0">
               <Table>
-                <TableHeader className="bg-slate-50">
+                <TableHeader className="bg-muted/50">
                   <TableRow>
-                    <TableHead className="text-xs font-medium text-slate-500">
+                    <TableHead className="text-xs font-medium text-muted-foreground">
                       Transaction
                     </TableHead>
-                    <TableHead className="text-xs font-medium text-slate-500">
+                    <TableHead className="text-xs font-medium text-muted-foreground">
                       Date
                     </TableHead>
-                    <TableHead className="text-xs font-medium text-slate-500">
+                    <TableHead className="text-xs font-medium text-muted-foreground">
                       Method
                     </TableHead>
-                    <TableHead className="text-xs font-medium text-slate-500">
+                    <TableHead className="text-xs font-medium text-muted-foreground">
                       Amount
                     </TableHead>
-                    <TableHead className="text-xs font-medium text-slate-500">
+                    <TableHead className="text-xs font-medium text-muted-foreground">
                       Status
                     </TableHead>
-                    <TableHead className="text-xs font-medium text-slate-500 text-right"></TableHead>
+                    <TableHead className="text-xs font-medium text-muted-foreground text-right"></TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -417,10 +417,10 @@ export default function RenterPaymentsPage() {
                       <TableCell colSpan={6} className="h-48 text-center">
                         <div className="flex flex-col items-center justify-center">
                           <FileText className="h-8 w-8 text-slate-300 mb-2" />
-                          <p className="text-sm text-slate-600 mb-1">
+                          <p className="text-sm text-muted-foreground mb-1">
                             No transactions found
                           </p>
-                          <p className="text-xs text-slate-500">
+                          <p className="text-xs text-muted-foreground">
                             Try adjusting your search or filter criteria
                           </p>
                         </div>
@@ -431,8 +431,8 @@ export default function RenterPaymentsPage() {
               </Table>
 
               {/* Pagination */}
-              <div className="flex items-center justify-between p-4 border-t border-slate-200">
-                <div className="text-xs text-slate-500 font-secondary">
+              <div className="flex items-center justify-between p-4 border-t border-border">
+                <div className="text-xs text-muted-foreground font-secondary">
                   Showing {filteredPayments.length} of {payments.length}{" "}
                   transactions
                 </div>
@@ -448,7 +448,7 @@ export default function RenterPaymentsPage() {
                   <Button
                     variant="outline"
                     size="sm"
-                    className="h-8 text-xs bg-blue-50 text-blue-700 border-blue-200"
+                    className="h-8 text-xs bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20"
                   >
                     1
                   </Button>
@@ -471,12 +471,12 @@ export default function RenterPaymentsPage() {
 
         {/* ============ INVOICES TAB ============ */}
         <TabsContent value="invoices" className="space-y-6">
-          <Card className="border-slate-200 shadow-sm">
+          <Card className="border-border shadow-sm">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <FileText className="h-5 w-5 text-blue-600" />
-                  <CardTitle className="text-lg font-semibold text-slate-800 font-primary">
+                  <CardTitle className="text-lg font-semibold text-foreground font-primary">
                     Invoices & Receipts
                   </CardTitle>
                 </div>
@@ -485,7 +485,7 @@ export default function RenterPaymentsPage() {
                   Download All
                 </Button>
               </div>
-              <CardDescription className="text-sm text-slate-500 font-secondary">
+              <CardDescription className="text-sm text-muted-foreground font-secondary">
                 View and download your invoices and receipts
               </CardDescription>
             </CardHeader>
@@ -494,15 +494,15 @@ export default function RenterPaymentsPage() {
                 {invoices.map((invoice) => (
                   <div
                     key={invoice.id}
-                    className="flex items-center justify-between p-4 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors font-secondary"
+                    className="flex items-center justify-between p-4 bg-muted/50 rounded-lg hover:bg-muted transition-colors font-secondary"
                   >
                     <div className="flex items-center gap-4">
-                      <div className="p-2 bg-white rounded-lg border border-slate-200">
-                        <FileText className="h-5 w-5 text-slate-600" />
+                      <div className="p-2 bg-white rounded-lg border border-border">
+                        <FileText className="h-5 w-5 text-muted-foreground" />
                       </div>
                       <div>
                         <div className="flex items-center gap-2 flex-wrap">
-                          <span className="text-sm font-medium text-slate-800">
+                          <span className="text-sm font-medium text-foreground">
                             {invoice.invoiceNumber}
                           </span>
                           <Badge
@@ -519,11 +519,11 @@ export default function RenterPaymentsPage() {
                           </Badge>
                         </div>
                         <div className="flex items-center gap-3 mt-1 flex-wrap">
-                          <span className="text-xs text-slate-500">
+                          <span className="text-xs text-muted-foreground">
                             {format(new Date(invoice.date), "MMM d, yyyy")}
                           </span>
                           <span className="text-xs text-slate-300">•</span>
-                          <span className="text-xs font-medium text-slate-800">
+                          <span className="text-xs font-medium text-foreground">
                             ₦{invoice.amount.toLocaleString()}
                           </span>
                         </div>
@@ -552,11 +552,11 @@ export default function RenterPaymentsPage() {
         <TabsContent value="analytics" className="space-y-6">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {/* Spending Chart */}
-            <Card className="lg:col-span-2 border-slate-200 shadow-sm">
+            <Card className="lg:col-span-2 border-border shadow-sm">
               <CardHeader>
                 <div className="flex items-center gap-2">
                   <FileText className="h-5 w-5 text-blue-600" />
-                  <CardTitle className="text-lg font-semibold text-slate-800 font-primary">
+                  <CardTitle className="text-lg font-semibold text-foreground font-primary">
                     Spending Overview
                   </CardTitle>
                 </div>
@@ -567,25 +567,25 @@ export default function RenterPaymentsPage() {
             </Card>
 
             {/* Spending Summary */}
-            <Card className="border-slate-200 shadow-sm">
+            <Card className="border-border shadow-sm">
               <CardHeader>
-                <CardTitle className="text-lg font-semibold text-slate-800 font-primary">
+                <CardTitle className="text-lg font-semibold text-foreground font-primary">
                   Spending Summary
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4 font-secondary">
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-slate-600">Total spent</span>
-                    <span className="text-sm font-semibold text-slate-800">
+                    <span className="text-sm text-muted-foreground">Total spent</span>
+                    <span className="text-sm font-semibold text-foreground">
                       ₦{metrics.totalSpent.toLocaleString()}
                     </span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-slate-600">
+                    <span className="text-sm text-muted-foreground">
                       Average per booking
                     </span>
-                    <span className="text-sm font-semibold text-slate-800">
+                    <span className="text-sm font-semibold text-foreground">
                       ₦
                       {metrics.completedTransactions > 0
                         ? (
@@ -595,18 +595,18 @@ export default function RenterPaymentsPage() {
                     </span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-slate-600">
+                    <span className="text-sm text-muted-foreground">
                       Most spent on
                     </span>
-                    <span className="text-sm font-semibold text-slate-800">
+                    <span className="text-sm font-semibold text-foreground">
                       Luxury SUV
                     </span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-slate-600">
+                    <span className="text-sm text-muted-foreground">
                       Peak spending month
                     </span>
-                    <span className="text-sm font-semibold text-slate-800">
+                    <span className="text-sm font-semibold text-foreground">
                       May 2026
                     </span>
                   </div>
@@ -615,7 +615,7 @@ export default function RenterPaymentsPage() {
                 <Separator />
 
                 <div className="space-y-3">
-                  <h4 className="text-xs font-semibold text-slate-700 uppercase tracking-wider">
+                  <h4 className="text-xs font-semibold text-foreground uppercase tracking-wider">
                     Spending by Category
                   </h4>
                   <div className="space-y-2">
@@ -626,9 +626,9 @@ export default function RenterPaymentsPage() {
                         <div key={cat.name} className="flex items-center justify-between">
                           <div className="flex items-center gap-2">
                             <div className={`h-2 w-2 rounded-full ${bgClass}`}></div>
-                            <span className="text-xs text-slate-600">{cat.name}</span>
+                            <span className="text-xs text-muted-foreground">{cat.name}</span>
                           </div>
-                          <span className="text-xs font-medium text-slate-800">
+                          <span className="text-xs font-medium text-foreground">
                             {cat.percentage}%
                           </span>
                         </div>

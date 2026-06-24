@@ -19,12 +19,12 @@ export default function AdminDashboardLayout({
   ];
 
   return (
-    <div className="flex flex-col md:flex-row min-h-screen bg-slate-50 dark:bg-slate-900 font-primary">
+    <div className="flex flex-col md:flex-row min-h-screen bg-muted/50 dark:bg-background font-primary">
       {/* Sidebar */}
-      <aside className="w-full md:w-64 bg-white dark:bg-slate-950 border-r border-slate-200 dark:border-slate-800 flex-shrink-0">
+      <aside className="w-full md:w-64 bg-white dark:bg-slate-950 border-r border-border dark:border-border flex-shrink-0">
         <div className="p-6">
-          <h2 className="text-xl font-bold text-slate-800 dark:text-white mb-2">Admin Portal</h2>
-          <p className="text-xs text-slate-500 font-secondary">Rydway Platform Management</p>
+          <h2 className="text-xl font-bold text-foreground dark:text-white mb-2">Admin Portal</h2>
+          <p className="text-xs text-muted-foreground font-secondary">Rydway Platform Management</p>
         </div>
         
         <nav className="px-4 pb-6 space-y-1">
@@ -32,7 +32,7 @@ export default function AdminDashboardLayout({
             <Link 
               key={item.title} 
               href={item.href}
-              className="flex items-center gap-3 px-3 py-2.5 rounded-md text-sm font-medium text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-slate-50 transition-colors"
+              className="flex items-center gap-3 px-3 py-2.5 rounded-md text-sm font-medium text-muted-foreground hover:bg-muted hover:text-foreground dark:text-muted-foreground dark:hover:bg-slate-800 dark:hover:text-slate-50 transition-colors"
             >
               <item.icon className="h-4 w-4" />
               {item.title}

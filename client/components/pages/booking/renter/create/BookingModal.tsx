@@ -138,7 +138,7 @@ const BOOKING_PURPOSES = [
 
 const SectionLabel = React.memo(({ text }: { text: string }) => (
   <p
-    className="font-secondary text-[11px] font-semibold text-slate-400 uppercase tracking-widest mb-3"
+    className="font-secondary text-[11px] font-semibold text-muted-foreground uppercase tracking-widest mb-3"
   >
     {text}
   </p>
@@ -147,14 +147,14 @@ SectionLabel.displayName = "SectionLabel";
 
 const LineItem = React.memo(({ label, value }: { label: string; value: number }) => (
   <div className="flex justify-between">
-    <span className="text-slate-500">{label}</span>
-    <span className="font-medium text-slate-800">₦{value.toLocaleString()}</span>
+    <span className="text-muted-foreground">{label}</span>
+    <span className="font-medium text-foreground">₦{value.toLocaleString()}</span>
   </div>
 ));
 LineItem.displayName = "LineItem";
 
 const Pill = React.memo(({ icon, children }: { icon: React.ReactNode; children: React.ReactNode }) => (
-  <span className="inline-flex items-center gap-1.5 text-xs font-medium bg-slate-100 text-slate-600 px-3 py-1.5 rounded-full">
+  <span className="inline-flex items-center gap-1.5 text-xs font-medium bg-muted text-muted-foreground px-3 py-1.5 rounded-full">
     {icon}{children}
   </span>
 ));
@@ -201,9 +201,9 @@ const Step1 = React.memo(({
     <SectionLabel text="Driver Option" />
 
     {hideSelfDrive ? (
-      <div className="p-4 bg-blue-50 rounded-xl border border-blue-200 -mt-2">
-        <p className="text-sm text-blue-700">This vehicle is available with a professional driver only.</p>
-        <p className="font-secondary text-sm font-semibold text-blue-800 mt-1">Business-provided driver</p>
+      <div className="p-4 bg-blue-500/10 rounded-xl border border-blue-500/20 -mt-2">
+        <p className="text-sm text-blue-600 dark:text-blue-400">This vehicle is available with a professional driver only.</p>
+        <p className="font-secondary text-sm font-semibold text-blue-600 dark:text-blue-400 mt-1">Business-provided driver</p>
       </div>
     ) : (
       <RadioGroup value={driverType} onValueChange={onDriverTypeChange} className="grid grid-cols-2 gap-3 -mt-2">
@@ -213,15 +213,15 @@ const Step1 = React.memo(({
             htmlFor={type}
             className={cn(
               "flex items-start gap-3 border rounded-xl p-4 cursor-pointer transition-colors",
-              driverType === type ? "border-primary bg-primary/5 shadow-sm" : "border-slate-200 hover:border-slate-300 hover:bg-slate-50"
+              driverType === type ? "border-primary bg-primary/5 shadow-sm" : "border-border hover:border-input hover:bg-muted/50"
             )}
           >
             <RadioGroupItem value={type} id={type} className="mt-0.5 shrink-0" />
             <div>
-              <span className="font-secondary font-semibold text-sm block text-slate-900">
+              <span className="font-secondary font-semibold text-sm block text-foreground">
                 {type === "self" ? "Self Drive" : "With Driver"}
               </span>
-              <span className="text-xs text-slate-500 mt-0.5 block">
+              <span className="text-xs text-muted-foreground mt-0.5 block">
                 {type === "self" ? "Drive the vehicle yourself" : `₦${(vehicle.driverDailyRate ?? 0).toLocaleString()}/day`}
               </span>
             </div>
@@ -231,7 +231,7 @@ const Step1 = React.memo(({
     )}
 
     {driverType === "self" && (
-      <div className="p-4 border rounded-xl bg-slate-50 space-y-4">
+      <div className="p-4 border rounded-xl bg-muted/50 space-y-4">
         <div className="flex items-center space-x-2">
           <Checkbox id="self-driver" checked={isSelfDriver} onCheckedChange={(c) => onSelfDriverChange(c as boolean)} />
           <Label htmlFor="self-driver" className="text-sm font-medium cursor-pointer">I will be the primary driver</Label>
@@ -244,9 +244,9 @@ const Step1 = React.memo(({
               { id: "d-lic",   icon: IdCard, key: "licenseNumber", label: "Driver License Number", ph: "License number" },
             ] as const).map(({ id, icon: Icon, key, label, ph }) => (
               <div key={id}>
-                <Label htmlFor={id} className="text-xs text-slate-600 mb-1 block">{label}</Label>
+                <Label htmlFor={id} className="text-xs text-muted-foreground mb-1 block">{label}</Label>
                 <div className="relative">
-                  <Icon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+                  <Icon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                   <Input
                     id={id}
                     value={driverDetails[key]}
@@ -264,20 +264,20 @@ const Step1 = React.memo(({
     )}
 
     {driverType === "business" && (
-      <div className="space-y-2.5 p-4 bg-slate-50 rounded-xl border text-sm">
+      <div className="space-y-2.5 p-4 bg-muted/50 rounded-xl border text-sm">
         <div className="flex justify-between">
-          <span className="text-slate-500">Driver Daily Rate</span>
+          <span className="text-muted-foreground">Driver Daily Rate</span>
           <span className="font-semibold">₦{(vehicle.driverDailyRate ?? 0).toLocaleString()}</span>
         </div>
         {businessSettings.workingHours && (
           <div className="flex justify-between">
-            <span className="text-slate-500">Working Hours</span>
+            <span className="text-muted-foreground">Working Hours</span>
             <span className="font-medium">{businessSettings.workingHours.start} – {businessSettings.workingHours.end}</span>
           </div>
         )}
         {businessSettings.overtimeRate && (
-          <p className="text-xs text-slate-500 flex items-center gap-1">
-            <Info className="h-3 w-3 text-slate-400" />
+          <p className="text-xs text-muted-foreground flex items-center gap-1">
+            <Info className="h-3 w-3 text-muted-foreground" />
             Overtime: ₦{businessSettings.overtimeRate}/hr beyond working hours
           </p>
         )}
@@ -288,11 +288,11 @@ const Step1 = React.memo(({
       <SectionLabel text="Trip Locations & Purpose" />
       <div className="grid grid-cols-2 gap-4 mb-4">
         <div>
-          <Label htmlFor="primary-usage" className="text-xs text-slate-600 mb-1 block">
-            Primary Usage Location <span className="text-slate-400">(optional)</span>
+          <Label htmlFor="primary-usage" className="text-xs text-muted-foreground mb-1 block">
+            Primary Usage Location <span className="text-muted-foreground">(optional)</span>
           </Label>
           <div className="relative">
-            <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+            <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <Input id="primary-usage" value={primaryUsageLocation} onChange={onPrimaryUsageLocationChange} placeholder="e.g. Lagos, Abuja" className="pl-9 h-10" />
           </div>
           {primaryUsageLocation.length > 0 && (
@@ -302,11 +302,11 @@ const Step1 = React.memo(({
           )}
         </div>
         <div>
-          <Label htmlFor="booking-purpose" className="text-xs text-slate-600 mb-1 block">
+          <Label htmlFor="booking-purpose" className="text-xs text-muted-foreground mb-1 block">
             Purpose of Booking <span className="text-red-400">*</span>
           </Label>
           <div className="relative">
-            <Briefcase className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 z-10 pointer-events-none" />
+            <Briefcase className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground z-10 pointer-events-none" />
             <Select value={bookingPurpose} onValueChange={onBookingPurposeChange}>
               <SelectTrigger id="booking-purpose" className={cn("h-10 pl-9 w-full", step1Errors.bookingPurpose && "border-red-500")}>
                 <SelectValue placeholder="Select a purpose" />
@@ -321,21 +321,21 @@ const Step1 = React.memo(({
       </div>
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <Label htmlFor="pickup-location" className="text-xs text-slate-600 mb-1 block">
+          <Label htmlFor="pickup-location" className="text-xs text-muted-foreground mb-1 block">
             Pick-up Location <span className="text-red-400">*</span>
           </Label>
           <div className="relative">
-            <Navigation className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+            <Navigation className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <Input id="pickup-location" value={pickupLocation} onChange={onPickupLocationChange} placeholder="e.g. Victoria Island" className={cn("pl-9 h-10", step1Errors.pickupLocation && "border-red-500")} />
           </div>
           {step1Errors.pickupLocation && <p className="text-xs text-red-500 mt-1">{step1Errors.pickupLocation}</p>}
         </div>
         <div>
-          <Label htmlFor="dropoff-location" className="text-xs text-slate-600 mb-1 block">
+          <Label htmlFor="dropoff-location" className="text-xs text-muted-foreground mb-1 block">
             Drop-off Location <span className="text-red-400">*</span>
           </Label>
           <div className="relative">
-            <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+            <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <Input id="dropoff-location" value={dropoffLocation} onChange={onDropoffLocationChange} placeholder="e.g. Ikeja Airport" className={cn("pl-9 h-10", step1Errors.dropoffLocation && "border-red-500")} />
           </div>
           {step1Errors.dropoffLocation && <p className="text-xs text-red-500 mt-1">{step1Errors.dropoffLocation}</p>}
@@ -371,17 +371,17 @@ const Step2 = React.memo(({
 
     {dateRange.from && dateRange.to && (
       <div className="flex items-center gap-2 flex-wrap -mt-2">
-        <span className="font-secondary inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full bg-primary/10 text-primary">
+        <span className="font-secondary inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full bg-primary/10 text-primary text-primary-foreground">
           <Clock className="h-3 w-3" />
           {format(dateRange.from, "dd MMM yyyy")} → {format(dateRange.to, "dd MMM yyyy")}
         </span>
-        <span className="text-xs text-slate-500">
+        <span className="text-xs text-muted-foreground">
           {differenceInDays(dateRange.to, dateRange.from)} day{differenceInDays(dateRange.to, dateRange.from) !== 1 ? "s" : ""}
         </span>
       </div>
     )}
 
-    <div className={cn("rounded-xl border overflow-hidden", step2Errors.dateRange ? "border-red-400" : "border-slate-200")}>
+    <div className={cn("rounded-xl border overflow-hidden", step2Errors.dateRange ? "border-red-400" : "border-border")}>
   <Calendar
   mode="range"
   selected={dateRange}
@@ -415,12 +415,12 @@ const Step2 = React.memo(({
 
     <div className="space-y-1">
       {(businessSettings.minimumDuration ?? 1) > 1 && (
-        <p className="text-xs text-slate-400 flex items-center gap-1">
+        <p className="text-xs text-muted-foreground flex items-center gap-1">
           <Info className="h-3 w-3" />
           Minimum {businessSettings.minimumDuration} day{(businessSettings.minimumDuration ?? 1) > 1 ? "s" : ""} rental required
         </p>
       )}
-      <p className="text-xs text-slate-400 flex items-center gap-1">
+      <p className="text-xs text-muted-foreground flex items-center gap-1">
         <Info className="h-3 w-3" />
         Today has a primary border. You can book from today onwards.
       </p>
@@ -430,11 +430,11 @@ const Step2 = React.memo(({
       <SectionLabel text="Pickup & Return Times" />
       <div className="grid grid-cols-2 gap-4 -mt-2">
         <div>
-          <Label htmlFor="pickup-time" className="text-xs text-slate-600 mb-1 block">Pickup Time</Label>
+          <Label htmlFor="pickup-time" className="text-xs text-muted-foreground mb-1 block">Pickup Time</Label>
           <Select value={pickupTime} onValueChange={onPickupTimeChange}>
             <SelectTrigger id="pickup-time" className="h-11 w-full">
               <div className="flex items-center gap-2 min-w-0 flex-1">
-                <Clock className="h-4 w-4 text-slate-400 shrink-0" />
+                <Clock className="h-4 w-4 text-muted-foreground shrink-0" />
                 <SelectValue placeholder="Select time" />
               </div>
             </SelectTrigger>
@@ -444,11 +444,11 @@ const Step2 = React.memo(({
           </Select>
         </div>
         <div>
-          <Label htmlFor="return-time" className="text-xs text-slate-600 mb-1 block">Return Time</Label>
+          <Label htmlFor="return-time" className="text-xs text-muted-foreground mb-1 block">Return Time</Label>
           <Select value={returnTime} onValueChange={onReturnTimeChange}>
             <SelectTrigger id="return-time" className="h-11 w-full">
               <div className="flex items-center gap-2 min-w-0 flex-1">
-                <Clock className="h-4 w-4 text-slate-400 shrink-0" />
+                <Clock className="h-4 w-4 text-muted-foreground shrink-0" />
                 <SelectValue placeholder="Select time" />
               </div>
             </SelectTrigger>
@@ -497,8 +497,8 @@ const Step3 = React.memo(({
       {bookingPurpose && <Pill icon={<Briefcase className="h-3 w-3" />}>{bookingPurpose}</Pill>}
     </div>
 
-    <div className="bg-slate-50 rounded-xl border p-5">
-      <h3 className="font-secondary font-bold text-slate-900 mb-4 text-lg">Price Breakdown</h3>
+    <div className="bg-muted/50 rounded-xl border p-5">
+      <h3 className="font-secondary font-bold text-foreground mb-4 text-lg">Price Breakdown</h3>
       <div className="space-y-3 text-sm">
         <LineItem label={`Rental (${pricing.rentalDays} ${pricing.rentalDays === 1 ? "day" : "days"})`} value={pricing.rentalCost} />
         {driverType === "business" && <LineItem label="Driver Service" value={pricing.driverCost} />}
@@ -508,32 +508,32 @@ const Step3 = React.memo(({
         {pricing.tax > 0 && <LineItem label={`Tax (${businessSettings.taxRate ?? 0}%)`} value={pricing.tax} />}
         {pricing.cautionDeposit > 0 && (
           <>
-            <div className="border-t border-slate-200 my-1" />
+            <div className="border-t border-border my-1" />
             <div className="flex justify-between text-sm">
-              <span className="text-slate-600 flex items-center gap-1">
+              <span className="text-muted-foreground flex items-center gap-1">
                 Caution Deposit
                 <span className="text-[10px] text-emerald-600 font-medium bg-emerald-50 px-1.5 py-0.5 rounded-full ml-1">Refundable</span>
               </span>
-              <span className="font-medium text-slate-700">₦{pricing.cautionDeposit.toLocaleString()}</span>
+              <span className="font-medium text-foreground">₦{pricing.cautionDeposit.toLocaleString()}</span>
             </div>
           </>
         )}
-        <div className="border-t border-slate-200 pt-3 mt-1">
+        <div className="border-t border-border pt-3 mt-1">
           <div className="flex justify-between font-bold text-base">
             <span>Total Payable Now</span>
             <span className="text-primary">₦{(pricing.totalPayable + pricing.cautionDeposit).toLocaleString()}</span>
           </div>
-          <p className="text-[11px] text-slate-400 mt-1">Includes ₦{pricing.cautionDeposit.toLocaleString()} refundable caution deposit</p>
+          <p className="text-[11px] text-muted-foreground mt-1">Includes ₦{pricing.cautionDeposit.toLocaleString()} refundable caution deposit</p>
         </div>
       </div>
     </div>
 
-    <div className="rounded-xl border border-amber-200 bg-amber-50 p-4">
+    <div className="rounded-xl border border-amber-500/20 bg-amber-500/10 p-4">
       <div className="flex items-start gap-3">
         <AlertTriangle className="h-4 w-4 text-amber-500 mt-0.5 shrink-0" />
         <div>
-          <p className="font-secondary text-sm font-semibold text-amber-800 mb-1">Late Return Policy</p>
-          <p className="text-xs text-amber-700 leading-relaxed">
+          <p className="font-secondary text-sm font-semibold text-amber-600 dark:text-amber-400 mb-1">Late Return Policy</p>
+          <p className="text-xs text-amber-600 dark:text-amber-400 leading-relaxed">
             If the vehicle is not returned by the agreed return time, a late fee of{" "}
             <span className="font-semibold">₦{lateFee.toLocaleString()}/hour</span> will be charged automatically.
             After 3 hours, the full next day's rental rate applies. Repeated late returns may affect future booking eligibility.
@@ -542,12 +542,12 @@ const Step3 = React.memo(({
       </div>
     </div>
 
-    <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+    <div className="rounded-xl border border-border bg-muted/50 p-4">
       <div className="flex items-start gap-3">
-        <FileText className="h-4 w-4 text-slate-400 mt-0.5 shrink-0" />
+        <FileText className="h-4 w-4 text-muted-foreground mt-0.5 shrink-0" />
         <div>
-          <p className="font-secondary text-sm font-semibold text-slate-700 mb-1">Vehicle Care & Return Disclaimer</p>
-          <p className="text-xs text-slate-500 leading-relaxed">
+          <p className="font-secondary text-sm font-semibold text-foreground mb-1">Vehicle Care & Return Disclaimer</p>
+          <p className="text-xs text-muted-foreground leading-relaxed">
             The renter is responsible for the vehicle in their care. The vehicle must be returned in the same condition
             as received — clean, with a full fuel tank, and free of damage. Any damage, excessive dirt, fuel deficit,
             or missing accessories will be deducted from the caution deposit. The renter bears liability for any
@@ -557,7 +557,7 @@ const Step3 = React.memo(({
       </div>
     </div>
 
-    <div className={cn("rounded-xl border p-4", termsError ? "border-red-300 bg-red-50" : "border-slate-200 bg-white")}>
+    <div className={cn("rounded-xl border p-4", termsError ? "border-red-300 bg-destructive/10" : "border-border bg-white")}>
       <div className="flex items-start space-x-3">
         <Checkbox
           id="terms"
@@ -565,7 +565,7 @@ const Step3 = React.memo(({
           onCheckedChange={(c) => { onTermsChange(c as boolean); onClearTermsError(); }}
           className="mt-0.5"
         />
-        <div className="text-xs text-slate-600 leading-relaxed">
+        <div className="text-xs text-muted-foreground leading-relaxed">
           I have read and agree to the{" "}
           <span className="text-primary font-semibold">Terms & Conditions</span>
           {" "}and{" "}
@@ -810,22 +810,22 @@ export function CreateBookingModal({ open, onOpenChange, vehicle, userProfile, o
     <Dialog open={open} onOpenChange={handleDialogClose}>
       <DialogContent data-booking-modal className="font-primary max-h-[90vh] overflow-y-auto max-w-2xl">
         <DialogHeader>
-          <DialogTitle className="font-primary text-2xl font-bold text-slate-900 tracking-tight">
+          <DialogTitle className="font-primary text-2xl font-bold text-foreground tracking-tight">
             Book {vehicle.name}
           </DialogTitle>
-          <DialogDescription className="text-slate-500 text-sm">
+          <DialogDescription className="text-muted-foreground text-sm">
             Complete the steps below to create your booking
           </DialogDescription>
         </DialogHeader>
 
         <div className="mb-5 mt-1">
-          <div className="flex justify-between text-xs text-slate-400 mb-2">
+          <div className="flex justify-between text-xs text-muted-foreground mb-2">
             <span>Step {currentStep + 1} of {steps.length}</span>
-            <span className="font-secondary font-semibold text-slate-700">{steps[currentStep].title}</span>
+            <span className="font-secondary font-semibold text-foreground">{steps[currentStep].title}</span>
           </div>
           <div className="flex gap-1">
             {steps.map((_, i) => (
-              <div key={i} className={cn("h-1.5 flex-1 rounded-full transition-colors duration-300", currentStep >= i ? "bg-primary" : "bg-slate-200")} />
+              <div key={i} className={cn("h-1.5 flex-1 rounded-full transition-colors duration-300", currentStep >= i ? "bg-primary" : "bg-secondary")} />
             ))}
           </div>
         </div>
@@ -869,7 +869,7 @@ export function CreateBookingModal({ open, onOpenChange, vehicle, userProfile, o
         )}
 
         <div className="flex gap-3 mt-8">
-          <Button type="button" variant="outline" className="flex-1 h-12 rounded-xl border-slate-300 font-medium" onClick={handlePreviousStep} disabled={currentStep === 0}>
+          <Button type="button" variant="outline" className="flex-1 h-12 rounded-xl border-input font-medium" onClick={handlePreviousStep} disabled={currentStep === 0}>
             <ChevronLeft className="h-4 w-4 mr-1" />Previous
           </Button>
           <Button type="button" className="font-secondary flex-1 h-12 rounded-xl text-white font-semibold" onClick={currentStep === steps.length - 1 ? handleSubmit : handleNextStep}>

@@ -7,6 +7,10 @@ export interface RenterSummary {
   pendingPayments: number;
   totalSpend: number;
   recentBookings: any[];
+  trends?: {
+    bookings: number;
+    spend: number;
+  };
 }
 
 export interface HostSummary {

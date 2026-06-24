@@ -21,9 +21,9 @@ interface Payment {
 }
 
 const PAYMENT_STATUS_BADGE: Record<string, string> = {
-  success: "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400",
-  pending: "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400",
-  failed: "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400",
+  success: "bg-green-100 text-emerald-600 dark:text-emerald-400 dark:bg-green-900/30 dark:text-green-400",
+  pending: "bg-amber-100 text-amber-600 dark:text-amber-400 dark:bg-amber-900/30 dark:text-amber-400",
+  failed: "bg-red-100 text-destructive dark:text-red-400 dark:bg-red-900/30 dark:text-red-400",
   refunded: "bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400",
 };
 
@@ -59,10 +59,10 @@ export default function AdminPaymentsPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">
+        <h1 className="text-3xl font-bold tracking-tight text-foreground dark:text-white">
           Payments
         </h1>
-        <p className="text-slate-500 font-secondary mt-1">
+        <p className="text-muted-foreground font-secondary mt-1">
           All payment transactions processed through the platform.
         </p>
       </div>
@@ -71,12 +71,12 @@ export default function AdminPaymentsPage() {
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <Card>
           <CardContent className="p-5 flex items-center gap-4">
-            <div className="h-10 w-10 rounded-lg bg-green-50 dark:bg-green-900/20 flex items-center justify-center">
+            <div className="h-10 w-10 rounded-lg bg-emerald-500/10 dark:bg-green-900/20 flex items-center justify-center">
               <TrendingUp className="h-5 w-5 text-green-600" />
             </div>
             <div>
-              <p className="text-xs text-slate-500">Total Collected</p>
-              <p className="text-xl font-bold text-slate-900 dark:text-white">
+              <p className="text-xs text-muted-foreground">Total Collected</p>
+              <p className="text-xl font-bold text-foreground dark:text-white">
                 ₦{totalSuccess.toLocaleString()}
               </p>
             </div>
@@ -84,12 +84,12 @@ export default function AdminPaymentsPage() {
         </Card>
         <Card>
           <CardContent className="p-5 flex items-center gap-4">
-            <div className="h-10 w-10 rounded-lg bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center">
+            <div className="h-10 w-10 rounded-lg bg-blue-500/10 dark:bg-blue-900/20 flex items-center justify-center">
               <CreditCard className="h-5 w-5 text-blue-600" />
             </div>
             <div>
-              <p className="text-xs text-slate-500">Total Transactions</p>
-              <p className="text-xl font-bold text-slate-900 dark:text-white">
+              <p className="text-xs text-muted-foreground">Total Transactions</p>
+              <p className="text-xl font-bold text-foreground dark:text-white">
                 {items.length}
               </p>
             </div>
@@ -97,12 +97,12 @@ export default function AdminPaymentsPage() {
         </Card>
         <Card>
           <CardContent className="p-5 flex items-center gap-4">
-            <div className="h-10 w-10 rounded-lg bg-amber-50 dark:bg-amber-900/20 flex items-center justify-center">
+            <div className="h-10 w-10 rounded-lg bg-amber-500/10 dark:bg-amber-900/20 flex items-center justify-center">
               <CreditCard className="h-5 w-5 text-amber-600" />
             </div>
             <div>
-              <p className="text-xs text-slate-500">Pending</p>
-              <p className="text-xl font-bold text-slate-900 dark:text-white">
+              <p className="text-xs text-muted-foreground">Pending</p>
+              <p className="text-xl font-bold text-foreground dark:text-white">
                 {items.filter((p) => p.status === "pending").length}
               </p>
             </div>
@@ -112,7 +112,7 @@ export default function AdminPaymentsPage() {
 
       {/* Search */}
       <div className="relative max-w-xs">
-        <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+        <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
         <Input
           id="payments-search"
           placeholder="Search by reference or booking…"
@@ -128,15 +128,15 @@ export default function AdminPaymentsPage() {
         </div>
       ) : filtered.length === 0 ? (
         <Card>
-          <CardContent className="flex flex-col items-center justify-center py-16 text-slate-400">
+          <CardContent className="flex flex-col items-center justify-center py-16 text-muted-foreground">
             <CreditCard className="h-10 w-10 mb-3" />
             <p className="font-medium">No payments found</p>
           </CardContent>
         </Card>
       ) : (
-        <div className="rounded-lg border border-slate-200 dark:border-slate-800 overflow-hidden">
+        <div className="rounded-lg border border-border dark:border-border overflow-hidden">
           <table className="w-full text-sm">
-            <thead className="bg-slate-50 dark:bg-slate-900 text-xs text-slate-500 uppercase tracking-wide">
+            <thead className="bg-muted/50 dark:bg-background text-xs text-muted-foreground uppercase tracking-wide">
               <tr>
                 <th className="px-4 py-3 text-left">Reference</th>
                 <th className="px-4 py-3 text-left hidden md:table-cell">Booking</th>
@@ -151,40 +151,40 @@ export default function AdminPaymentsPage() {
                 <tr
                   key={p.id}
                   id={`payment-row-${p.id}`}
-                  className="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors"
+                  className="hover:bg-muted/50 dark:hover:bg-slate-800/50 transition-colors"
                 >
                   <td className="px-4 py-3">
-                    <span className="font-mono text-xs text-slate-700 dark:text-slate-300 break-all">
+                    <span className="font-mono text-xs text-foreground dark:text-slate-300 break-all">
                       {p.reference}
                     </span>
                   </td>
                   <td className="px-4 py-3 hidden md:table-cell">
-                    <span className="font-mono text-xs text-slate-500">
+                    <span className="font-mono text-xs text-muted-foreground">
                       {p.booking?.bookingNumber ?? "—"}
                     </span>
                   </td>
-                  <td className="px-4 py-3 hidden lg:table-cell text-slate-600 dark:text-slate-400 capitalize">
+                  <td className="px-4 py-3 hidden lg:table-cell text-muted-foreground dark:text-muted-foreground capitalize">
                     {p.provider}
                     {p.channel && (
-                      <span className="ml-1 text-xs text-slate-400">
+                      <span className="ml-1 text-xs text-muted-foreground">
                         ({p.channel})
                       </span>
                     )}
                   </td>
-                  <td className="px-4 py-3 text-right font-semibold text-slate-800 dark:text-slate-200">
+                  <td className="px-4 py-3 text-right font-semibold text-foreground dark:text-slate-200">
                     ₦{Number(p.amount).toLocaleString()}
                   </td>
                   <td className="px-4 py-3 text-center">
                     <span
                       className={`text-xs px-2 py-0.5 rounded-full font-medium capitalize ${
                         PAYMENT_STATUS_BADGE[p.status] ??
-                        "bg-slate-100 text-slate-600"
+                        "bg-muted text-muted-foreground"
                       }`}
                     >
                       {p.status}
                     </span>
                   </td>
-                  <td className="px-4 py-3 text-xs text-slate-400 hidden sm:table-cell">
+                  <td className="px-4 py-3 text-xs text-muted-foreground hidden sm:table-cell">
                     {new Date(p.createdAt).toLocaleDateString("en-NG", {
                       day: "numeric",
                       month: "short",

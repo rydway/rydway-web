@@ -22,7 +22,7 @@ export default function ReviewList({ reviews, averageRating }: ReviewListProps) 
             <div className="flex flex-col items-center">
               <span className="text-4xl font-bold text-primary">{averageRating.toFixed(1)}</span>
               <RatingStars value={averageRating} readonly size="sm" />
-              <span className="text-sm text-slate-600 font-secondary mt-1">
+              <span className="text-sm text-muted-foreground font-secondary mt-1">
                 {reviews.length} {reviews.length === 1 ? 'review' : 'reviews'}
               </span>
             </div>
@@ -36,7 +36,7 @@ export default function ReviewList({ reviews, averageRating }: ReviewListProps) 
           <Card key={review.id} className="glassmorphism-card p-6">
             <div className="flex items-start gap-4">
               <Avatar>
-                <AvatarFallback className="bg-primary/10 text-primary font-semibold">
+                <AvatarFallback className="bg-primary/10 text-primary font-semibold text-primary-foreground">
                   {getInitials(review.reviewerName)}
                 </AvatarFallback>
               </Avatar>
@@ -44,13 +44,13 @@ export default function ReviewList({ reviews, averageRating }: ReviewListProps) 
               <div className="flex-1">
                 <div className="flex items-center justify-between mb-2">
                   <div>
-                    <h4 className="font-semibold text-slate-800">{review.reviewerName}</h4>
-                    <p className="text-xs text-slate-500 font-secondary">{formatTimeAgo(review.createdAt)}</p>
+                    <h4 className="font-semibold text-foreground">{review.reviewerName}</h4>
+                    <p className="text-xs text-muted-foreground font-secondary">{formatTimeAgo(review.createdAt)}</p>
                   </div>
                   <RatingStars value={review.rating} readonly size="sm" />
                 </div>
                 
-                <p className="text-sm text-slate-700 font-secondary leading-relaxed">
+                <p className="text-sm text-foreground font-secondary leading-relaxed">
                   {review.text}
                 </p>
                 

@@ -98,13 +98,13 @@ export default function AuthForm({ mode, onSubmit, onToggleMode, onMagicLink }: 
 
       {/* Form Container */}
       <div className="relative z-10 w-full max-w-md mx-auto">
-        <div className="glassmorphism-card rounded-3xl p-8 shadow-glass bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm">
+        <div className="glassmorphism-card rounded-3xl p-8 shadow-glass bg-white/90 dark:bg-background/ backdrop-blur-sm">
           {/* Header */}
           <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold text-slate-800 dark:text-white mb-2">
+            <h2 className="text-3xl font-bold text-foreground dark:text-white mb-2">
               {mode === 'signup' ? 'Create Account' : 'Welcome Back'}
             </h2>
-            <p className="text-slate-600 dark:text-slate-400 font-secondary">
+            <p className="text-muted-foreground dark:text-muted-foreground font-secondary">
               {mode === 'signup' 
                 ? 'Start your journey with Rydway' 
                 : 'Login to continue your journey'}
@@ -115,7 +115,7 @@ export default function AuthForm({ mode, onSubmit, onToggleMode, onMagicLink }: 
           <form onSubmit={handleSubmit} className="space-y-5">
             {mode === 'signup' && (
               <div>
-                <Label htmlFor="name" className="text-sm font-medium text-slate-700 dark:text-slate-300">
+                <Label htmlFor="name" className="text-sm font-medium text-foreground dark:text-slate-300">
                   Full Name
                 </Label>
                 <Input
@@ -124,7 +124,7 @@ export default function AuthForm({ mode, onSubmit, onToggleMode, onMagicLink }: 
                   placeholder="John Doe"
                   value={formData.name}
                   onChange={(e) => handleChange('name', e.target.value)}
-                  className={`mt-1.5 h-12 rounded-xl border-slate-200 bg-white/70 backdrop-blur-sm font-secondary ${
+                  className={`mt-1.5 h-12 rounded-xl border-border bg-white/70 backdrop-blur-sm font-secondary ${
                     errors.name ? 'border-red-500' : ''
                   }`}
                 />
@@ -135,18 +135,18 @@ export default function AuthForm({ mode, onSubmit, onToggleMode, onMagicLink }: 
             )}
 
             <div>
-              <Label htmlFor="email" className="text-sm font-medium text-slate-700 dark:text-slate-300">
+              <Label htmlFor="email" className="text-sm font-medium text-foreground dark:text-slate-300">
                 Email Address
               </Label>
               <div className="relative mt-1.5">
-                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" />
+                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
                 <Input
                   id="email"
                   type="email"
                   placeholder="you@example.com"
                   value={formData.email}
                   onChange={(e) => handleChange('email', e.target.value)}
-                  className={`h-12 pl-11 rounded-xl border-slate-200 bg-white/70 backdrop-blur-sm font-secondary ${
+                  className={`h-12 pl-11 rounded-xl border-border bg-white/70 backdrop-blur-sm font-secondary ${
                     errors.email ? 'border-red-500' : ''
                   }`}
                 />
@@ -157,25 +157,25 @@ export default function AuthForm({ mode, onSubmit, onToggleMode, onMagicLink }: 
             </div>
 
             <div>
-              <Label htmlFor="password" className="text-sm font-medium text-slate-700 dark:text-slate-300">
+              <Label htmlFor="password" className="text-sm font-medium text-foreground dark:text-slate-300">
                 Password
               </Label>
               <div className="relative mt-1.5">
-                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" />
+                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
                 <Input
                   id="password"
                   type={showPassword ? "text" : "password"}
                   placeholder="••••••••"
                   value={formData.password}
                   onChange={(e) => handleChange('password', e.target.value)}
-                  className={`h-12 pl-11 pr-11 rounded-xl border-slate-200 bg-white/70 backdrop-blur-sm font-secondary ${
+                  className={`h-12 pl-11 pr-11 rounded-xl border-border bg-white/70 backdrop-blur-sm font-secondary ${
                     errors.password ? 'border-red-500' : ''
                   }`}
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-muted-foreground dark:hover:text-slate-300"
                 >
                   {showPassword ? (
                     <EyeOff className="h-5 w-5" />
@@ -214,7 +214,7 @@ export default function AuthForm({ mode, onSubmit, onToggleMode, onMagicLink }: 
                 type="button"
                 variant="ghost"
                 onClick={onMagicLink}
-                className="w-full h-12 rounded-xl text-primary hover:bg-primary/10 font-medium"
+                className="w-full h-12 rounded-xl text-primary hover:bg-primary/10 font-medium text-primary-foreground"
               >
                 Send Magic Link Instead
               </Button>
@@ -223,7 +223,7 @@ export default function AuthForm({ mode, onSubmit, onToggleMode, onMagicLink }: 
 
           {/* Footer */}
           <div className="mt-6 text-center">
-            <p className="text-sm text-slate-600 dark:text-slate-400 font-secondary">
+            <p className="text-sm text-muted-foreground dark:text-muted-foreground font-secondary">
               {mode === 'signup' ? 'Already have an account?' : "Don't have an account?"}{' '}
               <button
                 onClick={onToggleMode}

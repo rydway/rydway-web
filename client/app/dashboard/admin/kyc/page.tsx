@@ -42,9 +42,9 @@ interface KycSubmission {
 }
 
 const STATUS_STYLES: Record<KycStatus, string> = {
-  pending: "bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-400",
-  approved: "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400",
-  rejected: "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400",
+  pending: "bg-amber-100 text-amber-600 dark:text-amber-400 dark:bg-amber-900/30 dark:text-amber-400",
+  approved: "bg-green-100 text-emerald-600 dark:text-emerald-400 dark:bg-green-900/30 dark:text-green-400",
+  rejected: "bg-red-100 text-destructive dark:text-red-400 dark:bg-red-900/30 dark:text-red-400",
 };
 
 async function fetchAdminKyc(status?: string) {
@@ -93,10 +93,10 @@ export default function AdminKycPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">
+        <h1 className="text-3xl font-bold tracking-tight text-foreground dark:text-white">
           KYC &amp; Verification
         </h1>
-        <p className="text-slate-500 font-secondary mt-1">
+        <p className="text-muted-foreground font-secondary mt-1">
           Review and approve identity verification submissions.
         </p>
       </div>
@@ -104,7 +104,7 @@ export default function AdminKycPage() {
       {/* Filters */}
       <div className="flex flex-col sm:flex-row gap-3">
         <div className="relative flex-1 max-w-xs">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <Input
             id="kyc-search"
             placeholder="Search by name or email…"
@@ -122,7 +122,7 @@ export default function AdminKycPage() {
               className={`px-3 py-1.5 rounded-md text-xs font-semibold border transition-colors ${
                 statusFilter === s
                   ? "bg-primary text-white border-primary"
-                  : "border-slate-200 text-slate-600 hover:border-slate-400 dark:border-slate-700 dark:text-slate-400"
+                  : "border-border text-muted-foreground hover:border-slate-400 dark:border-slate-700 dark:text-muted-foreground"
               }`}
             >
               {s ? s.charAt(0).toUpperCase() + s.slice(1) : "All"}
@@ -138,7 +138,7 @@ export default function AdminKycPage() {
         </div>
       ) : filtered.length === 0 ? (
         <Card>
-          <CardContent className="flex flex-col items-center justify-center py-16 text-slate-400">
+          <CardContent className="flex flex-col items-center justify-center py-16 text-muted-foreground">
             <ShieldCheck className="h-10 w-10 mb-3" />
             <p className="font-medium">No KYC submissions found</p>
           </CardContent>
@@ -151,16 +151,16 @@ export default function AdminKycPage() {
                 <div className="flex flex-col lg:flex-row lg:items-start gap-4">
                   {/* User Info */}
                   <div className="flex items-start gap-3 flex-1">
-                    <div className="h-10 w-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center flex-shrink-0">
-                      <User className="h-5 w-5 text-slate-400" />
+                    <div className="h-10 w-10 rounded-full bg-muted dark:bg-slate-800 flex items-center justify-center flex-shrink-0">
+                      <User className="h-5 w-5 text-muted-foreground" />
                     </div>
                     <div>
-                      <p className="font-semibold text-slate-900 dark:text-white">
+                      <p className="font-semibold text-foreground dark:text-white">
                         {kyc.user.firstName} {kyc.user.lastName}
                       </p>
-                      <p className="text-sm text-slate-500">{kyc.user.email}</p>
+                      <p className="text-sm text-muted-foreground">{kyc.user.email}</p>
                       <div className="flex gap-2 mt-1">
-                        <span className="text-xs bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 px-2 py-0.5 rounded-full capitalize">
+                        <span className="text-xs bg-muted dark:bg-slate-800 text-muted-foreground dark:text-muted-foreground px-2 py-0.5 rounded-full capitalize">
                           {kyc.user.role}
                         </span>
                         <span
@@ -182,7 +182,7 @@ export default function AdminKycPage() {
                         target="_blank"
                         rel="noopener noreferrer"
                         id={`kyc-doc-${kyc.id}`}
-                        className="flex items-center gap-1.5 text-xs bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-400 px-3 py-1.5 rounded-md hover:bg-blue-100 transition-colors"
+                        className="flex items-center gap-1.5 text-xs bg-blue-500/10 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 dark:text-blue-400 px-3 py-1.5 rounded-md hover:bg-blue-100 transition-colors"
                       >
                         <ExternalLink className="h-3 w-3" />
                         ID Document
@@ -203,7 +203,7 @@ export default function AdminKycPage() {
                   </div>
 
                   {/* Submitted */}
-                  <p className="text-xs text-slate-400 flex-shrink-0">
+                  <p className="text-xs text-muted-foreground flex-shrink-0">
                     {new Date(kyc.createdAt).toLocaleDateString("en-NG", {
                       day: "numeric",
                       month: "short",
@@ -214,7 +214,7 @@ export default function AdminKycPage() {
 
                 {/* Review Actions — only show for pending */}
                 {kyc.status === "pending" && (
-                  <div className="mt-4 pt-4 border-t border-slate-100 dark:border-slate-800 flex flex-col sm:flex-row gap-3">
+                  <div className="mt-4 pt-4 border-t border-slate-100 dark:border-border flex flex-col sm:flex-row gap-3">
                     <Input
                       id={`kyc-notes-${kyc.id}`}
                       placeholder="Optional review notes…"

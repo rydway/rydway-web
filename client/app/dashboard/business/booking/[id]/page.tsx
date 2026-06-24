@@ -21,7 +21,7 @@ export default function BusinessBookingPage() {
       <div className="flex items-center justify-center h-[60vh]">
         <div className="text-center">
           <Loader2 className="animate-spin h-12 w-12 text-primary mx-auto" />
-          <p className="mt-4 text-slate-600 dark:text-slate-300 font-secondary">Loading booking details...</p>
+          <p className="mt-4 text-muted-foreground dark:text-slate-300 font-secondary">Loading booking details...</p>
         </div>
       </div>
     );
@@ -30,10 +30,10 @@ export default function BusinessBookingPage() {
   if (!booking) {
     return (
       <div className="flex flex-col items-center justify-center h-[60vh]">
-        <h1 className="text-2xl font-bold text-slate-800 dark:text-white font-primary">
+        <h1 className="text-2xl font-bold text-foreground dark:text-white font-primary">
           Booking Not Found
         </h1>
-        <p className="text-slate-500 mt-2 font-secondary">The booking you're looking for doesn't exist.</p>
+        <p className="text-muted-foreground mt-2 font-secondary">The booking you're looking for doesn't exist.</p>
       </div>
     );
   }

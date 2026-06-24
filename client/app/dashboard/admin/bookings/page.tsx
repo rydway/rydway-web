@@ -30,11 +30,11 @@ const BOOKING_STATUSES = [
 ];
 
 const STATUS_BADGE: Record<string, string> = {
-  pending: "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400",
-  confirmed: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400",
-  active: "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400",
-  completed: "bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300",
-  cancelled: "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400",
+  pending: "bg-amber-100 text-amber-600 dark:text-amber-400 dark:bg-amber-900/30 dark:text-amber-400",
+  confirmed: "bg-blue-100 text-blue-600 dark:text-blue-400 dark:bg-blue-900/30 dark:text-blue-400",
+  active: "bg-green-100 text-emerald-600 dark:text-emerald-400 dark:bg-green-900/30 dark:text-green-400",
+  completed: "bg-muted text-foreground dark:bg-slate-800 dark:text-slate-300",
+  cancelled: "bg-red-100 text-destructive dark:text-red-400 dark:bg-red-900/30 dark:text-red-400",
   disputed: "bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400",
 };
 
@@ -69,10 +69,10 @@ export default function AdminBookingsPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">
+        <h1 className="text-3xl font-bold tracking-tight text-foreground dark:text-white">
           All Bookings
         </h1>
-        <p className="text-slate-500 font-secondary mt-1">
+        <p className="text-muted-foreground font-secondary mt-1">
           Monitor trip activity across the entire platform.
         </p>
       </div>
@@ -80,7 +80,7 @@ export default function AdminBookingsPage() {
       {/* Filters */}
       <div className="flex flex-col gap-3">
         <div className="relative max-w-xs">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <Input
             id="bookings-search"
             placeholder="Search by ref, vehicle, or renter…"
@@ -98,7 +98,7 @@ export default function AdminBookingsPage() {
               className={`px-3 py-1.5 rounded-md text-xs font-semibold border transition-colors capitalize ${
                 statusFilter === s
                   ? "bg-primary text-white border-primary"
-                  : "border-slate-200 text-slate-600 hover:border-slate-400 dark:border-slate-700 dark:text-slate-400"
+                  : "border-border text-muted-foreground hover:border-slate-400 dark:border-slate-700 dark:text-muted-foreground"
               }`}
             >
               {s || "All"}
@@ -113,15 +113,15 @@ export default function AdminBookingsPage() {
         </div>
       ) : filtered.length === 0 ? (
         <Card>
-          <CardContent className="flex flex-col items-center justify-center py-16 text-slate-400">
+          <CardContent className="flex flex-col items-center justify-center py-16 text-muted-foreground">
             <FileText className="h-10 w-10 mb-3" />
             <p className="font-medium">No bookings found</p>
           </CardContent>
         </Card>
       ) : (
-        <div className="rounded-lg border border-slate-200 dark:border-slate-800 overflow-hidden">
+        <div className="rounded-lg border border-border dark:border-border overflow-hidden">
           <table className="w-full text-sm">
-            <thead className="bg-slate-50 dark:bg-slate-900 text-xs text-slate-500 uppercase tracking-wide">
+            <thead className="bg-muted/50 dark:bg-background text-xs text-muted-foreground uppercase tracking-wide">
               <tr>
                 <th className="px-4 py-3 text-left">Ref</th>
                 <th className="px-4 py-3 text-left hidden md:table-cell">Renter</th>
@@ -136,13 +136,13 @@ export default function AdminBookingsPage() {
                 <tr
                   key={b.id}
                   id={`booking-row-${b.id}`}
-                  className="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors"
+                  className="hover:bg-muted/50 dark:hover:bg-slate-800/50 transition-colors"
                 >
                   <td className="px-4 py-3">
-                    <span className="font-mono text-xs text-slate-700 dark:text-slate-300">
+                    <span className="font-mono text-xs text-foreground dark:text-slate-300">
                       {b.bookingNumber}
                     </span>
-                    <p className="text-xs text-slate-400">
+                    <p className="text-xs text-muted-foreground">
                       {new Date(b.createdAt).toLocaleDateString("en-NG", {
                         day: "numeric",
                         month: "short",
@@ -150,15 +150,15 @@ export default function AdminBookingsPage() {
                     </p>
                   </td>
                   <td className="px-4 py-3 hidden md:table-cell">
-                    <p className="font-medium text-slate-700 dark:text-slate-300">
+                    <p className="font-medium text-foreground dark:text-slate-300">
                       {b.renter?.firstName} {b.renter?.lastName}
                     </p>
-                    <p className="text-xs text-slate-400">{b.renter?.email}</p>
+                    <p className="text-xs text-muted-foreground">{b.renter?.email}</p>
                   </td>
-                  <td className="px-4 py-3 hidden lg:table-cell text-slate-600 dark:text-slate-400">
+                  <td className="px-4 py-3 hidden lg:table-cell text-muted-foreground dark:text-muted-foreground">
                     {b.vehicle?.name}
                   </td>
-                  <td className="px-4 py-3 hidden lg:table-cell text-xs text-slate-500">
+                  <td className="px-4 py-3 hidden lg:table-cell text-xs text-muted-foreground">
                     {new Date(b.startDate).toLocaleDateString("en-NG", {
                       day: "numeric",
                       month: "short",
@@ -169,14 +169,14 @@ export default function AdminBookingsPage() {
                       month: "short",
                     })}
                   </td>
-                  <td className="px-4 py-3 text-right hidden sm:table-cell font-semibold text-slate-800 dark:text-slate-200">
+                  <td className="px-4 py-3 text-right hidden sm:table-cell font-semibold text-foreground dark:text-slate-200">
                     ₦{Number(b.totalAmount).toLocaleString()}
                   </td>
                   <td className="px-4 py-3 text-center">
                     <span
                       className={`text-xs px-2 py-0.5 rounded-full font-medium capitalize ${
                         STATUS_BADGE[b.status] ??
-                        "bg-slate-100 text-slate-600"
+                        "bg-muted text-muted-foreground"
                       }`}
                     >
                       {b.status}

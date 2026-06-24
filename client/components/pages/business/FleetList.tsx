@@ -32,7 +32,7 @@ export default function FleetList({ vehicles, onEdit, onDelete, onToggleAvailabi
                   <h3 className="text-lg font-bold font-primary">
                     {vehicle.make} {vehicle.model}
                   </h3>
-                  <p className="text-sm text-slate-600 font-secondary">
+                  <p className="text-sm text-muted-foreground font-secondary">
                     {vehicle.year} • {vehicle.plate}
                   </p>
                 </div>
@@ -40,18 +40,18 @@ export default function FleetList({ vehicles, onEdit, onDelete, onToggleAvailabi
                   <p className="text-xl font-bold text-primary font-primary">
                     {formatPrice(vehicle.rateDaily)}
                   </p>
-                  <p className="text-xs text-slate-500 font-secondary">/day</p>
+                  <p className="text-xs text-muted-foreground font-secondary">/day</p>
                 </div>
               </div>
               
               <div className="flex flex-wrap gap-2 mb-4">
-                <span className="px-2 py-1 text-xs rounded-full bg-blue-100 text-blue-800 font-secondary">
+                <span className="px-2 py-1 text-xs rounded-full bg-blue-100 text-blue-600 dark:text-blue-400 font-secondary">
                   {vehicle.category}
                 </span>
-                <span className="px-2 py-1 text-xs rounded-full bg-slate-100 text-slate-800 font-secondary">
+                <span className="px-2 py-1 text-xs rounded-full bg-muted text-foreground font-secondary">
                   {vehicle.transmission}
                 </span>
-                <span className="px-2 py-1 text-xs rounded-full bg-slate-100 text-slate-800 font-secondary">
+                <span className="px-2 py-1 text-xs rounded-full bg-muted text-foreground font-secondary">
                   {vehicle.capacity}
                 </span>
               </div>
@@ -82,7 +82,7 @@ export default function FleetList({ vehicles, onEdit, onDelete, onToggleAvailabi
                   onClick={() => onDelete?.(vehicle.id)}
                   size="sm"
                   variant="outline"
-                  className="rounded-xl border-red-500 text-red-600 hover:bg-red-50"
+                  className="rounded-xl border-red-500 text-red-600 hover:bg-destructive/10"
                 >
                   <Trash2 className="h-4 w-4 mr-1" />
                   Delete

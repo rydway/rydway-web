@@ -100,7 +100,7 @@ export function AddPaymentMethodDialog({
                     value={cardData.number}
                     onChange={(e) => setCardData({ ...cardData, number: e.target.value })}
                   />
-                  <CreditCard className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+                  <CreditCard className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                 </div>
               </div>
               

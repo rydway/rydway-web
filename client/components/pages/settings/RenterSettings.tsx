@@ -101,15 +101,15 @@ function RenterAccountSettings() {
   };
 
   return (
-    <Card className="border-slate-200 shadow-sm">
+    <Card className="border-border shadow-sm">
       <CardHeader>
         <div className="flex items-center gap-2">
           <UserIcon className="h-5 w-5 text-blue-600" />
-          <CardTitle className="text-lg font-semibold text-slate-800 font-primary">
+          <CardTitle className="text-lg font-semibold text-foreground font-primary">
             Account Settings
           </CardTitle>
         </div>
-        <CardDescription className="text-sm text-slate-500 font-secondary">
+        <CardDescription className="text-sm text-muted-foreground font-secondary">
           Manage your account security and preferences
         </CardDescription>
       </CardHeader>
@@ -117,8 +117,8 @@ function RenterAccountSettings() {
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <div>
-              <h4 className="text-sm font-medium text-slate-800">Password</h4>
-              <p className="text-xs text-slate-500 mt-1">
+              <h4 className="text-sm font-medium text-foreground">Password</h4>
+              <p className="text-xs text-muted-foreground mt-1">
                 Last changed 3 months ago
               </p>
             </div>
@@ -133,7 +133,7 @@ function RenterAccountSettings() {
           </div>
 
           {showChangePassword && (
-            <div className="mt-4 p-4 bg-slate-50 rounded-lg border border-slate-200 space-y-4">
+            <div className="mt-4 p-4 bg-muted/50 rounded-lg border border-border space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="current-password" className="text-xs">Current Password</Label>
                 <div className="relative">
@@ -230,8 +230,8 @@ function RenterAccountSettings() {
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <div>
-              <h4 className="text-sm font-medium text-slate-800">Deactivate Account</h4>
-              <p className="text-xs text-slate-500 mt-1">
+              <h4 className="text-sm font-medium text-foreground">Deactivate Account</h4>
+              <p className="text-xs text-muted-foreground mt-1">
                 Temporarily disable your account
               </p>
             </div>
@@ -239,7 +239,7 @@ function RenterAccountSettings() {
               variant="outline" 
               size="sm"
               onClick={() => setShowDeactivateDialog(true)}
-              className="text-xs h-8 text-amber-600 border-amber-200 hover:bg-amber-50"
+              className="text-xs h-8 text-amber-600 border-amber-500/20 hover:bg-amber-500/10"
             >
               Deactivate
             </Button>
@@ -247,8 +247,8 @@ function RenterAccountSettings() {
 
           <div className="flex items-center justify-between">
             <div>
-              <h4 className="text-sm font-medium text-slate-800">Delete Account</h4>
-              <p className="text-xs text-slate-500 mt-1">
+              <h4 className="text-sm font-medium text-foreground">Delete Account</h4>
+              <p className="text-xs text-muted-foreground mt-1">
                 Permanently delete your account and data
               </p>
             </div>
@@ -256,7 +256,7 @@ function RenterAccountSettings() {
               variant="outline" 
               size="sm"
               onClick={() => setShowDeleteDialog(true)}
-              className="text-xs h-8 text-red-600 border-red-200 hover:bg-red-50"
+              className="text-xs h-8 text-red-600 border-destructive/20 hover:bg-destructive/10"
             >
               Delete
             </Button>
@@ -349,12 +349,12 @@ function RenterPaymentMethods() {
   };
 
   return (
-    <Card className="border-slate-200 shadow-sm">
+    <Card className="border-border shadow-sm">
       <CardHeader>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <CreditCard className="h-5 w-5 text-blue-600" />
-            <CardTitle className="text-lg font-semibold text-slate-800 font-primary">
+            <CardTitle className="text-lg font-semibold text-foreground font-primary">
               Payment Methods
             </CardTitle>
           </div>
@@ -367,7 +367,7 @@ function RenterPaymentMethods() {
             Add Card
           </Button>
         </div>
-        <CardDescription className="text-sm text-slate-500 font-secondary">
+        <CardDescription className="text-sm text-muted-foreground font-secondary">
           Manage your payment methods for bookings
         </CardDescription>
       </CardHeader>
@@ -383,10 +383,10 @@ function RenterPaymentMethods() {
               />
             ))
           ) : (
-            <div className="flex flex-col items-center justify-center py-8 px-4 border border-dashed border-slate-200 rounded-lg">
+            <div className="flex flex-col items-center justify-center py-8 px-4 border border-dashed border-border rounded-lg">
               <CreditCard className="h-8 w-8 text-slate-300 mb-2" />
-              <p className="text-sm text-slate-600 mb-1">No payment methods</p>
-              <p className="text-xs text-slate-500 text-center">
+              <p className="text-sm text-muted-foreground mb-1">No payment methods</p>
+              <p className="text-xs text-muted-foreground text-center">
                 Add a card to start booking vehicles
               </p>
             </div>
@@ -418,15 +418,15 @@ function RenterNotificationSettings({
   };
 
   return (
-    <Card className="border-slate-200 shadow-sm">
+    <Card className="border-border shadow-sm">
       <CardHeader>
         <div className="flex items-center gap-2">
           <Bell className="h-5 w-5 text-blue-600" />
-          <CardTitle className="text-lg font-semibold text-slate-800 font-primary">
+          <CardTitle className="text-lg font-semibold text-foreground font-primary">
             Notifications
           </CardTitle>
         </div>
-        <CardDescription className="text-sm text-slate-500 font-secondary">
+        <CardDescription className="text-sm text-muted-foreground font-secondary">
           Choose what notifications you receive
         </CardDescription>
       </CardHeader>
@@ -434,10 +434,10 @@ function RenterNotificationSettings({
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <div className="space-y-0.5">
-              <Label htmlFor="booking-updates" className="text-sm font-medium text-slate-800">
+              <Label htmlFor="booking-updates" className="text-sm font-medium text-foreground">
                 Booking updates
               </Label>
-              <p className="text-xs text-slate-500">
+              <p className="text-xs text-muted-foreground">
                 Get notified about booking confirmations, changes, and reminders
               </p>
             </div>
@@ -450,10 +450,10 @@ function RenterNotificationSettings({
 
           <div className="flex items-center justify-between">
             <div className="space-y-0.5">
-              <Label htmlFor="promotions" className="text-sm font-medium text-slate-800">
+              <Label htmlFor="promotions" className="text-sm font-medium text-foreground">
                 Promotions
               </Label>
-              <p className="text-xs text-slate-500">
+              <p className="text-xs text-muted-foreground">
                 Receive special offers and discounts
               </p>
             </div>
@@ -468,10 +468,10 @@ function RenterNotificationSettings({
 
           <div className="flex items-center justify-between opacity-70">
             <div className="space-y-0.5">
-              <Label htmlFor="security-alerts" className="text-sm font-medium text-slate-800">
+              <Label htmlFor="security-alerts" className="text-sm font-medium text-foreground">
                 Security alerts
               </Label>
-              <p className="text-xs text-slate-500">
+              <p className="text-xs text-muted-foreground">
                 Important security notifications about your account
               </p>
             </div>
@@ -491,26 +491,26 @@ function RenterVerificationStatus({ user }: { user: User }) {
   const getStatusBadge = (status?: string) => {
     switch (status) {
       case 'verified':
-        return <Badge variant="green" className="bg-green-50 text-green-700 border-green-200">Verified</Badge>;
+        return <Badge variant="green" className="bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20">Verified</Badge>;
       case 'pending':
-        return <Badge variant="amber" className="bg-amber-50 text-amber-700 border-amber-200">Pending</Badge>;
+        return <Badge variant="amber" className="bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20">Pending</Badge>;
       case 'unverified':
-        return <Badge variant="amber" className="bg-amber-50 text-amber-700 border-amber-200">Not Verified</Badge>;
+        return <Badge variant="amber" className="bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20">Not Verified</Badge>;
       default:
         return <Badge variant="slate">Unknown</Badge>;
     }
   };
 
   return (
-    <Card className="border-slate-200 shadow-sm">
+    <Card className="border-border shadow-sm">
       <CardHeader>
         <div className="flex items-center gap-2">
           <Shield className="h-5 w-5 text-blue-600" />
-          <CardTitle className="text-lg font-semibold text-slate-800 font-primary">
+          <CardTitle className="text-lg font-semibold text-foreground font-primary">
             Verification Status
           </CardTitle>
         </div>
-        <CardDescription className="text-sm text-slate-500 font-secondary">
+        <CardDescription className="text-sm text-muted-foreground font-secondary">
           Your current verification status
         </CardDescription>
       </CardHeader>
@@ -518,8 +518,8 @@ function RenterVerificationStatus({ user }: { user: User }) {
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <div>
-              <h4 className="text-sm font-medium text-slate-800">KYC Verification</h4>
-              <p className="text-xs text-slate-500 mt-1">
+              <h4 className="text-sm font-medium text-foreground">KYC Verification</h4>
+              <p className="text-xs text-muted-foreground mt-1">
                 Identity verification
               </p>
             </div>
@@ -528,8 +528,8 @@ function RenterVerificationStatus({ user }: { user: User }) {
 
           <div className="flex items-center justify-between">
             <div>
-              <h4 className="text-sm font-medium text-slate-800">Driver's License</h4>
-              <p className="text-xs text-slate-500 mt-1">
+              <h4 className="text-sm font-medium text-foreground">Driver's License</h4>
+              <p className="text-xs text-muted-foreground mt-1">
                 License verification
               </p>
             </div>
@@ -537,10 +537,10 @@ function RenterVerificationStatus({ user }: { user: User }) {
           </div>
 
           {user.kycStatus === 'verified' && user.licenseStatus === 'verified' && (
-            <div className="mt-4 p-3 bg-green-50 rounded-lg border border-green-200">
+            <div className="mt-4 p-3 bg-emerald-500/10 rounded-lg border border-emerald-500/20">
               <div className="flex items-center gap-2">
                 <CheckCircle className="h-4 w-4 text-green-600" />
-                <span className="text-xs font-medium text-green-700">
+                <span className="text-xs font-medium text-emerald-600 dark:text-emerald-400">
                   You're fully verified! You can book any vehicle.
                 </span>
               </div>
@@ -548,10 +548,10 @@ function RenterVerificationStatus({ user }: { user: User }) {
           )}
 
           {user.kycStatus === 'pending' || user.licenseStatus === 'pending' ? (
-            <div className="mt-4 p-3 bg-amber-50 rounded-lg border border-amber-200">
+            <div className="mt-4 p-3 bg-amber-500/10 rounded-lg border border-amber-500/20">
               <div className="flex items-center gap-2">
                 <Clock className="h-4 w-4 text-amber-600" />
-                <span className="text-xs font-medium text-amber-700">
+                <span className="text-xs font-medium text-amber-600 dark:text-amber-400">
                   Your verification is being reviewed. This usually takes 1-2 business days.
                 </span>
               </div>
@@ -559,11 +559,11 @@ function RenterVerificationStatus({ user }: { user: User }) {
           ) : null}
 
           {user.kycStatus === 'unverified' || user.licenseStatus === 'unverified' ? (
-            <div className="mt-4 p-3 bg-amber-50 rounded-lg border border-amber-200">
+            <div className="mt-4 p-3 bg-amber-500/10 rounded-lg border border-amber-500/20">
               <div className="flex items-start gap-3 w-full">
                 <AlertCircle className="h-4 w-4 text-amber-600 flex-shrink-0 mt-0.5" />
                 <div className="flex-1">
-                  <span className="text-xs font-medium text-amber-700 block">
+                  <span className="text-xs font-medium text-amber-600 dark:text-amber-400 block">
                     Complete your verification to start booking vehicles.
                   </span>
                   <div className="flex justify-start">
@@ -621,10 +621,10 @@ export function RenterSettingsPage() {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-2">
         <div className="space-y-1">
-          <h1 className="text-2xl font-bold tracking-tight text-slate-900 font-primary">
+          <h1 className="text-2xl font-bold tracking-tight text-foreground font-primary">
             Settings
           </h1>
-          <p className="text-sm text-slate-500 font-secondary">
+          <p className="text-sm text-muted-foreground font-secondary">
             Manage your account and preferences
           </p>
         </div>
@@ -642,20 +642,20 @@ export function RenterSettingsPage() {
             onUpdate={setNotificationPrefs}
           />
           
-          <Card className="border-slate-200 shadow-sm bg-gradient-to-br from-blue-50 to-white">
+          <Card className="border-border shadow-sm bg-gradient-to-br from-blue-500/10 to-transparent">
             <CardContent className="p-5">
               <div className="flex items-center gap-3">
                 <Avatar className="h-12 w-12 border-2 border-white shadow-sm">
                   <AvatarImage src={mappedUser.avatar} />
-                  <AvatarFallback className="bg-blue-100 text-blue-700">
+                  <AvatarFallback className="bg-blue-100 text-blue-600 dark:text-blue-400">
                     {mappedUser.name.split(' ').map(n => n[0]).join('')}
                   </AvatarFallback>
                 </Avatar>
                 <div>
-                  <h3 className="text-sm font-semibold text-slate-800">{mappedUser.name}</h3>
-                  <p className="text-xs text-slate-500 mt-0.5">{mappedUser.email}</p>
+                  <h3 className="text-sm font-semibold text-foreground">{mappedUser.name}</h3>
+                  <p className="text-xs text-muted-foreground mt-0.5">{mappedUser.email}</p>
                   {mappedUser.phone && (
-                    <p className="text-xs text-slate-500 mt-0.5">{mappedUser.phone}</p>
+                    <p className="text-xs text-muted-foreground mt-0.5">{mappedUser.phone}</p>
                   )}
                 </div>
               </div>

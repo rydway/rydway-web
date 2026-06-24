@@ -252,19 +252,19 @@ export default function EarningsPage() {
       case "completed":
       case "paid":
         return (
-          <Badge className="bg-green-50 text-green-700 border-green-200">
+          <Badge className="bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20">
             Completed
           </Badge>
         );
       case "pending":
         return (
-          <Badge className="bg-amber-50 text-amber-700 border-amber-200">
+          <Badge className="bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20">
             Pending
           </Badge>
         );
       case "failed":
         return (
-          <Badge className="bg-red-50 text-red-700 border-red-200">
+          <Badge className="bg-destructive/10 text-destructive dark:text-red-400 border-destructive/20">
             Failed
           </Badge>
         );
@@ -285,13 +285,13 @@ export default function EarningsPage() {
     return (
       <div className="flex items-center justify-center min-h-[400px] max-w-md mx-auto">
         <div className="text-center space-y-4">
-          <div className="p-4 bg-slate-50 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-2">
-            <Wallet className="h-8 w-8 text-slate-400" />
+          <div className="p-4 bg-muted/50 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-2">
+            <Wallet className="h-8 w-8 text-muted-foreground" />
           </div>
-          <h3 className="text-lg font-semibold text-slate-800 font-primary">
+          <h3 className="text-lg font-semibold text-foreground font-primary">
             {isProfileError ? "Complete Your Profile" : "Unable to Load Earnings"}
           </h3>
-          <p className="text-slate-500 font-secondary text-sm">
+          <p className="text-muted-foreground font-secondary text-sm">
             {isProfileError 
               ? "You need an active host profile and verified KYC to view your earnings and request payouts. Please complete your business verification."
               : `We couldn't load your earnings data: ${error.message}`}
@@ -335,10 +335,10 @@ export default function EarningsPage() {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-2">
         <div className="space-y-1">
-          <h1 className="text-2xl font-bold tracking-tight text-slate-900">
+          <h1 className="text-2xl font-bold tracking-tight text-foreground">
             Earnings & Revenue
           </h1>
-          <p className="text-sm text-slate-500">
+          <p className="text-sm text-muted-foreground">
             Track your financial performance, revenue streams, and payouts
           </p>
         </div>
@@ -346,7 +346,7 @@ export default function EarningsPage() {
         <div className="flex items-center gap-2">
           <Select value={dateRange} onValueChange={setDateRange}>
             <SelectTrigger className="w-40 h-9 text-sm">
-              <Calendar className="h-4 w-4 mr-2 text-slate-400" />
+              <Calendar className="h-4 w-4 mr-2 text-muted-foreground" />
               <SelectValue placeholder="Date Range" />
             </SelectTrigger>
             <SelectContent>
@@ -379,7 +379,7 @@ export default function EarningsPage() {
           icon={Wallet}
           trend="Ready for withdrawal"
           trendUp={true}
-          className="border-slate-200 shadow-sm"
+          className="border-border shadow-sm"
         />
         <StatCard
           title="Total Earned"
@@ -387,7 +387,7 @@ export default function EarningsPage() {
           icon={DollarSign}
           trend="From completed bookings"
           trendUp={true}
-          className="border-slate-200 shadow-sm"
+          className="border-border shadow-sm"
         />
         <StatCard
           title="Total Withdrawn"
@@ -395,7 +395,7 @@ export default function EarningsPage() {
           icon={Banknote}
           trend="Lifetime payouts"
           trendUp={false}
-          className="border-slate-200 shadow-sm"
+          className="border-border shadow-sm"
         />
         <StatCard
           title="Pending Balance"
@@ -405,7 +405,7 @@ export default function EarningsPage() {
           icon={Clock}
           trend="Awaiting processing"
           trendUp={false}
-          className="border-slate-200 shadow-sm"
+          className="border-border shadow-sm"
         />
       </div>
 
@@ -416,7 +416,7 @@ export default function EarningsPage() {
         onValueChange={setActiveTab}
         className="space-y-6"
       >
-        <TabsList className="bg-slate-100 p-1 rounded-lg border border-slate-200 inline-flex">
+        <TabsList className="bg-muted p-1 rounded-lg border border-border inline-flex">
           <TabsTrigger
             value="overview"
             className="text-sm rounded-md px-3 py-1.5 data-[state=active]:bg-white data-[state=active]:shadow-sm"
@@ -472,30 +472,30 @@ export default function EarningsPage() {
               formatCompactCurrency={formatCompactCurrency}
             />
 
-            <Card className="border-slate-200 shadow-sm">
+            <Card className="border-border shadow-sm">
               <CardContent className="p-6">
                 <div className="space-y-5">
-                  <h3 className="text-lg font-semibold text-slate-800">
+                  <h3 className="text-lg font-semibold text-foreground">
                     Payment Methods
                   </h3>
                   {mockPaymentMethods.map((method) => (
                     <div key={method.name} className="space-y-2">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
-                          <span className="text-sm text-slate-700">
+                          <span className="text-sm text-foreground">
                             {method.name}
                           </span>
                         </div>
                         <div className="flex items-center gap-2">
-                          <span className="text-sm font-semibold text-slate-800">
+                          <span className="text-sm font-semibold text-foreground">
                             {formatCompactCurrency(method.value)}
                           </span>
-                          <span className="text-xs text-slate-500">
+                          <span className="text-xs text-muted-foreground">
                             ({method.percentage}%)
                           </span>
                         </div>
                       </div>
-                      <div className="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
+                      <div className="w-full h-2 bg-muted rounded-full overflow-hidden">
                         <div
                           className="h-full rounded-full"
                           style={{
@@ -514,11 +514,11 @@ export default function EarningsPage() {
 
         {/* Transactions Tab */}
         <TabsContent value="transactions" className="space-y-6">
-          <Card className="border-slate-200 shadow-sm">
+          <Card className="border-border shadow-sm">
             <CardContent className="p-4">
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div className="flex items-center gap-2 w-full md:w-auto">
-                  <Search className="h-4 w-4 text-slate-400" />
+                  <Search className="h-4 w-4 text-muted-foreground" />
                   <Input
                     placeholder="Search transactions..."
                     value={searchQuery}
@@ -549,56 +549,56 @@ export default function EarningsPage() {
             </CardContent>
           </Card>
 
-          <Card className="border-slate-200 shadow-sm">
+          <Card className="border-border shadow-sm">
             <CardContent className="p-0">
               <div className="overflow-x-auto">
                 <Table>
                   <TableHeader>
-                    <TableRow className="bg-slate-50">
-                      <TableHead className="text-xs font-medium text-slate-500">
+                    <TableRow className="bg-muted/50">
+                      <TableHead className="text-xs font-medium text-muted-foreground">
                         Reference
                       </TableHead>
-                      <TableHead className="text-xs font-medium text-slate-500">
+                      <TableHead className="text-xs font-medium text-muted-foreground">
                         Date & Time
                       </TableHead>
-                      <TableHead className="text-xs font-medium text-slate-500">
+                      <TableHead className="text-xs font-medium text-muted-foreground">
                         Description
                       </TableHead>
-                      <TableHead className="text-xs font-medium text-slate-500">
+                      <TableHead className="text-xs font-medium text-muted-foreground">
                         Destination
                       </TableHead>
-                      <TableHead className="text-xs font-medium text-slate-500 text-right">
+                      <TableHead className="text-xs font-medium text-muted-foreground text-right">
                         Amount
                       </TableHead>
-                      <TableHead className="text-xs font-medium text-slate-500">
+                      <TableHead className="text-xs font-medium text-muted-foreground">
                         Status
                       </TableHead>
-                      <TableHead className="text-xs font-medium text-slate-500"></TableHead>
+                      <TableHead className="text-xs font-medium text-muted-foreground"></TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
                     {filteredTransactions.map((tx) => (
-                      <TableRow key={tx.id} className="hover:bg-slate-50">
-                        <TableCell className="text-xs font-mono text-slate-500">
+                      <TableRow key={tx.id} className="hover:bg-muted/50">
+                        <TableCell className="text-xs font-mono text-muted-foreground">
                           {tx.id.slice(-12)}
                         </TableCell>
                         <TableCell>
                           <div className="space-y-0.5">
-                            <div className="text-sm text-slate-800">
+                            <div className="text-sm text-foreground">
                               {format(new Date(tx.date), "MMM d, yyyy")}
                             </div>
-                            <div className="text-xs text-slate-500">
+                            <div className="text-xs text-muted-foreground">
                               {format(new Date(tx.date), "h:mm a")}
                             </div>
                           </div>
                         </TableCell>
-                        <TableCell className="text-sm text-slate-700">
+                        <TableCell className="text-sm text-foreground">
                           {tx.vehicle}
                         </TableCell>
-                        <TableCell className="text-sm text-slate-700">
+                        <TableCell className="text-sm text-foreground">
                           {tx.customer}
                         </TableCell>
-                        <TableCell className="text-sm font-semibold text-slate-800 text-right">
+                        <TableCell className="text-sm font-semibold text-foreground text-right">
                           {formatCurrency(tx.amount)}
                         </TableCell>
                         <TableCell>{getStatusBadge(tx.status)}</TableCell>
@@ -629,8 +629,8 @@ export default function EarningsPage() {
                 </Table>
               </div>
 
-              <div className="flex items-center justify-between p-4 border-t border-slate-200">
-                <div className="text-xs text-slate-500">
+              <div className="flex items-center justify-between p-4 border-t border-border">
+                <div className="text-xs text-muted-foreground">
                   Showing {filteredTransactions.length} transactions
                 </div>
               </div>
@@ -641,14 +641,14 @@ export default function EarningsPage() {
         {/* Payouts Tab */}
         <TabsContent value="payouts" className="space-y-6">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <Card className="border-slate-200 shadow-sm bg-gradient-to-br from-blue-50 to-white">
+            <Card className="border-border shadow-sm bg-gradient-to-br from-blue-500/10 to-transparent">
               <CardContent className="p-6">
                 <div className="flex items-start justify-between">
                   <div>
-                    <p className="text-sm text-slate-600 mb-1">
+                    <p className="text-sm text-muted-foreground mb-1">
                       Available Balance
                     </p>
-                    <h3 className="text-2xl font-bold text-slate-800">
+                    <h3 className="text-2xl font-bold text-foreground">
                       {formatCurrency(
                         transformedSummary?.availableBalance || 0,
                       )}
@@ -674,14 +674,14 @@ export default function EarningsPage() {
               </CardContent>
             </Card>
 
-            <Card className="border-slate-200 shadow-sm">
+            <Card className="border-border shadow-sm">
               <CardContent className="p-6">
                 <div className="flex items-start justify-between">
                   <div>
-                    <p className="text-sm text-slate-600 mb-1">
+                    <p className="text-sm text-muted-foreground mb-1">
                       Pending Balance
                     </p>
-                    <h3 className="text-2xl font-bold text-slate-800">
+                    <h3 className="text-2xl font-bold text-foreground">
                       {formatCurrency(
                         transformedSummary?.pendingWithdrawal || 0,
                       )}
@@ -697,14 +697,14 @@ export default function EarningsPage() {
               </CardContent>
             </Card>
 
-            <Card className="border-slate-200 shadow-sm">
+            <Card className="border-border shadow-sm">
               <CardContent className="p-6">
                 <div className="flex items-start justify-between">
                   <div>
-                    <p className="text-sm text-slate-600 mb-1">
+                    <p className="text-sm text-muted-foreground mb-1">
                       Total Payouts (All Time)
                     </p>
-                    <h3 className="text-2xl font-bold text-slate-800">
+                    <h3 className="text-2xl font-bold text-foreground">
                       {formatCurrency(transformedSummary?.totalWithdrawn || 0)}
                     </h3>
                     <p className="text-xs text-green-600 mt-2">
@@ -734,14 +734,14 @@ export default function EarningsPage() {
               <h3 className="text-lg font-semibold">Request Withdrawal</h3>
               <button
                 onClick={() => setShowWithdrawModal(false)}
-                className="text-slate-400 hover:text-slate-600"
+                className="text-muted-foreground hover:text-muted-foreground"
               >
                 <X className="h-5 w-5" />
               </button>
             </div>
             <div className="space-y-4">
               <div>
-                <label className="text-sm text-slate-600 block mb-2">
+                <label className="text-sm text-muted-foreground block mb-2">
                   Amount (₦)
                 </label>
                 <Input
@@ -751,7 +751,7 @@ export default function EarningsPage() {
                   placeholder="Enter amount"
                   className="w-full"
                 />
-                <p className="text-xs text-slate-500 mt-1">
+                <p className="text-xs text-muted-foreground mt-1">
                   Available:{" "}
                   {formatCurrency(transformedSummary?.availableBalance || 0)}
                 </p>
@@ -767,7 +767,7 @@ export default function EarningsPage() {
                 <Button
                   onClick={handleWithdraw}
                   disabled={isWithdrawing}
-                  className="flex-1 bg-primary hover:bg-primary/90"
+                  className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground"
                 >
                   {isWithdrawing ? "Processing..." : "Confirm Withdrawal"}
                 </Button>

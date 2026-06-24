@@ -60,7 +60,7 @@ export function CreateTicketDialog({
       <DialogContent className="max-w-2xl font-secondary">
         <DialogHeader>
           <DialogTitle className="font-primary text-lg">Create Support Ticket</DialogTitle>
-          <DialogDescription className="text-sm text-slate-500 font-secondary">
+          <DialogDescription className="text-sm text-muted-foreground font-secondary">
             Fill out the form below and we'll get back to you as soon as possible.
           </DialogDescription>
         </DialogHeader>
@@ -148,10 +148,10 @@ export function CreateTicketDialog({
 
           <div className="space-y-2">
             <Label className="text-xs">Attachments</Label>
-            <div className="border border-dashed border-slate-300 rounded-lg p-6 text-center hover:border-blue-500 transition-colors cursor-pointer bg-slate-50">
-              <Upload className="h-6 w-6 text-slate-400 mx-auto mb-2" />
-              <p className="text-sm text-slate-600 mb-1 font-medium">Click to upload or drag and drop</p>
-              <p className="text-xs text-slate-500">Max file size: 10MB (PDF, JPG, PNG)</p>
+            <div className="border border-dashed border-input rounded-lg p-6 text-center hover:border-blue-500 transition-colors cursor-pointer bg-muted/50">
+              <Upload className="h-6 w-6 text-muted-foreground mx-auto mb-2" />
+              <p className="text-sm text-muted-foreground mb-1 font-medium">Click to upload or drag and drop</p>
+              <p className="text-xs text-muted-foreground">Max file size: 10MB (PDF, JPG, PNG)</p>
             </div>
           </div>
         </div>
@@ -162,7 +162,7 @@ export function CreateTicketDialog({
           </Button>
           <Button 
             size="sm" 
-            className="bg-primary hover:bg-primary/90"
+            className="bg-primary hover:bg-primary/90 text-primary-foreground"
             onClick={handleSubmit}
             disabled={!formData.subject || !formData.category || !formData.message}
           >

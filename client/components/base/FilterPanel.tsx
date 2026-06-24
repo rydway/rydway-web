@@ -57,7 +57,7 @@ export function FilterPanel({ onApply, onClear }: FilterPanelProps) {
           variant="ghost" 
           size="sm" 
           onClick={handleClear}
-          className="text-sm text-slate-600"
+          className="text-sm text-muted-foreground"
         >
           Clear All
         </Button>
@@ -75,7 +75,7 @@ export function FilterPanel({ onApply, onClear }: FilterPanelProps) {
             step={5000}
             className="mb-2"
           />
-          <div className="flex justify-between text-sm text-slate-600 font-secondary">
+          <div className="flex justify-between text-sm text-muted-foreground font-secondary">
             <span>{formatPrice(priceRange[0])}</span>
             <span>{formatPrice(priceRange[1])}</span>
           </div>

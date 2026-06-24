@@ -20,11 +20,11 @@ export default function QuickActions({
   onReceipts
 }: QuickActionsProps) {
   const actions = [
-    { label: "Search Cars", icon: Search, onClick: onSearchCars, color: "bg-blue-500" },
-    { label: "My Bookings", icon: Calendar, onClick: onViewBookings, color: "bg-green-500" },
+    { label: "Search Cars", icon: Search, onClick: onSearchCars, color: "bg-blue-500/100" },
+    { label: "My Bookings", icon: Calendar, onClick: onViewBookings, color: "bg-emerald-500/100" },
     { label: "Messages", icon: MessageSquare, onClick: onMessages, color: "bg-purple-500" },
     { label: "Reviews", icon: Star, onClick: onReviews, color: "bg-yellow-500" },
-    { label: "Receipts", icon: FileText, onClick: onReceipts, color: "bg-slate-500" },
+    { label: "Receipts", icon: FileText, onClick: onReceipts, color: "bg-muted/500" },
   ];
 
   return (
@@ -36,7 +36,7 @@ export default function QuickActions({
             key={idx}
             onClick={action.onClick}
             variant="outline"
-            className="flex-col h-auto py-4 rounded-xl hover:bg-slate-50"
+            className="flex-col h-auto py-4 rounded-xl hover:bg-muted/50"
           >
             <div className={`p-3 rounded-full ${action.color} mb-2`}>
               <action.icon className="h-5 w-5 text-white" />

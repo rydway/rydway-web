@@ -28,10 +28,10 @@ export function TicketDetailsDialog({
 
   const getStatusColor = (status: SupportTicket['status']) => {
     switch (status) {
-      case 'open': return 'bg-blue-50 text-blue-700 border-blue-200';
-      case 'in-progress': return 'bg-amber-50 text-amber-700 border-amber-200';
-      case 'resolved': return 'bg-green-50 text-green-700 border-green-200';
-      case 'closed': return 'bg-slate-50 text-slate-700 border-slate-200';
+      case 'open': return 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20';
+      case 'in-progress': return 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20';
+      case 'resolved': return 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20';
+      case 'closed': return 'bg-muted/50 text-foreground border-border';
     }
   };
 
@@ -64,7 +64,7 @@ export function TicketDetailsDialog({
               {ticket.status.charAt(0).toUpperCase() + ticket.status.slice(1)}
             </Badge>
           </div>
-          <DialogDescription className="font-secondary text-sm text-slate-500">
+          <DialogDescription className="font-secondary text-sm text-muted-foreground">
             {ticket.subject}
           </DialogDescription>
         </DialogHeader>
@@ -80,7 +80,7 @@ export function TicketDetailsDialog({
                   className={`max-w-[80%] rounded-lg p-3 ${
                     msg.sender === 'user'
                       ? 'bg-blue-600 text-white'
-                      : 'bg-slate-100 text-slate-800'
+                      : 'bg-muted text-foreground'
                   }`}
                 >
                   <div className="flex items-center gap-2 mb-1">
@@ -109,7 +109,7 @@ export function TicketDetailsDialog({
         </ScrollArea>
 
         {ticket.status !== 'closed' && (
-          <div className="mt-4 pt-4 border-t border-slate-200">
+          <div className="mt-4 pt-4 border-t border-border">
             <div className="flex gap-2">
               <Textarea
                 placeholder="Type your reply..."
@@ -118,7 +118,7 @@ export function TicketDetailsDialog({
                 className="min-h-[80px] text-sm"
               />
               <Button 
-                className="self-end bg-primary hover:bg-primary/90"
+                className="self-end bg-primary hover:bg-primary/90 text-primary-foreground"
                 size="sm"
                 onClick={handleSendReply}
                 disabled={!replyMessage.trim()}

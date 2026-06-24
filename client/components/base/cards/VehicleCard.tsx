@@ -106,7 +106,7 @@ export default function VehicleCard({
           variant="ghost"
           size="icon"
           onClick={handleFavoriteToggle}
-          className={`absolute right-4 top-1 h-8 w-8 rounded-full bg-white/90 backdrop-blur transition-all hover:scale-110 hover:bg-white dark:bg-slate-900/90 dark:hover:bg-slate-900 ${
+          className={`absolute right-4 top-1 h-8 w-8 rounded-full bg-white/90 backdrop-blur transition-all hover:scale-110 hover:bg-white dark:bg-background/ dark:hover:bg-primary ${
             isFavorite ? 'shadow-md ' : ''
           }`}
           aria-label={isFavorite ? "Remove from bookmarks" : "Add to bookmarks"}
@@ -115,7 +115,7 @@ export default function VehicleCard({
             className={`h-4 w-4 ${
               isFavorite 
                 ? 'fill-red-500 text-red-500 dark:fill-red-400 dark:text-red-400' 
-                : 'text-slate-500 dark:text-slate-400'
+                : 'text-muted-foreground dark:text-muted-foreground'
             }`}
           />
         </Button>
@@ -127,10 +127,10 @@ export default function VehicleCard({
           {/* Header with name and price - Always side by side */}
           <div className="mb-3 flex items-start justify-between gap-2">
             <div className="min-w-0 flex-1">
-              <h3 className="text-sm font-bold text-slate-800 font-primary dark:text-white sm:text-base line-clamp-1 break-words">
+              <h3 className="text-sm font-bold text-foreground font-primary dark:text-white sm:text-base line-clamp-1 break-words">
                 {vehicle.name}
               </h3>
-              <p className="mt-1 text-xs text-slate-500 dark:text-slate-400 sm:text-sm line-clamp-1">
+              <p className="mt-1 text-xs text-muted-foreground dark:text-muted-foreground sm:text-sm line-clamp-1">
                 {vehicle.category} {vehicle.fleet ? `• ${vehicle.fleet}` : ''}
               </p>
             </div>
@@ -139,10 +139,10 @@ export default function VehicleCard({
                 <span className="text-base font-primary font-bold text-primary sm:text-lg whitespace-nowrap">
                   {formatPrice(vehicle.price)}
                 </span>
-                <span className="text-xs text-slate-400 sm:text-sm whitespace-nowrap">/day</span>
+                <span className="text-xs text-muted-foreground sm:text-sm whitespace-nowrap">/day</span>
               </div>
               {vehicle.originalPrice && (
-                <span className="text-xs text-slate-400 line-through whitespace-nowrap">
+                <span className="text-xs text-muted-foreground line-through whitespace-nowrap">
                   {formatPrice(vehicle.originalPrice)}
                 </span>
               )}
@@ -150,7 +150,7 @@ export default function VehicleCard({
           </div>
           
           {/* Features */}
-          <div className="mb-4 flex items-center justify-between border-t border-slate-100 pt-4 text-slate-500 dark:border-slate-700 dark:text-slate-400">
+          <div className="mb-4 flex items-center justify-between border-t border-slate-100 pt-4 text-muted-foreground dark:border-slate-700 dark:text-muted-foreground">
             <div className="flex flex-col items-center gap-1">
               {getFuelIcon(vehicle.fuelType)}
               <span className="text-xs font-medium whitespace-nowrap">{getFuelText(vehicle.fuelType)}</span>

@@ -28,10 +28,10 @@ export const FormStep: React.FC<FormStepProps> = ({
   return (
     <div className="space-y-8">
       <div>
-        <h2 className="text-xl font-semibold text-slate-900 mb-2">
+        <h2 className="text-xl font-semibold text-foreground mb-2">
           {step.title}
         </h2>
-        <p className="text-slate-600">
+        <p className="text-muted-foreground">
           {step.description}
         </p>
       </div>

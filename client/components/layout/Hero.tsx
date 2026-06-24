@@ -58,7 +58,7 @@ export default function Hero() {
   }
 
   return (
-    <section className="relative min-h-[90vh] sm:min-h-screen w-full flex items-center justify-center bg-white overflow-hidden pt-16 sm:pt-20 md:pt-0">
+    <section className="relative min-h-[90vh] sm:min-h-screen w-full flex items-center justify-center bg-background overflow-hidden pt-16 sm:pt-20 md:pt-0">
       {/* Background image */}
       <div className="absolute inset-0 z-0">
         <Image
@@ -73,12 +73,12 @@ export default function Hero() {
 
       {/* Gradient balls/effects */}
       <div className="absolute inset-0 z-0 overflow-hidden">
-        <div className="absolute top-10 left-4 sm:left-10 w-40 h-40 sm:w-64 sm:h-64 bg-gradient-to-br from-[#0074D1] to-white rounded-full opacity-30 blur-3xl"></div>
-        <div className="absolute bottom-10 left-4 sm:left-10 w-48 h-48 sm:w-80 sm:h-80 bg-gradient-to-tr from-[#0074D1] to-white rounded-full opacity-25 blur-3xl"></div>
-        <div className="absolute top-20 right-4 sm:right-20 w-32 h-32 sm:w-48 sm:h-48 bg-gradient-to-br from-[#0074D1] to-white rounded-full opacity-20 blur-3xl"></div>
-        <div className="absolute bottom-20 right-4 sm:right-20 w-40 h-40 sm:w-60 sm:h-60 bg-gradient-to-tr from-[#0074D1] to-white rounded-full opacity-25 blur-3xl"></div>
-        <div className="hidden sm:block absolute top-1/2 left-1/4 w-40 h-40 bg-gradient-to-r from-[#0074D1] to-white rounded-full opacity-20 blur-3xl"></div>
-        <div className="hidden sm:block absolute top-1/3 right-1/3 w-32 h-32 bg-gradient-to-l from-[#0074D1] to-white rounded-full opacity-15 blur-3xl"></div>
+        <div className="absolute top-10 left-4 sm:left-10 w-40 h-40 sm:w-64 sm:h-64 bg-gradient-to-br from-[#0074D1] to-background rounded-full opacity-30 blur-3xl"></div>
+        <div className="absolute bottom-10 left-4 sm:left-10 w-48 h-48 sm:w-80 sm:h-80 bg-gradient-to-tr from-[#0074D1] to-background rounded-full opacity-25 blur-3xl"></div>
+        <div className="absolute top-20 right-4 sm:right-20 w-32 h-32 sm:w-48 sm:h-48 bg-gradient-to-br from-[#0074D1] to-background rounded-full opacity-20 blur-3xl"></div>
+        <div className="absolute bottom-20 right-4 sm:right-20 w-40 h-40 sm:w-60 sm:h-60 bg-gradient-to-tr from-[#0074D1] to-background rounded-full opacity-25 blur-3xl"></div>
+        <div className="hidden sm:block absolute top-1/2 left-1/4 w-40 h-40 bg-gradient-to-r from-[#0074D1] to-background rounded-full opacity-20 blur-3xl"></div>
+        <div className="hidden sm:block absolute top-1/3 right-1/3 w-32 h-32 bg-gradient-to-l from-[#0074D1] to-background rounded-full opacity-15 blur-3xl"></div>
       </div>
 
       {/* Main content container */}

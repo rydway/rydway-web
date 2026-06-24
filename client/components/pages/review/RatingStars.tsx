@@ -46,7 +46,7 @@ export default function RatingStars({
         </button>
       ))}
       {value > 0 && (
-        <span className="ml-2 text-sm font-semibold text-slate-700 font-secondary">
+        <span className="ml-2 text-sm font-semibold text-foreground font-secondary">
           {value.toFixed(1)}
         </span>
       )}

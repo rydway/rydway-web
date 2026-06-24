@@ -18,7 +18,7 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
        
           <div className="mb-8">
             <Link href="/" className="inline-block mb-6">
-            <h1 className="text-xl md:text-xl font-bold text-slate-900">Rydway.</h1>
+            <h1 className="text-xl md:text-xl font-bold text-foreground">Rydway.</h1>
             </Link>
           </div>
 

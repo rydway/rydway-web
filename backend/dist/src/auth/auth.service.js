@@ -253,7 +253,7 @@ let AuthService = class AuthService {
     }
     async getOAuthUrl(provider) {
         const supabase = this.getSupabaseClient();
-        const redirectTo = `${this.configService.get('CLIENT_URL') || 'http://localhost:3000'}/auth/callback`;
+        const redirectTo = `${this.configService.get('FRONTEND_URL') || 'http://localhost:3001'}/auth/callback`;
         const { data, error } = await supabase.auth.signInWithOAuth({
             provider,
             options: { redirectTo, skipBrowserRedirect: true },

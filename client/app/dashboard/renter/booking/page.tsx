@@ -175,10 +175,10 @@ export default function BookingsPage({ role = "renter" }: BookingsPageProps) {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-2">
         <div className="space-y-1">
-          <h1 className="text-2xl font-bold tracking-tight text-slate-900 font-primary">
+          <h1 className="text-2xl font-bold tracking-tight text-foreground font-primary">
             My Bookings
           </h1>
-          <p className="text-sm text-slate-500 font-secondary">
+          <p className="text-sm text-muted-foreground font-secondary">
             Manage your current and past vehicle rentals
           </p>
         </div>
@@ -214,15 +214,15 @@ export default function BookingsPage({ role = "renter" }: BookingsPageProps) {
       {currentBookingsPage.length === 0 ? (
         <Card>
           <CardContent className="flex flex-col items-center justify-center py-12">
-            <Calendar className="h-12 w-12 text-slate-400 mb-4" />
-            <h3 className="text-lg font-semibold text-slate-800 dark:text-white mb-2 font-primary">
+            <Calendar className="h-12 w-12 text-muted-foreground mb-4" />
+            <h3 className="text-lg font-semibold text-foreground dark:text-white mb-2 font-primary">
               No {getTabLabel()}
             </h3>
-            <p className="text-slate-600 dark:text-slate-300 text-center mb-6 font-secondary">
+            <p className="text-muted-foreground dark:text-slate-300 text-center mb-6 font-secondary">
               {getEmptyMessage()}
             </p>
             {activeTab === "active" && (
-              <Button asChild className="bg-primary hover:bg-primary/90 font-primary">
+              <Button asChild className="bg-primary hover:bg-primary/90 font-primary text-primary-foreground">
                 <Link href="/discover">Rent a Car</Link>
               </Button>
             )}

@@ -194,7 +194,7 @@ export default function BusinessCalendarPage() {
       icon: CheckCircle,
       trend: "Currently rented",
       trendUp: true,
-      iconColor: "text-blue-700"
+      iconColor: "text-blue-600 dark:text-blue-400"
     },
     {
       title: "Overdue Returns",
@@ -316,7 +316,7 @@ export default function BusinessCalendarPage() {
           >
             <ChevronRight className="h-4 w-4" />
           </Button>
-          <span className="ml-2 text-lg font-semibold text-slate-800 font-primary">
+          <span className="ml-2 text-lg font-semibold text-foreground font-primary">
             {moment(currentDate).format('MMMM YYYY')}
           </span>
         </div>
@@ -363,10 +363,10 @@ export default function BusinessCalendarPage() {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-2">
         <div className="space-y-1">
-          <h1 className="text-2xl font-bold tracking-tight text-slate-900 font-primary">
+          <h1 className="text-2xl font-bold tracking-tight text-foreground font-primary">
             Calendar & Availability
           </h1>
-          <p className="text-sm text-slate-500 font-secondary">
+          <p className="text-sm text-muted-foreground font-secondary">
             Manage bookings, maintenance, and vehicle availability
           </p>
         </div>
@@ -397,13 +397,13 @@ export default function BusinessCalendarPage() {
             trend={stat.trend}
             trendUp={stat.trendUp}
             iconClassName={stat.iconColor}
-            className="border border-slate-200 shadow-sm"
+            className="border border-border shadow-sm"
           />
         ))}
       </div>
 
       {/* Filters */}
-      <Card className="border border-slate-200 shadow-sm">
+      <Card className="border border-border shadow-sm">
         <CardContent className="p-4">
           <div className="flex flex-col md:flex-row md:items-center justify-end gap-4">
             <div className="flex flex-col sm:flex-row gap-2">
@@ -439,7 +439,7 @@ export default function BusinessCalendarPage() {
       <CalendarLegend />
 
       {/* Calendar */}
-      <Card className="border border-slate-200 shadow-sm overflow-hidden">
+      <Card className="border border-border shadow-sm overflow-hidden">
         <CardContent className="p-6">
           {loadingCalendar || loadingVehicles ? (
             <div className="flex items-center justify-center h-[700px]">

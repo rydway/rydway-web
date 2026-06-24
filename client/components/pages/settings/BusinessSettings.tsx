@@ -85,15 +85,15 @@ function BusinessAccountSettings() {
   };
 
   return (
-    <Card className="border-slate-200 shadow-sm">
+    <Card className="border-border shadow-sm">
       <CardHeader>
         <div className="flex items-center gap-2">
           <Building className="h-5 w-5 text-blue-600" />
-          <CardTitle className="text-lg font-semibold text-slate-800 font-primary">
+          <CardTitle className="text-lg font-semibold text-foreground font-primary">
             Account Settings
           </CardTitle>
         </div>
-        <CardDescription className="text-sm text-slate-500 font-secondary">
+        <CardDescription className="text-sm text-muted-foreground font-secondary">
           Manage your business account
         </CardDescription>
       </CardHeader>
@@ -101,8 +101,8 @@ function BusinessAccountSettings() {
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <div>
-              <h4 className="text-sm font-medium text-slate-800">Password</h4>
-              <p className="text-xs text-slate-500 mt-1">
+              <h4 className="text-sm font-medium text-foreground">Password</h4>
+              <p className="text-xs text-muted-foreground mt-1">
                 Last changed 2 months ago
               </p>
             </div>
@@ -117,7 +117,7 @@ function BusinessAccountSettings() {
           </div>
 
           {showChangePassword && (
-            <div className="mt-4 p-4 bg-slate-50 rounded-lg border border-slate-200 space-y-4">
+            <div className="mt-4 p-4 bg-muted/50 rounded-lg border border-border space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="business-current-password" className="text-xs">Current Password</Label>
                 <div className="relative">
@@ -214,8 +214,8 @@ function BusinessAccountSettings() {
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <div>
-              <h4 className="text-sm font-medium text-slate-800">Deactivate Account</h4>
-              <p className="text-xs text-slate-500 mt-1">
+              <h4 className="text-sm font-medium text-foreground">Deactivate Account</h4>
+              <p className="text-xs text-muted-foreground mt-1">
                 Temporarily disable your business account
               </p>
             </div>
@@ -223,7 +223,7 @@ function BusinessAccountSettings() {
               variant="outline" 
               size="sm"
               onClick={() => setShowDeactivateDialog(true)}
-              className="text-xs h-8 text-amber-600 border-amber-200 hover:bg-amber-50"
+              className="text-xs h-8 text-amber-600 border-amber-500/20 hover:bg-amber-500/10"
             >
               Deactivate
             </Button>
@@ -272,12 +272,12 @@ function BusinessPayoutDetails({
   };
 
   return (
-    <Card className="border-slate-200 shadow-sm">
+    <Card className="border-border shadow-sm">
       <CardHeader>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Landmark className="h-5 w-5 text-blue-600" />
-            <CardTitle className="text-lg font-semibold text-slate-800 font-primary">
+            <CardTitle className="text-lg font-semibold text-foreground font-primary">
               Payout Details
             </CardTitle>
           </div>
@@ -313,7 +313,7 @@ function BusinessPayoutDetails({
             </div>
           )}
         </div>
-        <CardDescription className="text-sm text-slate-500 font-secondary">
+        <CardDescription className="text-sm text-muted-foreground font-secondary">
           Bank account details for receiving payouts
         </CardDescription>
       </CardHeader>
@@ -358,17 +358,17 @@ function BusinessPayoutDetails({
           </div>
         ) : (
           <div className="space-y-4">
-            <div className="flex items-center justify-between p-3 bg-slate-50 rounded-lg">
-              <span className="text-xs text-slate-500">Bank</span>
-              <span className="text-sm font-medium text-slate-800">{payoutDetails.bankName}</span>
+            <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
+              <span className="text-xs text-muted-foreground">Bank</span>
+              <span className="text-sm font-medium text-foreground">{payoutDetails.bankName}</span>
             </div>
-            <div className="flex items-center justify-between p-3 bg-slate-50 rounded-lg">
-              <span className="text-xs text-slate-500">Account Number</span>
-              <span className="text-sm font-medium text-slate-800">{payoutDetails.accountNumber}</span>
+            <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
+              <span className="text-xs text-muted-foreground">Account Number</span>
+              <span className="text-sm font-medium text-foreground">{payoutDetails.accountNumber}</span>
             </div>
-            <div className="flex items-center justify-between p-3 bg-slate-50 rounded-lg">
-              <span className="text-xs text-slate-500">Account Name</span>
-              <span className="text-sm font-medium text-slate-800">{payoutDetails.accountName}</span>
+            <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
+              <span className="text-xs text-muted-foreground">Account Name</span>
+              <span className="text-sm font-medium text-foreground">{payoutDetails.accountName}</span>
             </div>
           </div>
         )}
@@ -392,15 +392,15 @@ function BusinessNotificationSettings({
   };
 
   return (
-    <Card className="border-slate-200 shadow-sm">
+    <Card className="border-border shadow-sm">
       <CardHeader>
         <div className="flex items-center gap-2">
           <Bell className="h-5 w-5 text-blue-600" />
-          <CardTitle className="text-lg font-semibold text-slate-800 font-primary">
+          <CardTitle className="text-lg font-semibold text-foreground font-primary">
             Notifications
           </CardTitle>
         </div>
-        <CardDescription className="text-sm text-slate-500 font-secondary">
+        <CardDescription className="text-sm text-muted-foreground font-secondary">
           Manage your business notification preferences
         </CardDescription>
       </CardHeader>
@@ -408,10 +408,10 @@ function BusinessNotificationSettings({
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <div className="space-y-0.5">
-              <Label htmlFor="new-bookings" className="text-sm font-medium text-slate-800">
+              <Label htmlFor="new-bookings" className="text-sm font-medium text-foreground">
                 New bookings
               </Label>
-              <p className="text-xs text-slate-500">
+              <p className="text-xs text-muted-foreground">
                 Get notified when you receive a new booking
               </p>
             </div>
@@ -424,10 +424,10 @@ function BusinessNotificationSettings({
 
           <div className="flex items-center justify-between">
             <div className="space-y-0.5">
-              <Label htmlFor="cancellations" className="text-sm font-medium text-slate-800">
+              <Label htmlFor="cancellations" className="text-sm font-medium text-foreground">
                 Cancellations
               </Label>
-              <p className="text-xs text-slate-500">
+              <p className="text-xs text-muted-foreground">
                 Get notified when a booking is cancelled
               </p>
             </div>
@@ -442,10 +442,10 @@ function BusinessNotificationSettings({
 
           <div className="flex items-center justify-between opacity-70">
             <div className="space-y-0.5">
-              <Label htmlFor="business-security" className="text-sm font-medium text-slate-800">
+              <Label htmlFor="business-security" className="text-sm font-medium text-foreground">
                 Security alerts
               </Label>
-              <p className="text-xs text-slate-500">
+              <p className="text-xs text-muted-foreground">
                 Important security notifications about your account
               </p>
             </div>
@@ -465,11 +465,11 @@ function BusinessVerificationStatus({ user }: { user: User }) {
   const getStatusBadge = (status?: string) => {
     switch (status) {
       case 'verified':
-        return <Badge variant="green" className="bg-green-50 text-green-700 border-green-200">Verified</Badge>;
+        return <Badge variant="green" className="bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20">Verified</Badge>;
       case 'pending':
-        return <Badge variant="amber" className="bg-amber-50 text-amber-700 border-amber-200">Pending</Badge>;
+        return <Badge variant="amber" className="bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20">Pending</Badge>;
       case 'unverified':
-        return <Badge variant="red" className="bg-red-50 text-red-700 border-red-200">Not Submitted</Badge>;
+        return <Badge variant="red" className="bg-destructive/10 text-destructive dark:text-red-400 border-destructive/20">Not Submitted</Badge>;
       default:
         return <Badge variant="slate">Unknown</Badge>;
     }
@@ -486,15 +486,15 @@ function BusinessVerificationStatus({ user }: { user: User }) {
   const expiryDays = getDaysUntilExpiry(user.documentExpiry);
 
   return (
-    <Card className="border-slate-200 shadow-sm">
+    <Card className="border-border shadow-sm">
       <CardHeader>
         <div className="flex items-center gap-2">
           <FileText className="h-5 w-5 text-blue-600" />
-          <CardTitle className="text-lg font-semibold text-slate-800 font-primary">
+          <CardTitle className="text-lg font-semibold text-foreground font-primary">
             Business Verification
           </CardTitle>
         </div>
-        <CardDescription className="text-sm text-slate-500 font-secondary">
+        <CardDescription className="text-sm text-muted-foreground font-secondary">
           Your business verification status
         </CardDescription>
       </CardHeader>
@@ -502,8 +502,8 @@ function BusinessVerificationStatus({ user }: { user: User }) {
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <div>
-              <h4 className="text-sm font-medium text-slate-800">Business Verification</h4>
-              <p className="text-xs text-slate-500 mt-1">
+              <h4 className="text-sm font-medium text-foreground">Business Verification</h4>
+              <p className="text-xs text-muted-foreground mt-1">
                 CAC registration, tax ID, etc.
               </p>
             </div>
@@ -511,19 +511,19 @@ function BusinessVerificationStatus({ user }: { user: User }) {
           </div>
 
           {user.documentExpiry && (
-            <div className="mt-4 p-4 bg-amber-50 rounded-lg border border-amber-200">
+            <div className="mt-4 p-4 bg-amber-500/10 rounded-lg border border-amber-500/20">
               <div className="flex items-start gap-3">
                 <Clock className="h-4 w-4 text-amber-600 mt-0.5" />
                 <div>
-                  <h4 className="text-xs font-semibold text-amber-800 mb-1">
+                  <h4 className="text-xs font-semibold text-amber-600 dark:text-amber-400 mb-1">
                     Document Expiry Reminder
                   </h4>
-                  <p className="text-xs text-amber-700">
+                  <p className="text-xs text-amber-600 dark:text-amber-400">
                     Your business documents will expire on {format(user.documentExpiry, 'MMMM d, yyyy')}
                   </p>
                   {expiryDays && expiryDays <= 30 && (
                     <div className="mt-2">
-                      <Badge variant="red" className="bg-red-50 text-red-700 border-red-200 text-[10px]">
+                      <Badge variant="red" className="bg-destructive/10 text-destructive dark:text-red-400 border-destructive/20 text-[10px]">
                         {expiryDays} days remaining
                       </Badge>
                     </div>
@@ -534,10 +534,10 @@ function BusinessVerificationStatus({ user }: { user: User }) {
           )}
 
           {user.businessVerification === 'pending' && (
-            <div className="mt-4 p-3 bg-amber-50 rounded-lg border border-amber-200">
+            <div className="mt-4 p-3 bg-amber-500/10 rounded-lg border border-amber-500/20">
               <div className="flex items-center gap-2">
                 <Clock className="h-4 w-4 text-amber-600" />
-                <span className="text-xs font-medium text-amber-700">
+                <span className="text-xs font-medium text-amber-600 dark:text-amber-400">
                   Your verification is being reviewed. This usually takes 2-3 business days.
                 </span>
               </div>
@@ -545,17 +545,17 @@ function BusinessVerificationStatus({ user }: { user: User }) {
           )}
 
           {user.businessVerification === 'unverified' && (
-            <div className="mt-4 p-3 bg-blue-50 rounded-lg border border-blue-200">
+            <div className="mt-4 p-3 bg-blue-500/10 rounded-lg border border-blue-500/20">
               <div className="flex items-center gap-2">
                 <AlertCircle className="h-4 w-4 text-blue-600" />
-                <span className="text-xs font-medium text-blue-700">
+                <span className="text-xs font-medium text-blue-600 dark:text-blue-400">
                   Complete your business verification to start receiving bookings.
                 </span>
               </div>
               <Button 
                 size="sm" 
                 variant="outline" 
-                className="mt-3 w-full border-blue-200 bg-white text-blue-700 hover:bg-blue-100 text-xs h-8"
+                className="mt-3 w-full border-blue-500/20 bg-white text-blue-600 dark:text-blue-400 hover:bg-blue-100 text-xs h-8"
               >
                 Start Verification
               </Button>
@@ -573,8 +573,8 @@ import { Loader2 } from "lucide-react";
 
 export function BusinessSettingsPage() {
   const { user, isLoading } = useCurrentUser();
-  const [notificationPrefs, setNotificationPrefs] = useState<NotificationPreferences>(mockBusinessNotifications);
-  const [payoutDetails, setPayoutDetails] = useState<PayoutDetails>(mockPayoutDetails);
+  const [notificationPrefs, setNotificationPrefs] = useState<NotificationPreferences>({ bookingUpdates: false, promotions: false, newBookings: true, cancellations: true, securityAlerts: true });
+  const [payoutDetails, setPayoutDetails] = useState<PayoutDetails>({ bankName: "", accountNumber: "", accountName: "", bankCode: "" });
 
   if (isLoading) {
     return (
@@ -605,10 +605,10 @@ export function BusinessSettingsPage() {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-2">
         <div className="space-y-1">
-          <h1 className="text-2xl font-bold tracking-tight text-slate-900 font-primary">
+          <h1 className="text-2xl font-bold tracking-tight text-foreground font-primary">
             Business Settings
           </h1>
-          <p className="text-sm text-slate-500 font-secondary">
+          <p className="text-sm text-muted-foreground font-secondary">
             Manage your business account, payouts, and preferences
           </p>
         </div>
@@ -630,20 +630,20 @@ export function BusinessSettingsPage() {
             onUpdate={setNotificationPrefs}
           />
           
-          <Card className="border-slate-200 shadow-sm bg-gradient-to-br from-blue-50 to-white">
+          <Card className="border-border shadow-sm bg-gradient-to-br from-blue-500/10 to-transparent">
             <CardContent className="p-5">
               <div className="flex items-center gap-3">
                 <Avatar className="h-12 w-12 border-2 border-white shadow-sm">
                   <AvatarImage src={mappedBusinessUser.avatar} />
-                  <AvatarFallback className="bg-blue-100 text-blue-700">
+                  <AvatarFallback className="bg-blue-100 text-blue-600 dark:text-blue-400">
                     {mappedBusinessUser.name.split(' ').map(n => n[0]).join('')}
                   </AvatarFallback>
                 </Avatar>
                 <div>
-                  <h3 className="text-sm font-semibold text-slate-800">{mappedBusinessUser.name}</h3>
-                  <p className="text-xs text-slate-500 mt-0.5">{mappedBusinessUser.email}</p>
+                  <h3 className="text-sm font-semibold text-foreground">{mappedBusinessUser.name}</h3>
+                  <p className="text-xs text-muted-foreground mt-0.5">{mappedBusinessUser.email}</p>
                   {mappedBusinessUser.phone && (
-                    <p className="text-xs text-slate-500 mt-0.5">{mappedBusinessUser.phone}</p>
+                    <p className="text-xs text-muted-foreground mt-0.5">{mappedBusinessUser.phone}</p>
                   )}
                 </div>
               </div>

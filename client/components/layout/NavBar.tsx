@@ -8,6 +8,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -30,7 +31,7 @@ export default function Navbar() {
     <header
       className={`fixed top-0 z-50 w-full transition-all duration-300 ${
         isScrolled
-          ? "bg-white/80 backdrop-blur-md border-b border-white/10 shadow-lg"
+          ? "bg-white/80 backdrop-blur-md border-b border-white/10 shadow-lg dark:bg-black/80 dark:border-white/10"
           : "bg-transparent"
       }`}
     >
@@ -47,6 +48,8 @@ export default function Navbar() {
 
         {/* Auth buttons and hamburger menu */}
         <div className="flex items-center gap-4">
+          <ThemeToggle />
+          
           <Link 
             href="/auth"
             className="hidden rounded-lg px-4 py-2 text-sm font-medium text-foreground transition hover:bg-muted font-primary md:block"
@@ -71,13 +74,13 @@ export default function Navbar() {
                     <Link
                       key={index}
                       href={item.href}
-                      className="px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 hover:text-[#0074D1] rounded-md transition-colors"
+                      className="px-3 py-2 text-sm font-medium text-foreground hover:bg-muted hover:text-[#0074D1] rounded-md transition-colors"
                     >
                       {item.label}
                     </Link>
                   ))}
                   <div className="border-t border-gray-100 pt-1">
-                    <Link href="/auth" className="block w-full px-3 py-2 text-sm font-medium text-foreground hover:bg-gray-100 rounded-md text-left transition-colors">
+                    <Link href="/auth" className="block w-full px-3 py-2 text-sm font-medium text-foreground hover:bg-muted rounded-md text-left transition-colors">
                       Join as Partner
                     </Link>
                   </div>

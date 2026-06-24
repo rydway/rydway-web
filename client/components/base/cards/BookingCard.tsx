@@ -255,10 +255,10 @@ export function BookingCard({
       <CardContent className="p-4 space-y-4">
         <div className="flex items-start justify-between">
           <div>
-            <h3 className="font-semibold text-slate-800 dark:text-white text-lg font-primary">
+            <h3 className="font-semibold text-foreground dark:text-white text-lg font-primary">
               {carName}
             </h3>
-            <p className="text-sm text-slate-600 dark:text-slate-300 font-secondary">
+            <p className="text-sm text-muted-foreground dark:text-slate-300 font-secondary">
               {carType} {ownerName && `• ${ownerName}`} {renterName && `• ${renterName}`}
             </p>
           </div>
@@ -271,7 +271,7 @@ export function BookingCard({
                 size="sm"
                 className="h-8 w-8 p-0 hover:bg-transparent"
               >
-                <MoreVertical className="h-4 w-4 text-slate-500 hover:text-slate-700" />
+                <MoreVertical className="h-4 w-4 text-muted-foreground hover:text-foreground" />
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="font-primary w-48">
@@ -282,20 +282,20 @@ export function BookingCard({
 
         {/* Renter/Owner Info */}
         {renterName && role === 'business' && (
-          <div className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-300 font-secondary">
+          <div className="flex items-center gap-2 text-sm text-muted-foreground dark:text-slate-300 font-secondary">
             <User className="h-3 w-3" />
             <span>Renter: {renterName}</span>
           </div>
         )}
         {ownerName && role === 'renter' && (
-          <div className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-300 font-secondary">
+          <div className="flex items-center gap-2 text-sm text-muted-foreground dark:text-slate-300 font-secondary">
             <User className="h-3 w-3" />
             <span>Owner: {ownerName}</span>
           </div>
         )}
 
         {/* Dates */}
-        <div className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-300 mb-2 font-secondary">
+        <div className="flex items-center gap-2 text-sm text-muted-foreground dark:text-slate-300 mb-2 font-secondary">
           <Calendar className="h-3 w-3" />
           <span>{startDate} - {endDate}</span>
           <Badge 
@@ -310,13 +310,13 @@ export function BookingCard({
         {(status === 'confirmed' || status === 'active') && (
           <div className="space-y-1">
             {pickupTime && (
-              <div className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-300 font-secondary">
+              <div className="flex items-center gap-2 text-sm text-muted-foreground dark:text-slate-300 font-secondary">
                 <Clock className="h-3 w-3" />
                 <span>Pickup: {pickupTime}</span>
               </div>
             )}
             {dropoffTime && (
-              <div className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-300 font-secondary ml-5">
+              <div className="flex items-center gap-2 text-sm text-muted-foreground dark:text-slate-300 font-secondary ml-5">
                 <span>Dropoff: {dropoffTime}</span>
               </div>
             )}
@@ -325,12 +325,12 @@ export function BookingCard({
 
         {/* Location */}
         <div className="space-y-1">
-          <div className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-300 font-secondary">
+          <div className="flex items-center gap-2 text-sm text-muted-foreground dark:text-slate-300 font-secondary">
             <MapPin className="h-3 w-3" />
             <span className="truncate">Pickup: {pickupLocation}</span>
           </div>
           {dropoffLocation && (
-            <div className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-300 font-secondary ml-5">
+            <div className="flex items-center gap-2 text-sm text-muted-foreground dark:text-slate-300 font-secondary ml-5">
               <span className="truncate">Dropoff: {dropoffLocation}</span>
             </div>
           )}
@@ -350,7 +350,7 @@ export function BookingCard({
               size="sm"
               variant="outline"
               onClick={() => onDecline?.(id)}
-              className="flex-1 text-red-600 border-red-500 bg-transparent hover:bg-red-50 hover:text-red-700 font-primary"
+              className="flex-1 text-red-600 border-red-500 bg-transparent hover:bg-destructive/10 hover:text-destructive dark:text-red-400 font-primary"
             >
               Decline
             </Button>
@@ -358,10 +358,10 @@ export function BookingCard({
         )}
 
         {/* Price */}
-        <div className="pt-3 border-t border-slate-200 dark:border-slate-800">
+        <div className="pt-3 border-t border-border dark:border-border">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-slate-600 dark:text-slate-300 font-secondary">Total Amount</p>
+              <p className="text-sm text-muted-foreground dark:text-slate-300 font-secondary">Total Amount</p>
               <p className="text-lg font-bold text-primary dark:text-primary-foreground font-primary">
                 ₦{totalAmount.toLocaleString()}
               </p>

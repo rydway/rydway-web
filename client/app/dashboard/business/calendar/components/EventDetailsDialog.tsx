@@ -48,21 +48,21 @@ export function EventDetailsDialog({
   const getStatusBadge = (status: CalendarEvent['status'], type: CalendarEvent['type']) => {
     switch (status) {
       case 'pending':
-        return <Badge variant="blue" className="bg-blue-50 text-blue-700 border-blue-200">Pending</Badge>;
+        return <Badge variant="blue" className="bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20">Pending</Badge>;
       case 'confirmed':
-        return <Badge variant="blue" className="bg-blue-100 text-blue-800 border-blue-300">Confirmed</Badge>;
+        return <Badge variant="blue" className="bg-blue-100 text-blue-600 dark:text-blue-400 border-blue-300">Confirmed</Badge>;
       case 'overdue':
-        return <Badge variant="red" className="bg-red-50 text-red-700 border-red-200">Overdue</Badge>;
+        return <Badge variant="red" className="bg-destructive/10 text-destructive dark:text-red-400 border-destructive/20">Overdue</Badge>;
       case 'returned':
-        return <Badge variant="blue" className="bg-blue-50 text-blue-700 border-blue-200">Returned</Badge>;
+        return <Badge variant="blue" className="bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20">Returned</Badge>;
       case 'scheduled':
-        return <Badge variant="amber" className="bg-amber-50 text-amber-700 border-amber-200">Scheduled</Badge>;
+        return <Badge variant="amber" className="bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20">Scheduled</Badge>;
       case 'in-progress':
-        return <Badge variant="amber" className="bg-amber-100 text-amber-800 border-amber-300">In Progress</Badge>;
+        return <Badge variant="amber" className="bg-amber-100 text-amber-600 dark:text-amber-400 border-amber-300">In Progress</Badge>;
       case 'completed':
-        return <Badge variant="green" className="bg-green-50 text-green-700 border-green-200">Completed</Badge>;
+        return <Badge variant="green" className="bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20">Completed</Badge>;
       case 'cancelled':
-        return <Badge variant="slate" className="bg-slate-50 text-slate-700 border-slate-200">Cancelled</Badge>;
+        return <Badge variant="slate" className="bg-muted/50 text-foreground border-border">Cancelled</Badge>;
     }
     return null;
   };
@@ -70,15 +70,15 @@ export function EventDetailsDialog({
   const getTypeBadge = (type: CalendarEvent['type']) => {
     switch (type) {
       case 'booking':
-        return <Badge variant="blue" className="bg-blue-50 text-blue-700 border-blue-200">Booking</Badge>;
+        return <Badge variant="blue" className="bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20">Booking</Badge>;
       case 'maintenance':
-        return <Badge variant="amber" className="bg-amber-50 text-amber-700 border-amber-200">Maintenance</Badge>;
+        return <Badge variant="amber" className="bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20">Maintenance</Badge>;
       case 'service':
-        return <Badge variant="amber" className="bg-amber-50 text-amber-700 border-amber-200">Service</Badge>;
+        return <Badge variant="amber" className="bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20">Service</Badge>;
       case 'inspection':
-        return <Badge variant="amber" className="bg-amber-50 text-amber-700 border-amber-200">Inspection</Badge>;
+        return <Badge variant="amber" className="bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20">Inspection</Badge>;
       case 'unavailable':
-        return <Badge variant="slate" className="bg-slate-50 text-slate-700 border-slate-200">Unavailable</Badge>;
+        return <Badge variant="slate" className="bg-muted/50 text-foreground border-border">Unavailable</Badge>;
     }
   };
 
@@ -102,22 +102,22 @@ export function EventDetailsDialog({
         
         <div className="space-y-5">
           {/* Event Time */}
-          <div className="p-3 bg-slate-50 rounded-lg flex items-center justify-between">
+          <div className="p-3 bg-muted/50 rounded-lg flex items-center justify-between">
             <div>
-              <p className="text-xs text-slate-500 font-medium">Start Date</p>
-              <p className="text-sm font-semibold text-slate-800">
+              <p className="text-xs text-muted-foreground font-medium">Start Date</p>
+              <p className="text-sm font-semibold text-foreground">
                 {format(new Date(event.start), "EEE, MMM d, yyyy")}
               </p>
-              <p className="text-xs text-slate-500">
+              <p className="text-xs text-muted-foreground">
                 {format(new Date(event.start), "h:mm a")}
               </p>
             </div>
             <div className="text-right">
-              <p className="text-xs text-slate-500 font-medium">End Date</p>
-              <p className="text-sm font-semibold text-slate-800">
+              <p className="text-xs text-muted-foreground font-medium">End Date</p>
+              <p className="text-sm font-semibold text-foreground">
                 {format(new Date(event.end), "EEE, MMM d, yyyy")}
               </p>
-              <p className="text-xs text-slate-500">
+              <p className="text-xs text-muted-foreground">
                 {format(new Date(event.end), "h:mm a")}
               </p>
             </div>
@@ -127,39 +127,39 @@ export function EventDetailsDialog({
           <div className="grid grid-cols-2 gap-4 py-2">
             {event.vehicleName && (
               <div className="flex items-start gap-2">
-                <Car className="h-4 w-4 text-slate-400 mt-0.5" />
+                <Car className="h-4 w-4 text-muted-foreground mt-0.5" />
                 <div>
-                  <p className="text-xs text-slate-500">Vehicle</p>
-                  <p className="text-sm font-medium text-slate-700">{event.vehicleName}</p>
+                  <p className="text-xs text-muted-foreground">Vehicle</p>
+                  <p className="text-sm font-medium text-foreground">{event.vehicleName}</p>
                 </div>
               </div>
             )}
             
             {event.renterName && (
               <div className="flex items-start gap-2">
-                <Users className="h-4 w-4 text-slate-400 mt-0.5" />
+                <Users className="h-4 w-4 text-muted-foreground mt-0.5" />
                 <div>
-                  <p className="text-xs text-slate-500">Renter</p>
-                  <p className="text-sm font-medium text-slate-700">{event.renterName}</p>
+                  <p className="text-xs text-muted-foreground">Renter</p>
+                  <p className="text-sm font-medium text-foreground">{event.renterName}</p>
                 </div>
               </div>
             )}
             
             {event.location && (
               <div className="flex items-start gap-2">
-                <MapPin className="h-4 w-4 text-slate-400 mt-0.5" />
+                <MapPin className="h-4 w-4 text-muted-foreground mt-0.5" />
                 <div>
-                  <p className="text-xs text-slate-500">Location</p>
-                  <p className="text-sm font-medium text-slate-700">{event.location}</p>
+                  <p className="text-xs text-muted-foreground">Location</p>
+                  <p className="text-sm font-medium text-foreground">{event.location}</p>
                 </div>
               </div>
             )}
             
             <div className="flex items-start gap-2">
-              <Clock className="h-4 w-4 text-slate-400 mt-0.5" />
+              <Clock className="h-4 w-4 text-muted-foreground mt-0.5" />
               <div>
-                <p className="text-xs text-slate-500">Duration</p>
-                <p className="text-sm font-medium text-slate-700">
+                <p className="text-xs text-muted-foreground">Duration</p>
+                <p className="text-sm font-medium text-foreground">
                   {Math.max(1, Math.ceil((new Date(event.end).getTime() - new Date(event.start).getTime()) / (1000 * 3600 * 24)))} days
                 </p>
               </div>
@@ -168,7 +168,7 @@ export function EventDetailsDialog({
           
           {/* Notes Section */}
           <div className="space-y-2">
-            <Label className="text-xs text-slate-500">Notes</Label>
+            <Label className="text-xs text-muted-foreground">Notes</Label>
             {isEditing ? (
               <Textarea 
                 value={notes} 
@@ -177,8 +177,8 @@ export function EventDetailsDialog({
                 placeholder="Add notes..."
               />
             ) : (
-              <div className="bg-slate-50 p-3 rounded-md border border-slate-200">
-                <p className="text-sm text-slate-700 whitespace-pre-wrap">{notes || "No notes available."}</p>
+              <div className="bg-muted/50 p-3 rounded-md border border-border">
+                <p className="text-sm text-foreground whitespace-pre-wrap">{notes || "No notes available."}</p>
               </div>
             )}
           </div>
@@ -203,7 +203,7 @@ export function EventDetailsDialog({
               <Button
                 size="sm"
                 onClick={handleSave}
-                className="bg-primary hover:bg-primary/90"
+                className="bg-primary hover:bg-primary/90 text-primary-foreground"
               >
                 <Save className="h-4 w-4 mr-2" />
                 Save Notes
@@ -212,7 +212,7 @@ export function EventDetailsDialog({
               <Button
                 size="sm"
                 onClick={() => setIsEditing(true)}
-                className="bg-primary hover:bg-primary/90"
+                className="bg-primary hover:bg-primary/90 text-primary-foreground"
               >
                 <Edit className="h-4 w-4 mr-2" />
                 Edit Notes

@@ -241,7 +241,7 @@ export default function AdminDisputesDashboard() {
             onClick={() => setStatusFilter(f)}
             className={`px-4 py-1.5 rounded-lg text-xs font-semibold border transition-all ${
               statusFilter === f
-                ? "bg-slate-900 text-white border-slate-900"
+                ? "bg-primary text-white border-primary"
                 : "bg-white text-slate-600 border-slate-200 hover:border-slate-400"
             }`}
           >
@@ -309,7 +309,7 @@ export default function AdminDisputesDashboard() {
                       {dispute.status === "OPEN" && (
                         <Button
                           size="sm"
-                          className="text-xs bg-slate-900 hover:bg-slate-800 text-white gap-1.5"
+                          className="text-xs bg-primary hover:bg-slate-800 text-white gap-1.5"
                           onClick={() => setResolveTarget(dispute)}
                         >
                           <ShieldCheck className="h-3.5 w-3.5" />

@@ -114,10 +114,10 @@ export default function RenterDashboardPage() {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-2">
         <div className="space-y-1">
-          <h1 className="text-2xl font-bold tracking-tight text-slate-900 font-primary">
+          <h1 className="text-2xl font-bold tracking-tight text-foreground font-primary">
             Renter Dashboard
           </h1>
-          <p className="text-sm text-slate-500 font-secondary">
+          <p className="text-sm text-muted-foreground font-secondary">
             Welcome back! Manage your trips, browse vehicles, and track your rental logs.
           </p>
         </div>
@@ -152,10 +152,10 @@ export default function RenterDashboardPage() {
         <div className="lg:col-span-2 space-y-6">
 
           {/* Active/Upcoming Trips */}
-          <Card className="border-slate-200 dark:border-slate-800 shadow-sm">
+          <Card className="border-border dark:border-border shadow-sm">
             <CardHeader className="pb-3">
               <div className="flex items-center justify-between">
-                <CardTitle className="text-lg font-semibold text-slate-800 dark:text-white font-primary">
+                <CardTitle className="text-lg font-semibold text-foreground dark:text-white font-primary">
                   Upcoming &amp; Active Trips
                 </CardTitle>
                 <Button
@@ -180,7 +180,7 @@ export default function RenterDashboardPage() {
               ) : displayTrips.length === 0 ? (
                 <div className="text-center py-10">
                   <Car className="h-10 w-10 text-slate-300 mx-auto mb-3" />
-                  <p className="text-sm text-slate-500 font-secondary mb-4">
+                  <p className="text-sm text-muted-foreground font-secondary mb-4">
                     No active or upcoming trips yet.
                   </p>
                   <Button asChild size="sm" className="bg-primary text-white font-primary">
@@ -209,9 +209,9 @@ export default function RenterDashboardPage() {
           </Card>
 
           {/* Recommended Cars */}
-          <Card className="border-slate-200 dark:border-slate-800 shadow-sm">
+          <Card className="border-border dark:border-border shadow-sm">
             <CardHeader className="pb-3">
-              <CardTitle className="text-lg font-semibold text-slate-800 dark:text-white font-primary">
+              <CardTitle className="text-lg font-semibold text-foreground dark:text-white font-primary">
                 Explore Premium Recommendations
               </CardTitle>
             </CardHeader>
@@ -225,7 +225,7 @@ export default function RenterDashboardPage() {
               ) : displayCars.length === 0 ? (
                 <div className="text-center py-10">
                   <Car className="h-10 w-10 text-slate-300 mx-auto mb-3" />
-                  <p className="text-sm text-slate-500 font-secondary">
+                  <p className="text-sm text-muted-foreground font-secondary">
                     No premium recommendations at the moment.
                   </p>
                   <Button asChild size="sm" className="mt-4 bg-primary text-white font-primary">
@@ -254,9 +254,9 @@ export default function RenterDashboardPage() {
         <div className="space-y-6">
 
           {/* Quick Shortcuts */}
-          <Card className="border-slate-200 dark:border-slate-800 shadow-sm">
+          <Card className="border-border dark:border-border shadow-sm">
             <CardHeader className="pb-3">
-              <CardTitle className="text-lg font-semibold text-slate-800 dark:text-white font-primary">
+              <CardTitle className="text-lg font-semibold text-foreground dark:text-white font-primary">
                 Quick Shortcuts
               </CardTitle>
             </CardHeader>
@@ -267,7 +267,7 @@ export default function RenterDashboardPage() {
                 asChild
               >
                 <Link href="/dashboard/renter/discover">
-                  <Search className="h-4 w-4 mr-2 text-slate-500" />
+                  <Search className="h-4 w-4 mr-2 text-muted-foreground" />
                   Discover Vehicles
                 </Link>
               </Button>
@@ -277,7 +277,7 @@ export default function RenterDashboardPage() {
                 asChild
               >
                 <Link href="/dashboard/renter/booking">
-                  <Calendar className="h-4 w-4 mr-2 text-slate-500" />
+                  <Calendar className="h-4 w-4 mr-2 text-muted-foreground" />
                   My Bookings
                 </Link>
               </Button>
@@ -287,7 +287,7 @@ export default function RenterDashboardPage() {
                 asChild
               >
                 <Link href="/dashboard/renter/payments">
-                  <CreditCard className="h-4 w-4 mr-2 text-slate-500" />
+                  <CreditCard className="h-4 w-4 mr-2 text-muted-foreground" />
                   Payment Methods &amp; Logs
                 </Link>
               </Button>
@@ -297,7 +297,7 @@ export default function RenterDashboardPage() {
                 asChild
               >
                 <Link href="/dashboard/renter/messages">
-                  <HelpCircle className="h-4 w-4 mr-2 text-slate-500" />
+                  <HelpCircle className="h-4 w-4 mr-2 text-muted-foreground" />
                   Messages
                 </Link>
               </Button>
@@ -307,7 +307,7 @@ export default function RenterDashboardPage() {
                 asChild
               >
                 <Link href="/dashboard/renter/settings">
-                  <User className="h-4 w-4 mr-2 text-slate-500" />
+                  <User className="h-4 w-4 mr-2 text-muted-foreground" />
                   Account Settings
                 </Link>
               </Button>
@@ -317,7 +317,7 @@ export default function RenterDashboardPage() {
                 asChild
               >
                 <Link href="/dashboard/renter/help">
-                  <HelpCircle className="h-4 w-4 mr-2 text-slate-500" />
+                  <HelpCircle className="h-4 w-4 mr-2 text-muted-foreground" />
                   Help Center &amp; FAQs
                 </Link>
               </Button>
@@ -325,16 +325,16 @@ export default function RenterDashboardPage() {
           </Card>
 
           {/* Recent Transactions */}
-          <Card className="border-slate-200 dark:border-slate-800 shadow-sm">
+          <Card className="border-border dark:border-border shadow-sm">
             <CardHeader className="pb-3">
-              <CardTitle className="text-lg font-semibold text-slate-800 dark:text-white font-primary">
+              <CardTitle className="text-lg font-semibold text-foreground dark:text-white font-primary">
                 Recent Transactions
               </CardTitle>
             </CardHeader>
             <CardContent className="p-0">
               <Table>
                 <TableHeader>
-                  <TableRow className="bg-slate-50 hover:bg-slate-50/80">
+                  <TableRow className="bg-muted/50 hover:bg-muted/50/80">
                     <TableHead className="text-xs font-semibold font-secondary py-2 pl-4">
                       Vehicle
                     </TableHead>
@@ -359,19 +359,19 @@ export default function RenterDashboardPage() {
                     <TableRow>
                       <TableCell
                         colSpan={3}
-                        className="text-center py-6 text-sm text-slate-500 font-secondary"
+                        className="text-center py-6 text-sm text-muted-foreground font-secondary"
                       >
                         No recent transactions.
                       </TableCell>
                     </TableRow>
                   ) : (
                     recentTransactions.map((tx) => (
-                      <TableRow key={tx.id} className="hover:bg-slate-50/50">
+                      <TableRow key={tx.id} className="hover:bg-muted/50/50">
                         <TableCell className="py-3 pl-4">
-                          <div className="font-medium text-xs text-slate-800 dark:text-white font-primary">
+                          <div className="font-medium text-xs text-foreground dark:text-white font-primary">
                             {tx.vehicle}
                           </div>
-                          <div className="text-[10px] text-slate-400 font-secondary">
+                          <div className="text-[10px] text-muted-foreground font-secondary">
                             {tx.date}
                           </div>
                         </TableCell>
@@ -379,7 +379,7 @@ export default function RenterDashboardPage() {
                           {tx.amount}
                         </TableCell>
                         <TableCell className="py-3 pr-4 text-right">
-                          <Badge className="text-[10px] font-normal font-primary capitalize bg-slate-50 text-slate-700 border-slate-200">
+                          <Badge className="text-[10px] font-normal font-primary capitalize bg-muted/50 text-foreground border-border">
                             {tx.status}
                           </Badge>
                         </TableCell>

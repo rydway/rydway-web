@@ -51,7 +51,7 @@ export default function BusinessPage() {
     return (
       <div className="flex items-center justify-center h-full min-h-[400px]">
         <Loader2 className="h-8 w-8 animate-spin text-primary" />
-        <span className="ml-2 font-secondary text-slate-500">Loading business profile...</span>
+        <span className="ml-2 font-secondary text-muted-foreground">Loading business profile...</span>
       </div>
     );
   }
@@ -222,10 +222,10 @@ export default function BusinessPage() {
             <CardContent className="p-6">
               <div className="flex items-center justify-between mb-6">
                 <div>
-                  <h3 className="text-xl font-semibold text-slate-800">
+                  <h3 className="text-xl font-semibold text-foreground">
                     Customer Reviews
                   </h3>
-                  <p className="text-slate-600">
+                  <p className="text-muted-foreground">
                     {businessData.totalReviews} reviews • {businessData.rating?.toFixed(1)} average rating
                   </p>
                 </div>
@@ -237,8 +237,8 @@ export default function BusinessPage() {
               
               {/* Reviews list would go here */}
               <div className="text-center py-12">
-                <Star className="h-12 w-12 text-slate-400 mx-auto mb-4" />
-                <p className="text-slate-600">Reviews will be displayed here</p>
+                <Star className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
+                <p className="text-muted-foreground">Reviews will be displayed here</p>
               </div>
             </CardContent>
           </Card>
@@ -249,23 +249,23 @@ export default function BusinessPage() {
           <Card>
             <CardContent className="p-6 space-y-6">
               <div className="space-y-4">
-                <h3 className="text-xl font-semibold text-slate-800">Business Policies</h3>
+                <h3 className="text-xl font-semibold text-foreground">Business Policies</h3>
                 
                 <div className="space-y-4">
-                  <div className="p-4 bg-blue-50 rounded-lg">
-                    <h4 className="font-semibold text-slate-800 mb-2">Insurance Coverage</h4>
-                    <p className="text-slate-600">{businessData.policies?.insurance}</p>
+                  <div className="p-4 bg-blue-500/10 rounded-lg">
+                    <h4 className="font-semibold text-foreground mb-2">Insurance Coverage</h4>
+                    <p className="text-muted-foreground">{businessData.policies?.insurance}</p>
                   </div>
                   
                   <div className="grid md:grid-cols-2 gap-6">
                     <div className="space-y-3">
-                      <h4 className="font-semibold text-slate-800">Cancellation Policy</h4>
-                      <p className="text-slate-600">{businessData.policies?.cancellation}</p>
+                      <h4 className="font-semibold text-foreground">Cancellation Policy</h4>
+                      <p className="text-muted-foreground">{businessData.policies?.cancellation}</p>
                     </div>
                     
                     <div className="space-y-3">
-                      <h4 className="font-semibold text-slate-800">Driver Requirements</h4>
-                      <p className="text-slate-600">{businessData.policies?.driverRequirements}</p>
+                      <h4 className="font-semibold text-foreground">Driver Requirements</h4>
+                      <p className="text-muted-foreground">{businessData.policies?.driverRequirements}</p>
                     </div>
                   </div>
                 </div>
@@ -278,21 +278,21 @@ export default function BusinessPage() {
         <TabsContent value="analytics" className="space-y-6">
             <Card>
               <CardContent className="p-6">
-                <h3 className="text-xl font-semibold text-slate-800 mb-6">Business Analytics</h3>
+                <h3 className="text-xl font-semibold text-foreground mb-6">Business Analytics</h3>
                 
                 <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-                  <div className="p-4 bg-slate-50 rounded-lg">
+                  <div className="p-4 bg-muted/50 rounded-lg">
                     <div className="flex items-center gap-3 mb-2">
                       <DollarSign className="h-5 w-5 text-primary" />
-                      <span className="text-2xl font-bold text-slate-800">₦{((summary as any)?.totalEarned || 0).toLocaleString()}</span>
+                      <span className="text-2xl font-bold text-foreground">₦{((summary as any)?.totalEarned || 0).toLocaleString()}</span>
                     </div>
-                    <p className="text-sm text-slate-600">Total Earnings</p>
+                    <p className="text-sm text-muted-foreground">Total Earnings</p>
                   </div>
                   
-                  <div className="p-4 bg-slate-50 rounded-lg">
+                  <div className="p-4 bg-muted/50 rounded-lg">
                     <div className="flex items-center gap-3 mb-2">
                       <Car className="h-5 w-5 text-primary" />
-                      <span className="text-2xl font-bold text-slate-800">
+                      <span className="text-2xl font-bold text-foreground">
                         {(() => {
                           const s = summary as any;
                           if (!s?.totalVehicles || s.totalVehicles === 0) return "0%";
@@ -302,30 +302,30 @@ export default function BusinessPage() {
                         })()}
                       </span>
                     </div>
-                    <p className="text-sm text-slate-600">Fleet Utilization</p>
+                    <p className="text-sm text-muted-foreground">Fleet Utilization</p>
                   </div>
                   
-                  <div className="p-4 bg-slate-50 rounded-lg">
+                  <div className="p-4 bg-muted/50 rounded-lg">
                     <div className="flex items-center gap-3 mb-2">
                       <Users className="h-5 w-5 text-primary" />
-                      <span className="text-2xl font-bold text-slate-800">{(summary as any)?.totalBookings || 0}</span>
+                      <span className="text-2xl font-bold text-foreground">{(summary as any)?.totalBookings || 0}</span>
                     </div>
-                    <p className="text-sm text-slate-600">Total Bookings</p>
+                    <p className="text-sm text-muted-foreground">Total Bookings</p>
                   </div>
                   
-                  <div className="p-4 bg-slate-50 rounded-lg">
+                  <div className="p-4 bg-muted/50 rounded-lg">
                     <div className="flex items-center gap-3 mb-2">
                       <TrendingUp className="h-5 w-5 text-primary" />
-                      <span className="text-2xl font-bold text-slate-800">{(summary as any)?.activeBookings || 0}</span>
+                      <span className="text-2xl font-bold text-foreground">{(summary as any)?.activeBookings || 0}</span>
                     </div>
-                    <p className="text-sm text-slate-600">Active Bookings</p>
+                    <p className="text-sm text-muted-foreground">Active Bookings</p>
                   </div>
                 </div>
                 
                 {/* Analytics charts would go here */}
                 <div className="text-center py-12">
-                  <TrendingUp className="h-12 w-12 text-slate-400 mx-auto mb-4" />
-                  <p className="text-slate-600">Analytics charts will be displayed here</p>
+                  <TrendingUp className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
+                  <p className="text-muted-foreground">Analytics charts will be displayed here</p>
                 </div>
               </CardContent>
             </Card>

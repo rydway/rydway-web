@@ -73,10 +73,10 @@ export default function AdminVehiclesPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">
+        <h1 className="text-3xl font-bold tracking-tight text-foreground dark:text-white">
           Vehicle Registry
         </h1>
-        <p className="text-slate-500 font-secondary mt-1">
+        <p className="text-muted-foreground font-secondary mt-1">
           All vehicles listed on the platform.
         </p>
       </div>
@@ -84,7 +84,7 @@ export default function AdminVehiclesPage() {
       {/* Filters */}
       <div className="flex flex-col sm:flex-row gap-3">
         <div className="relative flex-1 max-w-xs">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <Input
             id="vehicles-search"
             placeholder="Search by vehicle or host…"
@@ -106,7 +106,7 @@ export default function AdminVehiclesPage() {
               className={`px-3 py-1.5 rounded-md text-xs font-semibold border transition-colors ${
                 verifiedFilter === f.value
                   ? "bg-primary text-white border-primary"
-                  : "border-slate-200 text-slate-600 hover:border-slate-400 dark:border-slate-700 dark:text-slate-400"
+                  : "border-border text-muted-foreground hover:border-slate-400 dark:border-slate-700 dark:text-muted-foreground"
               }`}
             >
               {f.label}
@@ -121,15 +121,15 @@ export default function AdminVehiclesPage() {
         </div>
       ) : filtered.length === 0 ? (
         <Card>
-          <CardContent className="flex flex-col items-center justify-center py-16 text-slate-400">
+          <CardContent className="flex flex-col items-center justify-center py-16 text-muted-foreground">
             <Car className="h-10 w-10 mb-3" />
             <p className="font-medium">No vehicles found</p>
           </CardContent>
         </Card>
       ) : (
-        <div className="rounded-lg border border-slate-200 dark:border-slate-800 overflow-hidden">
+        <div className="rounded-lg border border-border dark:border-border overflow-hidden">
           <table className="w-full text-sm">
-            <thead className="bg-slate-50 dark:bg-slate-900 text-xs text-slate-500 uppercase tracking-wide">
+            <thead className="bg-muted/50 dark:bg-background text-xs text-muted-foreground uppercase tracking-wide">
               <tr>
                 <th className="px-4 py-3 text-left">Vehicle</th>
                 <th className="px-4 py-3 text-left hidden md:table-cell">Host</th>
@@ -145,7 +145,7 @@ export default function AdminVehiclesPage() {
                 <tr
                   key={v.id}
                   id={`vehicle-row-${v.id}`}
-                  className="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors"
+                  className="hover:bg-muted/50 dark:hover:bg-slate-800/50 transition-colors"
                 >
                   <td className="px-4 py-3">
                     <div className="flex items-center gap-3">
@@ -153,41 +153,41 @@ export default function AdminVehiclesPage() {
                         <img
                           src={v.images[0].url}
                           alt={v.name}
-                          className="h-10 w-14 object-cover rounded-md bg-slate-100"
+                          className="h-10 w-14 object-cover rounded-md bg-muted"
                         />
                       ) : (
-                        <div className="h-10 w-14 rounded-md bg-slate-100 dark:bg-slate-800 flex items-center justify-center">
-                          <Car className="h-4 w-4 text-slate-400" />
+                        <div className="h-10 w-14 rounded-md bg-muted dark:bg-slate-800 flex items-center justify-center">
+                          <Car className="h-4 w-4 text-muted-foreground" />
                         </div>
                       )}
                       <div>
-                        <p className="font-semibold text-slate-900 dark:text-white">
+                        <p className="font-semibold text-foreground dark:text-white">
                           {v.name ?? `${v.make} ${v.model}`}
                         </p>
-                        <p className="text-xs text-slate-400">{v.year}</p>
+                        <p className="text-xs text-muted-foreground">{v.year}</p>
                       </div>
                     </div>
                   </td>
                   <td className="px-4 py-3 hidden md:table-cell">
-                    <p className="font-medium text-slate-700 dark:text-slate-300">
+                    <p className="font-medium text-foreground dark:text-slate-300">
                       {v.host?.user?.firstName} {v.host?.user?.lastName}
                     </p>
-                    <p className="text-xs text-slate-400">{v.host?.user?.email}</p>
+                    <p className="text-xs text-muted-foreground">{v.host?.user?.email}</p>
                   </td>
-                  <td className="px-4 py-3 hidden lg:table-cell font-mono text-slate-600 dark:text-slate-400 text-xs">
+                  <td className="px-4 py-3 hidden lg:table-cell font-mono text-muted-foreground dark:text-muted-foreground text-xs">
                     {v.plateNumber}
                   </td>
-                  <td className="px-4 py-3 text-right hidden lg:table-cell font-semibold text-slate-800 dark:text-slate-200">
+                  <td className="px-4 py-3 text-right hidden lg:table-cell font-semibold text-foreground dark:text-slate-200">
                     ₦{Number(v.pricePerDay).toLocaleString()}
                   </td>
                   <td className="px-4 py-3 text-center">
                     {v.isVerified ? (
                       <CheckCircle className="h-5 w-5 text-green-500 mx-auto" />
                     ) : (
-                      <XCircle className="h-5 w-5 text-slate-300 dark:text-slate-600 mx-auto" />
+                      <XCircle className="h-5 w-5 text-slate-300 dark:text-muted-foreground mx-auto" />
                     )}
                   </td>
-                  <td className="px-4 py-3 text-xs text-slate-400 hidden sm:table-cell">
+                  <td className="px-4 py-3 text-xs text-muted-foreground hidden sm:table-cell">
                     {new Date(v.createdAt).toLocaleDateString("en-NG", {
                       day: "numeric",
                       month: "short",

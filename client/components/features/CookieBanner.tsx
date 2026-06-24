@@ -31,16 +31,16 @@ export default function CookieBanner() {
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 p-4 sm:p-6 pb-20 sm:pb-6 pointer-events-none">
       <div className="max-w-4xl mx-auto pointer-events-auto">
-        <div className="bg-white border border-slate-200 shadow-xl rounded-xl p-4 sm:p-6 flex flex-col sm:flex-row gap-4 items-center justify-between font-primary">
+        <div className="bg-card border border-border shadow-xl rounded-xl p-4 sm:p-6 flex flex-col sm:flex-row gap-4 items-center justify-between font-primary">
           <div className="flex-1 pr-8 relative">
             <button 
               onClick={() => setIsVisible(false)}
-              className="absolute top-0 right-0 sm:hidden text-slate-400 hover:text-slate-600"
+              className="absolute top-0 right-0 sm:hidden text-muted-foreground hover:text-muted-foreground"
             >
               <X className="h-5 w-5" />
             </button>
-            <h3 className="text-sm font-bold text-slate-900 mb-1">We use cookies</h3>
-            <p className="text-sm text-slate-600 font-secondary">
+            <h3 className="text-sm font-bold text-foreground mb-1">We use cookies</h3>
+            <p className="text-sm text-muted-foreground font-secondary">
               We use cookies to enhance your browsing experience, serve personalized ads or content, and analyze our traffic. By clicking "Accept All", you consent to our use of cookies.
             </p>
           </div>

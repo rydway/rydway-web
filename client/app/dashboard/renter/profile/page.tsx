@@ -134,7 +134,7 @@ function ProfileHeader({
             )}
           />
         ))}
-        <span className="ml-2 text-sm font-primary text-slate-700">
+        <span className="ml-2 text-sm font-primary text-foreground">
           {rating.toFixed(1)} ({reviews} reviews)
         </span>
       </div>
@@ -142,9 +142,9 @@ function ProfileHeader({
   };
 
   return (
-    <Card className=" py-0 dark:border-slate-800 overflow-hidden">
+    <Card className=" py-0 dark:border-border overflow-hidden">
       {/* Cover Image */}
-      <div className="relative h-32 md:h-48 bg-slate-200 dark:bg-slate-800 flex items-center justify-center group cursor-pointer">
+      <div className="relative h-32 md:h-48 bg-secondary dark:bg-slate-800 flex items-center justify-center group cursor-pointer">
         {profile.coverImage ? (
           <img
             src={profile.coverImage}
@@ -152,7 +152,7 @@ function ProfileHeader({
             className="w-full h-full object-cover"
           />
         ) : (
-          <div className="flex flex-col items-center gap-1 text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-300">
+          <div className="flex flex-col items-center gap-1 text-muted-foreground hover:text-foreground dark:text-muted-foreground dark:hover:text-slate-300">
             <Camera className="h-6 w-6" />
             <span className="text-xs font-medium font-secondary">Add Cover Photo</span>
           </div>
@@ -188,7 +188,7 @@ function ProfileHeader({
         {/* Logo/Avatar and Basic Info */}
         <div className="flex flex-col md:flex-row md:items-end gap-4">
           <div className="relative lg:-top-8 self-start md:self-auto">
-            <div className="relative w-24 h-24 md:w-32 md:h-32 -top-12 md:-top-6 rounded-lg border-4 border-white dark:border-slate-900 bg-white overflow-hidden">
+            <div className="relative w-24 h-24 md:w-32 md:h-32 -top-12 md:-top-6 rounded-lg border-4 border-white dark:border-primary bg-white overflow-hidden">
               {profile.avatar ? (
                 <img
                   src={profile.avatar}
@@ -196,18 +196,18 @@ function ProfileHeader({
                   className="w-full h-full object-cover"
                 />
               ) : (
-                <div className="w-full h-full bg-slate-100 flex items-center justify-center">
-                  <User className="h-16 w-16 text-slate-400" />
+                <div className="w-full h-full bg-muted flex items-center justify-center">
+                  <User className="h-16 w-16 text-muted-foreground" />
                 </div>
               )}
             </div>
             <Button
               size="icon"
               variant="outline"
-              className="absolute bottom-10 md:bottom-0 right-0 h-8 w-8 rounded-full bg-white hover:bg-slate-50"
+              className="absolute bottom-10 md:bottom-0 right-0 h-8 w-8 rounded-full bg-white hover:bg-muted/50"
               onClick={() => setShowAvatarDialog(true)}
             >
-              <Camera className="h-4 w-4 text-slate-600" />
+              <Camera className="h-4 w-4 text-muted-foreground" />
             </Button>
           </div>
 
@@ -215,7 +215,7 @@ function ProfileHeader({
             <div className="flex items-start justify-between gap-4">
               <div className="flex-1">
                 <div className="flex items-center gap-2 mb-2">
-                  <h1 className="text-2xl font-primary font-bold text-slate-800 dark:text-white">
+                  <h1 className="text-2xl font-primary font-bold text-foreground dark:text-white">
                     {profile.name}
                   </h1>
                   {profile.verified && (
@@ -224,7 +224,7 @@ function ProfileHeader({
                     </Badge>
                   )}
                 </div>
-                <div className="flex items-center gap-3 text-sm text-slate-500 flex-wrap">
+                <div className="flex items-center gap-3 text-sm text-muted-foreground flex-wrap">
                   <div className="flex items-center gap-1">
                     <Mail className="h-4 w-4" />
                     {profile.email}
@@ -249,7 +249,7 @@ function ProfileHeader({
             </div>
 
             {profile.location && (
-              <div className="flex items-center gap-1 mt-2 text-sm text-slate-500">
+              <div className="flex items-center gap-1 mt-2 text-sm text-muted-foreground">
                 <MapPin className="h-4 w-4" />
                 {profile.location}
               </div>
@@ -262,15 +262,15 @@ function ProfileHeader({
         {/* Bio */}
         {profile.bio && (
           <div className="space-y-4 mb-6">
-            <h3 className="font-primary font-semibold text-slate-800">About Me</h3>
+            <h3 className="font-primary font-semibold text-foreground">About Me</h3>
             <div className="flex-1">
-              <p className="text-slate-600 font-primary leading-relaxed">{profile.bio}</p>
+              <p className="text-muted-foreground font-primary leading-relaxed">{profile.bio}</p>
             </div>
           </div>
         )}
 
         {/* Member Since */}
-        <div className="flex items-center gap-4 text-xs text-slate-400">
+        <div className="flex items-center gap-4 text-xs text-muted-foreground">
           <div className="flex items-center gap-1">
             <Calendar className="h-3.5 w-3.5" />
             Member since {format(profile.memberSince, 'MMMM yyyy')}
@@ -293,8 +293,8 @@ function ProfileHeader({
           </DialogHeader>
           <div className="py-6">
             <div className="flex flex-col items-center justify-center gap-4">
-              <div className="h-32 w-32 rounded-full bg-slate-100 flex items-center justify-center">
-                <Camera className="h-10 w-10 text-slate-400" />
+              <div className="h-32 w-32 rounded-full bg-muted flex items-center justify-center">
+                <Camera className="h-10 w-10 text-muted-foreground" />
               </div>
               <div className="flex gap-2">
                 <Button variant="outline" size="sm" className="font-secondary">
@@ -410,7 +410,7 @@ function EditProfileDialog({
           <Button variant="outline" size="sm" onClick={() => onOpenChange(false)} className="font-secondary" disabled={isSaving}>
             Cancel
           </Button>
-          <Button size="sm" className="bg-primary hover:bg-primary/90 font-secondary" onClick={handleSave} disabled={isSaving}>
+          <Button size="sm" className="bg-primary hover:bg-primary/90 font-secondary text-primary-foreground" onClick={handleSave} disabled={isSaving}>
             {isSaving ? "Saving..." : "Save Changes"}
           </Button>
         </DialogFooter>
@@ -465,8 +465,8 @@ function VerificationStatus({ profile }: { profile: UserProfile }) {
     switch (status) {
       case 'verified':
         return {
-          bg: 'bg-green-50',
-          border: 'border-green-200',
+          bg: 'bg-emerald-500/10',
+          border: 'border-emerald-500/20',
           icon: CheckCircle,
           iconColor: 'text-green-600',
           text: 'Verified',
@@ -474,8 +474,8 @@ function VerificationStatus({ profile }: { profile: UserProfile }) {
         };
       case 'pending':
         return {
-          bg: 'bg-amber-50',
-          border: 'border-amber-200',
+          bg: 'bg-amber-500/10',
+          border: 'border-amber-500/20',
           icon: Clock,
           iconColor: 'text-amber-600',
           text: 'Pending Review',
@@ -483,8 +483,8 @@ function VerificationStatus({ profile }: { profile: UserProfile }) {
         };
       default:
         return {
-          bg: 'bg-amber-50',
-          border: 'border-amber-200',
+          bg: 'bg-amber-500/10',
+          border: 'border-amber-500/20',
           icon: AlertCircle,
           iconColor: 'text-amber-600',
           text: 'Not Verified',
@@ -500,7 +500,7 @@ function VerificationStatus({ profile }: { profile: UserProfile }) {
   return (
     <Card className=" shadow-sm h-full flex flex-col">
       <CardHeader className="pb-3">
-        <CardTitle className="text-base font-semibold font-primary text-slate-800 flex items-center gap-2">
+        <CardTitle className="text-base font-semibold font-primary text-foreground flex items-center gap-2">
           <Shield className="h-5 w-5 text-primary" />
           Verification Status
         </CardTitle>
@@ -520,7 +520,7 @@ function VerificationStatus({ profile }: { profile: UserProfile }) {
                   </Button>
                 )}
               </div>
-              <p className="text-xs font-secondary text-slate-500 mt-1">
+              <p className="text-xs font-secondary text-muted-foreground mt-1">
                 {config.message}
               </p>
             </div>
@@ -538,7 +538,7 @@ function RecentActivity({ vehicles }: { vehicles: UserProfile['recentVehicles'] 
   return (
     <Card className=" shadow-sm h-full flex flex-col">
       <CardHeader className="pb-3">
-        <CardTitle className="text-base font-semibold font-primary text-slate-800 flex items-center gap-2">
+        <CardTitle className="text-base font-semibold font-primary text-foreground flex items-center gap-2">
           <Clock className="h-5 w-5 text-primary" />
           Recent Activity
         </CardTitle>
@@ -548,19 +548,19 @@ function RecentActivity({ vehicles }: { vehicles: UserProfile['recentVehicles'] 
           {vehicles.map((vehicle) => (
             <div key={vehicle.id} className="flex items-center justify-between">
               <div className="flex items-center gap-3 min-w-0 flex-1">
-                <div className="h-8 w-8 bg-slate-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <Car className="h-4 w-4 text-slate-500" />
+                <div className="h-8 w-8 bg-muted rounded-lg flex items-center justify-center flex-shrink-0">
+                  <Car className="h-4 w-4 text-muted-foreground" />
                 </div>
                 <div className="min-w-0 flex-1">
-                  <p className="text-sm font-medium font-primary text-slate-800 truncate">{vehicle.name}</p>
+                  <p className="text-sm font-medium font-primary text-foreground truncate">{vehicle.name}</p>
                   <div className="flex items-center gap-2 mt-0.5 flex-wrap">
-                    <span className="text-xs font-secondary text-slate-500 truncate">{vehicle.location}</span>
+                    <span className="text-xs font-secondary text-muted-foreground truncate">{vehicle.location}</span>
                     <span className="text-xs text-slate-300">•</span>
-                    <span className="text-xs font-secondary text-slate-500 whitespace-nowrap">{format(vehicle.date, 'MMM d, yyyy')}</span>
+                    <span className="text-xs font-secondary text-muted-foreground whitespace-nowrap">{format(vehicle.date, 'MMM d, yyyy')}</span>
                   </div>
                 </div>
               </div>
-              <Badge variant="green" className="text-[10px] font-secondary bg-green-50 text-green-700 border-green-200 flex-shrink-0 ml-2">
+              <Badge variant="green" className="text-[10px] font-secondary bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20 flex-shrink-0 ml-2">
                 Completed
               </Badge>
             </div>
@@ -578,7 +578,7 @@ function UpcomingBookings({ bookings }: { bookings: UserProfile['upcomingBooking
   return (
     <Card className=" shadow-sm h-full flex flex-col">
       <CardHeader className="pb-3">
-        <CardTitle className="text-base font-semibold font-primary text-slate-800 flex items-center gap-2">
+        <CardTitle className="text-base font-semibold font-primary text-foreground flex items-center gap-2">
           <Calendar className="h-5 w-5 text-primary" />
           Upcoming Trips
         </CardTitle>
@@ -588,15 +588,15 @@ function UpcomingBookings({ bookings }: { bookings: UserProfile['upcomingBooking
           {bookings.map((booking) => (
             <div key={booking.id} className="flex items-center justify-between">
               <div className="flex items-center gap-3 min-w-0 flex-1">
-                <div className="h-8 w-8 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                <div className="h-8 w-8 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0 text-primary-foreground">
                   <Car className="h-4 w-4 text-primary" />
                 </div>
                 <div className="min-w-0 flex-1">
-                  <p className="text-sm font-medium font-primary text-slate-800 truncate">{booking.vehicleName}</p>
+                  <p className="text-sm font-medium font-primary text-foreground truncate">{booking.vehicleName}</p>
                   <div className="flex items-center gap-2 mt-0.5 flex-wrap">
-                    <span className="text-xs font-secondary text-slate-500 truncate">{booking.location}</span>
+                    <span className="text-xs font-secondary text-muted-foreground truncate">{booking.location}</span>
                     <span className="text-xs text-slate-300">•</span>
-                    <span className="text-xs font-secondary text-slate-500 whitespace-nowrap">
+                    <span className="text-xs font-secondary text-muted-foreground whitespace-nowrap">
                       {format(booking.startDate, 'MMM d')} - {format(booking.endDate, 'MMM d')}
                     </span>
                   </div>
@@ -630,7 +630,7 @@ function SocialLinks({ links }: { links?: UserProfile['socialLinks'] }) {
   return (
     <Card className=" shadow-sm h-full flex flex-col">
       <CardHeader className="">
-        <CardTitle className="text-base font-semibold font-primary text-slate-800 flex items-center gap-2">
+        <CardTitle className="text-base font-semibold font-primary text-foreground flex items-center gap-2">
           <Globe className="h-5 w-5 text-primary" />
           Social Profiles
         </CardTitle>
@@ -657,7 +657,7 @@ function SocialLinks({ links }: { links?: UserProfile['socialLinks'] }) {
           )}
           {links.linkedin && (
             <div className="flex items-center h-8 gap-2 font-secondary">
-              <Linkedin className="h-3.5 w-3.5 text-blue-700" />
+              <Linkedin className="h-3.5 w-3.5 text-blue-600 dark:text-blue-400" />
               {links.linkedin}
             </div>
           )}
@@ -670,7 +670,7 @@ function SocialLinks({ links }: { links?: UserProfile['socialLinks'] }) {
 // Account Type Badge (UNCHANGED)
 function AccountTypeBadge({ type }: { type: string }) {
   return (
-    <div className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-primary/10 border border-primary/20 rounded-full">
+    <div className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-primary/10 border border-primary/20 rounded-full text-primary-foreground">
       {type === 'personal' ? (
         <User className="h-3.5 w-3.5 text-primary" />
       ) : (
@@ -693,16 +693,16 @@ function AchievementCard({ stats }: { stats: UserProfile['stats'] }) {
             <Award className="h-5 w-5 text-amber-600" />
           </div>
           <div className="flex-1">
-            <h3 className="text-sm font-semibold font-primary text-slate-800 mb-1">
+            <h3 className="text-sm font-semibold font-primary text-foreground mb-1">
               Renter Milestone
             </h3>
-            <p className="text-xs font-secondary text-slate-600">
+            <p className="text-xs font-secondary text-muted-foreground">
               You've completed {stats.totalTrips} trips!
               {stats.totalTrips >= 20 ? ' 🎉' : ' 5 more to reach 25 trips.'}
             </p>
             <div className="mt-3">
               <div className="flex items-center justify-between text-xs mb-1">
-                <span className="font-secondary text-slate-600">Progress to Gold</span>
+                <span className="font-secondary text-muted-foreground">Progress to Gold</span>
                 <span className="font-medium font-primary text-amber-600">{stats.totalTrips}/50</span>
               </div>
               <Progress value={(stats.totalTrips / 50) * 100} className="h-1.5 bg-amber-100" />
@@ -719,7 +719,7 @@ function PersonalInformation({ profile }: { profile: UserProfile }) {
   return (
     <Card className=" shadow-sm h-full flex flex-col">
       <CardHeader className="pb-3">
-        <CardTitle className="text-base font-semibold font-primary text-slate-800 flex items-center gap-2">
+        <CardTitle className="text-base font-semibold font-primary text-foreground flex items-center gap-2">
           <User className="h-5 w-5 text-primary" />
           Personal Information
         </CardTitle>
@@ -728,27 +728,27 @@ function PersonalInformation({ profile }: { profile: UserProfile }) {
         <div className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <p className="text-xs font-secondary text-slate-500 mb-1">Full Name</p>
-              <p className="text-sm font-medium font-primary text-slate-800">{profile.name}</p>
+              <p className="text-xs font-secondary text-muted-foreground mb-1">Full Name</p>
+              <p className="text-sm font-medium font-primary text-foreground">{profile.name}</p>
             </div>
             <div>
-              <p className="text-xs font-secondary text-slate-500 mb-1">Email</p>
-              <p className="text-sm font-medium font-primary text-slate-800">{profile.email}</p>
+              <p className="text-xs font-secondary text-muted-foreground mb-1">Email</p>
+              <p className="text-sm font-medium font-primary text-foreground">{profile.email}</p>
             </div>
             <div>
-              <p className="text-xs font-secondary text-slate-500 mb-1">Phone</p>
-              <p className="text-sm font-medium font-primary text-slate-800">{profile.phone || 'Not provided'}</p>
+              <p className="text-xs font-secondary text-muted-foreground mb-1">Phone</p>
+              <p className="text-sm font-medium font-primary text-foreground">{profile.phone || 'Not provided'}</p>
             </div>
             <div>
-              <p className="text-xs font-secondary text-slate-500 mb-1">Location</p>
-              <p className="text-sm font-medium font-primary text-slate-800">{profile.location || 'Not provided'}</p>
+              <p className="text-xs font-secondary text-muted-foreground mb-1">Location</p>
+              <p className="text-sm font-medium font-primary text-foreground">{profile.location || 'Not provided'}</p>
             </div>
             <div>
-              <p className="text-xs font-secondary text-slate-500 mb-1">Member Since</p>
-              <p className="text-sm font-medium font-primary text-slate-800">{format(profile.memberSince, 'MMMM d, yyyy')}</p>
+              <p className="text-xs font-secondary text-muted-foreground mb-1">Member Since</p>
+              <p className="text-sm font-medium font-primary text-foreground">{format(profile.memberSince, 'MMMM d, yyyy')}</p>
             </div>
             <div>
-              <p className="text-xs font-secondary text-slate-500 mb-1">Account Type</p>
+              <p className="text-xs font-secondary text-muted-foreground mb-1">Account Type</p>
               <div className="mt-0.5">
                 <AccountTypeBadge type={profile.accountType} />
               </div>
@@ -778,7 +778,7 @@ export default function RenterProfilePage() {
     return (
       <div className="flex items-center justify-center h-full min-h-[400px]">
         <Loader2 className="h-8 w-8 animate-spin text-primary" />
-        <span className="ml-2 font-secondary text-slate-500">Loading profile data...</span>
+        <span className="ml-2 font-secondary text-muted-foreground">Loading profile data...</span>
       </div>
     );
   }

@@ -25,7 +25,7 @@ const tabsListVariants = cva(
     variants: {
       variant: {
         default: "bg-muted rounded-lg p-1",
-        underline: "border-b border-slate-200 dark:border-slate-800",
+        underline: "border-b border-slate-200 dark:border-border",
       },
     },
     defaultVariants: {

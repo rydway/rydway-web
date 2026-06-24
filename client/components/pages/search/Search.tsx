@@ -62,18 +62,18 @@ export default function SearchBar({ onSearch, className }: SearchBarProps) {
     <div className={cn("w-full", className)}>
       <div className="glassmorphism-card rounded-xl sm:rounded-2xl shadow-glass p-3 sm:p-4 md:p-2 flex flex-col md:flex-row items-stretch justify-between gap-3 sm:gap-4 md:gap-2">
         {/* Location */}
-        <div className="flex-1 min-w-0 px-3 sm:px-4 py-3 md:border-r border-white/30">
-          <label className="block text-xs sm:text-sm font-medium text-gray-600 mb-1 sm:mb-2 font-primary">
+        <div className="flex-1 min-w-0 px-3 sm:px-4 py-3 md:border-r border-border dark:border-white/10">
+          <label className="block text-xs sm:text-sm font-medium text-muted-foreground mb-1 sm:mb-2 font-primary">
             Location
           </label>
           <Select value={location} onValueChange={setLocation}>
             <SelectTrigger className="w-full h-10 sm:h-11 border-0 p-0 shadow-none focus:ring-0 text-sm sm:text-base bg-transparent backdrop-blur-sm font-secondary">
               <div className="flex items-center gap-2">
-                <MapPin className="h-4 w-4 text-gray-400" />
+                <MapPin className="h-4 w-4 text-muted-foreground" />
                 <SelectValue placeholder="Where are you going?" />
               </div>
             </SelectTrigger>
-            <SelectContent className="glassmorphism-dropdown backdrop-blur-xl border-white/30">
+            <SelectContent className="glassmorphism-dropdown backdrop-blur-xl border-border dark:border-white/10">
               {locations.map((loc) => (
                 <SelectItem 
                   key={loc.name} 
@@ -81,7 +81,7 @@ export default function SearchBar({ onSearch, className }: SearchBarProps) {
                   disabled={loc.disabled}
                   className={cn(
                     loc.disabled && "opacity-50 cursor-not-allowed",
-                    "hover:bg-white/30"
+                    "hover:bg-white/30 dark:hover:bg-black/40"
                   )}
                 >
                   {loc.name}{loc.disabled && " (Coming Soon)"}
@@ -92,8 +92,8 @@ export default function SearchBar({ onSearch, className }: SearchBarProps) {
         </div>
 
         {/* Date Range */}
-        <div className="flex-1 min-w-0 px-3 sm:px-4 py-3 md:border-r border-white/30">
-          <label className="block text-xs sm:text-sm font-medium text-gray-600 mb-1 sm:mb-2 font-primary">
+        <div className="flex-1 min-w-0 px-3 sm:px-4 py-3 md:border-r border-border dark:border-white/10">
+          <label className="block text-xs sm:text-sm font-medium text-muted-foreground mb-1 sm:mb-2 font-primary">
             Date Range
           </label>
           <Popover>
@@ -101,11 +101,11 @@ export default function SearchBar({ onSearch, className }: SearchBarProps) {
               <Button
                 variant="outline"
                 className={cn(
-                  "w-full h-10 sm:h-11 justify-start text-left font-normal border-0 shadow-none p-0 hover:bg-white/20 bg-white/10 backdrop-blur-sm text-gray-900 text-sm sm:text-base font-secondary",
-                  !dateRange.from && "text-gray-500"
+                  "w-full h-10 sm:h-11 justify-start text-left font-normal border-0 shadow-none p-0 hover:bg-white/20 dark:hover:bg-black/30 bg-white/10 dark:bg-black/20 backdrop-blur-sm text-foreground text-sm sm:text-base font-secondary",
+                  !dateRange.from && "text-muted-foreground"
                 )}
               >
-                <CalendarIcon className="mr-2 h-4 w-4 text-gray-600" />
+                <CalendarIcon className="mr-2 h-4 w-4 text-muted-foreground" />
                 {dateRange.from ? (
                   dateRange.to ? (
                     <>
@@ -124,7 +124,7 @@ export default function SearchBar({ onSearch, className }: SearchBarProps) {
                 )}
               </Button>
             </PopoverTrigger>
-            <PopoverContent className="w-auto p-0 glassmorphism-dropdown backdrop-blur-xl border-white/30" align="start">
+            <PopoverContent className="w-auto p-0 glassmorphism-dropdown backdrop-blur-xl border-border dark:border-white/10" align="start">
               <Calendar
                 initialFocus
                 mode="range"
@@ -143,19 +143,19 @@ export default function SearchBar({ onSearch, className }: SearchBarProps) {
 
         {/* Car Type */}
         <div className="flex-1 min-w-0 px-3 sm:px-4 py-3">
-          <label className="block text-xs sm:text-sm font-medium text-gray-600 mb-1 sm:mb-2 font-primary">
+          <label className="block text-xs sm:text-sm font-medium text-muted-foreground mb-1 sm:mb-2 font-primary">
             Car Type
           </label>
           <Select value={carType} onValueChange={setCarType}>
             <SelectTrigger className="w-full h-10 sm:h-11 border-0 p-0 shadow-none focus:ring-0 text-sm sm:text-base bg-transparent backdrop-blur-sm font-secondary">
               <SelectValue placeholder="Choose car type" />
             </SelectTrigger>
-            <SelectContent className="glassmorphism-dropdown backdrop-blur-xl border-white/30">
+            <SelectContent className="glassmorphism-dropdown backdrop-blur-xl border-border dark:border-white/10">
               {carTypes.map((type) => (
                 <SelectItem 
                   key={type.value} 
                   value={type.value}
-                  className="hover:bg-white/30"
+                  className="hover:bg-white/30 dark:hover:bg-black/40"
                 >
                   {type.label}
                 </SelectItem>

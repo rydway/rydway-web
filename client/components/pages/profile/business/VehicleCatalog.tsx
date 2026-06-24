@@ -205,7 +205,7 @@ export function VehicleCatalog({
             )}
           />
         ))}
-        <span className="font-secondary text-xs text-slate-600 ml-1">{rating.toFixed(1)}</span>
+        <span className="font-secondary text-xs text-muted-foreground ml-1">{rating.toFixed(1)}</span>
       </div>
     );
   };
@@ -213,7 +213,7 @@ export function VehicleCatalog({
   const renderVehicleCard = (vehicle: VehicleCardData) => (
     <Card key={vehicle.id} className="overflow-hidden hover:border-primary/20 transition-colors group flex flex-col h-full pt-0">
       {/* Image - Fixed height at top */}
-      <div className="relative h-48 w-full flex-shrink-0 bg-slate-50">
+      <div className="relative h-48 w-full flex-shrink-0 bg-muted/50">
         <Image
           src={vehicle.image}
           alt={vehicle.name}
@@ -308,10 +308,10 @@ export function VehicleCatalog({
           {/* Title & Price - Side by side on all screens */}
           <div className="flex items-start justify-between gap-2">
             <div className="min-w-0 flex-1">
-              <h3 className="font-primary font-semibold text-slate-800 text-base sm:text-lg line-clamp-1">
+              <h3 className="font-primary font-semibold text-foreground text-base sm:text-lg line-clamp-1">
                 {vehicle.name}
               </h3>
-              <p className="font-secondary text-xs sm:text-sm text-slate-600 line-clamp-1">
+              <p className="font-secondary text-xs sm:text-sm text-muted-foreground line-clamp-1">
                 {vehicle.year} • {vehicle.make} {vehicle.model}
               </p>
       
@@ -320,29 +320,29 @@ export function VehicleCatalog({
               <p className="font-primary text-xl sm:text-2xl font-bold text-primary leading-tight truncate">
                 ₦{vehicle.dailyRate.toLocaleString()}
               </p>
-              <p className="font-secondary text-xs text-slate-500">per day</p>
+              <p className="font-secondary text-xs text-muted-foreground">per day</p>
             </div>
           </div>
 
           {/* Rating */}
           <div className="flex items-center gap-2">
             {getRatingStars(vehicle.rating)}
-            <span className="font-secondary text-xs text-slate-500 whitespace-nowrap">
+            <span className="font-secondary text-xs text-muted-foreground whitespace-nowrap">
               {vehicle.totalReviews} reviews
             </span>
           </div>
 
           {/* Features - Responsive grid */}
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-            <div className="flex items-center gap-1 font-secondary text-xs sm:text-sm text-slate-600 bg-slate-50 p-2 rounded min-w-0">
+            <div className="flex items-center gap-1 font-secondary text-xs sm:text-sm text-muted-foreground bg-muted/50 p-2 rounded min-w-0">
               <Users className="h-3 w-3 sm:h-4 sm:w-4 flex-shrink-0" />
               <span className="truncate">{vehicle.seats} seats</span>
             </div>
-            <div className="flex items-center gap-1 font-secondary text-xs sm:text-sm text-slate-600 bg-slate-50 p-2 rounded min-w-0">
+            <div className="flex items-center gap-1 font-secondary text-xs sm:text-sm text-muted-foreground bg-muted/50 p-2 rounded min-w-0">
               <Fuel className="h-3 w-3 sm:h-4 sm:w-4 flex-shrink-0" />
               <span className="truncate">{vehicle.fuelType}</span>
             </div>
-            <div className="flex items-center gap-1 font-secondary text-xs sm:text-sm text-slate-600 bg-slate-50 p-2 rounded col-span-2 sm:col-span-1 min-w-0">
+            <div className="flex items-center gap-1 font-secondary text-xs sm:text-sm text-muted-foreground bg-muted/50 p-2 rounded col-span-2 sm:col-span-1 min-w-0">
               <Car className="h-3 w-3 sm:h-4 sm:w-4 flex-shrink-0" />
               <span className="truncate">{vehicle.transmission}</span>
             </div>
@@ -351,13 +351,13 @@ export function VehicleCatalog({
           {/* Location & Availability */}
           <div className="pt-2 border-t border-slate-100">
             <div className="flex items-center justify-between gap-2">
-              <div className="flex items-center gap-1 font-secondary text-xs sm:text-sm text-slate-600 min-w-0 flex-1">
+              <div className="flex items-center gap-1 font-secondary text-xs sm:text-sm text-muted-foreground min-w-0 flex-1">
                 <MapPin className="h-3 w-3 sm:h-4 sm:w-4 flex-shrink-0" />
                 <span className="truncate">{vehicle.location}</span>
               </div>
               
               {vehicle.nextAvailable && vehicle.status !== 'available' && (
-                <div className="flex items-center gap-1 font-secondary text-xs text-slate-500 flex-shrink-0">
+                <div className="flex items-center gap-1 font-secondary text-xs text-muted-foreground flex-shrink-0">
                   <Clock className="h-3 w-3" />
                   <span className="whitespace-nowrap">Available {vehicle.nextAvailable}</span>
                 </div>
@@ -368,23 +368,23 @@ export function VehicleCatalog({
           {/* Business Stats */}
           {role === "business" && vehicle.bookingStats && (
             <div className="grid grid-cols-3 gap-1 sm:gap-2 font-secondary text-xs mt-2">
-              <div className="text-center p-1 sm:p-2 bg-slate-50 rounded min-w-0">
+              <div className="text-center p-1 sm:p-2 bg-muted/50 rounded min-w-0">
                 <p className="font-primary font-medium text-sm sm:text-base truncate" title={`₦${vehicle.bookingStats.revenue.toLocaleString()}`}>
                   ₦{vehicle.bookingStats.revenue.toLocaleString()}
                 </p>
-                <p className="text-slate-500 text-xs truncate">Revenue</p>
+                <p className="text-muted-foreground text-xs truncate">Revenue</p>
               </div>
-              <div className="text-center p-1 sm:p-2 bg-slate-50 rounded min-w-0">
+              <div className="text-center p-1 sm:p-2 bg-muted/50 rounded min-w-0">
                 <p className="font-primary font-medium text-sm sm:text-base truncate" title={`${vehicle.bookingStats.utilizationRate}%`}>
                   {vehicle.bookingStats.utilizationRate}%
                 </p>
-                <p className="text-slate-500 text-xs truncate">Utilization</p>
+                <p className="text-muted-foreground text-xs truncate">Utilization</p>
               </div>
-              <div className="text-center p-1 sm:p-2 bg-slate-50 rounded min-w-0">
+              <div className="text-center p-1 sm:p-2 bg-muted/50 rounded min-w-0">
                 <p className="font-primary font-medium text-sm sm:text-base truncate" title={`${vehicle.bookingStats.totalBookings} bookings`}>
                   {vehicle.bookingStats.totalBookings}
                 </p>
-                <p className="text-slate-500 text-xs truncate">Bookings</p>
+                <p className="text-muted-foreground text-xs truncate">Bookings</p>
               </div>
             </div>
           )}
@@ -430,8 +430,8 @@ export function VehicleCatalog({
         {/* Header & Controls */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
-            <h2 className="font-primary text-xl font-bold text-slate-800">Vehicle Fleet</h2>
-            <p className="font-secondary text-sm text-slate-600">
+            <h2 className="font-primary text-xl font-bold text-foreground">Vehicle Fleet</h2>
+            <p className="font-secondary text-sm text-muted-foreground">
               {sortedVehicles.length} vehicle{sortedVehicles.length !== 1 ? 's' : ''} found
             </p>
           </div>
@@ -476,12 +476,12 @@ export function VehicleCatalog({
         />
 
         {/* Filters */}
-        <div>
+        <div className="w-full">
           <div className="pb-2">
-            <div className="flex flex-col md:flex-row gap-4">
+            <div className="flex flex-col gap-3">
               {/* Search */}
-              <div className="flex-1 relative">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+              <div className="relative w-full">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                 <Input
                   placeholder="Search vehicles..."
                   value={searchQuery}
@@ -489,14 +489,14 @@ export function VehicleCatalog({
                     setSearchQuery(e.target.value);
                     setCurrentPage(1);
                   }}
-                  className="pl-10 h-12 font-secondary"
+                  className="pl-10 h-12 font-secondary w-full"
                 />
               </div>
 
               {/* Filters */}
-              <div className="flex flex-col md:flex-row gap-2 md:items-center">
+              <div className="flex overflow-x-auto pb-2 gap-2 scrollbar-hide w-full">
                 <Select value={selectedStatus} onValueChange={setSelectedStatus}>
-                  <SelectTrigger className="w-[180px] font-secondary">
+                  <SelectTrigger className="w-[180px] shrink-0 font-secondary">
                     <Filter className="h-4 w-4 mr-2" />
                     <SelectValue placeholder="Status" />
                   </SelectTrigger>
@@ -509,7 +509,7 @@ export function VehicleCatalog({
                 </Select>
 
                 <Select value={selectedType} onValueChange={setSelectedType}>
-                  <SelectTrigger className="w-[180px] font-secondary">
+                  <SelectTrigger className="w-[180px] shrink-0 font-secondary">
                     <Car className="h-4 w-4 mr-2" />
                     <SelectValue placeholder="Vehicle Type" />
                   </SelectTrigger>
@@ -523,7 +523,7 @@ export function VehicleCatalog({
                 </Select>
 
                 <Select value={selectedSort} onValueChange={setSelectedSort}>
-                  <SelectTrigger className="w-[180px] font-secondary">
+                  <SelectTrigger className="w-[180px] shrink-0 font-secondary">
                     <Settings className="h-4 w-4 mr-2" />
                     <SelectValue placeholder="Sort by" />
                   </SelectTrigger>
@@ -547,11 +547,11 @@ export function VehicleCatalog({
         {currentVehicles.length === 0 ? (
           <Card>
             <CardContent className="flex flex-col items-center justify-center py-12">
-              <Car className="h-12 w-12 text-slate-400 mb-4" />
-              <h3 className="font-primary text-lg font-semibold text-slate-800 mb-2">
+              <Car className="h-12 w-12 text-muted-foreground mb-4" />
+              <h3 className="font-primary text-lg font-semibold text-foreground mb-2">
                 No Vehicles Found
               </h3>
-              <p className="font-secondary text-slate-600 text-center mb-6">
+              <p className="font-secondary text-muted-foreground text-center mb-6">
                 {searchQuery 
                   ? `No vehicles match "${searchQuery}"` 
                   : "No vehicles available in this category"}
@@ -587,7 +587,7 @@ export function VehicleCatalog({
                     <div className="flex flex-col md:flex-row md:items-start justify-between">
                       <div className="flex-1">
                         <div className="flex items-start gap-3 mb-2">
-                          <h3 className="font-primary font-semibold text-slate-800 text-xl">
+                          <h3 className="font-primary font-semibold text-foreground text-xl">
                             {vehicle.name}
                           </h3>
                           <div className="flex gap-2">
@@ -598,32 +598,32 @@ export function VehicleCatalog({
                           </div>
                         </div>
                         
-                        <p className="font-secondary text-slate-600 mb-2">
+                        <p className="font-secondary text-muted-foreground mb-2">
                           {vehicle.year} {vehicle.make} {vehicle.model} • {vehicle.vehicleType}
                         </p>
 
                         <div className="flex items-center gap-4 mb-4">
                           <div className="flex items-center gap-2 font-secondary">
-                            <Users className="h-4 w-4 text-slate-400" />
+                            <Users className="h-4 w-4 text-muted-foreground" />
                             <span>{vehicle.seats} seats</span>
                           </div>
                           <div className="flex items-center gap-2 font-secondary">
-                            <Fuel className="h-4 w-4 text-slate-400" />
+                            <Fuel className="h-4 w-4 text-muted-foreground" />
                             <span>{vehicle.fuelType}</span>
                           </div>
                           <div className="flex items-center gap-2 font-secondary">
-                            <Car className="h-4 w-4 text-slate-400" />
+                            <Car className="h-4 w-4 text-muted-foreground" />
                             <span>{vehicle.transmission}</span>
                           </div>
                           <div className="flex items-center gap-2 font-secondary">
-                            <MapPin className="h-4 w-4 text-slate-400" />
+                            <MapPin className="h-4 w-4 text-muted-foreground" />
                             <span>{vehicle.location}</span>
                           </div>
                         </div>
 
                         <div className="flex items-center gap-4">
                           {getRatingStars(vehicle.rating)}
-                          <span className="font-secondary text-slate-600">
+                          <span className="font-secondary text-muted-foreground">
                             {vehicle.totalReviews} reviews
                           </span>
                         </div>
@@ -635,7 +635,7 @@ export function VehicleCatalog({
                           <p className="font-primary text-3xl font-bold text-primary">
                             ₦{vehicle.dailyRate.toLocaleString()}
                           </p>
-                          <p className="font-secondary text-sm text-slate-500">per day</p>
+                          <p className="font-secondary text-sm text-muted-foreground">per day</p>
                         </div>
 
                         <div className="flex gap-2">

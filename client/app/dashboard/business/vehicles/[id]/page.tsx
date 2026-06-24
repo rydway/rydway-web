@@ -32,7 +32,7 @@ export default function BusinessVehicleDetailsPage({ params }: { params: Promise
     return (
       <div className="flex flex-col items-center justify-center h-96">
         <Loader2 className="animate-spin h-12 w-12 text-blue-600" />
-        <p className="text-slate-600 mt-4 font-secondary">Loading vehicle details...</p>
+        <p className="text-muted-foreground mt-4 font-secondary">Loading vehicle details...</p>
       </div>
     );
   }
@@ -40,9 +40,9 @@ export default function BusinessVehicleDetailsPage({ params }: { params: Promise
   if (!vehicle) {
     return (
       <div className="flex flex-col items-center justify-center h-96 font-primary">
-        <h2 className="text-2xl font-bold text-slate-800">Vehicle Not Found</h2>
-        <p className="text-slate-600 mt-2 font-secondary">The vehicle you're looking for doesn't exist.</p>
-        <p className="text-slate-500 text-sm mt-1 font-secondary">Vehicle ID: {vehicleId ?? "unknown"}</p>
+        <h2 className="text-2xl font-bold text-foreground">Vehicle Not Found</h2>
+        <p className="text-muted-foreground mt-2 font-secondary">The vehicle you're looking for doesn't exist.</p>
+        <p className="text-muted-foreground text-sm mt-1 font-secondary">Vehicle ID: {vehicleId ?? "unknown"}</p>
         <button 
           onClick={() => router.push("/dashboard/business/vehicles")}
           className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-primary"

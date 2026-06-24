@@ -49,7 +49,7 @@ export default function PriceBreakdown({ dailyRate, startDate, endDate, deposit,
           <span className="text-primary">{formatPrice(total)}</span>
         </div>
         
-        <div className="flex justify-between text-sm text-slate-600">
+        <div className="flex justify-between text-sm text-muted-foreground">
           <span>Security Deposit (refundable)</span>
           <span className="font-semibold">{formatPrice(deposit)}</span>
         </div>

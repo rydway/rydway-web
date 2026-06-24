@@ -19,7 +19,7 @@ export default function RequestInbox({ requests, onAccept, onReject }: RequestIn
     <div className="space-y-4">
       {requests.length === 0 ? (
         <Card className="glassmorphism-card p-12 text-center">
-          <p className="text-slate-600 font-secondary">No pending requests</p>
+          <p className="text-muted-foreground font-secondary">No pending requests</p>
         </Card>
       ) : (
         requests.map((request) => (
@@ -30,7 +30,7 @@ export default function RequestInbox({ requests, onAccept, onReject }: RequestIn
                 <h3 className="text-lg font-bold font-primary mt-2">
                   Booking Request #{request.id}
                 </h3>
-                <p className="text-sm text-slate-600 font-secondary">
+                <p className="text-sm text-muted-foreground font-secondary">
                   Vehicle ID: {request.vehicleId}
                 </p>
               </div>
@@ -38,13 +38,13 @@ export default function RequestInbox({ requests, onAccept, onReject }: RequestIn
                 <p className="text-2xl font-bold text-primary font-primary">
                   {formatPrice(request.totalAmount)}
                 </p>
-                <p className="text-xs text-slate-500 font-secondary">
+                <p className="text-xs text-muted-foreground font-secondary">
                   {request.daysCount} days
                 </p>
               </div>
             </div>
 
-            <div className="flex items-center gap-2 text-sm text-slate-600 font-secondary mb-4">
+            <div className="flex items-center gap-2 text-sm text-muted-foreground font-secondary mb-4">
               <Calendar className="h-4 w-4" />
               <span>
                 {formatDate(request.startDate)} - {formatDate(request.endDate)}
@@ -63,7 +63,7 @@ export default function RequestInbox({ requests, onAccept, onReject }: RequestIn
                 <Button
                   onClick={() => onReject?.(request.id)}
                   variant="outline"
-                  className="flex-1 rounded-xl border-red-500 text-red-600 hover:bg-red-50"
+                  className="flex-1 rounded-xl border-red-500 text-red-600 hover:bg-destructive/10"
                 >
                   <X className="h-4 w-4 mr-2" />
                   Reject

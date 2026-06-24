@@ -85,14 +85,14 @@ export default function HelpPage() {
       {/* Header */}
       <div className="space-y-2 text-center max-w-3xl mx-auto">
         <div className="flex justify-center mb-4">
-          <div className="h-16 w-16 bg-primary/10 rounded-full flex items-center justify-center">
+          <div className="h-16 w-16 bg-primary/10 rounded-full flex items-center justify-center text-primary-foreground">
             <LifeBuoy className="h-8 w-8 text-primary" />
           </div>
         </div>
-        <h1 className="text-3xl font-bold tracking-tight text-slate-900 font-primary">
+        <h1 className="text-3xl font-bold tracking-tight text-foreground font-primary">
           How can we help you?
         </h1>
-        <p className="text-sm text-slate-500 font-secondary">
+        <p className="text-sm text-muted-foreground font-secondary">
           Search our help center, browse FAQs, or get in touch with our support team
         </p>
       </div>
@@ -113,7 +113,7 @@ export default function HelpPage() {
         {/* ============ FAQ TAB ============ */}
         <TabsContent value="faq" className="space-y-6">
           {searchQuery && (
-            <div className="text-sm text-slate-600 mb-4">
+            <div className="text-sm text-muted-foreground mb-4">
               Found {filteredCategories.reduce((acc, cat) => acc + cat.questions.length, 0)} results for "{searchQuery}"
             </div>
           )}
@@ -128,8 +128,8 @@ export default function HelpPage() {
             <Card className="shadow-sm py-0">
               <CardContent className="p-12 text-center">
                 <Search className="h-12 w-12 text-slate-300 mx-auto mb-4" />
-                <h3 className="text-lg font-semibold text-slate-800 mb-2">No results found</h3>
-                <p className="text-sm text-slate-500 mb-6">
+                <h3 className="text-lg font-semibold text-foreground mb-2">No results found</h3>
+                <p className="text-sm text-muted-foreground mb-6">
                   We couldn't find any articles matching "{searchQuery}"
                 </p>
                 <Button 
@@ -148,13 +148,13 @@ export default function HelpPage() {
         <TabsContent value="tickets" className="space-y-6">
           <div className="flex items-center justify-between">
             <div>
-              <h2 className="text-lg font-semibold text-slate-800">Your Support Tickets</h2>
-              <p className="text-sm text-slate-500 mt-1">
+              <h2 className="text-lg font-semibold text-foreground">Your Support Tickets</h2>
+              <p className="text-sm text-muted-foreground mt-1">
                 Track and manage your support requests
               </p>
             </div>
             <Button 
-              className="bg-primary hover:bg-primary/90"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground"
               onClick={() => setShowCreateTicket(true)}
             >
               <Plus className="h-4 w-4 mr-2" />
@@ -162,7 +162,7 @@ export default function HelpPage() {
             </Button>
           </div>
 
-          <Card className="border-slate-200 shadow-sm">
+          <Card className="border-border shadow-sm">
             <CardContent className="p-6">
               {isTicketsLoading ? (
                 <div className="flex justify-center items-center py-12">
@@ -187,39 +187,39 @@ export default function HelpPage() {
             {/* Contact Options - Stacked */}
             <div className="lg:col-span-2 space-y-6">
               <div>
-                <h2 className="text-lg font-semibold text-slate-800 mb-4">Get in Touch</h2>
+                <h2 className="text-lg font-semibold text-foreground mb-4">Get in Touch</h2>
                 
-                <Card className="border-slate-200 shadow-sm overflow-hidden">
+                <Card className="border-border shadow-sm overflow-hidden">
                   {/* Live Chat */}
-                  <div className="flex items-center justify-between p-5 hover:bg-slate-50 transition-colors border-b border-slate-200 last:border-0">
+                  <div className="flex items-center justify-between p-5 hover:bg-muted/50 transition-colors border-b border-border last:border-0">
                     <div className="flex items-center gap-4">
-                      <div className="h-10 w-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <div className="h-10 w-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0 text-primary-foreground">
                         <MessageCircle className="h-5 w-5 text-primary" />
                       </div>
                       <div>
-                        <h3 className="text-sm font-semibold text-slate-800">Live Chat</h3>
-                        <p className="text-xs text-slate-500 mt-0.5">Chat with our support team in real-time</p>
-                        <Badge className="mt-2 bg-green-50 text-green-700 border-green-200 text-[10px] px-1.5 py-0.5">
+                        <h3 className="text-sm font-semibold text-foreground">Live Chat</h3>
+                        <p className="text-xs text-muted-foreground mt-0.5">Chat with our support team in real-time</p>
+                        <Badge className="mt-2 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20 text-[10px] px-1.5 py-0.5">
                           Available 24/7
                         </Badge>
                       </div>
                     </div>
-                    <Button className="bg-primary hover:bg-primary/90 ml-4 flex-shrink-0">
+                    <Button className="bg-primary hover:bg-primary/90 ml-4 flex-shrink-0 text-primary-foreground">
                       Start Chat
                       <MessageCircle className="h-4 w-4 ml-2" />
                     </Button>
                   </div>
 
                   {/* Phone Support */}
-                  <div className="flex items-center justify-between p-5 hover:bg-slate-50 transition-colors border-b border-slate-200 last:border-0">
+                  <div className="flex items-center justify-between p-5 hover:bg-muted/50 transition-colors border-b border-border last:border-0">
                     <div className="flex items-center gap-4">
-                      <div className="h-10 w-10 bg-amber-50 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <div className="h-10 w-10 bg-amber-500/10 rounded-lg flex items-center justify-center flex-shrink-0">
                         <Phone className="h-5 w-5 text-amber-600" />
                       </div>
                       <div>
-                        <h3 className="text-sm font-semibold text-slate-800">Phone Support</h3>
-                        <p className="text-xs text-slate-500 mt-0.5">Speak directly with a support agent</p>
-                        <p className="text-sm font-semibold text-slate-800 mt-1.5">+234 800 123 4567</p>
+                        <h3 className="text-sm font-semibold text-foreground">Phone Support</h3>
+                        <p className="text-xs text-muted-foreground mt-0.5">Speak directly with a support agent</p>
+                        <p className="text-sm font-semibold text-foreground mt-1.5">+234 800 123 4567</p>
                       </div>
                     </div>
                     <Button variant="outline" className="ml-4 flex-shrink-0">
@@ -229,15 +229,15 @@ export default function HelpPage() {
                   </div>
 
                   {/* Email Support */}
-                  <div className="flex items-center justify-between p-5 hover:bg-slate-50 transition-colors">
+                  <div className="flex items-center justify-between p-5 hover:bg-muted/50 transition-colors">
                     <div className="flex items-center gap-4">
                       <div className="h-10 w-10 bg-purple-50 rounded-lg flex items-center justify-center flex-shrink-0">
                         <Mail className="h-5 w-5 text-purple-600" />
                       </div>
                       <div>
-                        <h3 className="text-sm font-semibold text-slate-800">Email Support</h3>
-                        <p className="text-xs text-slate-500 mt-0.5">Get a response within 24 hours</p>
-                        <p className="text-xs font-medium text-slate-800 mt-1.5 font-mono">support@rydway.com</p>
+                        <h3 className="text-sm font-semibold text-foreground">Email Support</h3>
+                        <p className="text-xs text-muted-foreground mt-0.5">Get a response within 24 hours</p>
+                        <p className="text-xs font-medium text-foreground mt-1.5 font-mono">support@rydway.com</p>
                       </div>
                     </div>
                     <Button variant="outline" className="ml-4 flex-shrink-0">
@@ -249,12 +249,12 @@ export default function HelpPage() {
               </div>
 
               {/* Contact Form */}
-              <Card className="border-slate-200 shadow-sm">
+              <Card className="border-border shadow-sm">
                 <CardHeader>
-                  <CardTitle className="text-base font-semibold text-slate-800">
+                  <CardTitle className="text-base font-semibold text-foreground">
                     Send us a Message
                   </CardTitle>
-                  <CardDescription className="text-sm text-slate-500">
+                  <CardDescription className="text-sm text-muted-foreground">
                     Fill out the form below and we'll respond within 24 hours
                   </CardDescription>
                 </CardHeader>
@@ -285,7 +285,7 @@ export default function HelpPage() {
                       />
                     </div>
 
-                    <Button className="w-full bg-primary hover:bg-primary/90">
+                    <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
                       <Send className="h-4 w-4 mr-2" />
                       Send Message
                     </Button>
@@ -298,16 +298,16 @@ export default function HelpPage() {
             <div className="space-y-6">
               <SupportTeam />
               
-              <Card className="border-slate-200 shadow-sm">
+              <Card className="border-border shadow-sm">
                 <CardContent className="p-6">
                   <div className="space-y-4">
                     <div className="flex items-start gap-3">
-                      <div className="p-2 bg-primary/10 rounded-lg">
+                      <div className="p-2 bg-primary/10 rounded-lg text-primary-foreground">
                         <MapPin className="h-5 w-5 text-primary" />
                       </div>
                       <div>
-                        <h4 className="text-sm font-medium text-slate-800">Visit Us</h4>
-                        <p className="text-xs text-slate-500 mt-1">
+                        <h4 className="text-sm font-medium text-foreground">Visit Us</h4>
+                        <p className="text-xs text-muted-foreground mt-1">
                           123 Victoria Island<br />
                           Lagos, Nigeria
                         </p>
@@ -317,12 +317,12 @@ export default function HelpPage() {
                     <Separator />
                     
                     <div className="flex items-start gap-3">
-                      <div className="p-2 bg-primary/10 rounded-lg">
+                      <div className="p-2 bg-primary/10 rounded-lg text-primary-foreground">
                         <Clock className="h-5 w-5 text-primary" />
                       </div>
                       <div>
-                        <h4 className="text-sm font-medium text-slate-800">Support Hours</h4>
-                        <p className="text-xs text-slate-500 mt-1">
+                        <h4 className="text-sm font-medium text-foreground">Support Hours</h4>
+                        <p className="text-xs text-muted-foreground mt-1">
                           24/7 - Always open<br />
                           Emergency support available
                         </p>

@@ -33,7 +33,7 @@ export default function NotificationBell({
           <Bell className="h-5 w-5" />
           {unreadCount > 0 && (
             <Badge 
-              className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 text-xs bg-red-500"
+              className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 text-xs bg-destructive/100"
             >
               {unreadCount > 9 ? '9+' : unreadCount}
             </Badge>
@@ -58,14 +58,14 @@ export default function NotificationBell({
         
         <div className="max-h-96 overflow-y-auto">
           {notifications.length === 0 ? (
-            <div className="p-8 text-center text-sm text-slate-500 font-secondary">
+            <div className="p-8 text-center text-sm text-muted-foreground font-secondary">
               No notifications
             </div>
           ) : (
             notifications.map((notification) => (
               <DropdownMenuItem
                 key={notification.id}
-                className={`p-4 cursor-pointer ${!notification.read ? 'bg-blue-50/50' : ''}`}
+                className={`p-4 cursor-pointer ${!notification.read ? 'bg-blue-500/10/50' : ''}`}
                 onClick={() => onMarkAsRead?.(notification.id)}
               >
                 <div className="flex gap-3 w-full">
@@ -73,16 +73,16 @@ export default function NotificationBell({
                     <p className="text-sm font-semibold font-primary mb-1">
                       {notification.title}
                     </p>
-                    <p className="text-xs text-slate-600 font-secondary">
+                    <p className="text-xs text-muted-foreground font-secondary">
                       {notification.message}
                     </p>
-                    <p className="text-xs text-slate-400 mt-1 font-secondary">
+                    <p className="text-xs text-muted-foreground mt-1 font-secondary">
                       {formatTimeAgo(notification.createdAt)}
                     </p>
                   </div>
                   {!notification.read && (
                     <div className="flex-shrink-0">
-                      <div className="h-2 w-2 rounded-full bg-primary" />
+                      <div className="h-2 w-2 rounded-full bg-primary text-primary-foreground" />
                     </div>
                   )}
                 </div>

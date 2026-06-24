@@ -20,7 +20,7 @@ export default function BookingCard({ booking, onViewDetails, showActions = true
       <CardContent className="p-6">
         <div className="flex items-start justify-between mb-4">
           <div>
-            <p className="text-xs text-slate-500 font-secondary mb-1">Booking ID: {booking.id}</p>
+            <p className="text-xs text-muted-foreground font-secondary mb-1">Booking ID: {booking.id}</p>
             <h3 className="text-lg font-bold font-primary">Vehicle Rental</h3>
           </div>
           <StatusBadge status={booking.status} />
@@ -28,23 +28,23 @@ export default function BookingCard({ booking, onViewDetails, showActions = true
 
         <div className="space-y-3 mb-4">
           <div className="flex items-center gap-2 text-sm font-secondary">
-            <Calendar className="h-4 w-4 text-slate-400" />
+            <Calendar className="h-4 w-4 text-muted-foreground" />
             <span>{formatDate(booking.startDate)} - {formatDate(booking.endDate)}</span>
-            <span className="text-slate-500">({booking.daysCount} days)</span>
+            <span className="text-muted-foreground">({booking.daysCount} days)</span>
           </div>
           <div className="flex items-center gap-2 text-sm font-secondary">
-            <MapPin className="h-4 w-4 text-slate-400" />
+            <MapPin className="h-4 w-4 text-muted-foreground" />
             <span>{booking.pickupLocation}</span>
           </div>
           <div className="flex items-center gap-2 text-sm font-secondary">
-            <Car className="h-4 w-4 text-slate-400" />
+            <Car className="h-4 w-4 text-muted-foreground" />
             <span>Vehicle ID: {booking.vehicleId}</span>
           </div>
         </div>
 
         <div className="flex items-center justify-between pt-4 border-t border-slate-100">
           <div>
-            <p className="text-xs text-slate-500 font-secondary">Total Amount</p>
+            <p className="text-xs text-muted-foreground font-secondary">Total Amount</p>
             <p className="text-xl font-bold text-primary font-primary">{formatPrice(booking.totalAmount)}</p>
           </div>
           {showActions && onViewDetails && (

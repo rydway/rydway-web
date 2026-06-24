@@ -255,7 +255,7 @@ export class AuthService {
    */
   async getOAuthUrl(provider: 'google' | 'facebook'): Promise<string> {
     const supabase = this.getSupabaseClient();
-    const redirectTo = `${this.configService.get<string>('CLIENT_URL') || 'http://localhost:3000'}/auth/callback`;
+    const redirectTo = `${this.configService.get<string>('FRONTEND_URL') || 'http://localhost:3001'}/auth/callback`;
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider,
       options: { redirectTo, skipBrowserRedirect: true },

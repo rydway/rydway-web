@@ -40,7 +40,7 @@ async function bootstrap() {
     swagger_1.SwaggerModule.setup('docs', app, document);
     const frontendUrl = configService.get('FRONTEND_URL') || 'http://localhost:3001';
     app.enableCors({
-        origin: [frontendUrl],
+        origin: [frontendUrl, 'http://localhost:3000', 'http://localhost:3001'],
         methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
         allowedHeaders: ['Content-Type', 'Authorization', 'x-idempotency-key'],
         credentials: true,

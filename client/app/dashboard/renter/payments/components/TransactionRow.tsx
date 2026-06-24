@@ -19,15 +19,15 @@ export function TransactionRow({
   const getStatusBadge = (status: Payment['status']) => {
     switch (status) {
       case 'completed':
-        return <Badge variant="green" className="bg-green-50 text-green-700 border-green-200">Completed</Badge>;
+        return <Badge variant="green" className="bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20">Completed</Badge>;
       case 'pending':
-        return <Badge variant="amber" className="bg-amber-50 text-amber-700 border-amber-200">Pending</Badge>;
+        return <Badge variant="amber" className="bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20">Pending</Badge>;
       case 'processing':
-        return <Badge variant="blue" className="bg-blue-50 text-blue-700 border-blue-200">Processing</Badge>;
+        return <Badge variant="blue" className="bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20">Processing</Badge>;
       case 'failed':
-        return <Badge variant="red" className="bg-red-50 text-red-700 border-red-200">Failed</Badge>;
+        return <Badge variant="red" className="bg-destructive/10 text-destructive dark:text-red-400 border-destructive/20">Failed</Badge>;
       case 'refunded':
-        return <Badge variant="slate" className="bg-slate-50 text-slate-700 border-slate-200">Refunded</Badge>;
+        return <Badge variant="slate" className="bg-muted/50 text-foreground border-border">Refunded</Badge>;
     }
   };
 
@@ -42,19 +42,19 @@ export function TransactionRow({
   };
 
   return (
-    <TableRow className="hover:bg-slate-50 cursor-pointer font-secondary" onClick={() => onViewDetails(payment)}>
+    <TableRow className="hover:bg-muted/50 cursor-pointer font-secondary" onClick={() => onViewDetails(payment)}>
       <TableCell>
         <div className="flex items-center gap-3">
-          <div className="p-2 bg-white rounded-lg border border-slate-200 flex-shrink-0">
+          <div className="p-2 bg-white rounded-lg border border-border flex-shrink-0">
             {getTypeIcon(payment.type)}
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-sm font-medium text-slate-800">
+              <span className="text-sm font-medium text-foreground">
                 {payment.vehicleName || payment.description}
               </span>
             </div>
-            <p className="text-xs text-slate-500 mt-0.5 font-mono">
+            <p className="text-xs text-muted-foreground mt-0.5 font-mono">
               {payment.transactionId}
             </p>
           </div>
@@ -62,25 +62,25 @@ export function TransactionRow({
       </TableCell>
       <TableCell>
         <div className="space-y-1">
-          <p className="text-sm text-slate-800">
+          <p className="text-sm text-foreground">
             {format(new Date(payment.date), 'MMM d, yyyy')}
           </p>
-          <p className="text-xs text-slate-500">
+          <p className="text-xs text-muted-foreground">
             {format(new Date(payment.date), 'h:mm a')}
           </p>
         </div>
       </TableCell>
       <TableCell>
         <div className="flex items-center gap-2">
-          {payment.method === 'card' && <CreditCard className="h-3.5 w-3.5 text-slate-400" />}
-          {payment.method === 'bank_transfer' && <Landmark className="h-3.5 w-3.5 text-slate-400" />}
-          <span className="text-sm text-slate-600 capitalize">
+          {payment.method === 'card' && <CreditCard className="h-3.5 w-3.5 text-muted-foreground" />}
+          {payment.method === 'bank_transfer' && <Landmark className="h-3.5 w-3.5 text-muted-foreground" />}
+          <span className="text-sm text-muted-foreground capitalize">
             {payment.method.replace('_', ' ')}
           </span>
         </div>
       </TableCell>
       <TableCell>
-        <span className="text-sm font-semibold text-slate-800">
+        <span className="text-sm font-semibold text-foreground">
           ₦{payment.amount.toLocaleString()}
         </span>
       </TableCell>

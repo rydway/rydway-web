@@ -66,7 +66,7 @@ export function BusinessActions({
         <>
           <Button 
             variant="outline" 
-            className="w-full text-red-600 hover:text-red-700 hover:bg-red-50 border-red-200"
+            className="w-full text-red-600 hover:text-destructive dark:text-red-400 hover:bg-destructive/10 border-destructive/20"
             onClick={() => setShowDeleteDialog(true)}
           >
             <Trash2 className="h-4 w-4 mr-2" />

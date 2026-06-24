@@ -85,11 +85,11 @@ export default function OtpForm({ email, onVerify, onResend }: OtpFormProps) {
   return (
     <div>
       <div className="mb-8 text-center">
-        <h2 className="text-3xl font-bold text-slate-900 mb-2">Verify Your Email</h2>
-        <p className="text-slate-600">
+        <h2 className="text-3xl font-bold text-foreground mb-2">Verify Your Email</h2>
+        <p className="text-muted-foreground">
           We sent a code to <span className="font-semibold">{email}</span>
         </p>
-        <p className="text-sm text-slate-500 mt-1">Enter the 6-digit code below</p>
+        <p className="text-sm text-muted-foreground mt-1">Enter the 6-digit code below</p>
       </div>
 
       <div className="mb-8">
@@ -105,7 +105,7 @@ export default function OtpForm({ email, onVerify, onResend }: OtpFormProps) {
               onChange={(e) => handleChange(e.target.value, index)}
               onKeyDown={(e) => handleKeyDown(e, index)}
               onPaste={handlePaste}
-              className="w-14 h-14 text-center text-2xl font-bold rounded-lg border-2 border-slate-300 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+              className="w-14 h-14 text-center text-2xl font-bold rounded-lg border-2 border-input focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
               disabled={loading}
             />
           ))}
@@ -132,21 +132,21 @@ export default function OtpForm({ email, onVerify, onResend }: OtpFormProps) {
       </div>
 
       <div className="text-center">
-        <p className="text-sm text-slate-600 mb-4">
+        <p className="text-sm text-muted-foreground mb-4">
           Didn't receive the code?{" "}
           <button
             onClick={handleResend}
             disabled={resendTimer > 0}
             className={`font-semibold ${
               resendTimer > 0
-                ? "text-slate-400 cursor-not-allowed"
+                ? "text-muted-foreground cursor-not-allowed"
                 : "text-primary hover:underline"
             }`}
           >
             Resend {resendTimer > 0 && `(${resendTimer}s)`}
           </button>
         </p>
-        <p className="text-xs text-slate-500">
+        <p className="text-xs text-muted-foreground">
           Check your spam folder if you don't see the email
         </p>
       </div>

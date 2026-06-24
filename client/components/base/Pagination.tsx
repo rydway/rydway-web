@@ -44,9 +44,9 @@ export function CustomPagination({
   return (
     <div className={cn("flex flex-col sm:flex-row items-center justify-between gap-4", className)}>
       {/* Items info */}
-      <div className="text-sm text-slate-600 dark:text-slate-400 font-secondary">
-        Showing <span className="font-semibold text-slate-800 dark:text-white font-primary">{startItem}-{endItem}</span> of{" "}
-        <span className="font-semibold text-slate-800 dark:text-white font-primary">{totalItems}</span> bookings
+      <div className="text-sm text-muted-foreground dark:text-muted-foreground font-secondary">
+        Showing <span className="font-semibold text-foreground dark:text-white font-primary">{startItem}-{endItem}</span> of{" "}
+        <span className="font-semibold text-foreground dark:text-white font-primary">{totalItems}</span> bookings
       </div>
 
       {/* Pagination controls */}
@@ -57,8 +57,8 @@ export function CustomPagination({
           onClick={() => onPageChange(currentPage - 1)}
           disabled={currentPage === 1}
           className={cn(
-            "h-8 w-8 p-0 border-slate-300 dark:border-slate-700 hover:border-primary/50 hover:bg-primary/5 dark:hover:border-primary/50 dark:hover:bg-primary/10",
-            "text-slate-700 dark:text-slate-300 hover:text-primary dark:hover:text-primary",
+            "h-8 w-8 p-0 border-input dark:border-slate-700 hover:border-primary/50 hover:bg-primary/5 dark:hover:border-primary/50 dark:hover:bg-primary/10",
+            "text-foreground dark:text-slate-300 hover:text-primary dark:hover:text-primary",
             "font-primary transition-colors duration-200"
           )}
         >
@@ -69,7 +69,7 @@ export function CustomPagination({
           page === '...' ? (
             <span 
               key={`ellipsis-${index}`} 
-              className="px-2 text-slate-400 font-secondary"
+              className="px-2 text-muted-foreground font-secondary"
             >
               ...
             </span>
@@ -83,7 +83,7 @@ export function CustomPagination({
                 "h-8 w-8 p-0 text-sm font-primary transition-colors duration-200",
                 currentPage === page 
                   ? "bg-primary hover:bg-primary/90 text-primary-foreground border-primary shadow-sm" 
-                  : "border-slate-300 dark:border-slate-700 hover:border-primary/50 hover:bg-primary/5 dark:hover:border-primary/50 dark:hover:bg-primary/10 text-slate-700 dark:text-slate-300 hover:text-primary dark:hover:text-primary"
+                  : "border-input dark:border-slate-700 hover:border-primary/50 hover:bg-primary/5 dark:hover:border-primary/50 dark:hover:bg-primary/10 text-foreground dark:text-slate-300 hover:text-primary dark:hover:text-primary"
               )}
             >
               {page}
@@ -97,8 +97,8 @@ export function CustomPagination({
           onClick={() => onPageChange(currentPage + 1)}
           disabled={currentPage === totalPages}
           className={cn(
-            "h-8 w-8 p-0 border-slate-300 dark:border-slate-700 hover:border-primary/50 hover:bg-primary/5 dark:hover:border-primary/50 dark:hover:bg-primary/10",
-            "text-slate-700 dark:text-slate-300 hover:text-primary dark:hover:text-primary",
+            "h-8 w-8 p-0 border-input dark:border-slate-700 hover:border-primary/50 hover:bg-primary/5 dark:hover:border-primary/50 dark:hover:bg-primary/10",
+            "text-foreground dark:text-slate-300 hover:text-primary dark:hover:text-primary",
             "font-primary transition-colors duration-200"
           )}
         >

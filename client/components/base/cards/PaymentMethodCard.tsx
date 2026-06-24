@@ -44,22 +44,22 @@ export function PaymentMethodCard({
       case 'verve':
         return <CreditCard className="h-5 w-5 text-green-600" />;
       case 'bank':
-        return <Landmark className="h-5 w-5 text-slate-600" />;
+        return <Landmark className="h-5 w-5 text-muted-foreground" />;
       case 'wallet':
         return <Wallet className="h-5 w-5 text-purple-600" />;
       default:
-        return <CreditCard className="h-5 w-5 text-slate-400" />;
+        return <CreditCard className="h-5 w-5 text-muted-foreground" />;
     }
   };
 
   const getCardBrandColor = () => {
     switch (method.type) {
-      case 'visa': return 'bg-blue-50/50 border-blue-200';
+      case 'visa': return 'bg-blue-500/10/50 border-blue-500/20';
       case 'mastercard': return 'bg-orange-50/50 border-orange-200';
-      case 'verve': return 'bg-green-50/50 border-green-200';
-      case 'bank': return 'bg-slate-50 border-slate-200';
+      case 'verve': return 'bg-emerald-500/10/50 border-emerald-500/20';
+      case 'bank': return 'bg-muted/50 border-border';
       case 'wallet': return 'bg-purple-50/50 border-purple-200';
-      default: return 'bg-slate-50 border-slate-200';
+      default: return 'bg-muted/50 border-border';
     }
   };
 
@@ -69,43 +69,43 @@ export function PaymentMethodCard({
     }`}>
       <div className="flex items-start justify-between">
         <div className="flex items-center gap-3">
-          <div className="p-2 bg-white rounded-lg border border-slate-200">
+          <div className="p-2 bg-white rounded-lg border border-border">
             {getCardIcon()}
           </div>
           <div>
             <div className="flex items-center gap-2">
               {method.type === 'bank' ? (
                 <>
-                  <span className="text-sm font-medium text-slate-800">
+                  <span className="text-sm font-medium text-foreground">
                     {method.bankName}
                   </span>
-                  <span className="text-xs text-slate-500">
+                  <span className="text-xs text-muted-foreground">
                     •••• {method.accountNumber?.slice(-4)}
                   </span>
                 </>
               ) : (
                 <>
-                  <span className="text-sm font-medium text-slate-800">
+                  <span className="text-sm font-medium text-foreground">
                     {method.brand || method.type.toUpperCase()}
                   </span>
-                  <span className="text-xs text-slate-500">
+                  <span className="text-xs text-muted-foreground">
                     •••• {method.last4}
                   </span>
                 </>
               )}
               {method.isDefault && (
-                <Badge variant="blue" className="text-[10px] px-1.5 py-0 h-4 bg-blue-100 text-blue-700 border-blue-200">
+                <Badge variant="blue" className="text-[10px] px-1.5 py-0 h-4 bg-blue-100 text-blue-600 dark:text-blue-400 border-blue-500/20">
                   Default
                 </Badge>
               )}
             </div>
             {method.type !== 'bank' && method.expiryMonth && method.expiryYear && (
-              <p className="text-xs text-slate-500 mt-1">
+              <p className="text-xs text-muted-foreground mt-1">
                 Expires {method.expiryMonth}/{method.expiryYear}
               </p>
             )}
             {method.type === 'bank' && method.accountName && (
-              <p className="text-xs text-slate-500 mt-1">
+              <p className="text-xs text-muted-foreground mt-1">
                 {method.accountName}
               </p>
             )}
