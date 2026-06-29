@@ -38,9 +38,12 @@ async function bootstrap() {
         .build();
     const document = swagger_1.SwaggerModule.createDocument(app, config);
     swagger_1.SwaggerModule.setup('docs', app, document);
-    const frontendUrl = configService.get('FRONTEND_URL') || 'http://localhost:3001';
+    const frontendUrl = configService.get('FRONTEND_URL');
+    const allowedOrigins = frontendUrl
+        ? frontendUrl.split(',').map((url) => url.trim())
+        : ['http://localhost:3000'];
     app.enableCors({
-        origin: [frontendUrl, 'http://localhost:3000', 'http://localhost:3001'],
+        origin: allowedOrigins,
         methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
         allowedHeaders: ['Content-Type', 'Authorization', 'x-idempotency-key'],
         credentials: true,

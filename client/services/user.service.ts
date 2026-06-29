@@ -22,7 +22,7 @@ export const userService = {
     return api.get<User>(`/users/${id}`);
   },
 
-  async getVendors(): Promise<any[]> {
-    return api.get<any[]>('/users/vendors');
+  async getVendors(page: number = 1, limit: number = 12): Promise<{ data: any[], meta: any }> {
+    return api.get<{ data: any[], meta: any }>(`/users/vendors?page=${page}&limit=${limit}`);
   },
 };

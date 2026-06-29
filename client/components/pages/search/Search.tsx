@@ -67,7 +67,7 @@ export default function SearchBar({ onSearch, className }: SearchBarProps) {
             Location
           </label>
           <Select value={location} onValueChange={setLocation}>
-            <SelectTrigger className="w-full h-10 sm:h-11 border-0 p-0 shadow-none focus:ring-0 text-sm sm:text-base bg-transparent backdrop-blur-sm font-secondary">
+            <SelectTrigger className="w-full h-10 sm:h-11 border-0 pl-2 pr-8 shadow-none focus:ring-0 text-sm sm:text-base bg-transparent backdrop-blur-sm font-secondary">
               <div className="flex items-center gap-2">
                 <MapPin className="h-4 w-4 text-muted-foreground" />
                 <SelectValue placeholder="Where are you going?" />
@@ -101,7 +101,7 @@ export default function SearchBar({ onSearch, className }: SearchBarProps) {
               <Button
                 variant="outline"
                 className={cn(
-                  "w-full h-10 sm:h-11 justify-start text-left font-normal border-0 shadow-none p-0 hover:bg-white/20 dark:hover:bg-black/30 bg-white/10 dark:bg-black/20 backdrop-blur-sm text-foreground text-sm sm:text-base font-secondary",
+                  "w-full h-10 sm:h-11 justify-start text-left font-normal border-0 shadow-none px-2 hover:bg-white/20 dark:hover:bg-black/30 bg-white/10 dark:bg-black/20 backdrop-blur-sm text-foreground text-sm sm:text-base font-secondary",
                   !dateRange.from && "text-muted-foreground"
                 )}
               >
@@ -147,7 +147,7 @@ export default function SearchBar({ onSearch, className }: SearchBarProps) {
             Car Type
           </label>
           <Select value={carType} onValueChange={setCarType}>
-            <SelectTrigger className="w-full h-10 sm:h-11 border-0 p-0 shadow-none focus:ring-0 text-sm sm:text-base bg-transparent backdrop-blur-sm font-secondary">
+            <SelectTrigger className="w-full h-10 sm:h-11 border-0 pl-2 pr-8 shadow-none focus:ring-0 text-sm sm:text-base bg-transparent backdrop-blur-sm font-secondary">
               <SelectValue placeholder="Choose car type" />
             </SelectTrigger>
             <SelectContent className="glassmorphism-dropdown backdrop-blur-xl border-border dark:border-white/10">

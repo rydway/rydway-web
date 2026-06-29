@@ -1,4 +1,4 @@
-import { Controller, Get, Patch, Delete, Body, Param, UseGuards, BadRequestException } from '@nestjs/common';
+import { Controller, Get, Patch, Delete, Body, Param, UseGuards, BadRequestException, Query } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiBearerAuth } from '@nestjs/swagger';
 import { UsersService } from './users.service';
 import { UpdateUserDto, UpdatePasswordDto } from './dto/users.dto';
@@ -67,12 +67,15 @@ export class UsersController {
   }
 
   @Get('vendors')
-  @ApiOperation({ summary: 'Get all verified vendors (hosts)' })
-  async getVendors() {
-    const data = await this.usersService.getVendors();
+  @ApiOperation({ summary: 'Get all vendors (hosts)' })
+  async getVendors(
+    @Query('page') page: string = '1',
+    @Query('limit') limit: string = '12'
+  ) {
+    const result = await this.usersService.getVendors(Number(page), Number(limit));
     return {
       message: 'Vendors fetched successfully',
-      data,
+      data: result,
     };
   }
 

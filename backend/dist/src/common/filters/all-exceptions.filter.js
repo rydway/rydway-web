@@ -38,7 +38,8 @@ let AllExceptionsFilter = class AllExceptionsFilter {
             }
         }
         else if (exception instanceof Error) {
-            message = exception.message;
+            console.error('Unhandled Exception:', exception);
+            message = 'An unexpected error occurred. Please try again later.';
         }
         response.status(status).json({
             success: false,

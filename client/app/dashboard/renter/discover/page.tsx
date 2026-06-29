@@ -28,7 +28,8 @@ export default function SearchWithNavbar() {
   const router = useRouter();
 
   const { vehicles, isLoading: isLoadingVehicles } = useVehicles();
-  const { vendors, isLoading: isLoadingVendors } = useVendors();
+  const [vendorPage, setVendorPage] = useState(1);
+  const { vendors, meta: vendorMeta, isLoading: isLoadingVendors } = useVendors(vendorPage, 12);
 
   const handleSearch = (filters: SearchFilters) => {
     const query = (filters.query ?? "").toLowerCase();
@@ -209,7 +210,7 @@ export default function SearchWithNavbar() {
         <>
           <div>
             <p className="text-sm text-muted-foreground font-secondary">
-              Showing <span className="font-bold text-primary font-primary">{filteredVendors.length}</span> verified businesses
+              Showing <span className="font-bold text-primary font-primary">{searchQuery ? filteredVendors.length : (vendorMeta?.total || filteredVendors.length)}</span> businesses
             </p>
           </div>
 
@@ -218,14 +219,15 @@ export default function SearchWithNavbar() {
               <Loader2 className="h-8 w-8 animate-spin text-primary" />
             </div>
           ) : filteredVendors.length > 0 ? (
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            <>
+              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {filteredVendors.map((vendor: any) => {
                 const businessName = vendor.hostProfile?.businessName || `${vendor.firstName} ${vendor.lastName}`;
                 const rating = vendor.hostProfile?.avgRating || 5.0;
                 const reviews = vendor.hostProfile?.totalReviews || 0;
 
                 return (
-                  <div key={vendor.id} className="bg-white border border-border rounded-2xl p-5 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between space-y-4">
+                  <div key={vendor.id} className="bg-white dark:bg-slate-800 border border-border dark:border-slate-700 rounded-2xl p-5 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between space-y-4">
                     <div className="space-y-3">
                       <div className="flex items-center gap-3">
                         <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary font-bold text-lg border border-primary/20 shrink-0 text-primary-foreground">
@@ -234,7 +236,9 @@ export default function SearchWithNavbar() {
                         <div className="min-w-0">
                           <div className="flex items-center gap-1.5">
                             <h3 className="font-semibold text-foreground truncate font-primary">{businessName}</h3>
-                            <ShieldCheck className="h-4 w-4 text-emerald-500 shrink-0" />
+                            {vendor.kycStatus === 'verified' && (
+                              <ShieldCheck className="h-4 w-4 text-emerald-500 shrink-0" />
+                            )}
                           </div>
                           <div className="flex items-center gap-1 mt-0.5">
                             <Star className="h-3.5 w-3.5 fill-amber-400 text-amber-400" />
@@ -251,7 +255,7 @@ export default function SearchWithNavbar() {
                         </div>
                         <div className="flex items-center gap-2">
                           <Building2 className="h-3.5 w-3.5 text-muted-foreground shrink-0" />
-                          <span>Verified Fleet Host</span>
+                          <span>{vendor.kycStatus === 'verified' ? "Verified Fleet Host" : "Fleet Host"}</span>
                         </div>
                       </div>
                     </div>
@@ -281,6 +285,28 @@ export default function SearchWithNavbar() {
                 );
               })}
             </div>
+            {vendorMeta && vendorMeta.totalPages > 1 && (
+              <div className="flex justify-center items-center gap-4 mt-8 pb-4">
+                <Button 
+                  variant="outline" 
+                  className="rounded-xl"
+                  disabled={vendorPage === 1}
+                  onClick={() => setVendorPage(p => Math.max(1, p - 1))}
+                >
+                  Previous
+                </Button>
+                <span className="text-sm font-medium font-secondary">Page {vendorPage} of {vendorMeta.totalPages}</span>
+                <Button 
+                  variant="outline" 
+                  className="rounded-xl"
+                  disabled={vendorPage === vendorMeta.totalPages}
+                  onClick={() => setVendorPage(p => Math.min(vendorMeta.totalPages, p + 1))}
+                >
+                  Next
+                </Button>
+              </div>
+            )}
+          </>
           ) : (
             <div className="flex flex-col items-center justify-center py-16 text-center">
               <div className="mb-4 rounded-full bg-muted p-6">
@@ -316,7 +342,9 @@ export default function SearchWithNavbar() {
                   <div>
                     <DialogTitle className="font-primary text-xl flex items-center gap-2">
                       {businessName}
-                      <ShieldCheck className="h-5 w-5 text-emerald-500" />
+                      {selectedVendor.kycStatus === 'verified' && (
+                        <ShieldCheck className="h-5 w-5 text-emerald-500" />
+                      )}
                     </DialogTitle>
                     <div className="flex items-center gap-1 mt-1">
                       <Star className="h-4 w-4 fill-amber-400 text-amber-400" />
@@ -331,7 +359,9 @@ export default function SearchWithNavbar() {
                 <div>
                   <h4 className="font-semibold text-foreground font-primary mb-1">About Business</h4>
                   <p className="text-muted-foreground text-xs leading-relaxed">
-                    This is a verified professional vehicle supplier on Rydway. Offering premium services, clean fleets, and comprehensive insurance.
+                    {selectedVendor.kycStatus === 'verified' 
+                      ? "This is a verified professional vehicle supplier on Rydway. Offering premium services, clean fleets, and comprehensive insurance."
+                      : "This is a vehicle supplier on Rydway. Please communicate and book directly through the platform."}
                   </p>
                 </div>
 

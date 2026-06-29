@@ -93,24 +93,32 @@ export declare class UsersService {
         updatedAt: Date;
         deletedAt: Date | null;
     }>;
-    getVendors(): Promise<{
-        id: string;
-        email: string;
-        phone: string | null;
-        firstName: string;
-        lastName: string;
-        role: import("@prisma/client").$Enums.Role;
-        profileImageUrl: string | null;
-        kycStatus: import("@prisma/client").$Enums.KycStatus;
-        hostProfile: {
+    getVendors(page?: number, limit?: number): Promise<{
+        data: {
             id: string;
-            businessName: string | null;
-            tradingName: string | null;
-            businessAddress: string | null;
-            businessPhone: string | null;
-            businessEmail: string | null;
-            avgRating: number;
-            totalReviews: number;
-        } | null;
-    }[]>;
+            email: string;
+            phone: string | null;
+            firstName: string;
+            lastName: string;
+            role: import("@prisma/client").$Enums.Role;
+            profileImageUrl: string | null;
+            kycStatus: import("@prisma/client").$Enums.KycStatus;
+            hostProfile: {
+                id: string;
+                avgRating: number;
+                totalReviews: number;
+                businessName: string | null;
+                tradingName: string | null;
+                businessAddress: string | null;
+                businessPhone: string | null;
+                businessEmail: string | null;
+            } | null;
+        }[];
+        meta: {
+            total: number;
+            page: number;
+            limit: number;
+            totalPages: number;
+        };
+    }>;
 }

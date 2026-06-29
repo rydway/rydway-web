@@ -53,8 +53,8 @@ export default function Hero() {
     { value: "family", label: "Family" },
   ]
 
-  const handleSearch = () => {
-    toast.info(`Searching: ${location || "Any location"}, ${dateRange.from?.toDateString()} → ${dateRange.to?.toDateString()}, ${carType || "Any car type"}`)
+  const handleSearch = (filters: any) => {
+    toast.info(`Searching: ${filters.location || "Any location"}, ${filters.startDate?.toDateString() || "Any date"} → ${filters.endDate?.toDateString() || "Any date"}, ${filters.category?.[0] || "Any car type"}`)
   }
 
   return (

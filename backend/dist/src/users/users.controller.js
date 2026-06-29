@@ -96,11 +96,11 @@ let UsersController = class UsersController {
             data: null,
         };
     }
-    async getVendors() {
-        const data = await this.usersService.getVendors();
+    async getVendors(page = '1', limit = '12') {
+        const result = await this.usersService.getVendors(Number(page), Number(limit));
         return {
             message: 'Vendors fetched successfully',
-            data,
+            data: result,
         };
     }
     async getUserById(id) {
@@ -148,9 +148,11 @@ __decorate([
 ], UsersController.prototype, "softDelete", null);
 __decorate([
     (0, common_1.Get)('vendors'),
-    (0, swagger_1.ApiOperation)({ summary: 'Get all verified vendors (hosts)' }),
+    (0, swagger_1.ApiOperation)({ summary: 'Get all vendors (hosts)' }),
+    __param(0, (0, common_1.Query)('page')),
+    __param(1, (0, common_1.Query)('limit')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
+    __metadata("design:paramtypes", [String, String]),
     __metadata("design:returntype", Promise)
 ], UsersController.prototype, "getVendors", null);
 __decorate([

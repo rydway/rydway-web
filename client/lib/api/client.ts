@@ -15,7 +15,8 @@ async function fetchClient<T>(
   method: HttpMethod,
   options: FetchOptions = {},
 ): Promise<T> {
-  const url = `${API_URL}${endpoint.startsWith("/") ? endpoint : `/${endpoint}`}`;
+  const safeEndpoint = endpoint || "";
+  const url = `${API_URL}${safeEndpoint.startsWith("/") ? safeEndpoint : `/${safeEndpoint}`}`;
 
   // Get token from local storage (or pass via options if needed)
   let token = null;

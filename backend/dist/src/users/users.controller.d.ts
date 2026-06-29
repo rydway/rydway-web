@@ -41,28 +41,36 @@ export declare class UsersController {
         message: string;
         data: null;
     }>;
-    getVendors(): Promise<{
+    getVendors(page?: string, limit?: string): Promise<{
         message: string;
         data: {
-            id: string;
-            email: string;
-            phone: string | null;
-            firstName: string;
-            lastName: string;
-            role: import("@prisma/client").$Enums.Role;
-            profileImageUrl: string | null;
-            kycStatus: import("@prisma/client").$Enums.KycStatus;
-            hostProfile: {
+            data: {
                 id: string;
-                businessName: string | null;
-                tradingName: string | null;
-                businessAddress: string | null;
-                businessPhone: string | null;
-                businessEmail: string | null;
-                avgRating: number;
-                totalReviews: number;
-            } | null;
-        }[];
+                email: string;
+                phone: string | null;
+                firstName: string;
+                lastName: string;
+                role: import("@prisma/client").$Enums.Role;
+                profileImageUrl: string | null;
+                kycStatus: import("@prisma/client").$Enums.KycStatus;
+                hostProfile: {
+                    id: string;
+                    avgRating: number;
+                    totalReviews: number;
+                    businessName: string | null;
+                    tradingName: string | null;
+                    businessAddress: string | null;
+                    businessPhone: string | null;
+                    businessEmail: string | null;
+                } | null;
+            }[];
+            meta: {
+                total: number;
+                page: number;
+                limit: number;
+                totalPages: number;
+            };
+        };
     }>;
     getUserById(id: string): Promise<{
         message: string;

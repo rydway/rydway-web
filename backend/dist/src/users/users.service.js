@@ -100,36 +100,60 @@ let UsersService = class UsersService {
             },
         });
     }
-    async getVendors() {
-        return this.prisma.user.findMany({
-            where: {
-                role: client_1.Role.host,
-                kycStatus: 'verified',
-                isActive: true,
-            },
-            select: {
-                id: true,
-                email: true,
-                phone: true,
-                firstName: true,
-                lastName: true,
-                role: true,
-                profileImageUrl: true,
-                kycStatus: true,
-                hostProfile: {
-                    select: {
-                        id: true,
-                        businessName: true,
-                        tradingName: true,
-                        businessAddress: true,
-                        businessPhone: true,
-                        businessEmail: true,
-                        avgRating: true,
-                        totalReviews: true,
+    async getVendors(page = 1, limit = 20) {
+        const skip = (page - 1) * limit;
+        const [vendors, total] = await Promise.all([
+            this.prisma.user.findMany({
+                where: {
+                    role: client_1.Role.host,
+                    isActive: true,
+                },
+                orderBy: {
+                    hostProfile: {
+                        avgRating: 'desc',
                     },
                 },
+                skip,
+                take: limit,
+                select: {
+                    id: true,
+                    email: true,
+                    phone: true,
+                    firstName: true,
+                    lastName: true,
+                    role: true,
+                    profileImageUrl: true,
+                    kycStatus: true,
+                    hostProfile: {
+                        select: {
+                            id: true,
+                            businessName: true,
+                            tradingName: true,
+                            businessAddress: true,
+                            businessPhone: true,
+                            businessEmail: true,
+                            avgRating: true,
+                            totalReviews: true,
+                        },
+                    },
+                },
+            }),
+            this.prisma.user.count({
+                where: {
+                    role: client_1.Role.host,
+                    isActive: true,
+                },
+            }),
+        ]);
+        return {
+            data: vendors,
+            meta: {
+                total,
+                page,
+                limit,
+                totalPages: Math.ceil(total / limit),
             },
-        });
+        };
     }
 };
 exports.UsersService = UsersService;

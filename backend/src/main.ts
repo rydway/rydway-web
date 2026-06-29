@@ -48,10 +48,13 @@ async function bootstrap() {
   SwaggerModule.setup('docs', app, document);
 
   // CORS — only allow configured frontend origin
-  const frontendUrl =
-    configService.get<string>('FRONTEND_URL') || 'http://localhost:3001';
+  const frontendUrl = configService.get<string>('FRONTEND_URL');
+  const allowedOrigins = frontendUrl
+    ? frontendUrl.split(',').map((url) => url.trim())
+    : ['http://localhost:3000'];
+
   app.enableCors({
-    origin: [frontendUrl, 'http://localhost:3000', 'http://localhost:3001'],
+    origin: allowedOrigins,
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization', 'x-idempotency-key'],
     credentials: true,

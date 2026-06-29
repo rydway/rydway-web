@@ -56,14 +56,15 @@ export function useUser(id: string) {
   };
 }
 
-export function useVendors() {
+export function useVendors(page: number = 1, limit: number = 12) {
   const query = useQuery({
-    queryKey: ['vendors'],
-    queryFn: () => userService.getVendors(),
+    queryKey: ['vendors', page, limit],
+    queryFn: () => userService.getVendors(page, limit),
   });
 
   return {
-    vendors: query.data || [],
+    vendors: query.data?.data || [],
+    meta: query.data?.meta,
     isLoading: query.isLoading,
     error: query.error as Error | null,
   };

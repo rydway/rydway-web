@@ -36,7 +36,10 @@ export class AllExceptionsFilter implements ExceptionFilter {
         code = this.mapStatusToCode(status);
       }
     } else if (exception instanceof Error) {
-      message = exception.message;
+      // Log the original error internally (if not already handled by a logger)
+      console.error('Unhandled Exception:', exception);
+      // Return a user-friendly generic message
+      message = 'An unexpected error occurred. Please try again later.';
     }
 
     response.status(status).json({
