@@ -20,7 +20,7 @@ function isTokenExpired(token: string) {
  *   rydway_token  – the JWT (for API calls via SSR if ever needed)
  *   rydway_role   – 'renter' | 'host' | 'admin'  (safe to read on edge)
  */
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const token = request.cookies.get('rydway_token')?.value;
   const role = request.cookies.get('rydway_role')?.value;
@@ -94,5 +94,5 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   matcher: ['/dashboard/:path*', '/auth/:path*', '/auth'],
-  runtime: 'edge',
+  runtime: 'experimental-edge',
 };
