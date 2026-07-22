@@ -4,7 +4,11 @@ import { io, Socket } from 'socket.io-client';
 import { messagingService } from '@/services/messaging.service';
 import { Message, Conversation } from '@/types/models';
 
-const SOCKET_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
+const SOCKET_URL =
+  process.env.NEXT_PUBLIC_API_URL ||
+  (process.env.NODE_ENV === "production"
+    ? "https://rydway-web.onrender.com"
+    : "http://localhost:8001");
 
 export function useConversations() {
   const query = useQuery({
