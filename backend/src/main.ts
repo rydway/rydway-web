@@ -47,11 +47,17 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('docs', app, document);
 
-  // CORS — only allow configured frontend origin
+  // CORS — allow frontend origin
   const frontendUrl = configService.get<string>('FRONTEND_URL');
-  const allowedOrigins = frontendUrl
+  const envOrigins = frontendUrl
     ? frontendUrl.split(',').map((url) => url.trim())
-    : ['http://localhost:3000'];
+    : [];
+
+  const allowedOrigins = [
+    'http://localhost:3000',
+    'https://rydway-web.rydway-space.workers.dev',
+    ...envOrigins
+  ];
 
   app.enableCors({
     origin: allowedOrigins,
